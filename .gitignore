@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+package-lock.json
+package.json
+
+# Local test artifacts & logs
+test_screenshots/
+*.log
+.DS_Store
+Thumbs.db
+
+# Scratch extraction & test scripts
+check_*.py
+find_*.py
+inspect_*.py
+print_*.py
+test_*.js
+capture_*.js
+verify_*.js
+download_*.py
+generate_*.py
+
