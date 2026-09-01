@@ -321,24 +321,63 @@ const categories = [
       </div><!-- .s__bento-container -->
     </div><!-- .s__services-wrapper -->
   </div><!-- .s__inner -->
+
+  <!-- Interactive Subtle Smiley Canvas Overlay -->
+  <canvas class="s__canvas js-services-canvas"></canvas>
 </section>
 
 <script>
+  import Emitter from '../utils/Emitter'
+  import Ticker from '../utils/Ticker'
   import gsap from 'gsap'
 
   class ServicesBento {
-    container: HTMLElement | null
+    el: HTMLElement | null
     tabButtons: NodeListOf<HTMLElement>
     bentoViews: NodeListOf<HTMLElement>
+    cells: NodeListOf<HTMLElement>
+    canvas: HTMLCanvasElement | null
+    ctx: CanvasRenderingContext2D | null
+
+    smileyImages: {
+      main: HTMLImageElement
+      contrasted: HTMLImageElement
+    } | null
+
+    smileys: any[]
+    lastThrow: number
+    bounding: {
+      left: number
+      top: number
+      width: number
+      height: number
+    }
+    isPaused: boolean
 
     constructor() {
-      this.container = document.getElementById('services')
-      if (!this.container) return
+      this.el = document.getElementById('services')
+      if (!this.el) return
 
-      this.tabButtons = this.container.querySelectorAll('.js-service-tab')
-      this.bentoViews = this.container.querySelectorAll('.js-service-bento')
+      this.tabButtons = this.el.querySelectorAll('.js-service-tab')
+      this.bentoViews = this.el.querySelectorAll('.js-service-bento')
+      this.cells = this.el.querySelectorAll('.js-cell, .js-service-tab')
+      this.canvas = this.el.querySelector('.js-services-canvas')
+      this.ctx = this.canvas?.getContext('2d') || null
+
+      this.smileys = []
+      this.lastThrow = 0
+      this.smileyImages = null
+      this.isPaused = true
+
+      this.bounding = {
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+      }
 
       this.initTabs()
+      this.initSmileyEngine()
     }
 
     initTabs() {
@@ -367,6 +406,136 @@ const categories = [
           })
         })
       })
+    }
+
+    initSmileyEngine() {
+      // Load smiley images
+      const mainImg = new Image(100, 100)
+      mainImg.src = '/images/asset-smiley--main.svg'
+
+      const contrastedImg = new Image(100, 100)
+      contrastedImg.src = '/images/asset-smiley--contrasted.svg'
+
+      this.smileyImages = {
+        main: mainImg,
+        contrasted: contrastedImg,
+      }
+
+      this.setSize()
+
+      // Bind resize & scroll
+      Emitter.on('resize', () => this.setSize(), this)
+
+      // Bind subtle hover throw on cells (very less: max 1-2 smileys with cooldown)
+      this.cells.forEach((cell) => {
+        const onHover = () => this.throwSubtleSmiley(cell)
+        cell.addEventListener('mouseenter', onHover, { passive: true })
+        cell.addEventListener('touchstart', onHover, { passive: true })
+      })
+
+      // Intersect observer to pause canvas rendering when offscreen
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            this.isPaused = !entry.isIntersecting
+            if (!this.isPaused) {
+              Emitter.on('tick', this.tick, this)
+            } else {
+              Emitter.off('tick', this.tick, this)
+            }
+          })
+        },
+        { threshold: 0.1 }
+      )
+      if (this.el) observer.observe(this.el)
+    }
+
+    setSize() {
+      if (!this.el || !this.canvas) return
+      const rect = this.el.getBoundingClientRect()
+      this.bounding = {
+        left: rect.left,
+        top: rect.top,
+        width: this.el.clientWidth,
+        height: this.el.clientHeight,
+      }
+      this.canvas.width = this.bounding.width
+      this.canvas.height = this.bounding.height
+    }
+
+    /**
+     * Throw subtle & sparse smileys (1 or 2 max)
+     */
+    throwSubtleSmiley(cell: HTMLElement) {
+      const now = Date.now()
+      if (now - this.lastThrow < 280) return // Throttled to keep it "very less"
+      this.lastThrow = now
+
+      if (!this.el) return
+      const cellRect = cell.getBoundingClientRect()
+      const elRect = this.el.getBoundingClientRect()
+
+      // Spawn only 1 or 2 small smileys
+      const count = Math.random() > 0.6 ? 2 : 1
+
+      for (let i = 0; i < count; i++) {
+        const size = Math.random() * 10 + 20 // 20px - 30px
+        const x = cellRect.left - elRect.left + Math.random() * cellRect.width
+        const y = cellRect.top - elRect.top + Math.random() * (cellRect.height * 0.5)
+
+        const velocity = {
+          x: (Math.random() - 0.5) * 5,
+          y: -Math.random() * 3.5 - 1.5,
+        }
+
+        this.smileys.push({
+          x,
+          y,
+          size,
+          velocity,
+          gravity: 0.16,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.12,
+          opacity: 0.9,
+        })
+      }
+    }
+
+    updateSmileys() {
+      if (!this.ctx || !this.smileyImages) return
+      this.ctx.clearRect(0, 0, this.bounding.width, this.bounding.height)
+
+      if (this.smileys.length === 0) return
+
+      const isContrasted = document.documentElement.classList.contains('theme-contrasted')
+      const img = isContrasted ? this.smileyImages.contrasted : this.smileyImages.main
+
+      for (let i = this.smileys.length - 1; i >= 0; i--) {
+        const s = this.smileys[i]
+        s.x += s.velocity.x
+        s.y += s.velocity.y
+        s.velocity.y += s.gravity
+        s.rotation += s.rotationSpeed
+        s.opacity -= 0.014 // Smooth gentle fade
+
+        if (s.opacity <= 0) {
+          this.smileys.splice(i, 1)
+          continue
+        }
+
+        this.ctx.save()
+        this.ctx.globalAlpha = Math.max(0, s.opacity)
+        this.ctx.translate(s.x, s.y)
+        this.ctx.rotate(s.rotation)
+        this.ctx.drawImage(img, -s.size / 2, -s.size / 2, s.size, s.size)
+        this.ctx.restore()
+      }
+    }
+
+    tick() {
+      if (this.smileys.length > 0) {
+        this.updateSmileys()
+      }
     }
   }
 
@@ -846,6 +1015,17 @@ const categories = [
           right: 0.5rem;
         }
       }
+    }
+
+    /* Canvas for Subtle Smileys */
+    .s__canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 4;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
   }
 </style>

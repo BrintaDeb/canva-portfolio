@@ -167,12 +167,9 @@
         timeElem.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }
 
-      // Show greeting bubble after a gentle delay if not already opened
-      setTimeout(() => {
-        if (!this.chatWindow?.classList.contains('is-active')) {
-          this.greetingBubble?.classList.add('is-visible')
-        }
-      }, 4000)
+      // Greeting bubble stays closed unless triggered
+      this.greetingBubble?.classList.remove('is-visible')
+      this.greetingBubble?.classList.add('is-dismissed')
     }
 
     toggleChat() {
