@@ -182,11 +182,6 @@ const categories = [
             const tier2 = cat.tiers[1]
             const tier3 = cat.tiers[2]
 
-            const quoteUrl1 = `https://wa.me/917005581453?text=${encodeURIComponent(`Hi Brinta, I would like to request a quotation for: ${cat.title} - ${tier1.name} at ${tier1.price}${tier1.period}.`)}`
-            const quoteUrl2 = `https://wa.me/917005581453?text=${encodeURIComponent(`Hi Brinta, I would like to request a quotation for: ${cat.title} - ${tier2.name} at ${tier2.price}${tier2.period}.`)}`
-            const quoteUrl3 = `https://wa.me/917005581453?text=${encodeURIComponent(`Hi Brinta, I would like to request a quotation for: ${cat.title} - ${tier3.name} at ${tier3.price}${tier3.period}.`)}`
-            const bespokeUrl = `https://wa.me/917005581453?text=${encodeURIComponent(`Hi Brinta, I have a bespoke custom requirement and would like to discuss a custom scope.`)}`
-
             return (
               <div
                 class:list={['s__bento s__bento--service js-service-bento', { 'is-active': idx === 0 }]}
@@ -204,8 +199,17 @@ const categories = [
 
                 <!-- Row 2: Split 2 Column (Tier 1 left, Tier 2 Stack right) -->
                 <div class="s__row s__row--split">
-                  <!-- Left: Tier 1 Tall Cell -->
-                  <a href={quoteUrl1} target="_blank" rel="noopener" class="s__cell s__cell--tier-tall js-cell" title={`Quote for ${tier1.name}`}>
+                  <!-- Left: Tier 1 Tall Cell (Interactive Quotation Trigger) -->
+                  <div
+                    class="s__cell s__cell--tier-tall js-cell js-open-quote"
+                    data-package={cat.title}
+                    data-tier={tier1.name}
+                    data-price={tier1.price + tier1.period}
+                    data-specs={tier1.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                    role="button"
+                    tabindex="0"
+                    title={`Request Full Quotation for ${tier1.name}`}
+                  >
                     <div class="s__cell__content">
                       <div class="s__cell__huge">
                         {tier1.price}<br />
@@ -217,16 +221,25 @@ const categories = [
                         ))}
                       </div>
                       <div class="s__cell__cta-tag">
-                        [ REQUEST QUOTATION → ]
+                        [ REQUEST FULL QUOTATION → ]
                       </div>
                     </div>
                     <span class="s__cell__mask"></span>
-                  </a>
+                  </div>
 
                   <!-- Right: Stacked Column (Tier 2 & Action) -->
                   <div class="s__col">
                     <!-- Top: Tier 2 (Most Popular / Recommended) -->
-                    <a href={quoteUrl2} target="_blank" rel="noopener" class="s__cell s__cell--netmag js-cell" title={`Quote for ${tier2.name}`}>
+                    <div
+                      class="s__cell s__cell--netmag js-cell js-open-quote"
+                      data-package={cat.title}
+                      data-tier={tier2.name}
+                      data-price={tier2.price + tier2.period}
+                      data-specs={tier2.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                      role="button"
+                      tabindex="0"
+                      title={`Request Full Quotation for ${tier2.name}`}
+                    >
                       <div class="s__cell__content">
                         <div class="s__cell__badge-mono">★ {tier2.popularBadge} ★</div>
                         <h4 class="s__cell__serif">{tier2.name} — {tier2.price}</h4>
@@ -235,7 +248,7 @@ const categories = [
                         </p>
                       </div>
                       <span class="s__cell__mask"></span>
-                    </a>
+                    </div>
 
                     <!-- Bottom: Hatching stripes + Instant WhatsApp Trigger -->
                     <div class="s__subrow">
@@ -243,74 +256,48 @@ const categories = [
                         <div class="s__stripes-pattern"></div>
                       </div>
 
-                      <a href={quoteUrl2} target="_blank" rel="noopener" class="s__cell s__cell--fwa js-cell" title="Instant Quote">
+                      <div
+                        class="s__cell s__cell--fwa js-cell js-open-quote"
+                        data-package={cat.title}
+                        data-tier={tier2.name}
+                        data-price={tier2.price + tier2.period}
+                        data-specs={tier2.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                        role="button"
+                        tabindex="0"
+                        title="Book Tier 2"
+                      >
                         <div class="s__cell__content">
                           <div class="s__cell__bold">BOOK TIER 2</div>
                           <div class="s__cell__meta">
-                            <span>(Instant Quote)</span>
+                            <span>(Full Quotation)</span>
                             <span>(WhatsApp Direct)</span>
                           </div>
                         </div>
                         <span class="s__cell__mask"></span>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Row 3: Tier 3 Full Width Banner -->
-                <a href={quoteUrl3} target="_blank" rel="noopener" class="s__cell s__cell--full s__cell--tier3 js-cell" title={`Quote for ${tier3.name}`}>
+                <div
+                  class="s__cell s__cell--full s__cell--tier3 js-cell js-open-quote"
+                  data-package={cat.title}
+                  data-tier={tier3.name}
+                  data-price={tier3.price + tier3.period}
+                  data-specs={tier3.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                  role="button"
+                  tabindex="0"
+                  title={`Request Full Quotation for ${tier3.name}`}
+                >
                   <div class="s__cell__content">
                     <h3 class="s__cell__serif">{tier3.name} — {tier3.price}{tier3.period}</h3>
                     <p class="s__cell__serif-sub">
                       {tier3.specs.map((s) => `(${s.label}: ${s.value})`).join(' • ')}
                     </p>
-                  </div>
-                  <span class="s__cell__mask"></span>
-                </a>
-
-                <!-- Row 4: Bottom 3-cell Row (Globe/Icon + Bespoke Scope + Stripes) -->
-                <div class="s__row s__row--bottom">
-                  <!-- Left: Wireframe Icon with Crosshairs -->
-                  <div class="s__cell s__cell--globe js-cell">
-                    <div class="s__crosshair s__crosshair--tl">+</div>
-                    <div class="s__crosshair s__crosshair--tr">+</div>
-                    <div class="s__cell__content">
-                      <svg class="s__globe-icon" width="60" height="60" viewBox="0 0 101 113" fill="none">
-                        <path
-                          d="M80.05 107.398c-21.944 12.67-52.875.18-69.085-27.896m69.086 27.896c21.945-12.67 26.594-45.702 10.384-73.778M80.05 107.398c-19.686 11.366-48.786-2.181-64.996-30.258C-1.155 49.063 1.663 17.09 21.35 5.723m58.702 101.675c19.686-11.366 22.504-43.34 6.293-71.417C70.134 7.904 41.034-5.642 21.35 5.723m58.702 101.675c-10.973 6.335-33.009-11.29-49.219-39.367-16.21-28.077-20.456-55.973-9.483-62.308m58.702 101.675c10.972-6.335 6.726-34.231-9.484-62.308C54.357 17.013 32.322-.612 21.35 5.723m58.702 101.675c3.74-2.159-6.262-26.77-22.456-54.818S25.089 3.564 21.349 5.723m58.702 101.675c-3.74 2.159-20.053-18.808-36.246-46.856C27.61 32.493 17.609 7.882 21.349 5.723M10.965 79.502C-5.245 51.425-.596 18.393 21.349 5.723M10.965 79.502c11.366 19.686 38.37 25.373 60.314 12.703 21.946-12.67 30.522-38.9 19.156-58.585m-79.47 45.882C-.401 59.816 8.175 33.586 30.121 20.916c21.945-12.67 48.948-6.982 60.314 12.704m-79.47 45.882c6.335 10.972 29.26 9.596 51.206-3.074C84.115 63.758 96.77 44.592 90.434 33.62m-79.47 45.882C4.63 68.529 17.285 49.363 39.23 36.693c21.945-12.67 44.87-14.046 51.205-3.073M21.349 5.723c21.945-12.67 52.876-.18 69.086 27.897M54.749 63.573C32.778 76.258 13.192 83.358 11.033 79.618c-2.16-3.74 13.783-17.15 35.754-29.836 21.97-12.685 41.557-19.785 43.716-16.045 2.159 3.74-13.783 17.15-35.754 29.836Z"
-                          stroke="currentColor"
-                          stroke-width="1.2"
-                        />
-                      </svg>
+                    <div class="s__cell__cta-tag" style="margin-top: 0.5rem;">
+                      [ CLICK FOR FULL DETAILED QUOTATION → ]
                     </div>
-                    <span class="s__cell__mask"></span>
-                  </div>
-
-                  <!-- Center: Bespoke Trigger -->
-                  <a href={bespokeUrl} target="_blank" rel="noopener" class="s__cell s__cell--cssda js-cell" title="Custom Scope">
-                    <div class="s__cell__content">
-                      <div class="s__cell__bold">BESPOKE</div>
-                      <div class="s__cell__meta">
-                        <span>(Custom 3D &amp; Dev)</span>
-                        <span>(Hybrid Direction)</span>
-                        <span>(Discuss Scope →)</span>
-                      </div>
-                    </div>
-                    <span class="s__cell__mask"></span>
-                  </a>
-
-                  <!-- Right: Stripes Card -->
-                  <div class="s__cell s__cell--stripes">
-                    <div class="s__stripes-pattern"></div>
-                  </div>
-                </div>
-
-                <!-- Row 5: Detailed Terms & Quality Narrative -->
-                <div class="s__cell s__cell--full s__cell--bio js-cell">
-                  <div class="s__cell__content">
-                    <p class="s__cell__bio-text">
-                      Transparent rates, rapid delivery, and direct pair-collaboration. Every project includes structured revisions, modern web performance optimization, and scalable source files.
-                    </p>
                   </div>
                   <span class="s__cell__mask"></span>
                 </div>
@@ -318,9 +305,141 @@ const categories = [
             )
           })
         }
+
+        <!-- Row 4: Custom Quote Form Bento Section (Connected to the same box) -->
+        <div class="s__cell s__cell--custom-quote js-cell">
+          <div class="s__custom-quote-header">
+            <span class="s__custom-tag">[ CUSTOM PROJECT QUOTATION BUILDER ]</span>
+            <h4 class="s__custom-title">Have a specific custom scope, 3D project, or hybrid requirement?</h4>
+            <p class="s__custom-subtitle">Fill out your details below to send a full structured quotation directly to WhatsApp.</p>
+          </div>
+
+          <form id="customQuoteForm" class="s__quote-form js-quote-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="quoteClientName">YOUR NAME / COMPANY *</label>
+                <input
+                  type="text"
+                  id="quoteClientName"
+                  placeholder="e.g. Alex Morgan / Studio Pulse"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="quoteCategory">PRIMARY SERVICE *</label>
+                <select id="quoteCategory">
+                  <option value="Web Development & 3D Web">Web Development &amp; 3D Web</option>
+                  <option value="UI/UX & Brand Identity">UI/UX &amp; Brand Identity</option>
+                  <option value="SEO Management & Growth Retainer">SEO Management &amp; Retainer</option>
+                  <option value="Full Creative Nomad Direction (Hybrid)">Full Creative Direction (Hybrid)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="quoteBudget">ESTIMATED BUDGET / TIMELINE</label>
+                <input
+                  type="text"
+                  id="quoteBudget"
+                  placeholder="e.g. ₹40,000 / 2-3 Weeks"
+                />
+              </div>
+
+              <div class="form-group form-group--full">
+                <label for="quoteRequirements">PROJECT DETAILS &amp; KEY REQUIREMENTS *</label>
+                <textarea
+                  id="quoteRequirements"
+                  rows="2"
+                  placeholder="Describe pages, features, branding vision, or specific reference websites..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="s__submit-quote-btn">
+                <span>SEND FULL QUOTATION TO WHATSAPP</span>
+                <span class="btn-arrow">→</span>
+              </button>
+            </div>
+          </form>
+        </div><!-- .s__cell--custom-quote -->
+
+        <!-- Row 5: Detailed Terms & Quality Narrative -->
+        <div class="s__cell s__cell--full s__cell--bio js-cell">
+          <div class="s__cell__content">
+            <p class="s__cell__bio-text">
+              Transparent rates, rapid delivery, and direct pair-collaboration. Every project includes structured revisions, modern web performance optimization, and scalable source files.
+            </p>
+          </div>
+          <span class="s__cell__mask"></span>
+        </div>
       </div><!-- .s__bento-container -->
     </div><!-- .s__services-wrapper -->
   </div><!-- .s__inner -->
+
+  <!-- Interactive Full Quotation Modal for Tier Clicks -->
+  <div id="serviceQuoteModal" class="service-quote-modal hidden">
+    <div class="modal-backdrop js-close-modal"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-tag">[ INSTANT WHATSAPP QUOTATION ]</div>
+        <button class="modal-close-btn js-close-modal" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-summary-box">
+          <div class="summary-line">
+            <span class="summary-label">PACKAGE:</span>
+            <span id="modalPackageName" class="summary-val">Web Development Packages</span>
+          </div>
+          <div class="summary-line">
+            <span class="summary-label">TIER:</span>
+            <span id="modalTierName" class="summary-val">Professional (Tier 2)</span>
+          </div>
+          <div class="summary-line">
+            <span class="summary-label">ESTIMATED RATE:</span>
+            <span id="modalTierPrice" class="summary-val font-bold">₹35,000</span>
+          </div>
+        </div>
+
+        <form id="tierQuoteForm" class="modal-form">
+          <div class="form-group">
+            <label for="modalClientName">YOUR NAME / BRAND *</label>
+            <input
+              type="text"
+              id="modalClientName"
+              placeholder="e.g. John Doe / Acme Inc"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="modalTimeline">TARGET LAUNCH TIMELINE</label>
+            <input
+              type="text"
+              id="modalTimeline"
+              placeholder="e.g. Within 2-3 weeks / ASAP"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="modalNotes">SPECIFIC REQUIREMENTS OR NOTES</label>
+            <textarea
+              id="modalNotes"
+              rows="2"
+              placeholder="Any specific features, design preferences, or reference links..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="modal-send-btn">
+            <span>SEND FULL QUOTATION TO WHATSAPP</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Interactive Subtle Smiley Canvas Overlay -->
   <canvas class="s__canvas js-services-canvas"></canvas>
@@ -328,7 +447,6 @@ const categories = [
 
 <script>
   import Emitter from '../utils/Emitter'
-  import Ticker from '../utils/Ticker'
   import gsap from 'gsap'
 
   class ServicesBento {
@@ -338,6 +456,20 @@ const categories = [
     cells: NodeListOf<HTMLElement>
     canvas: HTMLCanvasElement | null
     ctx: CanvasRenderingContext2D | null
+
+    quoteModal: HTMLElement | null
+    modalPackageName: HTMLElement | null
+    modalTierName: HTMLElement | null
+    modalTierPrice: HTMLElement | null
+    tierQuoteForm: HTMLFormElement | null
+    customQuoteForm: HTMLFormElement | null
+
+    activeTierData: {
+      package: string
+      tier: string
+      price: string
+      specs: string
+    }
 
     smileyImages: {
       main: HTMLImageElement
@@ -364,6 +496,20 @@ const categories = [
       this.canvas = this.el.querySelector('.js-services-canvas')
       this.ctx = this.canvas?.getContext('2d') || null
 
+      this.quoteModal = document.getElementById('serviceQuoteModal')
+      this.modalPackageName = document.getElementById('modalPackageName')
+      this.modalTierName = document.getElementById('modalTierName')
+      this.modalTierPrice = document.getElementById('modalTierPrice')
+      this.tierQuoteForm = document.getElementById('tierQuoteForm') as HTMLFormElement
+      this.customQuoteForm = document.getElementById('customQuoteForm') as HTMLFormElement
+
+      this.activeTierData = {
+        package: '',
+        tier: '',
+        price: '',
+        specs: '',
+      }
+
       this.smileys = []
       this.lastThrow = 0
       this.smileyImages = null
@@ -378,6 +524,7 @@ const categories = [
 
       this.initTabs()
       this.initSmileyEngine()
+      this.initQuotationSystem()
     }
 
     initTabs() {
@@ -408,8 +555,108 @@ const categories = [
       })
     }
 
+    initQuotationSystem() {
+      const phoneNumber = '917005581453'
+
+      // Tier Cell Clicks -> Open Full Quotation Modal
+      const quoteTriggers = this.el?.querySelectorAll('.js-open-quote')
+      quoteTriggers?.forEach((trigger) => {
+        const handleOpen = (e: Event) => {
+          e.preventDefault()
+          const pkg = trigger.getAttribute('data-package') || ''
+          const tier = trigger.getAttribute('data-tier') || ''
+          const price = trigger.getAttribute('data-price') || ''
+          const specs = trigger.getAttribute('data-specs') || ''
+
+          this.activeTierData = { package: pkg, tier, price, specs }
+
+          if (this.modalPackageName) this.modalPackageName.textContent = pkg
+          if (this.modalTierName) this.modalTierName.textContent = tier
+          if (this.modalTierPrice) this.modalTierPrice.textContent = price
+
+          this.quoteModal?.classList.remove('hidden')
+          document.body.style.overflow = 'hidden'
+
+          setTimeout(() => {
+            const clientInput = document.getElementById('modalClientName') as HTMLInputElement
+            clientInput?.focus()
+          }, 150)
+        }
+
+        trigger.addEventListener('click', handleOpen)
+        trigger.addEventListener('keydown', (e: any) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleOpen(e)
+          }
+        })
+      })
+
+      // Close modal handlers
+      this.quoteModal?.querySelectorAll('.js-close-modal').forEach((btn) => {
+        btn.addEventListener('click', () => this.closeModal())
+      })
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !this.quoteModal?.classList.contains('hidden')) {
+          this.closeModal()
+        }
+      })
+
+      // Modal Form Submit -> Send structured WhatsApp quotation
+      this.tierQuoteForm?.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const clientName = (document.getElementById('modalClientName') as HTMLInputElement)?.value.trim() || 'Client'
+        const timeline = (document.getElementById('modalTimeline') as HTMLInputElement)?.value.trim() || 'Flexible / ASAP'
+        const notes = (document.getElementById('modalNotes') as HTMLTextAreaElement)?.value.trim() || 'Standard package deliverables.'
+
+        const message = [
+          `*QUOTATION REQUEST — BRINTA DEB PORTFOLIO*`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `📦 *Service Package:* ${this.activeTierData.package}`,
+          `🎯 *Selected Tier:* ${this.activeTierData.tier}`,
+          `💰 *Estimated Rate:* ${this.activeTierData.price}`,
+          `👤 *Client Name / Brand:* ${clientName}`,
+          `⏱ *Timeline:* ${timeline}`,
+          `📝 *Project Requirements:* ${notes}`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `_Sent directly from Brinta Deb Portfolio_`,
+        ].join('\n')
+
+        const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+        window.open(waUrl, '_blank', 'noopener,noreferrer')
+        this.closeModal()
+      })
+
+      // In-page Custom Quote Form Submit -> Send structured WhatsApp quotation
+      this.customQuoteForm?.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const clientName = (document.getElementById('quoteClientName') as HTMLInputElement)?.value.trim() || 'Client'
+        const category = (document.getElementById('quoteCategory') as HTMLSelectElement)?.value || 'Custom Scope'
+        const budget = (document.getElementById('quoteBudget') as HTMLInputElement)?.value.trim() || 'To be discussed'
+        const requirements = (document.getElementById('quoteRequirements') as HTMLTextAreaElement)?.value.trim() || 'Custom creative project inquiry'
+
+        const message = [
+          `*CUSTOM PROJECT QUOTATION — BRINTA DEB*`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `👤 *Client Name / Brand:* ${clientName}`,
+          `🎨 *Requested Service:* ${category}`,
+          `💵 *Budget & Timeline:* ${budget}`,
+          `📋 *Requirements & Scope:* ${requirements}`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `_Sent directly from Brinta Deb Services Section_`,
+        ].join('\n')
+
+        const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+        window.open(waUrl, '_blank', 'noopener,noreferrer')
+      })
+    }
+
+    closeModal() {
+      this.quoteModal?.classList.add('hidden')
+      document.body.style.overflow = ''
+    }
+
     initSmileyEngine() {
-      // Load smiley images
       const mainImg = new Image(100, 100)
       mainImg.src = '/images/asset-smiley--main.svg'
 
@@ -422,18 +669,14 @@ const categories = [
       }
 
       this.setSize()
-
-      // Bind resize & scroll
       Emitter.on('resize', () => this.setSize(), this)
 
-      // Bind subtle hover throw on cells (very less: max 1-2 smileys with cooldown)
       this.cells.forEach((cell) => {
         const onHover = () => this.throwSubtleSmiley(cell)
         cell.addEventListener('mouseenter', onHover, { passive: true })
         cell.addEventListener('touchstart', onHover, { passive: true })
       })
 
-      // Intersect observer to pause canvas rendering when offscreen
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -463,23 +706,19 @@ const categories = [
       this.canvas.height = this.bounding.height
     }
 
-    /**
-     * Throw subtle & sparse smileys (1 or 2 max)
-     */
     throwSubtleSmiley(cell: HTMLElement) {
       const now = Date.now()
-      if (now - this.lastThrow < 280) return // Throttled to keep it "very less"
+      if (now - this.lastThrow < 280) return
       this.lastThrow = now
 
       if (!this.el) return
       const cellRect = cell.getBoundingClientRect()
       const elRect = this.el.getBoundingClientRect()
 
-      // Spawn only 1 or 2 small smileys
       const count = Math.random() > 0.6 ? 2 : 1
 
       for (let i = 0; i < count; i++) {
-        const size = Math.random() * 10 + 20 // 20px - 30px
+        const size = Math.random() * 10 + 20
         const x = cellRect.left - elRect.left + Math.random() * cellRect.width
         const y = cellRect.top - elRect.top + Math.random() * (cellRect.height * 0.5)
 
@@ -516,7 +755,7 @@ const categories = [
         s.y += s.velocity.y
         s.velocity.y += s.gravity
         s.rotation += s.rotationSpeed
-        s.opacity -= 0.014 // Smooth gentle fade
+        s.opacity -= 0.014
 
         if (s.opacity <= 0) {
           this.smileys.splice(i, 1)
@@ -577,7 +816,7 @@ const categories = [
       width: 100%;
     }
 
-    /* Top Pill Header (Matches SAbout 1:1) */
+    /* Top Pill Header */
     .s__services-header {
       display: block;
       background: color(secondary);
@@ -686,7 +925,7 @@ const categories = [
       }
     }
 
-    /* Bento Grid (Matching SAbout) */
+    /* Bento Grid */
     .s__bento-container {
       position: relative;
       width: 100%;
@@ -767,7 +1006,7 @@ const categories = [
       }
     }
 
-    /* Cells (Matching SAbout 1:1) */
+    /* Cells */
     .s__cell {
       position: relative;
       border: 1px solid color(secondary);
@@ -863,49 +1102,6 @@ const categories = [
         }
       }
 
-      &--cssda {
-        padding: 1.25rem 1rem;
-        text-align: center;
-
-        .s__cell__content {
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-      }
-
-      &--globe {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1.25rem;
-        min-height: 7.5rem;
-
-        .s__globe-icon {
-          display: block;
-          margin: 0 auto;
-
-          path {
-            stroke: color(secondary);
-            transition: stroke 0.25s ease;
-          }
-        }
-      }
-
-      &--stripes {
-        background: repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 5px,
-          color(secondary) 5px,
-          color(secondary) 6.2px
-        );
-        cursor: default;
-        min-height: 5.5rem;
-      }
-
       &--bio {
         padding: 1.75rem 1.5rem;
         text-align: left;
@@ -996,23 +1192,128 @@ const categories = [
         letter-spacing: 0.12em;
         text-transform: uppercase;
         margin-top: 0.5rem;
+        color: color(secondary);
+        transition: color 0.25s ease;
       }
 
-      .s__crosshair {
-        position: absolute;
-        font: 400 1.25rem / 1 font-family(fraktion);
-        color: color(secondary);
-        opacity: 0.4;
-        transition: color 0.25s ease;
+      /* Custom Quote Inline Form Cell */
+      &--custom-quote {
+        padding: 2.25rem 2rem;
+        cursor: default;
+        margin-top: -1px;
 
-        &--tl {
-          top: 0.4rem;
-          left: 0.5rem;
+        @include mq(phone) {
+          padding: 1.5rem 1.25rem;
         }
 
-        &--tr {
-          top: 0.4rem;
-          right: 0.5rem;
+        .s__custom-quote-header {
+          margin-bottom: 1.5rem;
+          border-bottom: 1px solid rgba(22, 0, 0, 0.15);
+          padding-bottom: 1rem;
+        }
+
+        .s__custom-tag {
+          font: 700 0.6875rem / 1 font-family(fraktion);
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: color(secondary);
+        }
+
+        .s__custom-title {
+          font: 400 1.45rem / 1.2 font-family(editorial);
+          color: color(secondary);
+          margin: 0.4rem 0 0.25rem 0;
+        }
+
+        .s__custom-subtitle {
+          font: 400 0.8125rem / 1.4 font-family(fraktion);
+          color: color(secondary);
+          opacity: 0.7;
+          margin: 0;
+        }
+      }
+    }
+
+    /* Inline Form Elements */
+    .s__quote-form {
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        @include mq(phone) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        &--full {
+          grid-column: 1 / -1;
+        }
+
+        label {
+          font: 700 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: color(secondary);
+        }
+
+        input,
+        select,
+        textarea {
+          background: color(primary);
+          border: 1px solid color(secondary);
+          color: color(secondary);
+          font: 500 0.8125rem / 1.4 font-family(fraktion);
+          padding: 0.65rem 0.75rem;
+          outline: none;
+          transition: background 0.2s ease, box-shadow 0.2s ease;
+
+          &::placeholder {
+            color: rgba(22, 0, 0, 0.4);
+          }
+
+          &:focus {
+            background: #ffffff;
+            box-shadow: 0 0 0 1px color(secondary);
+          }
+        }
+      }
+
+      .form-submit-row {
+        margin-top: 1.25rem;
+      }
+
+      .s__submit-quote-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.95rem 1.25rem;
+        background: color(secondary);
+        border: 1px solid color(secondary);
+        color: color(primary);
+        font: 700 0.75rem / 1 font-family(fraktion);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        .btn-arrow {
+          transition: transform 0.25s ease;
+        }
+
+        &:hover {
+          background: color(primary);
+          color: color(secondary);
+
+          .btn-arrow {
+            transform: translateX(4px);
+          }
         }
       }
     }
@@ -1026,6 +1327,169 @@ const categories = [
       width: 100%;
       height: 100%;
       pointer-events: none;
+    }
+  }
+
+  /* Full Quotation Modal Dialog */
+  .service-quote-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+
+    &.hidden {
+      display: none;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(22, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 34rem;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      padding: 2rem;
+
+      @include mq(phone) {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid color(secondary);
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.25rem;
+
+      &-tag {
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+
+      .modal-close-btn {
+        background: transparent;
+        border: none;
+        font-size: 1.1rem;
+        cursor: pointer;
+        color: color(secondary);
+        padding: 0.25rem;
+      }
+    }
+
+    .modal-summary-box {
+      background: rgba(22, 0, 0, 0.04);
+      border: 1px solid color(secondary);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+
+      .summary-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.5rem;
+      }
+
+      .summary-label {
+        font: 700 0.625rem / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        color: color(secondary);
+        opacity: 0.6;
+      }
+
+      .summary-val {
+        font: 600 0.8125rem / 1.3 font-family(fraktion);
+        color: color(secondary);
+
+        &.font-bold {
+          font-weight: 700;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        label {
+          font: 700 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: color(secondary);
+        }
+
+        input,
+        textarea {
+          background: color(primary);
+          border: 1px solid color(secondary);
+          color: color(secondary);
+          font: 500 0.8125rem / 1.4 font-family(fraktion);
+          padding: 0.65rem 0.75rem;
+          outline: none;
+
+          &:focus {
+            background: #ffffff;
+            box-shadow: 0 0 0 1px color(secondary);
+          }
+        }
+      }
+
+      .modal-send-btn {
+        margin-top: 0.5rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.95rem 1.25rem;
+        background: color(secondary);
+        border: 1px solid color(secondary);
+        color: color(primary);
+        font: 700 0.75rem / 1 font-family(fraktion);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        .btn-arrow {
+          transition: transform 0.25s ease;
+        }
+
+        &:hover {
+          background: color(primary);
+          color: color(secondary);
+
+          .btn-arrow {
+            transform: translateX(4px);
+          }
+        }
+      }
     }
   }
 </style>
