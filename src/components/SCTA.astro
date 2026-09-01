@@ -1,0 +1,1063 @@
+---
+const lines = [
+  ['L', 'e', 't<span class="sup">\'</span>', 's'],
+  ['C', 'r', 'e', 'a', 't', 'e'],
+]
+---
+
+<section class="s-cta" data-intersect>
+  <div id="contact" class="s__inner js-container">
+    <div class="s__hover js-hover">
+      <div class="s__button js-button">
+        <div class="s__button__inner">
+          <div class="s__button__text js-button-text">
+            GO
+          </div><!-- .s__button__text -->
+        </div><!-- .s__button__inner -->
+      </div><!-- .s__button -->
+
+      <div class="s__cta js-cta">
+        {
+          lines.map((line, i) => (
+            <div
+              class:list={[
+                's__cta__line',
+                's__cta__line--' + (i === 0 ? 'top' : 'bottom'),
+              ]}
+            >
+              <div class="s__cta__text">
+                {line.map((char) => (
+                  <span class="s__cta__char">
+                    {['', '', '', ''].map(() => (
+                      <span class="s__cta__char__slice" set:html={char} />
+                    ))}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+        <a href="mailto:brintadeb15@gmail.com" class="s__cta__link">
+          brintadeb15@gmail.com
+        </a>
+
+        <div class="s__cta__stars">
+          <svg
+            class="s__cta__star"
+            width="49"
+            height="49"
+            viewBox="0 0 49 49"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+            >
+            </path>
+          </svg>
+          <svg
+            class="s__cta__star"
+            width="49"
+            height="49"
+            viewBox="0 0 49 49"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+            >
+            </path>
+          </svg>
+          <svg
+            class="s__cta__star"
+            width="49"
+            height="49"
+            viewBox="0 0 49 49"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+            >
+            </path>
+          </svg>
+          <svg
+            class="s__cta__star"
+            width="49"
+            height="49"
+            viewBox="0 0 49 49"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+            >
+            </path>
+          </svg>
+        </div>
+
+        <div class="a-dots"></div>
+      </div><!-- .s__cta -->
+    </div><!-- .s__hover -->
+  </div><!-- .s__inner -->
+
+  <div class="s__grid js-grid">
+    <svg class="s__grid__svg js-grid-svg">
+      <path class="s__grid__path js-grid-path" d=""></path>
+    </svg>
+  </div><!-- .s__grid -->
+</section>
+
+<script>
+  import Emitter from '../utils/Emitter'
+  import Ticker from '../utils/Ticker'
+
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  class Section {
+    el: HTMLElement
+    container: HTMLElement
+    hover: HTMLElement
+    button: HTMLElement
+    cta: HTMLElement
+
+    bounding: DOMRect | null
+
+    ctaMaxSize: number
+
+    grid: {
+      bounding: DOMRect | null
+      width: number
+      height: number
+      vLines: number
+      hLines: number
+      gapX: number
+      gapY: number
+      lines: any[]
+      points: any[]
+      el: HTMLElement
+      svg: HTMLElement
+      path: SVGPathElement
+    }
+
+    wave: {
+      progress: number
+      op: number
+      speed: number
+      strength: number
+      state: string
+      timeout: number
+    }
+
+    buttonIsHovered: boolean
+    isPaused: boolean
+    tl: gsap.core.Timeline | null
+
+    /**
+     * Constructor
+     */
+    constructor() {
+      // Elements
+      this.el = document.querySelector('.s-cta') as HTMLElement
+      this.container = this.el?.querySelector('.js-container') as HTMLElement
+      this.hover = this.el?.querySelector('.js-hover') as HTMLElement
+      this.button = this.el?.querySelector('.js-button') as HTMLElement
+      this.cta = this.el?.querySelector('.js-cta') as HTMLElement
+
+      // Properties
+      this.bounding = null
+      this.ctaMaxSize = 0
+
+      this.grid = {
+        bounding: null,
+        width: 0,
+        height: 0,
+        vLines: 0,
+        hLines: 0,
+        gapX: 0,
+        gapY: 0,
+        lines: [],
+        points: [],
+        el: this.el?.querySelector('.js-grid') as HTMLElement,
+        svg: this.el?.querySelector('.js-grid-svg') as HTMLElement,
+        path: this.el?.querySelector('.js-grid-path') as SVGPathElement,
+      }
+
+      this.wave = {
+        progress: 0,
+        op: 0,
+        speed: (window.safeWidth || window.innerWidth) > 767 ? 15 : 10,
+        strength: (window.safeWidth || window.innerWidth) > 767 ? 1 : 0.35,
+        state: 'paused',
+        timeout: 0,
+      }
+
+      this.buttonIsHovered = false
+      this.isPaused = true
+      this.tl = null
+
+      // Init
+      if (document.readyState === 'complete') {
+        Ticker.nextTick(this.init, this)
+      } else {
+        Emitter.once('siteLoaded', this.init, this)
+      }
+    }
+
+    /**
+     * Init
+     */
+    init() {
+      this.setSize()
+      this.setPoints()
+      this.setTimeline()
+
+      this.bindEvents()
+
+      this.drawLines()
+    }
+
+    /**
+     * Bind events
+     */
+    bindEvents() {
+      Emitter.on('resize', this.onResize, this)
+
+      this.hover?.addEventListener('mouseenter', this.onButtonHover.bind(this))
+      this.hover?.addEventListener('mouseleave', this.onButtonLeave.bind(this))
+
+      this.hover?.addEventListener('touchstart', this.onButtonHover.bind(this), {
+        passive: true,
+      })
+
+      this.el?.addEventListener('intersect', this.onIntersect.bind(this), {
+        passive: true,
+      })
+    }
+
+    /**
+     * Resize handler
+     */
+    onResize(widthChanged: boolean) {
+      if (widthChanged) {
+        this.setSize()
+        this.setPoints()
+        this.setTimeline()
+        this.drawLines()
+      }
+    }
+
+    /**
+     * Button hover handler
+     */
+    onButtonHover() {
+      this.buttonIsHovered = true
+      this.hover?.classList.add('is-active')
+      this.waveShock()
+
+      if (this.tl) {
+        this.tl.pause()
+      }
+    }
+
+    /**
+     * Button leave handler
+     */
+    onButtonLeave() {
+      this.buttonIsHovered = false
+      this.hover?.classList.remove('is-active')
+
+      if (this.tl) {
+        this.tl.resume()
+      }
+    }
+
+    /**
+     * Intersect handler
+     */
+    onIntersect(e: any) {
+      this.isPaused = !e.detail.isIntersecting
+
+      if (this.isPaused) {
+        Emitter.off('tick', this.tick, this)
+        if (this.tl) this.tl.pause()
+      } else {
+        Emitter.on('tick', this.tick, this)
+        if (this.tl) this.tl.resume()
+      }
+    }
+
+    /**
+     * Set size
+     */
+    setSize() {
+      if (!this.el || !this.grid.el || !this.grid.svg || !this.container) return
+
+      this.bounding = this.el.getBoundingClientRect()
+      this.grid.bounding = this.grid.el.getBoundingClientRect()
+
+      this.grid.width = this.grid.bounding.width
+      this.grid.height = this.grid.bounding.height
+
+      this.grid.svg.style.width = this.grid.width + 'px'
+      this.grid.svg.style.height = this.grid.height + 'px'
+
+      this.ctaMaxSize = Math.max(
+        this.container.clientWidth,
+        this.container.clientHeight
+      )
+    }
+
+    /**
+     * Set points
+     */
+    setPoints() {
+      const { grid } = this
+
+      grid.points = []
+
+      grid.vLines = (window.safeWidth || window.innerWidth) > 767 ? 12 : 8
+      grid.gapX = grid.width / grid.vLines
+      grid.gapY = grid.gapX
+      grid.hLines = Math.ceil(grid.height / (grid.gapY || 1)) + 1
+
+      const hWidth = grid.width * 0.5
+      const hHeight = grid.height * 0.5
+
+      for (let x = 0; x <= grid.vLines; x++) {
+        const col: any[] = []
+
+        for (let y = 0; y <= grid.hLines; y++) {
+          const px = x * grid.gapX
+          const py = y * grid.gapY
+
+          const dx = px - hWidth
+          const dy = py - hHeight
+          const dist = Math.hypot(dx, dy)
+
+          col.push({
+            x: px,
+            y: py,
+            dx,
+            dy,
+            dist,
+            vx: 0,
+            vy: 0,
+            wx: 0,
+            wy: 0,
+            mx: 0,
+            my: 0,
+            ox: 0,
+            oy: 0,
+          })
+        }
+
+        grid.points.push(col)
+      }
+    }
+
+    /**
+     * Set timeline
+     */
+    setTimeline() {
+      if (!this.el) return
+
+      ScrollTrigger.create({
+        trigger: this.el,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onEnter: () => {
+          if (!this.tl) {
+            this.createPulseTimeline()
+          }
+        },
+        onEnterBack: () => {
+          if (!this.tl) {
+            this.createPulseTimeline()
+          }
+        },
+      })
+    }
+
+    /**
+     * Create pulse timeline
+     */
+    createPulseTimeline() {
+      const text = this.container?.querySelector('.js-button-text')
+      if (!text) return
+
+      this.tl = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 0.5,
+      })
+
+      this.tl.call(() => {
+        this.wave.state = 'pulse'
+      })
+
+      this.tl.fromTo(
+        text,
+        {
+          scale: 0.85,
+        },
+        {
+          scale: 1.05,
+          duration: 2.7,
+          ease: 'power2.in',
+        }
+      )
+
+      this.tl.call(this.wavePulse.bind(this), [])
+
+      this.tl.to(text, {
+        scale: 0.85,
+        duration: 0.15,
+        ease: 'power4.out',
+      })
+    }
+
+    /**
+     * Move points
+     */
+    movePoints(time: number) {
+      const { grid, wave } = this
+
+      grid.points.forEach((col) => {
+        col.forEach((point: any, y: number) => {
+          if (y === 0 || point.dist === 0) return
+
+          const d = Math.abs(point.dist - wave.progress)
+          const l = 30
+
+          if (d < l) {
+            const s = 1 - d / l
+            const a = Math.atan2(point.dy, point.dx)
+            const f = Math.cos(d * 0.01) * s
+
+            point.vx += Math.cos(a) * f * l * 0.5 * wave.strength
+            point.vy += Math.sin(a) * f * l * 0.5 * wave.strength
+          }
+
+          point.vx += (0 - point.wx) * 0.001
+          point.vy += (0 - point.wy) * 0.001
+
+          point.vx *= 0.9
+          point.vy *= 0.9
+
+          point.wx += point.vx * 3
+          point.wy += point.vy * 3
+
+          point.wx *= 0.9
+          point.wy *= 0.9
+
+          point.mx = point.wx * 0.1
+          point.my = point.wy * 0.1
+
+          const maxDist = Math.hypot((window.safeHeight || window.innerHeight), (window.safeWidth || window.innerWidth)) || 1
+          point.ox = point.dx / maxDist
+          point.oy = point.dy / maxDist
+
+          point.ox = this.easeOut(point.ox)
+          point.oy = this.easeOut(point.oy)
+
+          point.ox *= grid.gapX * 75 * (point.dist / (this.ctaMaxSize || 1))
+          point.oy *= grid.gapY * 75 * (point.dist / (this.ctaMaxSize || 1))
+        })
+      })
+    }
+
+    /**
+     * Ease out
+     */
+    easeOut(t: number) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+    }
+
+    /**
+     * Draw lines
+     */
+    drawLines() {
+      const { grid } = this
+      if (!grid.path) return
+
+      let d = ''
+
+      grid.points.forEach((col) => {
+        col.forEach((point: any, i: number) => {
+          const p = this.movedPoint(point)
+
+          if (i === 0) {
+            d += `M ${p.x} ${p.y} `
+          } else {
+            d += `L ${p.x} ${p.y} `
+          }
+        })
+      })
+
+      for (let y = 0; y < grid.hLines; y++) {
+        grid.points.forEach((col, x) => {
+          const point = col[y]
+          if (!point) return
+          const p = this.movedPoint(point)
+
+          if (x === 0) {
+            d += `M ${p.x} ${p.y} `
+          } else {
+            d += `L ${p.x} ${p.y} `
+          }
+        })
+      }
+
+      grid.path.setAttribute('d', d)
+    }
+
+    /**
+     * Get point coordinates with movement added
+     */
+    movedPoint(point: any) {
+      return {
+        x: point.x + point.mx + point.ox * this.wave.op,
+        y: point.y + point.my + point.oy * this.wave.op,
+      }
+    }
+
+    /**
+     * Wave pulse
+     */
+    wavePulse() {
+      if (this.buttonIsHovered) return
+
+      const { wave } = this
+      wave.progress = 0
+      wave.state = 'pulse'
+      wave.speed = (window.safeWidth || window.innerWidth) > 767 ? 15 : 10
+      wave.strength = (window.safeWidth || window.innerWidth) > 767 ? 1 : 0.35
+    }
+
+    /**
+     * Wave shock
+     */
+    waveShock() {
+      const { wave } = this
+      if (!this.buttonIsHovered || wave.state === 'shock') return
+
+      wave.progress = 0
+      wave.state = 'shock'
+      wave.speed = 30
+      wave.strength = 5
+    }
+
+    /**
+     * Tick
+     */
+    tick(time: number) {
+      const { wave, grid } = this
+
+      if (wave.progress < grid.height) {
+        if (wave.state !== 'paused') {
+          wave.progress += wave.speed
+        }
+      }
+
+      this.movePoints(time)
+      this.drawLines()
+    }
+  }
+
+  new Section()
+</script>
+
+<style lang="scss">
+  .s-cta {
+    position: relative;
+    z-index: 2;
+
+    padding: 40rem 0 0;
+
+    @include mq(desktop-lg) {
+      padding-top: 35rem;
+    }
+
+    @include mq(desktop-md) {
+      padding-top: 30rem;
+    }
+
+    @include mq(desktop-sm) {
+      padding-top: 25rem;
+    }
+
+    @include mq(tablet) {
+      padding-top: 25rem;
+    }
+
+    @include mq(tablet-sm) {
+      padding-top: 20rem;
+    }
+
+    @include mq(phone) {
+      padding-top: 15rem;
+    }
+
+    .s__inner {
+      @include flex(column, center, center);
+
+      position: relative;
+      z-index: 3;
+
+      height: calc(100vh - 8rem - 2px);
+
+      @include mq(phone) {
+        height: calc(100vh - 4.375rem);
+      }
+    }
+
+    .s__button {
+      position: relative;
+      z-index: 1;
+
+      width: 6rem;
+      height: 6rem;
+
+      cursor: pointer;
+
+      color: color(primary);
+      font: 700 3.75rem / 6.85rem font-family(bigger);
+      letter-spacing: 0.05em;
+      text-align: center;
+      text-indent: 0.075em;
+      text-transform: uppercase;
+
+      &__inner {
+        width: 100%;
+        height: 100%;
+
+        background: color(secondary);
+        border-radius: 999rem;
+
+        transition: scale 1s ease(out-quint) 0.2s;
+        will-change: scale;
+      }
+
+      &__text {
+        transition: scale 1.2s ease(out-quint) 0.2s;
+        will-change: scale;
+      }
+    }
+
+    .s__hover.is-active .s__button {
+      .s__button__inner {
+        scale: 1.5;
+        transition: scale 0.6s ease(in-quint) 0s;
+      }
+
+      .s__button__text {
+        animation-play-state: paused;
+        scale: 2;
+        transition: scale 0.6s ease(in-cubic) 0s;
+      }
+    }
+
+    @keyframes s-cta-char-up-down {
+      0% {
+        transform: translate3d(0, 0, 0);
+        animation-timing-function: ease(out-cubic);
+      }
+
+      25% {
+        transform: translate3d(0, -52%, 0);
+        animation-timing-function: ease(in-out-cubic);
+      }
+
+      75% {
+        transform: translate3d(0, 52%, 0);
+        animation-timing-function: ease(in-cubic);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes s-cta-char-toggle {
+      0%, 50% {
+        opacity: 1;
+      }
+
+      50.01%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .s__cta {
+      --size: 64rem;
+
+      position: absolute;
+      top: calc(50% - var(--size) / 2);
+      left: calc(50% - var(--size) / 2);
+      z-index: 2;
+
+      width: var(--size);
+      height: var(--size);
+
+      background: color(secondary);
+      border-radius: 999rem;
+      clip-path: circle(0 at 50% 50%);
+      overflow: hidden;
+
+      color: color(primary);
+      font: 700 calc(var(--size) * 0.3743) / 1 font-family(bigger);
+      text-align: center;
+      text-transform: uppercase;
+
+      transition: clip-path 0.6s ease(in-out-quint);
+      will-change: clip-path;
+      pointer-events: none;
+
+      &:before,
+      &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 4;
+
+        width: 100%;
+        height: 100%;
+
+        border-radius: 999rem;
+        transition: border-width 0.6s ease(in-out-quint);
+        will-change: border-width;
+
+        content: '';
+        pointer-events: none;
+      }
+
+      &:before {
+        border: calc(var(--size) * 0.5) solid color(primary);
+      }
+
+      &:after {
+        border: calc(var(--size) * 0.5) solid color(secondary);
+      }
+
+      &__link {
+        position: absolute;
+        top: calc(50% + var(--size) * 0.36);
+        left: 50%;
+        z-index: 3;
+
+        display: block;
+        padding: 1em 1.5em;
+
+        background: color(secondary);
+        opacity: 0;
+        transform: translate3d(-50%, 1em, 0);
+
+        color: color(primary);
+        font: 700 14px / 1 font-family(fraktion);
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        text-transform: uppercase;
+        border: 1px solid color(primary);
+        border-radius: 999px;
+
+        transition:
+          transform 0s linear 0.3s,
+          opacity 0s linear 0.3s;
+        will-change: transform, opacity;
+
+        @include mq(phone) {
+          top: calc(50% + var(--size) * 0.28);
+          padding: 0.8em 1.2em;
+          font-size: 13px;
+        }
+
+        &:before {
+          position: absolute;
+          top: calc(50% - 3px);
+          left: 0.6em;
+
+          border-top: 3px solid transparent;
+          border-left: 6px solid currentcolor;
+          border-bottom: 3px solid transparent;
+
+          content: '';
+
+          @include mq(phone) {
+            display: none;
+          }
+        }
+      }
+
+      &__line {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+
+        translate: -50% -50%;
+        scale: 0.5;
+
+        transition: scale 0.6s ease(in-cubic);
+        will-change: scale;
+
+        @include mq(phone) {
+          top: 45%;
+        }
+
+        &--top {
+          clip-path: inset(-100% 0 calc(50% + 0.01em) 0);
+
+          .s__cta__char__slice {
+            --toggle-delay: calc(var(--delay) + var(--offset) + 0.45s);
+
+            @for $i from 1 through 3 {
+              &:nth-child(#{$i + 1}) {
+                clip-path: inset(0 0 calc(100% - (0.03em * $i)) 0);
+              }
+            }
+          }
+        }
+
+        &--bottom {
+          clip-path: inset(calc(50% + 0.01em) 0 -100% 0);
+          letter-spacing: 0.014em;
+
+          .s__cta__char__slice {
+            --toggle-delay: calc(var(--delay) + var(--offset) + 1.45s);
+
+            @for $i from 1 through 3 {
+              &:nth-child(#{$i + 1}) {
+                clip-path: inset(calc(100% - (0.03em * $i)) 0 0 0);
+              }
+            }
+          }
+        }
+      }
+
+      &__text {
+        @include flex(row, flex-start, center);
+        height: 0.8em;
+      }
+
+      &__char {
+        position: relative;
+        height: 100%;
+
+        @for $i from 1 through 6 {
+          &:nth-child(#{$i}) {
+            --delay: #{$i * 0.1 + 's'};
+          }
+        }
+
+        &__slice {
+          --offset: 0s;
+          --move-delay: calc(var(--delay) + var(--offset));
+
+          position: relative;
+          display: block;
+          height: 100%;
+
+          animation: s-cta-char-up-down 2s infinite var(--move-delay);
+          will-change: transform;
+
+          &:not(:first-child) {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            animation:
+              s-cta-char-up-down 2s infinite var(--move-delay),
+              s-cta-char-toggle 2s linear infinite var(--toggle-delay);
+          }
+
+          @for $i from 1 through 3 {
+            &:nth-child(#{$i + 1}) {
+              --offset: 0.02s + #{(4 - $i) * 0.04 + 's'};
+            }
+          }
+        }
+      }
+
+      :global(.sup) {
+        font-size: 0.5em;
+        vertical-align: top;
+      }
+
+      .a-dots {
+        position: absolute;
+        top: -10%;
+        left: -10%;
+
+        width: 120%;
+        height: 120%;
+
+        scale: 1.1;
+
+        transition: scale 0.8s ease(in-cubic);
+        will-change: scale;
+
+        &:before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+
+          width: 200%;
+          height: 200%;
+
+          background:
+            repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                color(secondary) 3px,
+                color(secondary) 100%
+              )
+              center / 48px 48px repeat,
+            repeating-linear-gradient(
+                90deg,
+                color(primary),
+                color(primary) 2px,
+                transparent 3px,
+                transparent 48px
+              )
+              center / 48px 48px repeat;
+
+          transform: translate3d(-50%, -50%, 0) scale(0.5);
+          content: '';
+        }
+      }
+
+      @keyframes s-cta-star-float {
+        0%, 100% {
+          transform: translate3d(0, 0, 0);
+        }
+
+        50% {
+          transform: translate3d(0, -15%, 0) scale(0.5);
+        }
+      }
+
+      &__stars {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+
+        width: 100%;
+        height: 100%;
+
+        scale: 1.25;
+        transition: scale 0.8s ease(in-cubic);
+        will-change: scale;
+      }
+
+      &__star {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 0.15em;
+        height: auto;
+
+        fill: color(primary);
+        animation: s-cta-star-float 10s infinite ease(in-out-quad);
+        will-change: transform;
+
+        &:nth-child(1) {
+          top: 12%;
+          left: 25%;
+          animation-duration: 8s;
+        }
+
+        &:nth-child(2) {
+          top: 33%;
+          left: 85%;
+          width: 0.1em;
+          animation-duration: 9s;
+        }
+
+        &:nth-child(3) {
+          top: 60%;
+          left: 11%;
+          width: 0.1em;
+          animation-duration: 7s;
+        }
+
+        &:nth-child(4) {
+          top: 83%;
+          left: 74%;
+          width: 0.15em;
+        }
+      }
+    }
+
+    .s__hover.is-active .s__cta {
+      clip-path: circle(50% at 50% 50%);
+      transition: clip-path 1s ease(in-out-expo) 0.2s;
+      pointer-events: auto;
+
+      &:before {
+        border-width: 1rem;
+        transition: border-width 1.1s ease(in-out-expo) 0.2s;
+
+        @include mq(phone) {
+          border-width: 0.5rem;
+        }
+      }
+
+      &:after {
+        border-width: 1px;
+        transition: border-width 1.005s ease(in-out-expo) 0.2s;
+      }
+
+      .s__cta__stars {
+        scale: 1;
+        transition: scale 2s ease(out-quint) 0.4s;
+      }
+
+      .s__cta__line {
+        scale: 1;
+        transition: scale 1.8s ease(out-quint) 0.6s;
+      }
+
+      .s__cta__link {
+        opacity: 1;
+        transform: translate3d(-50%, 0, 0);
+        transition:
+          transform 0.6s ease(out-expo) 1s,
+          opacity 0.3s ease(out-expo) 1s;
+      }
+
+      .a-dots {
+        scale: 1;
+        transition: scale 1.8s ease(out-quint) 0.6s;
+      }
+    }
+
+    .s__grid {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      z-index: 1;
+
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+
+      &__svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &__path {
+        fill: none;
+        stroke: color(secondary);
+        stroke-width: 1px;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,97 @@
+<footer class="site-foot">
+  <div class="site-foot__logo">
+    <a href="/" title="Brinta Deb — Home" class="site-foot__link" aria-label="Back to Top">
+      <svg
+        class="bd-foot-logo"
+        width="280"
+        height="280"
+        viewBox="0 0 280 280"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Custom BD Architectural Monogram (Balanced & Identical Font Structure) -->
+        <g class="bd-logo-mark">
+          <path
+            class="bd-foot-glyph bd-foot-glyph--b"
+            d="M20 20h64c28 0 46 16 46 48 0 20-12 36-32 44 24 8 36 26 36 56 0 38-22 62-58 62H20V20Zm36 36v40h26c14 0 20-7 20-20s-6-20-20-20H56Zm0 76v42h28c14 0 20-7 20-21s-6-21-20-21H56Z"
+            fill="currentColor"
+          />
+          <path
+            class="bd-foot-glyph bd-foot-glyph--d"
+            d="M150 20h58c30 0 52 18 52 56v92c0 38-22 56-52 56h-58V20Zm36 36v132h20c16 0 20-10 20-24V96c0-14-4-24-20-24h-20Z"
+            fill="currentColor"
+          />
+        </g>
+      </svg>
+
+      <span class="u-sr-only">Brinta Deb</span>
+    </a>
+  </div><!-- .site-foot__logo -->
+</footer>
+
+<style lang="scss">
+  .site-foot {
+    @include flex(row, center, center);
+
+    position: relative;
+    z-index: 3;
+
+    padding: 1.5rem;
+
+    border-top: 1px solid color(secondary);
+
+    @include mq(phone) {
+      padding: 1rem;
+    }
+
+    &__logo {
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        outline: none;
+      }
+
+      svg {
+        display: block;
+        width: 3rem;
+        height: 3rem;
+        color: color(secondary);
+        transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        @include mq(phone) {
+          width: 1.875rem;
+          height: 1.875rem;
+        }
+      }
+
+      .bd-foot-glyph {
+        transform-origin: center;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.3s ease;
+      }
+
+      &:hover {
+        svg {
+          transform: scale(1.12);
+        }
+
+        .bd-foot-glyph--b {
+          transform: translateY(-4px);
+          fill: #f40c3f;
+        }
+
+        .bd-foot-glyph--d {
+          transform: translateY(4px);
+          fill: currentColor;
+        }
+      }
+
+      &:active {
+        svg {
+          transform: scale(0.92);
+        }
+      }
+    }
+  }
+</style>

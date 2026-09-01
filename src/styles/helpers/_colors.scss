@@ -1,0 +1,24 @@
+/**
+ * Colors helpers
+ */
+@use 'sass:map';
+@use "../variables-scss/colors" as *;
+
+/* Get a color value */
+@function color($key, $alpha: 1) {
+  @if $alpha != 1 {
+    $value: map.get($theme-colors, $key);
+    $color: $value;
+    @if $alias {
+      $color: $alias;
+    }
+
+    @return rgba($color, $alpha);
+  } @else {
+    @if $key == 'gradient' {
+      @return map.get($theme-colors, $key);
+    }
+
+    @return var(--color-#{$key});
+  }
+}

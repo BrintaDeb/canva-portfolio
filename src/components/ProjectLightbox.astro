@@ -1,0 +1,388 @@
+---
+// Project Lightbox Modal Component
+---
+
+<div id="projectLightbox" class="project-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="lightbox-backdrop js-lightbox-close"></div>
+  
+  <div class="lightbox-container">
+    <div class="lightbox-dialog">
+      <!-- Header -->
+      <div class="lightbox-header">
+        <div class="lightbox-header-info">
+          <span class="lightbox-tag js-lightbox-tag">Fullstack Web & UI/UX</span>
+          <h3 class="lightbox-title js-lightbox-title">Project Title</h3>
+        </div>
+        <button class="lightbox-close-btn js-lightbox-close" aria-label="Close modal" title="Close [Esc]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Media Body -->
+      <div class="lightbox-body">
+        <div class="lightbox-media-wrapper">
+          <img src="" alt="" class="lightbox-image js-lightbox-img" style="display: none;" />
+          <video src="" class="lightbox-video js-lightbox-video" loop muted playsinline controls style="display: none;"></video>
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="lightbox-footer">
+        <div class="lightbox-footer-desc js-lightbox-desc">
+          Interactive showcase preview. Click below to explore live deployment or inspect full design architecture.
+        </div>
+        <div class="lightbox-actions">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="lightbox-btn lightbox-btn-primary js-lightbox-link" style="display: none;">
+            <span>Visit Live Website</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+          <button class="lightbox-btn lightbox-btn-secondary js-lightbox-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  class LightboxManager {
+    modal: HTMLElement | null
+    img: HTMLImageElement | null
+    video: HTMLVideoElement | null
+    title: HTMLElement | null
+    tag: HTMLElement | null
+    link: HTMLAnchorElement | null
+    desc: HTMLElement | null
+
+    constructor() {
+      this.modal = document.getElementById('projectLightbox')
+      if (!this.modal) return
+
+      this.img = this.modal.querySelector('.js-lightbox-img')
+      this.video = this.modal.querySelector('.js-lightbox-video')
+      this.title = this.modal.querySelector('.js-lightbox-title')
+      this.tag = this.modal.querySelector('.js-lightbox-tag')
+      this.link = this.modal.querySelector('.js-lightbox-link')
+      this.desc = this.modal.querySelector('.js-lightbox-desc')
+
+      this.bindEvents()
+    }
+
+    bindEvents() {
+      // Close triggers
+      this.modal?.querySelectorAll('.js-lightbox-close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          this.close()
+        })
+      })
+
+      // Global window event listener
+      window.addEventListener('open-project-lightbox', ((e: CustomEvent) => {
+        if (e.detail) this.open(e.detail)
+      }) as EventListener)
+
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.modal?.classList.contains('is-open')) {
+          this.close()
+        }
+      })
+    }
+
+    open(data: {
+      caption: string
+      tag?: string
+      site?: string
+      src: string
+      type?: string
+      poster?: string
+    }) {
+      if (!this.modal) return
+
+      if (this.title) this.title.textContent = data.caption || 'Project Showcase'
+      if (this.tag) this.tag.textContent = data.tag || 'Work Portfolio'
+
+      // Handle media
+      const isVideo = data.type === 'video' || (typeof data.src === 'string' && data.src.endsWith('.mp4'))
+
+      if (isVideo && this.video) {
+        this.video.src = data.src
+        if (data.poster) this.video.poster = data.poster
+        this.video.style.display = 'block'
+        this.video.play().catch(() => {})
+        if (this.img) this.img.style.display = 'none'
+      } else if (this.img) {
+        this.img.src = data.src
+        this.img.alt = data.caption || 'Project Preview'
+        this.img.style.display = 'block'
+        if (this.video) {
+          this.video.pause()
+          this.video.src = ''
+          this.video.style.display = 'none'
+        }
+      }
+
+      // Handle live site link
+      if (this.link) {
+        if (data.site && data.site !== '#' && data.site.startsWith('http')) {
+          this.link.href = data.site
+          this.link.style.display = 'inline-flex'
+        } else {
+          this.link.style.display = 'none'
+        }
+      }
+
+      this.modal.classList.add('is-open')
+      this.modal.setAttribute('aria-hidden', 'false')
+      document.body.classList.add('lightbox-active')
+    }
+
+    close() {
+      if (!this.modal) return
+      this.modal.classList.remove('is-open')
+      this.modal.setAttribute('aria-hidden', 'true')
+      document.body.classList.remove('lightbox-active')
+
+      if (this.video) {
+        this.video.pause()
+        this.video.src = ''
+      }
+    }
+  }
+
+  // Initialize lightbox on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new LightboxManager())
+  } else {
+    new LightboxManager()
+  }
+</script>
+
+<style lang="scss">
+  .project-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.is-open {
+      opacity: 1;
+      pointer-events: auto;
+
+      .lightbox-dialog {
+        transform: scale(1) translateY(0);
+      }
+    }
+  }
+
+  .lightbox-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 0, 0, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .lightbox-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 90vh;
+  }
+
+  .lightbox-dialog {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 90vh;
+    background: color(secondary);
+    border: 1px solid rgba(255, 240, 235, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lightbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid rgba(255, 240, 235, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+  }
+
+  .lightbox-tag {
+    font: 700 11px / 1 font-family(fraktion);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color(primary);
+    opacity: 0.7;
+  }
+
+  .lightbox-title {
+    margin: 0;
+    font: 600 clamp(1.1rem, 2vw, 1.5rem) / 1.2 font-family(editorial);
+    color: color(primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lightbox-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: color(primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+
+    &:hover {
+      background: color(primary);
+      color: color(secondary);
+      transform: rotate(90deg);
+    }
+  }
+
+  .lightbox-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.4);
+    min-height: 200px;
+    max-height: calc(90vh - 170px);
+  }
+
+  .lightbox-media-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    img, video {
+      max-width: 100%;
+      max-height: calc(90vh - 200px);
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .lightbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.75rem;
+    border-top: 1px solid rgba(255, 240, 235, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+
+    @include mq(phone) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &-desc {
+      font: 400 13px / 1.4 font-family(fraktion);
+      color: color(primary);
+      opacity: 0.65;
+      max-width: 60%;
+
+      @include mq(phone) {
+        max-width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  .lightbox-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+
+    @include mq(phone) {
+      justify-content: center;
+    }
+  }
+
+  .lightbox-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    font: 700 12px / 1 font-family(fraktion);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &-primary {
+      background: color(primary);
+      color: color(secondary);
+      border: 1px solid color(primary);
+
+      &:hover {
+        background: transparent;
+        color: color(primary);
+      }
+    }
+
+    &-secondary {
+      background: transparent;
+      color: color(primary);
+      border: 1px solid rgba(255, 240, 235, 0.25);
+
+      &:hover {
+        border-color: color(primary);
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+</style>

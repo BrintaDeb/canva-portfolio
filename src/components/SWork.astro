@@ -1,0 +1,1228 @@
+---
+import AWork from './AWork.astro'
+
+const worksList = [
+  {
+    caption: 'Nest Services — Rental Marketplace & Tenant Platform',
+    tag: 'Fullstack Web & UI/UX',
+    site: 'https://nestservices.vercel.app/',
+    src: '/assets/media/nestservices_preview.png',
+    modalSrc: '/assets/media/nestservices_full.png',
+    type: 'image',
+  },
+  {
+    caption: 'Netflix Web Application Clone (Believer 2)',
+    tag: 'UI/UX & Frontend Dev',
+    site: '#',
+    src: '/assets/media/4196fb390cbd9b45ba4dad6f2a98b397.png',
+    type: 'image',
+  },
+  {
+    caption: 'Bali Travel & Tours — Promo Reel',
+    tag: 'Video Editing & Motion',
+    site: '#',
+    src: '/assets/video/0291a950e1660906e0a2cf78ea3cc59d.mp4',
+    poster: '/assets/video/18507247e2bf1a9f63173524fc8cdacc.jpg',
+    type: 'video',
+  },
+  {
+    caption: 'World Mark Foundation — Webflow Architecture',
+    tag: 'Webflow & Branding',
+    site: '#',
+    src: '/assets/media/47dffeb11d199c8b13a8c5880bfa8623.png',
+    type: 'image',
+  },
+  {
+    caption: 'Our Brews Cafe — Restaurant Motion Reel',
+    tag: 'Commercial Reel',
+    site: '#',
+    src: '/assets/video/454c2193e5856c61115a3a0af61abb87.mp4',
+    poster: '/assets/video/b9bb368e44adfd1f7371206b13d337e7.jpg',
+    type: 'video',
+  },
+  {
+    caption: 'World Mark Foundation — Wix Studio Platform',
+    tag: 'Wix Studio & Responsive Web',
+    site: '#',
+    src: '/assets/media/5aa8400b1c1748a45c1e52546bbed452.png',
+    type: 'image',
+  },
+  {
+    caption: 'Nagpal Di Hatti — Food Promo Reel',
+    tag: 'Motion Graphics',
+    site: '#',
+    src: '/assets/video/bc78b97f8ad927dd204883528e1a8e61.mp4',
+    poster: '/assets/video/0b454741acf7a369f2ee8ef4b237b221.jpg',
+    type: 'video',
+  },
+  {
+    caption: 'Anti-Ragging Tour — Safety Campaign & Portal',
+    tag: 'Graphic Design & Poster',
+    site: '#',
+    src: '/assets/media/4160d5c43f0e3bbaa41ea2868029c7e4.png',
+    type: 'image',
+  },
+  {
+    caption: 'Instagram SEO Mastery — Carousel Motion',
+    tag: 'Instagram Strategy',
+    site: '#',
+    src: '/assets/video/9cfd35179075b14a6522145e2dd51717.mp4',
+    type: 'video',
+  },
+  {
+    caption: 'Holi Celebration 2021 — Stadium Festival Poster',
+    tag: 'Event Visual Identity',
+    site: '#',
+    src: '/assets/media/94ba33e622970233daf0a5937daab451.png',
+    type: 'image',
+  },
+  {
+    caption: 'Terms & Conditions Ticket — Motion Loop',
+    tag: 'Motion Design',
+    site: '#',
+    src: '/assets/video/3bfa6f73ccf0dca332681673af1bdab7.mp4',
+    type: 'video',
+  },
+  {
+    caption: 'NAMASVI Minimalist Brand Identity',
+    tag: 'Logo & Typography',
+    site: '#',
+    src: '/assets/media/588ea4c484f35de331781338c483464a.png',
+    type: 'image',
+  },
+  {
+    caption: 'Zero Waste Bamboo Fiber Eco Bag',
+    tag: 'Packaging Design',
+    site: '#',
+    src: '/assets/media/6c23df9f1416b41e7f58fd012f44ab69.jpg',
+    type: 'image',
+  },
+  {
+    caption: 'Happy Rath Yatra — Custom Coffee Cups',
+    tag: 'Merchandise Branding',
+    site: '#',
+    src: '/assets/media/4cb3b40250f0f48f1a745ffb67b266a2.png',
+    type: 'image',
+  },
+  {
+    caption: 'Traditional Indian Folk Masks Illustration',
+    tag: 'Heritage Digital Art',
+    site: '#',
+    src: '/assets/media/6ee9649b6e33f8953e379bfbcdbb4bb5.png',
+    type: 'image',
+  },
+  {
+    caption: 'LoveLuxe Valentine — Luxury Event Poster',
+    tag: 'Event Branding',
+    site: '#',
+    src: '/assets/media/ac64da694ace09d1b9942f055e0638d9.png',
+    type: 'image',
+  },
+  {
+    caption: 'Tanjiro Kamado — Demon Slayer Procreate Art',
+    tag: 'Procreate Digital Sketch',
+    site: '#',
+    src: '/assets/media/28b35d4e8aee8a2836b9dd9fa522f520.png',
+    type: 'image',
+  },
+  {
+    caption: 'Zenitsu Agatsuma — Thunder Breathing Artwork',
+    tag: 'Anime Digital Sketch',
+    site: '#',
+    src: '/assets/media/ec03fe34a4d885c6c1faff01a49bd99e.png',
+    type: 'image',
+  },
+  {
+    caption: 'Zenitsu with Chuntaro Sparrow Portrait',
+    tag: 'Character Art',
+    site: '#',
+    src: '/assets/media/f22740031efdf69bf015d3a1609d9403.png',
+    type: 'image',
+  },
+  {
+    caption: 'Inosuke Hashibira — Beast Slash Illustration',
+    tag: 'Action Manga Art',
+    site: '#',
+    src: '/assets/media/79d412c14dc811f1b5d941f703114591.png',
+    type: 'image',
+  },
+  {
+    caption: 'Spongebob Dual Face Pop Surrealism',
+    tag: 'Pop Art Illustration',
+    site: '#',
+    src: '/assets/media/b35bbed35c5bc0673fa97ebc938b796a.png',
+    type: 'image',
+  },
+  {
+    caption: 'Khyber Pass Chicken Tikka Massala Campaign',
+    tag: 'Food Branding',
+    site: '#',
+    src: '/assets/media/411051247f7f5c4f0f29b4c70b5efc89.jpg',
+    type: 'image',
+  },
+  {
+    caption: '3Rooms Wednesday Banquet Night Campaign',
+    tag: 'Social Media Advertising',
+    site: '#',
+    src: '/assets/media/9cc1d42fca2ab95b600c86de7ae288f8.jpg',
+    type: 'image',
+  },
+  {
+    caption: 'Interactive Canva Presentation Deck 01',
+    tag: 'Canva Design System',
+    site: 'https://www.canva.com/design/DAEgOcD46u8/qXha20201-C-BVE0ggTrIw/view',
+    src: '/assets/media/12b430f652a6514e21dfbee23e054ad2.png',
+    type: 'image',
+  },
+  {
+    caption: 'Interactive Canva Presentation Deck 02',
+    tag: 'Canva Design System',
+    site: 'https://www.canva.com/design/DAEukfCDzdI/VX12fHvVfaxcwznDpox7XQ/view',
+    src: '/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png',
+    type: 'image',
+  },
+]
+---
+
+<section id="work" class="s-work" data-intersect>
+  <div class="s__outer">
+    <div class="s__inner js-container">
+      <h2 class="s__title">
+        <span class="s__title__inner js-title">
+          <span class="s__title__letter js-letter">W</span>
+          <span class="s__title__letter js-letter">O</span>
+          <span class="s__title__letter js-letter">R</span>
+          <span class="s__title__letter js-letter">K</span>
+        </span>
+      </h2>
+
+      <div class="s__scene js-scene">
+        {
+          worksList.map((work, index) => (
+            <AWork
+              cssClass="s__scene__work s__scene__work--card js-work"
+              caption={work.caption}
+              tag={work.tag}
+              site={work.site}
+              src={work.src}
+              modalSrc={work.modalSrc}
+              poster={work.poster}
+              type={work.type}
+              index={String(index + 1).padStart(4, '0')}
+              total={String(worksList.length).padStart(2, '0')}
+            />
+          ))
+        }
+      </div><!-- .s__scene -->
+
+      <canvas class="s__canvas js-canvas"></canvas>
+    </div><!-- .s__inner -->
+
+    <div class="s__mask-outer">
+      <div class="s__mask js-mask">
+        <svg class="s__mask__svg js-mask-svg">
+          <path class="s__mask__path-inner js-mask-path-inner" d=""></path>
+          <path class="s__mask__path-outer js-mask-path-outer" d=""></path>
+          <path class="s__mask__path-lines js-mask-path-lines" d=""></path>
+        </svg>
+      </div><!-- .s__mask -->
+    </div><!-- .s__mask-outer -->
+
+    <div class="s__ruler js-ruler"></div>
+  </div><!-- .s__outer -->
+</section>
+
+<script>
+  import Emitter from '../utils/Emitter'
+  import Ticker from '../utils/Ticker'
+
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  class Section {
+    el: HTMLElement
+    container: HTMLElement
+    ruler: HTMLElement
+    scene: HTMLElement
+    canvas: HTMLCanvasElement
+    ctx: CanvasRenderingContext2D | null
+    title: HTMLElement
+    videos: NodeListOf<HTMLVideoElement>
+
+    mask: {
+      width: number
+      height: number
+      maxScale: number
+      lines: any[]
+      el: HTMLElement
+      svg: HTMLElement
+      pathOuter: SVGPathElement
+      pathInner: SVGPathElement
+      pathLines: SVGPathElement
+    }
+
+    bounding: {
+      left: number
+      top: number
+      width: number
+      height: number
+    }
+    letters: any[]
+    works: any[]
+    points: any[]
+
+    tl: gsap.core.Timeline | null
+    animationProgress: number
+    pointsProgress: number
+    last: {
+      animationProgress: number
+      pointsProgress: number
+    }
+    scrollProgress: number
+    smoothScrollProgress: number
+    state: number
+    speed: number
+    isPaused: boolean
+    loadIsStarted: boolean
+
+    /**
+     * Constructor
+     */
+    constructor() {
+      // Elements
+      this.el = document.querySelector('.s-work') as HTMLElement
+      this.container = this.el?.querySelector('.js-container') as HTMLElement
+      this.ruler = this.el?.querySelector('.js-ruler') as HTMLElement
+      this.scene = this.container?.querySelector('.js-scene') as HTMLElement
+      this.canvas = this.container?.querySelector('.js-canvas') as HTMLCanvasElement
+      this.ctx = this.canvas?.getContext('2d')
+      this.title = this.container?.querySelector('.js-title') as HTMLElement
+      this.videos = this.container?.querySelectorAll('video') as NodeListOf<HTMLVideoElement>
+
+      // Properties
+      this.mask = {
+        width: 0,
+        height: 0,
+        maxScale: 1,
+        lines: [],
+        el: this.el?.querySelector('.js-mask') as HTMLElement,
+        svg: this.el?.querySelector('.js-mask-svg') as HTMLElement,
+        pathOuter: this.el?.querySelector('.js-mask-path-outer') as SVGPathElement,
+        pathInner: this.el?.querySelector('.js-mask-path-inner') as SVGPathElement,
+        pathLines: this.el?.querySelector('.js-mask-path-lines') as SVGPathElement,
+      }
+
+      this.letters = []
+      this.title?.querySelectorAll('.js-letter').forEach((_letter) => {
+        const letter = {
+          el: _letter,
+          ghosts: [] as any[],
+          width: 0,
+          height: 0,
+          top: 0,
+          left: 0,
+          freq: 1,
+          total: 0,
+        }
+
+        this.letters.push(letter)
+      })
+
+      this.works = []
+      this.container?.querySelectorAll('.js-work').forEach((_work) => {
+        const work = {
+          el: _work,
+        }
+
+        this.works.push(work)
+      })
+
+      this.points = []
+
+      this.scrollProgress = 0
+      this.smoothScrollProgress = 0
+      this.animationProgress = 0
+      this.pointsProgress = 0
+      this.state = 0
+      this.speed = 1000
+      this.last = {
+        animationProgress: 0,
+        pointsProgress: 0,
+      }
+
+      this.isPaused = true
+      this.loadIsStarted = false
+      this.tl = null
+
+      // Init
+      if (document.readyState === 'complete') {
+        Ticker.nextTick(this.init, this)
+      } else {
+        Emitter.once('siteLoaded', this.init, this)
+      }
+    }
+
+    /**
+     * Init
+     */
+    init() {
+      this.setCtxStyle()
+      this.setSize()
+      this.setMask()
+      this.setPoints()
+      this.setLetters()
+      this.setWorks()
+      this.setTimeline()
+
+      this.bindEvents()
+    }
+
+    /**
+     * Bind events
+     */
+    bindEvents() {
+      Emitter.on('contrastchange', this.setCtxStyle, this)
+      Emitter.on('resize', this.onResize, this)
+
+      this.el?.addEventListener('intersect', this.onIntersect.bind(this), {
+        passive: true,
+      })
+    }
+
+    /**
+     * Resize handler
+     */
+    onResize(widthChanged: boolean) {
+      if (widthChanged) {
+        this.setCtxStyle()
+        this.setSize()
+        this.setMask()
+        this.setPoints()
+        this.setLetters()
+        this.setWorks()
+        this.setTimeline()
+      }
+    }
+
+    /**
+     * Intersect handler
+     */
+    onIntersect(e: any) {
+      this.isPaused = !e.detail.isIntersecting
+
+      if (this.isPaused) {
+        Emitter.off('tick', this.tick, this)
+      } else {
+        Emitter.on('tick', this.tick, this)
+      }
+
+      if (!this.loadIsStarted) {
+        this.loadNextVideo()
+        this.loadIsStarted = true
+      }
+    }
+
+    /**
+     * Set canvas style
+     */
+    setCtxStyle() {
+      if (!this.el) return
+      const color = getComputedStyle(this.el).getPropertyValue('--color-primary')
+
+      Ticker.nextTick(() => {
+        if (this.ctx) this.ctx.strokeStyle = color
+      })
+    }
+
+    /**
+     * Set size
+     */
+    setSize() {
+      if (!this.el || !this.container || !this.canvas) return
+
+      const isMobile = (window.safeWidth || window.innerWidth) <= 767
+      const heightMultiplier = isMobile ? 85 : 125
+      this.el.style.setProperty('--height', (this.works.length * heightMultiplier + 200) + 'lvh')
+
+      const bounding = this.container.getBoundingClientRect()
+
+      this.bounding = {
+        left: bounding.left,
+        top: bounding.top,
+        width: window.safeWidth || window.innerWidth,
+        height: window.safeHeight || window.innerHeight,
+      }
+
+      this.canvas.width = this.bounding.width
+      this.canvas.height = this.bounding.height
+
+      this.speed = Math.hypot(this.bounding.width, this.bounding.height) * 4
+    }
+
+    /**
+     * Set mask
+     */
+    setMask() {
+      const { mask, el, ruler } = this
+      if (!mask.el || !el || !ruler) return
+
+      const width = mask.el.clientWidth
+      const height = mask.el.clientHeight
+
+      mask.width = width
+      mask.height = height
+
+      mask.svg.style.width = mask.width + 'px'
+      mask.svg.style.height = mask.height + 'px'
+
+      const elBounding = el.getBoundingClientRect()
+      const rulerBounding = ruler.getBoundingClientRect()
+      const rulerWidth = rulerBounding.width
+      const rulerHeight = rulerBounding.height
+      const offsetX = rulerBounding.left - elBounding.left
+      const offsetY = rulerBounding.top - elBounding.top
+
+      const dOuter = `M -1 0 L ${width + 2} 0 L ${width + 2} ${height} L -1 ${height} Z`
+
+      const corners = {
+        tl: { x: offsetX, y: offsetY },
+        tr: { x: offsetX + rulerWidth, y: offsetY },
+        br: { x: offsetX + rulerWidth, y: offsetY + rulerHeight },
+        bl: { x: offsetX, y: offsetY + rulerHeight },
+      }
+
+      let size = (corners.tr.x - corners.tl.x) / 2
+      mask.maxScale = Math.max(2, (window.safeWidth || window.innerWidth) / (size || 1))
+
+      let dInner = `M ${corners.tl.x} ${corners.tl.y + size} A ${size} ${size} 0 0 1 ${corners.tr.x} ${corners.tr.y + size} L ${corners.br.x} ${corners.br.y - size} A ${size} ${size} 0 0 1 ${corners.bl.x} ${corners.bl.y - size} Z`
+      const linesClip = `${dOuter} ${dInner}`
+
+      mask.pathOuter?.setAttribute('d', `${dOuter} ${dInner}`)
+
+      const thickness = (window.safeWidth || window.innerWidth) > 767 ? 16 : 8
+      corners.tl.x += thickness
+      corners.tl.y += thickness
+      corners.tr.x -= thickness
+      corners.tr.y += thickness
+      corners.br.x -= thickness
+      corners.br.y -= thickness
+      corners.bl.x += thickness
+      corners.bl.y -= thickness
+
+      size = Math.max(1, (corners.tr.x - corners.tl.x) / 2)
+
+      dInner = `M ${corners.tl.x} ${corners.tl.y + size} A ${size} ${size} 0 0 1 ${corners.tr.x} ${corners.tr.y + size} L ${corners.br.x} ${corners.br.y - size} A ${size} ${size} 0 0 1 ${corners.bl.x} ${corners.bl.y - size} Z`
+
+      mask.pathInner?.setAttribute('d', `${dOuter} ${dInner}`)
+
+      mask.lines = []
+      const vLines = (window.safeWidth || window.innerWidth) > 767 ? 12 : 8
+      const gapX = width / vLines
+      const gapY = height * 0.1
+      const hLines = Math.ceil(height / (gapY || 1))
+
+      for (let i = 1; i < vLines; i++) {
+        const x = gapX * i
+        mask.lines.push({
+          p1: { x, y: 0 },
+          p2: { x, y: height },
+        })
+      }
+
+      for (let i = 0; i < hLines; i++) {
+        const y = gapY * i
+        mask.lines.push({
+          p1: { x: 0, y },
+          p2: { x: width, y },
+        })
+      }
+
+      let dLines = ''
+      mask.lines.forEach((line) => {
+        dLines += `M ${line.p1.x} ${line.p1.y} L ${line.p2.x} ${line.p2.y} `
+      })
+
+      mask.pathLines?.setAttribute('d', dLines)
+      if (mask.pathLines) {
+        mask.pathLines.style.clipPath = `path(evenodd, '${linesClip}')`
+      }
+    }
+
+    /**
+     * Set letters
+     */
+    setLetters() {
+      const { letters, scene } = this
+      if (!scene || !this.bounding) return
+
+      letters.forEach((letter, j) => {
+        letter.ghosts.forEach((ghost: any) => {
+          ghost.el.remove()
+        })
+        letter.ghosts = []
+
+        const bounding = letter.el.getBoundingClientRect()
+
+        letter.width = bounding.width
+        letter.height = bounding.height
+        letter.top = bounding.top - this.bounding.top
+        letter.left = bounding.left
+
+        letter.freq = 1 + Math.random()
+
+        const multiplier = (window.safeWidth || window.innerWidth) > 767 ? 0.75 : 0.5
+
+        letter.total =
+          Math.round(((this.bounding.width || 1000) / (letter.width || 100)) * multiplier) + 2
+
+        for (let i = 0; i < letter.total; i++) {
+          const el = document.createElement('span')
+          el.classList.add('s__scene__letter', 'js-letter')
+          el.innerText = letter.el.innerText
+          el.dataset.letter = letter.el.innerText
+
+          scene.appendChild(el)
+
+          const ghost = {
+            el,
+            x: letter.left,
+            y: letter.top,
+            z: Math.random() * 100,
+            i: i - letter.total * 0.5,
+            p: (i / letter.total - 0.5) * 2,
+            ap: Math.abs(i / letter.total - 0.5) * 2,
+          }
+
+          el.style.top = ghost.y + 'px'
+          el.style.left = ghost.x + 'px'
+          el.style.zIndex = String(j !== 1 && j !== 2 && (j + letters.length + i) % 5 === 0 ? 3 : 1)
+          el.style.setProperty('--ix', String(ghost.i))
+          el.style.setProperty(
+            '--iy',
+            String(((j + 1) / (letters.length + 1) - 0.5) * 2)
+          )
+          el.style.setProperty('--ap', String(ghost.ap))
+          el.style.setProperty('--p', String(ghost.p))
+
+          letter.ghosts.push(ghost)
+        }
+      })
+    }
+
+    /**
+     * Set works
+     */
+    setWorks() {
+      this.works.forEach((work, i) => {
+        const el = work.el
+        el.style.setProperty('--size', String(0.7 + Math.random() * 0.3))
+        el.style.setProperty(
+          '--y',
+          String((0.25 + Math.random() * 0.35) * (i % 2 ? -1 : 1))
+        )
+      })
+    }
+
+    /**
+     * Set timeline
+     */
+    setTimeline() {
+      const { el, container, works, scene, mask } = this
+      if (!el || !container || !scene || !mask.el) return
+
+      if (this.tl) {
+        this.tl.kill()
+      }
+
+      this.tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 20%',
+          end: 'bottom 80%',
+          scrub: 1.2,
+        },
+        onUpdate: () => {
+          scene.style.setProperty('--state', String(this.state))
+        },
+      })
+
+      const introDuration = 1.0
+      const enterDuration = 0.9
+      const glideDuration = 1.4
+      const exitDuration = 0.9
+      const stepDuration = 2.4
+
+      // Initial intro transition
+      this.tl.fromTo(
+        mask.el,
+        { scale: 1 },
+        { scale: mask.maxScale, duration: introDuration, ease: 'power3.inOut' },
+        0
+      )
+
+      this.tl.fromTo(
+        scene,
+        { scale: 0.75 },
+        { scale: 1, duration: introDuration, ease: 'power3.inOut' },
+        0
+      )
+
+      this.tl.fromTo(
+        container,
+        { clipPath: 'inset(0 1rem)' },
+        { clipPath: 'inset(0 0rem)', duration: introDuration, ease: 'power3.inOut' },
+        0
+      )
+
+      this.tl.fromTo(
+        this,
+        { pointsProgress: 0 },
+        { pointsProgress: 1, duration: introDuration, ease: 'power3.inOut' },
+        0
+      )
+
+      this.tl.fromTo(
+        this,
+        { state: 0 },
+        { state: 1, duration: introDuration, ease: 'power3.inOut' },
+        0
+      )
+
+      // Sequentially animate each project:
+      // Enter smoothly from right (1.15 -> 0.25) -> Glide gently across center (0.25 -> -0.25) -> Exit smoothly to left (-0.25 -> -1.15)
+      // Never a hard dead-stop; smooth continuous motion with slide delay and zero overlapping!
+      works.forEach((work, i) => {
+        const workEl = work.el
+        const startTime = introDuration + i * stepDuration
+
+        gsap.set(workEl, { attr: { progress: 1.15 } })
+
+        // 1. Enter from right towards center (Fading in)
+        this.tl!.fromTo(
+          workEl,
+          { attr: { progress: 1.15 } },
+          {
+            attr: { progress: 0.25 },
+            duration: enterDuration,
+            ease: 'power2.out',
+          },
+          startTime
+        )
+
+        // 2. Slow, luxurious glide across center (Active spotlight focus, smooth organic drift)
+        this.tl!.to(
+          workEl,
+          {
+            attr: { progress: -0.25 },
+            duration: glideDuration,
+            ease: 'sine.inOut',
+          },
+          startTime + enterDuration
+        )
+
+        // 3. Exit to left (Fading out)
+        this.tl!.to(
+          workEl,
+          {
+            attr: { progress: -1.15 },
+            duration: exitDuration,
+            ease: 'power2.in',
+          },
+          startTime + enterDuration + glideDuration
+        )
+      })
+
+      const outroStart = introDuration + (works.length - 1) * stepDuration + enterDuration + glideDuration + 0.6
+
+      this.tl.fromTo(
+        this,
+        { animationProgress: 0 },
+        { animationProgress: 30000, duration: this.tl.totalDuration(), ease: 'none' },
+        0
+      )
+
+      this.tl.fromTo(
+        this,
+        { state: 1 },
+        { state: 0, duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        outroStart
+      )
+
+      this.tl.fromTo(
+        mask.el,
+        { scale: mask.maxScale },
+        { scale: 1, duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        outroStart
+      )
+
+      this.tl.fromTo(
+        scene,
+        { scale: 1 },
+        { scale: 0.75, duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        outroStart
+      )
+
+      this.tl.fromTo(
+        container,
+        { clipPath: 'inset(0 0rem)' },
+        { clipPath: 'inset(0 1rem)', duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        outroStart
+      )
+
+      this.tl.fromTo(
+        this,
+        { pointsProgress: 1 },
+        { pointsProgress: 0, duration: introDuration, ease: 'power3.inOut' },
+        outroStart
+      )
+    }
+
+    /**
+     * Load next video
+     */
+    loadNextVideo() {
+      if (!this.videos) return
+      const video = Array.from(this.videos).find(
+        (v) => !v.classList.contains('is-loaded')
+      )
+
+      if (video) {
+        if (video.readyState >= 3) {
+          this.videoLoaded(video)
+        } else {
+          video.addEventListener(
+            'canplaythrough',
+            () => {
+              this.videoLoaded(video)
+            },
+            { once: true }
+          )
+
+          const dataSrc = video.getAttribute('data-src')
+          if (dataSrc) {
+            video.setAttribute('src', dataSrc)
+            video.load()
+          }
+        }
+      }
+    }
+
+    /**
+     * Video loaded
+     */
+    videoLoaded(video: HTMLVideoElement) {
+      video.classList.add('is-loaded')
+      this.loadNextVideo()
+    }
+
+    /**
+     * Move letters
+     */
+    moveLetters() {
+      const { speed, letters, animationProgress } = this
+
+      letters.forEach((letter) => {
+        const letterSpeed = speed * letter.freq
+        letter.ghosts.forEach((ghost: any, index: number) => {
+          let progress =
+            (((animationProgress % letterSpeed) / letterSpeed +
+              index / letter.total) %
+              1) /
+              0.7 -
+            0.15
+
+          ghost.el.style.setProperty('--progress', String(progress))
+        })
+      })
+    }
+
+    /**
+     * Set points
+     */
+    setPoints() {
+      const { bounding } = this
+      if (!bounding) return
+
+      this.points = []
+
+      const gap = 24
+      const cols = Math.ceil((bounding.width * 1.2) / gap)
+      const rows = Math.ceil((bounding.height * 1.2) / gap)
+
+      const offsetX = (bounding.width - cols * gap) * 0.5
+      const offsetY = (bounding.height - rows * gap) * 0.5
+
+      const hWidth = bounding.width * 0.5
+      const hHeight = bounding.height * 0.5
+
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          const x = i * gap + offsetX
+          const y = j * gap + offsetY
+
+          const dx = hWidth - x
+          const dy = hHeight - y
+
+          this.points.push({
+            x,
+            y,
+            dx,
+            dy,
+            flowX: 0,
+          })
+        }
+      }
+    }
+
+    /**
+     * Move points
+     */
+    movePoints() {
+      const { points, animationProgress } = this
+
+      points.forEach((p) => {
+        p.flowX = (animationProgress * -0.05) % 24
+      })
+    }
+
+    /**
+     * Draw points
+     */
+    drawPoints() {
+      const { bounding, ctx, points, animationProgress, pointsProgress, last } =
+        this
+      if (!ctx || !bounding) return
+
+      const rAnimationProgress = Math.round(animationProgress * 100) / 100
+      const rPointsProgress = Math.round(pointsProgress * 100) / 100
+
+      if (
+        rPointsProgress === last.pointsProgress &&
+        rAnimationProgress === last.animationProgress
+      )
+        return
+
+      ctx.clearRect(0, 0, bounding.width, bounding.height)
+      ctx.beginPath()
+
+      points.forEach((point) => {
+        const x = point.x + point.dx * (1 - pointsProgress) * 0.2 + point.flowX
+        const y = point.y + point.dy * (1 - pointsProgress) * 0.2
+
+        ctx.rect(x, y, 0.5, 0.5)
+      })
+
+      ctx.stroke()
+
+      last.pointsProgress = rPointsProgress
+      last.animationProgress = rAnimationProgress
+    }
+
+    /**
+     * Tick
+     */
+    tick() {
+      if (!this.el) return
+
+      this.scrollProgress =
+        Math.max(
+          Math.min(1, ScrollTrigger.positionInViewport(this.el, 'top')),
+          0
+        ) *
+          -1 +
+        (1 -
+          Math.max(
+            Math.min(1, ScrollTrigger.positionInViewport(this.el, 'bottom')),
+            0
+          ))
+      this.smoothScrollProgress +=
+        (this.scrollProgress - this.smoothScrollProgress) * 0.1
+
+      this.el.style.setProperty(
+        '--scroll-progress',
+        String(this.scrollProgress)
+      )
+
+      this.movePoints()
+      this.moveLetters()
+      this.drawPoints()
+    }
+  }
+
+  new Section()
+</script>
+
+<style lang="scss">
+  .s-work {
+    --height: 100lvh;
+
+    position: relative;
+    z-index: 2;
+
+    height: var(--height);
+
+    background: color(primary);
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+
+      width: 100%;
+      height: 1px;
+
+      background: color(secondary);
+
+      content: '';
+    }
+
+    .s__mask-outer {
+      position: sticky;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100lvh;
+
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .s__mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      will-change: scale, transform;
+
+      &__svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &__path-outer {
+        fill: color(primary);
+        fill-rule: evenodd;
+        stroke: color(secondary);
+        stroke-width: 1px;
+      }
+
+      &__path-inner {
+        fill: color(primary);
+        fill-rule: evenodd;
+        stroke: color(secondary);
+        stroke-width: 1px;
+
+        transform: translate3d(0, calc(var(--scroll-progress) * 48px), 0);
+
+        will-change: transform;
+      }
+
+      &__path-lines {
+        fill: none;
+        stroke: color(secondary);
+        stroke-width: 1px;
+      }
+    }
+
+    .s__outer {
+      position: relative;
+
+      height: var(--height);
+
+      clip-path: inset(0 -1rem);
+    }
+
+    .s__inner {
+      @include flex(column, center, center);
+
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: color(secondary);
+      transform: translate3d(0, calc(var(--scroll-progress) * -15%), 0);
+
+      color: color(primary);
+
+      will-change: clip-path, transform;
+
+      @include mq(phone) {
+        transform: none;
+      }
+    }
+
+    .s__ruler {
+      --width: min(16.6667%, 19.625rem);
+
+      position: absolute;
+      top: 10lvh;
+      left: calc(50% - var(--width) / 2);
+
+      width: var(--width);
+      height: 80lvh;
+
+      pointer-events: none;
+
+      @include mq(tablet) {
+        --width: 33.3333%;
+      }
+
+      @include mq(phone) {
+        --width: 50%;
+      }
+    }
+
+    .s__title,
+    .s__scene {
+      font: 700 min(18.75rem, 25lvh) / 1 font-family(bigger);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .s__title__inner,
+    :global(.s__scene__letter) {
+      line-height: 0.85;
+    }
+
+    .s__title {
+      width: 0.7em;
+
+      opacity: 0;
+      word-break: break-all;
+
+      &__inner {
+        @include flex(column, center, center);
+
+        margin: 0.075em 0 -0.125em;
+      }
+    }
+
+    .s__scene {
+      --shadow: #{color(shadow)};
+      --progress: 0.5;
+      --state: 0;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+
+      width: 100%;
+      height: 100%;
+
+      perspective: 40rem;
+
+      will-change: transform;
+
+      :global(.s__scene__letter) {
+        --head: calc((var(--progress) - 0.5) * -2);
+        --ahead: calc(var(--head) * var(--head));
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: block;
+
+        transform: rotateY(calc(var(--head) * -10deg * var(--state)))
+          translate3d(
+            calc(var(--head) * 50vw * var(--state)),
+            calc(var(--iy) * 50% * var(--ahead) * var(--state)),
+            0
+          );
+
+        pointer-events: none;
+        will-change: transform;
+
+        &:before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+
+          color: color(shadow);
+
+          opacity: min(calc( var(--state) * 2 ), 1);
+          transform: scale(
+              1.05, 1.02
+            )
+            translate3d(
+              calc(var(--head) * 0.1rem * var(--state) * var(--state)),
+              0,
+              0
+            );
+          transform-origin: calc(50% - var(--head) * 50%) -50%;
+
+          will-change: opacity, transform;
+
+          content: attr(data-letter);
+        }
+      }
+
+      :global(.s__scene__work) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+
+        transform: rotateY(calc(var(--progress) * -16deg))
+          translate3d(
+            calc(var(--progress) * (52vw + 60%) - 50%),
+            calc(var(--y) * 35% - 50%),
+            calc(var(--progress) * var(--progress) * -6rem)
+          )
+          scale(calc(var(--size) * (1 - var(--progress) * var(--progress) * 0.15)));
+
+        will-change: transform, opacity;
+
+        @include mq(tablet) {
+          transform: rotateY(calc(var(--progress) * -16deg))
+            translate3d(
+              calc(var(--progress) * (52vw + 60%) - 50%),
+              calc(var(--y) * 35% - 50%),
+              calc(var(--progress) * var(--progress) * -6rem)
+            )
+            scale(calc(var(--size) * (1 - var(--progress) * var(--progress) * 0.15)));
+        }
+
+        @include mq(phone) {
+          transform: rotateY(calc(var(--progress) * -12deg))
+            translate3d(
+              calc(var(--progress) * (55vw + 60%) - 50%),
+              calc(var(--y) * 60% - 50%),
+              calc(var(--progress) * var(--progress) * -4rem)
+            )
+            scale(calc(var(--size) * (1 - var(--progress) * var(--progress) * 0.15)));
+        }
+      }
+    }
+
+    .s__canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+
+      width: 100%;
+      height: 100%;
+
+      transform: translate3d(0, calc(var(--scroll-progress) * -5%), 0);
+
+      @include mq(phone) {
+        transform: none;
+      }
+    }
+  }
+</style>

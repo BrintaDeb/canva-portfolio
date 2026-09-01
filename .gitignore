@@ -1,7 +1,9 @@
 # Dependencies
 node_modules/
-package-lock.json
-package.json
+
+# Astro build & cache
+.astro/
+dist/
 
 # Local test artifacts & logs
 test_screenshots/
@@ -19,4 +21,5 @@ capture_*.js
 verify_*.js
 download_*.py
 generate_*.py
+
 

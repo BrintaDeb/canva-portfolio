@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/daee28464eba92254cb149feea6599e3.otf') format('opentype'), url('assets/fonts/f8f199f09526f79e87644ed227e0f651.woff2') format('woff2'), url('assets/fonts/4ff8a742aa834e35f10ead140b735c45.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Arimo';
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/d257a7100844bc3f98c9021168b6249e.woff2') format('woff2'), url('assets/fonts/ac9b8a560f98d1757a4565a2419d33c3.woff') format('woff'), url('assets/fonts/79d14bb61301a10c73c6cb293c29b309.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Arimo';
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  src: url('assets/fonts/4de29305db46625343735e840e3d27aa.otf') format('opentype'), url('assets/fonts/1060345c54d396e76d73f1da7ee200bd.woff2') format('woff2'), url('assets/fonts/7fc2786f9023d4d812357cb787e9ad4b.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('assets/fonts/0bb563f2f60ffd4e62b64cb021c33776.otf') format('opentype'), url('assets/fonts/98c4d2c0223fc8474641c77f923528e9.woff2') format('woff2'), url('assets/fonts/9fd726aeae98b22824f0dc8947036e77.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Arsenica';
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/33a3bd42e59610323db76c2bd6546f6e.woff') format('woff'), url('assets/fonts/662b34818f8c15b99d7b3fbdd0836847.otf') format('opentype'), url('assets/fonts/c1d7916e2c29f971f879f9e089080f3e.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Arsenica';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/479d0b23c29a2a1e9d50beecb3ba710f.otf') format('opentype'), url('assets/fonts/d49d3052bc66dc2edcaa3bdb9922bc8e.woff') format('woff'), url('assets/fonts/e9849a0be596192c822daa1765c81db9.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mansalva';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/a04480142168af91a5c56a20a486024a.woff') format('woff'), url('assets/fonts/fae8514cc95d3eeb0c84b0b2412bbde4.woff2') format('woff2'), url('assets/fonts/07546b18d27405c046eefbc568d1930f.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'TT Commons Pro';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/614342fb828a1f286d2b151a5214574f.otf') format('opentype'), url('assets/fonts/5505f71211e4b034e8c772ad6db3aad7.woff2') format('woff2'), url('assets/fonts/e8ee9b141dc82771ad7572ab59c0a0ae.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'TT Commons Pro';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('assets/fonts/fe36023d8e7261984703791f79c23ecc.woff') format('woff'), url('assets/fonts/49c5eb36cb4bf24cb7823054f6f8b278.otf') format('opentype'), url('assets/fonts/78e74164a4ee09afd0188f20b378a44f.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Handelson Two';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('assets/fonts/cd7d7981449177f592079fd2236340f1.otf') format('opentype'), url('assets/fonts/963a9f3e1e1301b32ff98c54938ac3d9.woff') format('woff'), url('assets/fonts/54246b104fcfe6d76464273dc9e8e16d.woff2') format('woff2');
+}
