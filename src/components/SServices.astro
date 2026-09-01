@@ -2,8 +2,8 @@
 const categories = [
   {
     id: 'web-dev',
-    emoji: '💻',
     code: '01',
+    navTitle: 'WEB DEVELOPMENT',
     title: 'Web Development Packages',
     tagline: 'High-performance responsive websites, bespoke UI/UX, and 3D digital experiences.',
     tiers: [
@@ -14,11 +14,11 @@ const categories = [
         period: '',
         isPopular: false,
         specs: [
-          { label: 'Pages', value: 'Up to 3' },
+          { label: 'Pages', value: 'Up to 3 Pages' },
           { label: 'Design', value: 'Template-based UI' },
           { label: 'Responsiveness', value: 'Mobile & Tablet Friendly' },
           { label: 'Integrations', value: 'Contact Form, CMS + Basic SEO + Socials' },
-          { label: 'Support', value: '1 Month' },
+          { label: 'Support', value: '1 Month Support' },
         ],
       },
       {
@@ -29,7 +29,7 @@ const categories = [
         isPopular: true,
         popularBadge: 'Most Popular',
         specs: [
-          { label: 'Pages', value: 'Up to 8' },
+          { label: 'Pages', value: 'Up to 8 Pages' },
           { label: 'Design', value: 'Custom UI/UX, Premium 3D Elements' },
           { label: 'Responsiveness', value: 'Fully Responsive + Fast Load' },
           { label: 'Integrations', value: 'CMS + Basic SEO + Socials, Advanced CMS' },
@@ -43,19 +43,19 @@ const categories = [
         period: '',
         isPopular: false,
         specs: [
-          { label: 'Features', value: 'Unlimited / Dynamic' },
-          { label: 'Design', value: 'Custom UI/UX, Premium 3D Elements & Animations' },
+          { label: 'Features', value: 'Unlimited / Dynamic Pages' },
+          { label: 'Design', value: 'Custom UI/UX, 3D Elements & Animations' },
           { label: 'Responsiveness', value: 'Advanced Performance Optimization' },
           { label: 'Integrations', value: 'Contact, Payment Gateway + Advanced CMS' },
-          { label: 'Support', value: '1 Month, 6 Months Priority Maintenance' },
+          { label: 'Support', value: '1 Month + 6 Months Priority Maintenance' },
         ],
       },
     ],
   },
   {
     id: 'graphic-design',
-    emoji: '🎨',
     code: '02',
+    navTitle: 'GRAPHIC DESIGN',
     title: 'Graphic Design Packages',
     tagline: 'Brand identity systems, 3D renderings, and high-engagement social media assets.',
     tiers: [
@@ -68,8 +68,9 @@ const categories = [
         specs: [
           { label: 'Deliverables', value: '1 Logo Concept, Business Card' },
           { label: 'Social Media', value: '3 Post Templates' },
-          { label: 'Revisions', value: '2 Rounds' },
+          { label: 'Revisions', value: '2 Rounds of Revisions' },
           { label: 'Source Files', value: 'Standard High-Res PNG / JPG' },
+          { label: 'Timeline', value: '3 - 5 Business Days' },
         ],
       },
       {
@@ -83,7 +84,8 @@ const categories = [
           { label: 'Deliverables', value: '3 Logo Concepts, Brand Guidelines' },
           { label: 'Social Media', value: '10 Post Templates + Banners' },
           { label: 'Revisions', value: '5 Rounds + Unlimited Minor Revisions' },
-          { label: 'Source Files', value: 'Vector & Source Files AI / PSD' },
+          { label: 'Source Files', value: 'Vector AI, PSD, SVG, High-Res PNG' },
+          { label: 'Timeline', value: '7 - 10 Business Days' },
         ],
       },
       {
@@ -94,17 +96,18 @@ const categories = [
         isPopular: false,
         specs: [
           { label: 'Deliverables', value: 'Full Brand Kit + 3D Logo Rendering' },
-          { label: 'Social Media', value: '20 Posts Templates + Animated UI Assets' },
+          { label: 'Social Media', value: '20 Post Templates + Animated UI Assets' },
           { label: 'Revisions', value: 'Unlimited Revisions' },
-          { label: 'Source Files', value: 'All Files + 3D Source Models' },
+          { label: 'Source Files', value: 'All Source Files + 3D Source Models' },
+          { label: 'Timeline', value: '14 Business Days' },
         ],
       },
     ],
   },
   {
     id: 'seo-management',
-    emoji: '🚀',
     code: '03',
+    navTitle: 'SEO MANAGEMENT',
     title: 'SEO Management',
     subheading: '(Monthly Retainer)',
     tagline: 'Dominant search engine rankings, technical performance audits, and high-authority backlinks.',
@@ -113,12 +116,12 @@ const categories = [
         name: 'Local Boost',
         tier: 'Tier 1',
         price: '₹10,000',
-        period: '/ mo',
+        period: '/mo',
         isPopular: false,
         specs: [
           { label: 'Keywords', value: 'Target 5 - 15 Keywords' },
-          { label: 'On-Page', value: 'Basic Meta Tags & Fixes' },
-          { label: 'Off-Page/Links', value: '10 High-Quality Backlinks, Outreach Strategy' },
+          { label: 'On-Page', value: 'Basic Meta Tags & Technical Fixes' },
+          { label: 'Off-Page', value: '10 High-Quality Backlinks' },
           { label: 'Content', value: '1 Blog Post / month' },
           { label: 'Reporting', value: 'Monthly Analytics Report' },
         ],
@@ -127,29 +130,29 @@ const categories = [
         name: 'Growth Engine',
         tier: 'Tier 2',
         price: '₹22,000',
-        period: '/ mo',
+        period: '/mo',
         isPopular: true,
         popularBadge: 'High Growth',
         specs: [
           { label: 'Keywords', value: 'Target 15 - 30 Keywords' },
-          { label: 'On-Page', value: 'Basic Meta Tags & Full Technical & Speed Audits' },
-          { label: 'Off-Page/Links', value: '10 High-Quality Backlinks + Guest Posting Strategy' },
+          { label: 'On-Page', value: 'Full Technical, Speed & Meta Audits' },
+          { label: 'Off-Page', value: '10 High-Quality Backlinks + Guest Posting' },
           { label: 'Content', value: '3 Blog Posts / month' },
-          { label: 'Reporting', value: 'Comprehensive Content Marketing + Bi-Weekly Strategy Calls' },
+          { label: 'Reporting', value: 'Content Strategy + Bi-Weekly Calls' },
         ],
       },
       {
         name: 'Market Dominance',
         tier: 'Tier 3',
         price: '₹45,000',
-        period: '/ mo',
+        period: '/mo',
         isPopular: false,
         specs: [
           { label: 'Keywords', value: 'Target 30+ High-Intent Keywords' },
-          { label: 'On-Page', value: 'Full Technical, Speed, Advanced Schema & UI/UX Audits' },
-          { label: 'Off-Page/Links', value: '30 High-Quality Backlinks + Dedicated Outreach' },
-          { label: 'Content', value: '3+ Blog Posts / month + Content Marketing Suite' },
-          { label: 'Reporting', value: 'Real-time Dashboard + Competitor Tracking & Bi-Weekly Calls' },
+          { label: 'On-Page', value: 'Technical, Speed, Schema & UI/UX Audits' },
+          { label: 'Off-Page', value: '30 High-Quality Backlinks + Dedicated Outreach' },
+          { label: 'Content', value: '3+ Blog Posts / mo + Content Suite' },
+          { label: 'Reporting', value: 'Live Dashboard + Competitor Tracking & Calls' },
         ],
       },
     ],
@@ -158,287 +161,237 @@ const categories = [
 ---
 
 <section id="services" class="s-services" data-intersect>
-  <div class="s-services__inner">
-    <!-- Header Block Matching Website Aesthetic -->
-    <div class="s-services__header">
-      <div class="s-services__badge">
-        <span class="badge-tag">[ 04 ]</span>
-        <span class="badge-title">SERVICES &amp; PACKAGES</span>
-      </div>
-
-      <h2 class="s-services__title">
-        Bespoke Solutions <span class="title-amp">&amp;</span> Transparent Rates
-      </h2>
-
-      <p class="s-services__subtitle">
-        Curated tiers engineered for scalable digital products, distinct branding, and search dominance.
-      </p>
-
-      <!-- 3 Options Switcher Bar (Only 3 Options) -->
-      <div class="s-services__switcher js-services-switcher" role="tablist">
-        {
-          categories.map((cat, idx) => (
-            <button
-              class:list={['switcher-tab js-switcher-tab', { 'is-active': idx === 0 }]}
-              data-target={cat.id}
-              role="tab"
-              aria-selected={idx === 0 ? 'true' : 'false'}
-            >
-              <span class="tab-code">[{cat.code}]</span>
-              <span class="tab-emoji">{cat.emoji}</span>
-              <span class="tab-label">{cat.title.replace(' Packages', '')}</span>
-            </button>
-          ))
-        }
-      </div>
+  <div class="s-services__inner js-services-inner">
+    <!-- Top Pill Header (Identical to SAbout & SMyWay) -->
+    <div class="s-services__pill-header">
+      <span class="s-services__pill-tag">SERVICES &amp; PACKAGES</span>
     </div>
 
-    <!-- Category Glass Cards Container -->
-    <div class="s-services__deck">
+    <!-- 3-Options Bento Switcher Tab Bar -->
+    <div class="s-services__tabs-row" role="tablist">
+      {
+        categories.map((cat, idx) => (
+          <button
+            class:list={['s-services__tab-cell js-services-tab', { 'is-active': idx === 0 }]}
+            data-target={cat.id}
+            role="tab"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+          >
+            <span class="tab-code">[{cat.code}]</span>
+            <span class="tab-title">{cat.navTitle}</span>
+            <span class="tab-mask"></span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Bento Grid Container -->
+    <div class="s-services__bento-wrap js-tilt-container">
       {
         categories.map((cat, idx) => (
           <div
-            class:list={['service-view js-service-view', { 'is-active': idx === 0 }]}
-            id={`category-${cat.id}`}
+            class:list={['s-services__bento-view js-services-view', { 'is-active': idx === 0 }]}
+            id={`services-${cat.id}`}
             data-category={cat.id}
           >
-            <!-- 3D Perspective Glass Card with Subtle Physics -->
-            <div class="glass-frame js-tilt-frame">
-              <div class="glass-specular"></div>
-
-              <!-- Top Bar of Glass Frame -->
-              <div class="glass-frame__head">
-                <div class="head-left">
-                  <span class="head-emoji">{cat.emoji}</span>
-                  <div class="head-text">
-                    <h3 class="head-title">
-                      {cat.title}
-                      {cat.subheading && <span class="head-subheading">{cat.subheading}</span>}
-                    </h3>
-                    <p class="head-tagline">{cat.tagline}</p>
-                  </div>
-                </div>
-                <div class="head-right font-mono">
-                  <span class="head-indicator">AVAILABLE FOR CONTRACT</span>
-                </div>
+            <!-- Category Banner Cell -->
+            <div class="s-services__cell s-services__cell--banner">
+              <div class="banner-left">
+                <h3 class="banner-title">
+                  {cat.title}
+                  {cat.subheading && <span class="banner-subheading">{cat.subheading}</span>}
+                </h3>
+                <p class="banner-tagline">{cat.tagline}</p>
               </div>
+              <div class="banner-right">
+                <span class="banner-badge">(CONTRACT &amp; FREELANCE)</span>
+              </div>
+            </div>
 
-              <!-- 3-Tier Grid -->
-              <div class="glass-frame__tiers">
-                {cat.tiers.map((tier) => (
-                  <div class:list={['tier-column', { 'tier-column--popular': tier.isPopular }]}>
-                    {tier.isPopular && (
-                      <div class="popular-header">
-                        <span class="popular-pulse"></span>
-                        <span class="popular-tag">{tier.popularBadge}</span>
+            <!-- 3-Tier Grid Row -->
+            <div class="s-services__row--tiers">
+              {cat.tiers.map((tier) => (
+                <div class:list={['s-services__cell s-services__cell--tier js-tier-cell', { 'is-popular': tier.isPopular }]}>
+                  {tier.isPopular && (
+                    <div class="tier-popular-ribbon">
+                      <span class="ribbon-text">{tier.popularBadge}</span>
+                    </div>
+                  )}
+
+                  <div class="tier-cell-inner">
+                    <div class="tier-cell-top">
+                      <div class="tier-header-line">
+                        <span class="tier-badge">[{tier.tier}]</span>
+                        <h4 class="tier-title">{tier.name}</h4>
                       </div>
-                    )}
 
-                    <div class="tier-column__top">
-                      <div class="tier-meta-row">
-                        <span class="tier-tier-tag">{tier.tier}</span>
-                        <h4 class="tier-heading">{tier.name}</h4>
-                      </div>
-
-                      <div class="tier-pricing-box">
-                        <span class="tier-price-amount">{tier.price}</span>
+                      <div class="tier-price-box">
+                        <span class="tier-price-num">{tier.price}</span>
                         {tier.period && <span class="tier-price-period">{tier.period}</span>}
                       </div>
                     </div>
 
-                    <div class="tier-column__specs">
+                    <div class="tier-specs-list">
                       {tier.specs.map((spec) => (
-                        <div class="spec-item">
-                          <span class="spec-k">{spec.label}</span>
-                          <span class="spec-v">{spec.value}</span>
+                        <div class="spec-row">
+                          <span class="spec-label">({spec.label})</span>
+                          <span class="spec-val">{spec.value}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div class="tier-column__footer">
+                    <div class="tier-action-wrap">
                       <a
                         href={`https://wa.me/917005581453?text=${encodeURIComponent(`Hi Brinta, I would like to request a quotation for: ${cat.title} - ${tier.name} (${tier.tier}) at ${tier.price}${tier.period}.`)}`}
                         target="_blank"
                         rel="noopener"
-                        class="tier-quote-action js-quote-link"
+                        class="tier-quote-btn"
                         title={`Request Quotation for ${tier.name}`}
                       >
-                        <span class="btn-caption">Request Quotation</span>
-                        <span class="btn-vector">→</span>
+                        <span class="btn-text">REQUEST QUOTATION</span>
+                        <span class="btn-arrow">→</span>
+                        <span class="btn-hover-mask"></span>
                       </a>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div><!-- .glass-frame -->
-          </div><!-- .service-view -->
+                </div>
+              ))}
+            </div><!-- .s-services__row--tiers -->
+          </div><!-- .s-services__bento-view -->
         ))
       }
-    </div><!-- .s-services__deck -->
 
-    <!-- Custom Project Scope Card -->
-    <div class="s-services__custom-box">
-      <div class="custom-card js-tilt-frame">
-        <div class="custom-card__left">
-          <div class="custom-tag font-mono">[ BESPOKE SCOPE ]</div>
-          <h4 class="custom-heading font-serif">Have a custom or multi-disciplinary requirement?</h4>
-          <p class="custom-description font-mono">
-            Need custom 3D web animations, hybrid full-stack systems, or specialized brand direction? Let's formulate a tailored scope.
+      <!-- Bottom Bespoke Row (Matches SAbout .s__cell--full) -->
+      <div class="s-services__cell s-services__cell--custom">
+        <div class="custom-content">
+          <div class="custom-meta">
+            <span class="custom-tag">[ BESPOKE / HYBRID SCOPE ]</span>
+          </div>
+          <h4 class="custom-heading font-serif">"Need tailored 3D web experiences, cross-disciplinary art, or specialized direction?"</h4>
+          <p class="custom-desc">
+            For custom scale projects, full-stack applications, or enterprise branding retainers, we engineer customized scopes calibrated to your exact roadmap.
           </p>
         </div>
-        <div class="custom-card__right">
+        <div class="custom-action">
           <a
-            href="https://wa.me/917005581453?text=Hi%20Brinta,%20I%20have%20a%20custom%20project%20inquiry%20and%20would%20like%20to%20discuss%20a%20tailored%20quotation."
+            href="https://wa.me/917005581453?text=Hi%20Brinta,%20I%20have%20a%20custom%20bespoke%20project%20inquiry%20and%20would%20like%20to%20discuss%20a%20tailored%20quotation."
             target="_blank"
             rel="noopener"
-            class="custom-cta-action font-mono"
+            class="custom-btn"
           >
-            <span>Discuss Custom Scope</span>
-            <span class="cta-arrow">→</span>
+            <span>DISCUSS BESPOKE SCOPE</span>
+            <span class="btn-arrow">→</span>
+            <span class="btn-hover-mask"></span>
           </a>
         </div>
       </div>
-    </div>
+    </div><!-- .s-services__bento-wrap -->
   </div><!-- .s-services__inner -->
 </section>
 
 <script>
   import gsap from 'gsap'
 
-  class ServicesSection {
-    el: HTMLElement | null
-    tiltFrames: NodeListOf<HTMLElement>
-    switcherTabs: NodeListOf<HTMLElement>
-    serviceViews: NodeListOf<HTMLElement>
+  class ServicesBento {
+    container: HTMLElement | null
+    tiltWrap: HTMLElement | null
+    tabButtons: NodeListOf<HTMLElement>
+    views: NodeListOf<HTMLElement>
 
     constructor() {
-      this.el = document.getElementById('services')
-      if (!this.el) return
+      this.container = document.getElementById('services')
+      if (!this.container) return
 
-      this.tiltFrames = this.el.querySelectorAll('.js-tilt-frame')
-      this.switcherTabs = this.el.querySelectorAll('.js-switcher-tab')
-      this.serviceViews = this.el.querySelectorAll('.js-service-view')
+      this.tiltWrap = this.container.querySelector('.js-tilt-container')
+      this.tabButtons = this.container.querySelectorAll('.js-services-tab')
+      this.views = this.container.querySelectorAll('.js-services-view')
 
-      this.initSmoothTilt()
-      this.init3OptionSwitcher()
+      this.initTabs()
+      this.initSmoothPhysics()
     }
 
-    /**
-     * Subtle & Smooth 3D Perspective Tilt Physics
-     */
-    initSmoothTilt() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-      if (window.innerWidth < 900) return
-
-      this.tiltFrames.forEach((frame) => {
-        let bounds: DOMRect
-        let isHovered = false
-
-        const onMouseEnter = () => {
-          bounds = frame.getBoundingClientRect()
-          isHovered = true
-        }
-
-        const onMouseMove = (e: MouseEvent) => {
-          if (!isHovered) return
-          const mouseX = e.clientX - bounds.left
-          const mouseY = e.clientY - bounds.top
-
-          const xRatio = (mouseX / bounds.width - 0.5) * 2 // -1 to 1
-          const yRatio = (mouseY / bounds.height - 0.5) * 2 // -1 to 1
-
-          // Gentle smooth tilt: max 2.5 degrees
-          const rotX = -yRatio * 2.5
-          const rotY = xRatio * 2.5
-
-          gsap.to(frame, {
-            rotationX: rotX,
-            rotationY: rotY,
-            transformPerspective: 1600,
-            ease: 'power2.out',
-            duration: 0.6,
-            overwrite: 'auto',
-          })
-
-          const specular = frame.querySelector('.glass-specular') as HTMLElement
-          if (specular) {
-            gsap.to(specular, {
-              x: mouseX,
-              y: mouseY,
-              duration: 0.5,
-              ease: 'power1.out',
-              overwrite: 'auto',
-            })
-          }
-        }
-
-        const onMouseLeave = () => {
-          isHovered = false
-          gsap.to(frame, {
-            rotationX: 0,
-            rotationY: 0,
-            ease: 'power3.out',
-            duration: 0.9,
-            overwrite: 'auto',
-          })
-        }
-
-        frame.addEventListener('mouseenter', onMouseEnter)
-        frame.addEventListener('mousemove', onMouseMove)
-        frame.addEventListener('mouseleave', onMouseLeave)
-      })
-    }
-
-    /**
-     * 3-Option Category Switcher
-     */
-    init3OptionSwitcher() {
-      this.switcherTabs.forEach((tab) => {
+    initTabs() {
+      this.tabButtons.forEach((tab) => {
         tab.addEventListener('click', () => {
-          const targetId = tab.getAttribute('data-target')
+          const target = tab.getAttribute('data-target')
 
-          this.switcherTabs.forEach((t) => {
-            const isActive = t === tab
-            t.classList.toggle('is-active', isActive)
-            t.setAttribute('aria-selected', isActive ? 'true' : 'false')
+          this.tabButtons.forEach((t) => {
+            const active = t === tab
+            t.classList.toggle('is-active', active)
+            t.setAttribute('aria-selected', active ? 'true' : 'false')
           })
 
-          this.serviceViews.forEach((view) => {
-            const viewCategory = view.getAttribute('data-category')
-            if (viewCategory === targetId) {
-              view.style.display = 'block'
+          this.views.forEach((v) => {
+            const cat = v.getAttribute('data-category')
+            if (cat === target) {
+              v.style.display = 'block'
               gsap.fromTo(
-                view,
-                { opacity: 0, y: 15 },
-                {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.45,
-                  ease: 'power2.out',
-                }
+                v,
+                { opacity: 0, y: 12 },
+                { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
               )
             } else {
-              gsap.to(view, {
-                opacity: 0,
-                y: -10,
-                duration: 0.25,
-                ease: 'power2.in',
-                onComplete: () => {
-                  view.style.display = 'none'
-                },
-              })
+              v.style.display = 'none'
             }
           })
         })
       })
     }
+
+    initSmoothPhysics() {
+      if (!this.tiltWrap) return
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      if (window.innerWidth < 1024) return
+
+      let bounds: DOMRect
+      let isHovered = false
+
+      const onEnter = () => {
+        bounds = this.tiltWrap!.getBoundingClientRect()
+        isHovered = true
+      }
+
+      const onMove = (e: MouseEvent) => {
+        if (!isHovered || !this.tiltWrap) return
+        const xRel = (e.clientX - bounds.left) / bounds.width - 0.5
+        const yRel = (e.clientY - bounds.top) / bounds.height - 0.5
+
+        // Micro subtle tilt: 1.5 degrees max
+        const rotX = -yRel * 1.8
+        const rotY = xRel * 1.8
+
+        gsap.to(this.tiltWrap, {
+          rotationX: rotX,
+          rotationY: rotY,
+          transformPerspective: 1800,
+          duration: 0.8,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        })
+      }
+
+      const onLeave = () => {
+        isHovered = false
+        if (!this.tiltWrap) return
+        gsap.to(this.tiltWrap, {
+          rotationX: 0,
+          rotationY: 0,
+          duration: 1.0,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+      }
+
+      this.tiltWrap.addEventListener('mouseenter', onEnter)
+      this.tiltWrap.addEventListener('mousemove', onMove)
+      this.tiltWrap.addEventListener('mouseleave', onLeave)
+    }
   }
 
-  // Initialize on load
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => new ServicesSection())
+    document.addEventListener('DOMContentLoaded', () => new ServicesBento())
   } else {
-    new ServicesSection()
+    new ServicesBento()
   }
 </script>
 
@@ -446,534 +399,523 @@ const categories = [
   .s-services {
     position: relative;
     z-index: 3;
-    padding: 7.5rem 2rem 8.5rem;
-    border-bottom: 1px solid color(secondary);
+    padding: 7rem 0 8rem;
     background: color(primary);
+    border-bottom: 1px solid color(secondary);
     overflow: hidden;
 
     @include mq(tablet) {
-      padding: 5rem 1.5rem 6rem;
-    }
-
-    @include mq(phone) {
-      padding: 3.5rem 1rem 4.5rem;
+      padding: 4rem 0 5rem;
     }
 
     &__inner {
-      max-width: 1280px;
+      position: relative;
+      z-index: 2;
       margin: 0 auto;
-      width: 100%;
-    }
-
-    /* Header Block */
-    &__header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    &__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.35rem 0.85rem;
-      background: color(secondary);
-      color: color(primary);
-      border: 1px solid color(secondary);
-      margin-bottom: 1.5rem;
-
-      .badge-tag {
-        font: 700 0.6875rem / 1 font-family(fraktion);
-        color: #f40c3f;
-        letter-spacing: 0.15em;
-      }
-
-      .badge-title {
-        font: 700 0.6875rem / 1 font-family(fraktion);
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-    }
-
-    &__title {
-      font: 400 clamp(2.4rem, 5.5vw, 4.25rem) / 1.08 font-family(editorial);
-      color: color(secondary);
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
-
-      .title-amp {
-        font-style: italic;
-        color: #f40c3f;
-      }
-    }
-
-    &__subtitle {
-      font: 400 0.9375rem / 1.6 font-family(fraktion);
-      color: color(secondary);
-      opacity: 0.75;
-      max-width: 640px;
-      margin: 0 auto 2.5rem auto;
-    }
-
-    /* 3-Option Switcher Bar (Only 3 Options) */
-    &__switcher {
-      display: inline-flex;
-      align-items: stretch;
-      background: rgba(255, 242, 237, 0.7);
-      border: 1px solid color(secondary);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 20px rgba(22, 0, 0, 0.05);
+      width: 54rem;
+      max-width: calc(100% - 2.5rem);
 
       @include mq(phone) {
-        display: flex;
-        flex-direction: column;
         width: 100%;
+        max-width: calc(100% - 1.5rem);
+      }
+    }
+
+    /* Top Pill Header (Matches SAbout & SMyWay exactly) */
+    &__pill-header {
+      display: block;
+      background: color(secondary);
+      color: color(primary);
+      text-align: center;
+      padding: 0.45rem 1rem;
+      border: 1px solid color(secondary);
+      border-bottom: 0;
+    }
+
+    &__pill-tag {
+      font: 700 0.6875rem / 1 font-family(fraktion);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* 3-Option Bento Tab Bar */
+    &__tabs-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid color(secondary);
+      background: color(primary);
+      margin-top: 0;
+
+      @include mq(phone) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__tab-cell {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 1.1rem 1rem;
+      background: color(primary);
+      border: none;
+      border-right: 1px solid color(secondary);
+      color: color(secondary);
+      cursor: pointer;
+      overflow: hidden;
+      transition: color 0.25s ease, background-color 0.25s ease;
+
+      &:last-child {
+        border-right: none;
       }
 
-      .switcher-tab {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0.85rem 1.65rem;
-        border: none;
-        border-right: 1px solid color(secondary);
-        background: transparent;
-        color: color(secondary);
-        font: 600 0.8125rem / 1 font-family(fraktion);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.25s ease;
+      @include mq(phone) {
+        border-right: none;
+        border-bottom: 1px solid color(secondary);
 
         &:last-child {
-          border-right: none;
+          border-bottom: none;
         }
+      }
+
+      .tab-code {
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        color: #f40c3f;
+        letter-spacing: 0.1em;
+        position: relative;
+        z-index: 2;
+      }
+
+      .tab-title {
+        font: 700 0.75rem / 1 font-family(fraktion);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+      }
+
+      .tab-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: color(secondary);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      &:hover:not(.is-active) {
+        .tab-mask {
+          transform: scaleY(1);
+        }
+        .tab-title {
+          color: color(primary);
+        }
+      }
+
+      &.is-active {
+        background: color(secondary);
+        color: color(primary);
+
+        .tab-title {
+          color: color(primary);
+        }
+        .tab-code {
+          color: #f40c3f;
+        }
+      }
+    }
+
+    /* Bento Grid Wrapper */
+    &__bento-wrap {
+      position: relative;
+      width: 100%;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    &__bento-view {
+      display: none;
+      width: 100%;
+
+      &.is-active {
+        display: block;
+      }
+    }
+
+    /* Bento Cells (Matches SAbout style) */
+    &__cell {
+      position: relative;
+      border: 1px solid color(secondary);
+      margin-top: -1px;
+      background: color(primary);
+      overflow: hidden;
+
+      &--banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding: 1.75rem 2rem;
+        background: rgba(255, 242, 237, 0.95);
 
         @include mq(phone) {
-          border-right: none;
-          border-bottom: 1px solid color(secondary);
-          justify-content: center;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 1.5rem 1.25rem;
+        }
 
-          &:last-child {
-            border-bottom: none;
+        .banner-title {
+          font: 400 1.65rem / 1.15 font-family(editorial);
+          color: color(secondary);
+          letter-spacing: -0.02em;
+          margin-bottom: 0.35rem;
+
+          .banner-subheading {
+            font: 400 0.9375rem / 1 font-family(fraktion);
+            opacity: 0.65;
+            margin-left: 0.5rem;
           }
         }
 
-        .tab-code {
-          color: #f40c3f;
-          font-weight: 700;
+        .banner-tagline {
+          font: 400 0.8125rem / 1.45 font-family(fraktion);
+          color: color(secondary);
+          opacity: 0.7;
         }
 
-        .tab-emoji {
-          font-size: 1.1rem;
+        .banner-right {
+          flex-shrink: 0;
+
+          .banner-badge {
+            font: 700 0.6875rem / 1 font-family(fraktion);
+            letter-spacing: 0.16em;
+            color: color(secondary);
+            padding: 0.35rem 0.65rem;
+            border: 1px solid color(secondary);
+            background: color(primary);
+          }
+        }
+      }
+
+      &--custom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 2.25rem 2rem;
+        background: color(primary);
+
+        @include mq(tablet) {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 1.75rem 1.25rem;
         }
 
-        &:hover {
-          background: rgba(244, 12, 63, 0.08);
-          color: #f40c3f;
-        }
+        .custom-meta {
+          margin-bottom: 0.5rem;
 
-        &.is-active {
-          background: color(secondary);
-          color: color(primary);
-
-          .tab-code {
+          .custom-tag {
+            font: 700 0.6875rem / 1 font-family(fraktion);
+            letter-spacing: 0.16em;
             color: #f40c3f;
           }
         }
-      }
-    }
-  }
 
-  /* Deck Views */
-  .s-services__deck {
-    position: relative;
-    width: 100%;
-  }
-
-  .service-view {
-    display: none;
-    width: 100%;
-
-    &.is-active {
-      display: block;
-    }
-  }
-
-  /* Glass Frame Card (Website UI Match) */
-  .glass-frame {
-    position: relative;
-    background: rgba(255, 242, 237, 0.75);
-    border: 1px solid color(secondary);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    box-shadow: 0 20px 50px rgba(22, 0, 0, 0.06);
-    transform-style: preserve-3d;
-    will-change: transform;
-    overflow: hidden;
-
-    .glass-specular {
-      position: absolute;
-      top: -150px;
-      left: -150px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(244, 12, 63, 0.12) 0%, rgba(255, 242, 237, 0.3) 45%, transparent 70%);
-      pointer-events: none;
-      filter: blur(35px);
-      z-index: 0;
-    }
-
-    &__head {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      padding: 2rem 2.5rem;
-      border-bottom: 1px solid color(secondary);
-      background: rgba(255, 242, 237, 0.4);
-
-      @include mq(tablet) {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1.5rem;
-      }
-
-      .head-left {
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-      }
-
-      .head-emoji {
-        font-size: 2.25rem;
-      }
-
-      .head-title {
-        font: 700 1.65rem / 1.2 font-family(primary);
-        color: color(secondary);
-        letter-spacing: -0.02em;
-        margin-bottom: 0.25rem;
-      }
-
-      .head-subheading {
-        font: 400 1rem / 1 font-family(fraktion);
-        opacity: 0.65;
-        margin-left: 0.5rem;
-      }
-
-      .head-tagline {
-        font: 400 0.875rem / 1.45 font-family(fraktion);
-        color: color(secondary);
-        opacity: 0.72;
-      }
-
-      .head-right {
-        .head-indicator {
-          display: inline-block;
-          font-size: 0.6875rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          padding: 0.4rem 0.85rem;
-          border: 1px solid color(secondary);
-          background: rgba(22, 0, 0, 0.04);
+        .custom-heading {
+          font: 400 1.35rem / 1.25 font-family(editorial);
           color: color(secondary);
+          margin-bottom: 0.5rem;
+        }
+
+        .custom-desc {
+          font: 400 0.8125rem / 1.5 font-family(fraktion);
+          color: color(secondary);
+          opacity: 0.72;
+          max-width: 560px;
+        }
+
+        .custom-action {
+          flex-shrink: 0;
+
+          .custom-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.95rem 1.65rem;
+            background: color(secondary);
+            border: 1px solid color(secondary);
+            color: color(primary);
+            text-decoration: none;
+            font: 700 0.75rem / 1 font-family(fraktion);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+
+            .btn-arrow {
+              position: relative;
+              z-index: 2;
+              transition: transform 0.25s ease;
+            }
+
+            span:not(.btn-hover-mask):not(.btn-arrow) {
+              position: relative;
+              z-index: 2;
+            }
+
+            .btn-hover-mask {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: #f40c3f;
+              transform: scaleX(0);
+              transform-origin: left;
+              transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+              z-index: 1;
+            }
+
+            &:hover {
+              .btn-hover-mask {
+                transform: scaleX(1);
+              }
+              .btn-arrow {
+                transform: translateX(4px);
+              }
+            }
+          }
         }
       }
     }
 
-    &__tiers {
-      position: relative;
-      z-index: 1;
+    /* 3-Tier Grid Row */
+    &__row--tiers {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      align-items: stretch;
+      margin-top: -1px;
 
       @include mq(tablet) {
         grid-template-columns: 1fr;
       }
-    }
-  }
 
-  /* Individual Tier Column */
-  .tier-column {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 2.5rem 2rem;
-    border-right: 1px solid color(secondary);
-    background: transparent;
-    transition: background 0.3s ease;
+      > .s-services__cell--tier {
+        margin-top: 0;
 
-    &:last-child {
-      border-right: none;
-    }
-
-    @include mq(tablet) {
-      border-right: none;
-      border-bottom: 1px solid color(secondary);
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    &:hover {
-      background: rgba(244, 12, 63, 0.03);
-    }
-
-    /* Popular / Tier 2 Column */
-    &--popular {
-      background: rgba(244, 12, 63, 0.05);
-
-      .popular-header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        background: #f40c3f;
-        color: #ffffff;
-        padding: 0.35rem 1rem;
-
-        .popular-pulse {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #ffffff;
-          box-shadow: 0 0 8px #ffffff;
+        &:not(:first-child) {
+          margin-left: -1px;
         }
 
-        .popular-tag {
-          font: 700 0.6875rem / 1 font-family(fraktion);
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+        @include mq(tablet) {
+          &:not(:first-child) {
+            margin-left: 0;
+            margin-top: -1px;
+          }
         }
       }
     }
 
-    &__top {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid rgba(22, 0, 0, 0.15);
-      padding-bottom: 1.5rem;
-
-      .tier-column--popular & {
-        margin-top: 1rem;
-      }
-    }
-
-    .tier-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.85rem;
-    }
-
-    .tier-tier-tag {
-      font: 700 0.6875rem / 1 font-family(fraktion);
-      color: #f40c3f;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.2rem 0.5rem;
-      border: 1px solid #f40c3f;
-    }
-
-    .tier-heading {
-      font: 700 1.35rem / 1.2 font-family(primary);
-      color: color(secondary);
-      letter-spacing: -0.02em;
-    }
-
-    .tier-pricing-box {
-      display: flex;
-      align-items: baseline;
-      gap: 0.35rem;
-      margin-top: 0.5rem;
-    }
-
-    .tier-price-amount {
-      font: 700 2.25rem / 1 font-family(fraktion);
-      color: color(secondary);
-      letter-spacing: -0.03em;
-    }
-
-    .tier-price-period {
-      font: 400 0.875rem / 1 font-family(fraktion);
-      color: color(secondary);
-      opacity: 0.65;
-    }
-
-    /* Specs List */
-    &__specs {
-      flex: 1;
+    /* Tier Cell */
+    &__cell--tier {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 1.15rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .spec-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px dashed rgba(22, 0, 0, 0.1);
-
-      &:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-    }
-
-    .spec-k {
-      font: 600 0.6875rem / 1 font-family(fraktion);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: color(secondary);
-      opacity: 0.5;
-    }
-
-    .spec-v {
-      font: 500 0.875rem / 1.45 font-family(fraktion);
-      color: color(secondary);
-      line-height: 1.4;
-    }
-
-    /* Action Button */
-    &__footer {
-      margin-top: auto;
-    }
-
-    .tier-quote-action {
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      width: 100%;
-      padding: 0.95rem 1.25rem;
-      border: 1px solid color(secondary);
-      background: color(secondary);
-      color: color(primary);
-      text-decoration: none;
-      font: 700 0.75rem / 1 font-family(fraktion);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: all 0.25s ease;
-      cursor: pointer;
-
-      .btn-vector {
-        transition: transform 0.25s ease;
-      }
+      padding: 2rem 1.75rem;
+      background: color(primary);
+      transition: background-color 0.25s ease;
 
       &:hover {
+        background: rgba(244, 12, 63, 0.02);
+      }
+
+      &.is-popular {
+        background: rgba(244, 12, 63, 0.04);
+
+        .tier-popular-ribbon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: #f40c3f;
+          color: #ffffff;
+          text-align: center;
+          padding: 0.35rem 0.75rem;
+
+          .ribbon-text {
+            font: 700 0.625rem / 1 font-family(fraktion);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+          }
+        }
+
+        .tier-cell-top {
+          margin-top: 0.75rem;
+        }
+      }
+
+      .tier-cell-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .tier-cell-top {
+        margin-bottom: 1.75rem;
+        border-bottom: 1px solid color(secondary);
+        padding-bottom: 1.25rem;
+      }
+
+      .tier-header-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+
+        .tier-badge {
+          font: 700 0.6875rem / 1 font-family(fraktion);
+          color: #f40c3f;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .tier-title {
+          font: 700 1.25rem / 1.15 font-family(primary);
+          color: color(secondary);
+          letter-spacing: -0.02em;
+        }
+      }
+
+      .tier-price-box {
+        display: flex;
+        align-items: baseline;
+        gap: 0.35rem;
+
+        .tier-price-num {
+          font: 700 2.15rem / 1 font-family(fraktion);
+          color: color(secondary);
+          letter-spacing: -0.03em;
+        }
+
+        .tier-price-period {
+          font: 400 0.8125rem / 1 font-family(fraktion);
+          color: color(secondary);
+          opacity: 0.65;
+        }
+      }
+
+      /* Specs List */
+      .tier-specs-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.95rem;
+        margin-bottom: 2rem;
+
+        .spec-row {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px dashed rgba(22, 0, 0, 0.12);
+
+          &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+
+          .spec-label {
+            font: 600 0.6875rem / 1 font-family(fraktion);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: color(secondary);
+            opacity: 0.55;
+          }
+
+          .spec-val {
+            font: 400 0.8125rem / 1.4 font-family(fraktion);
+            color: color(secondary);
+          }
+        }
+      }
+
+      /* Action Quote Button */
+      .tier-action-wrap {
+        margin-top: auto;
+
+        .tier-quote-btn {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0.85rem 1.15rem;
+          border: 1px solid color(secondary);
+          background: color(secondary);
+          color: color(primary);
+          text-decoration: none;
+          font: 700 0.6875rem / 1 font-family(fraktion);
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          overflow: hidden;
+          transition: color 0.25s ease;
+          cursor: pointer;
+
+          .btn-text,
+          .btn-arrow {
+            position: relative;
+            z-index: 2;
+          }
+
+          .btn-arrow {
+            transition: transform 0.25s ease;
+          }
+
+          .btn-hover-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f40c3f;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+          }
+
+          &:hover {
+            .btn-hover-mask {
+              transform: scaleX(1);
+            }
+            .btn-arrow {
+              transform: translateX(4px);
+            }
+          }
+
+          &:active {
+            transform: scale(0.98);
+          }
+        }
+      }
+
+      &.is-popular .tier-quote-btn {
         background: #f40c3f;
         border-color: #f40c3f;
         color: #ffffff;
 
-        .btn-vector {
-          transform: translateX(4px);
+        .btn-hover-mask {
+          background: color(secondary);
         }
-      }
-
-      &:active {
-        transform: scale(0.98);
-      }
-    }
-
-    &--popular .tier-quote-action {
-      background: #f40c3f;
-      border-color: #f40c3f;
-      color: #ffffff;
-
-      &:hover {
-        background: color(secondary);
-        border-color: color(secondary);
-        color: color(primary);
-      }
-    }
-  }
-
-  /* Custom Scope Card */
-  .s-services__custom-box {
-    margin-top: 3rem;
-    width: 100%;
-
-    .custom-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      padding: 2.5rem 3rem;
-      border: 1px solid color(secondary);
-      background: rgba(255, 242, 237, 0.7);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 10px 30px rgba(22, 0, 0, 0.04);
-
-      @include mq(tablet) {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 2rem;
-      }
-    }
-
-    .custom-tag {
-      font-size: 0.6875rem;
-      letter-spacing: 0.18em;
-      color: #f40c3f;
-      font-weight: 700;
-      margin-bottom: 0.65rem;
-    }
-
-    .custom-heading {
-      font: 400 1.75rem / 1.25 font-family(editorial);
-      color: color(secondary);
-      margin-bottom: 0.5rem;
-    }
-
-    .custom-description {
-      font: 400 0.875rem / 1.5 font-family(fraktion);
-      color: color(secondary);
-      opacity: 0.75;
-      max-width: 620px;
-    }
-
-    .custom-cta-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 2rem;
-      background: #f40c3f;
-      border: 1px solid #f40c3f;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: all 0.25s ease;
-      white-space: nowrap;
-
-      .cta-arrow {
-        transition: transform 0.25s ease;
-      }
-
-      &:hover {
-        background: color(secondary);
-        border-color: color(secondary);
-        color: color(primary);
-
-        .cta-arrow {
-          transform: translateX(4px);
-        }
-      }
-
-      &:active {
-        transform: scale(0.98);
       }
     }
   }
