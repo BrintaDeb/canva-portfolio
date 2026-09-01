@@ -2574,3 +2574,142 @@ body.theme-dark .action-pill-btn.secondary {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+/* ==========================================================================
+   Slide 13: Services & Packages Glassmorphism Deck Grid
+   ========================================================================== */
+.deck-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  margin-top: 24px;
+  box-sizing: border-box;
+}
+
+.deck-service-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(22, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deck-service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.deck-service-card.featured {
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 35px rgba(121, 40, 202, 0.25), 0 14px 35px rgba(0, 0, 0, 0.06);
+}
+
+.deck-service-card.featured::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  padding: 2px;
+  background: linear-gradient(135deg, #7928ca, #0070f3, #f40c3f);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.deck-popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #7928ca, #0070f3);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+.deck-service-header {
+  margin-bottom: 16px;
+}
+
+.deck-service-header .service-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.deck-service-header .service-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main, #160000);
+  margin-bottom: 4px;
+}
+
+.deck-service-header .service-price-tag {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f40c3f;
+}
+
+.deck-tier-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-muted, #4b5563);
+}
+
+.deck-tier-bullets li.highlight-tier {
+  color: var(--text-main, #160000);
+  font-weight: 600;
+  background: rgba(244, 12, 63, 0.06);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.deck-quote-btn {
+  display: block;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(22, 0, 0, 0.06);
+  border: 1px solid rgba(22, 0, 0, 0.15);
+  color: #160000;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.deck-quote-btn:hover {
+  background: #f40c3f;
+  border-color: #f40c3f;
+  color: #ffffff;
+}
+
+.deck-quote-btn.popular {
+  background: linear-gradient(90deg, #7928ca, #0070f3);
+  border: none;
+  color: #ffffff;
+}
+
+.deck-quote-btn.popular:hover {
+  background: linear-gradient(90deg, #f40c3f, #7928ca);
+}
