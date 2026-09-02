@@ -92,7 +92,7 @@ import '../styles/global.scss'
   </head>
 
   <body>
-    <div class="site-wrapper js-site-wrapper" style="opacity: 0;">
+    <div class="site-wrapper js-site-wrapper">
       <SiteHead />
 
       <SHero />
@@ -122,7 +122,7 @@ import '../styles/global.scss'
 
     <div
       class="site-intro js-intro"
-      style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #F40C3F;"
+      style="position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; pointer-events: none;"
     >
       <div class="sb-logo js-logo">
         <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v"></div>
@@ -395,9 +395,6 @@ import '../styles/global.scss'
         const mount = document.querySelector('.js-mount') as HTMLElement
         const logoLinesV = intro?.querySelectorAll('.js-logo-line-v')
         const logoLinesH = intro?.querySelectorAll('.js-logo-line-h')
-        const borderTop = intro?.querySelector('.js-border-top') as HTMLElement
-        const borderLeft = intro?.querySelector('.js-border-left') as HTMLElement
-        const borderRight = intro?.querySelector('.js-border-right') as HTMLElement
 
         const tl = gsap.timeline()
 
@@ -407,17 +404,14 @@ import '../styles/global.scss'
           })
         }
 
-        if (intro) {
-          tl.set(intro, {
-            background: 'transparent',
-          })
-        }
+        // Fire intro event immediately
+        document.dispatchEvent(new CustomEvent('intro'))
 
         if (logoLinesV && logoLinesV.length > 0) {
           tl.fromTo(
             logoLinesV,
             { scaleY: 0 },
-            { scaleY: 1, duration: 1, ease: 'power4.inOut', stagger: 0.15 },
+            { scaleY: 1, duration: 0.4, ease: 'power4.inOut', stagger: 0.05 },
             0
           )
         }
@@ -426,68 +420,32 @@ import '../styles/global.scss'
           tl.fromTo(
             logoLinesH,
             { scaleX: 0 },
-            { scaleX: 1, duration: 0.4, ease: 'power4.inOut', stagger: 0 },
-            1
+            { scaleX: 1, duration: 0.25, ease: 'power4.inOut' },
+            0.2
           )
         }
 
-        if (logoLinesV && logoLinesV.length > 0) {
-          tl.set(logoLinesV, { transformOrigin: '50% 0' })
-          tl.fromTo(
-            logoLinesV,
-            { scaleY: 1 },
-            { scaleY: 0, duration: 1, ease: 'power4.in', immediateRender: false, stagger: 0.1 },
-            2
+        if (intro) {
+          tl.to(
+            intro,
+            {
+              opacity: 0,
+              duration: 0.4,
+              ease: 'power2.out',
+              onComplete: () => {
+                if (mount) mount.style.opacity = '1'
+                intro.remove()
+                document.documentElement.classList.remove('is-scroll-blocked')
+                Ticker.nextTick(() => {
+                  Emitter.emit('updateViewport')
+                })
+              },
+            },
+            0.6
           )
+        } else {
+          document.documentElement.classList.remove('is-scroll-blocked')
         }
-
-        if (logoLinesH && logoLinesH.length > 0) {
-          tl.fromTo(
-            logoLinesH,
-            { scaleY: 1 },
-            { scaleY: 0, duration: 0.5, ease: 'power4.in', immediateRender: false, stagger: 0.1 },
-            2.1
-          )
-        }
-
-        if (borderTop) {
-          tl.from(
-            borderTop,
-            { scaleY: 0, duration: 3, ease: 'power3.inOut' },
-            1
-          )
-        }
-
-        if (borderLeft && borderRight) {
-          tl.from(
-            [borderLeft, borderRight],
-            { scaleX: 0, duration: 3, ease: 'power3.inOut' },
-            1
-          )
-        }
-
-        tl.call(
-          () => {
-            document.dispatchEvent(new CustomEvent('intro'))
-          },
-          undefined,
-          '-=1.85'
-        )
-
-        tl.call(
-          () => {
-            if (mount) mount.style.opacity = '1'
-            if (intro) intro.remove()
-
-            document.documentElement.classList.remove('is-scroll-blocked')
-
-            Ticker.nextTick(() => {
-              Emitter.emit('updateViewport')
-            })
-          },
-          undefined,
-          5
-        )
       }
     }
 

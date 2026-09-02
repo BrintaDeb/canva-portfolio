@@ -72,8 +72,8 @@ import ASeparator from './ASeparator.astro'
      */
     init() {
       this.splitWords()
-
       this.bindEvents()
+      if (this.el) this.el.style.opacity = '1'
     }
 
     /**
@@ -323,7 +323,7 @@ import ASeparator from './ASeparator.astro'
 
     min-height: calc(100svh - 7rem - 1px);
 
-    opacity: 0;
+    opacity: 1;
     overflow: hidden;
 
     @include mq(phone) {
@@ -336,6 +336,17 @@ import ASeparator from './ASeparator.astro'
 
       flex-grow: 1;
       flex-shrink: 1;
+
+      @include mq(tablet) {
+        max-height: 42vh;
+        min-height: 220px;
+      }
+
+      @include mq(phone) {
+        max-height: 34vh;
+        min-height: 160px;
+        flex-grow: 0;
+      }
     }
 
     .s__border {
@@ -404,7 +415,8 @@ import ASeparator from './ASeparator.astro'
       }
 
       @include mq(phone) {
-        font-size: calc(31vw - 0.75rem);
+        font-size: calc(27vw - 0.75rem);
+        padding: 0.75rem 0.5rem;
       }
 
       &__word {
