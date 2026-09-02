@@ -220,14 +220,14 @@
 <style lang="scss">
   .wa-chatbot {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
+    bottom: max(28px, calc(18px + env(safe-area-inset-bottom, 0px)));
+    right: max(28px, calc(18px + env(safe-area-inset-right, 0px)));
     z-index: 9990;
     font-family: font-family(fraktion);
 
     @include mq(phone) {
-      bottom: 20px;
-      right: 18px;
+      bottom: max(20px, calc(14px + env(safe-area-inset-bottom, 0px)));
+      right: max(18px, calc(14px + env(safe-area-inset-right, 0px)));
     }
   }
 

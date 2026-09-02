@@ -573,6 +573,8 @@ const lines = [
   .s-cta {
     position: relative;
     z-index: 2;
+    overflow: hidden;
+    max-width: 100%;
 
     padding: 40rem 0 0;
 
@@ -605,6 +607,8 @@ const lines = [
 
       position: relative;
       z-index: 3;
+      overflow: hidden;
+      max-width: 100%;
 
       height: calc(100vh - 8rem - 2px);
 
@@ -692,6 +696,18 @@ const lines = [
 
     .s__cta {
       --size: 64rem;
+
+      @include mq(desktop-sm) {
+        --size: 54rem;
+      }
+
+      @include mq(tablet) {
+        --size: min(44rem, 96vw);
+      }
+
+      @include mq(phone) {
+        --size: min(22rem, 94vw);
+      }
 
       position: absolute;
       top: calc(50% - var(--size) / 2);
