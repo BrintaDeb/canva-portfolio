@@ -1,0 +1,62 @@
+name: Render Backend Keep-Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes to prevent Render free instances from spinning down (15-min idle timeout)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+
+jobs:
+  keep_alive:
+    name: Ping Render Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Keep-Alive HTTP Query
+        env:
+          # You can add your Render backend URL in GitHub Repository Secrets (RENDER_BACKEND_URL)
+          # Or define comma-separated URLs in RENDER_BACKEND_URLS
+          BACKEND_URL: ${{ secrets.RENDER_BACKEND_URL }}
+          BACKEND_URLS: ${{ secrets.RENDER_BACKEND_URLS }}
+        run: |
+          echo "======================================================="
+          echo "🚀 Starting Render Backend Keep-Alive Ping at $(date -u)"
+          echo "======================================================="
+
+          # Determine target URLs: check secrets, or fallback to known project services
+          TARGETS=()
+          if [ -n "$BACKEND_URLS" ]; then
+            IFS=',' read -ra ADDR <<< "$BACKEND_URLS"
+            for url in "${ADDR[@]}"; do
+              TARGETS+=("$(echo "$url" | xargs)")
+            done
+          elif [ -n "$BACKEND_URL" ]; then
+            TARGETS+=("$BACKEND_URL")
+          else
+            # Default fallback URLs if no secret is set yet
+            TARGETS+=(
+              "https://humlya-salt-product-web.onrender.com"
+              "https://food-website-lozv.onrender.com"
+              "https://pet-web-pocz.onrender.com"
+            )
+          fi
+
+          for URL in "${TARGETS[@]}"; do
+            echo "-------------------------------------------------------"
+            echo "📡 Pinging: $URL"
+            START_TIME=$(date +%s%N)
+            
+            # Send GET request with 20s timeout and fetch HTTP status
+            HTTP_STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" --max-time 20 -H "User-Agent: RenderKeepAlive/1.0" "$URL" || echo "FAILED")
+            END_TIME=$(date +%s%N)
+            DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+
+            if [ "$HTTP_STATUS" = "FAILED" ] || [ "$HTTP_STATUS" = "000" ]; then
+              echo "⚠️ Request to $URL timed out or connection error (server may be waking up)"
+            else
+              echo "✅ Response received: HTTP $HTTP_STATUS in ${DURATION}ms"
+            fi
+          done
+
+          echo "======================================================="
+          echo "🎉 Keep-alive query cycle complete. Next run in 10 mins."
+          echo "======================================================="
