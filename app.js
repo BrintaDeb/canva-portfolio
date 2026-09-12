@@ -43,7 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: "Social Media Motion", desc: "Food Posts & Reels" },
     { title: "Anime Sketching", desc: "Procreate Artworks" },
     { title: "Tech Skills", desc: "Software & Design Tools" },
-    { title: "Work With Me", desc: "Contact & Inquiries" }
+    { title: "Services & Packages", desc: "Web Dev, Design & SEO Pricing" },
+    { title: "Four Steps. 7 Days.", desc: "Rapid Sprint Workflow" },
+    { title: "Work With Me", desc: "Contact & Direct Message" }
   ];
 
   // --- 1. Toast Notification Helper ---
@@ -302,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 9. Lightbox for Images and Artworks ---
   function openLightbox(imgSrc) {
-    lightboxImg.src = imgSrc;
+    lightboxImg.src = imgSrc.startsWith('/') ? imgSrc : '/' + imgSrc;
     imageLightbox.classList.remove('hidden');
   }
 

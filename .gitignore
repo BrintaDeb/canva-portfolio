@@ -12,14 +12,6 @@ test_screenshots/
 Thumbs.db
 
 # Scratch extraction & test scripts
-check_*.py
-find_*.py
-inspect_*.py
-print_*.py
-test_*.js
-capture_*.js
-verify_*.js
-download_*.py
-generate_*.py
+tests/
 
 
