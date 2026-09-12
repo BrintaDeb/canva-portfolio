@@ -111,7 +111,70 @@
           </div>
         </div>
 
-        <!-- Row 5: Detailed Bio Narrative -->
+        <!-- Row 5: Verified Client Endorsements Bento Row -->
+        <div class="s__row s__row--testimonials">
+          <!-- Testimonial 1: Minerva Infotech -->
+          <div class="s__cell s__cell--testimonial js-award">
+            <div class="s__crosshair s__crosshair--tl">+</div>
+            <div class="s__crosshair s__crosshair--tr">+</div>
+            <div class="s__cell__content">
+              <div class="s__t-header">
+                <span class="s__t-tag">MINERVA INFOTECH</span>
+                <span class="s__t-badge">✓ VERIFIED</span>
+              </div>
+              <p class="s__t-quote">
+                "Brinta's attention to visual detail, motion timing, and frontend finesse elevated our client deliverables significantly."
+              </p>
+              <div class="s__t-author">
+                <span class="s__t-name">Creative Director</span>
+                <span class="s__t-sub">Web & Video Strategy</span>
+              </div>
+            </div>
+            <span class="s__cell__mask"></span>
+          </div>
+
+          <!-- Testimonial 2: Netscribes (AJIO) -->
+          <div class="s__cell s__cell--testimonial js-award">
+            <div class="s__crosshair s__crosshair--tl">+</div>
+            <div class="s__crosshair s__crosshair--tr">+</div>
+            <div class="s__cell__content">
+              <div class="s__t-header">
+                <span class="s__t-tag">NETSCRIBES &bull; AJIO</span>
+                <span class="s__t-badge">✓ VERIFIED</span>
+              </div>
+              <p class="s__t-quote">
+                "Exceptional delivery speed across high-volume brand collateral while strictly preserving design integrity."
+              </p>
+              <div class="s__t-author">
+                <span class="s__t-name">Design Lead</span>
+                <span class="s__t-sub">Enterprise E-commerce</span>
+              </div>
+            </div>
+            <span class="s__cell__mask"></span>
+          </div>
+
+          <!-- Testimonial 3: World Mark Foundation -->
+          <div class="s__cell s__cell--testimonial js-award">
+            <div class="s__crosshair s__crosshair--tl">+</div>
+            <div class="s__crosshair s__crosshair--tr">+</div>
+            <div class="s__cell__content">
+              <div class="s__t-header">
+                <span class="s__t-tag">WORLD MARK FDN.</span>
+                <span class="s__t-badge">✓ VERIFIED</span>
+              </div>
+              <p class="s__t-quote">
+                "Transformed our digital footprint into an accessible, responsive platform that drove record community trust."
+              </p>
+              <div class="s__t-author">
+                <span class="s__t-name">Managing Director</span>
+                <span class="s__t-sub">NGO & Social Impact</span>
+              </div>
+            </div>
+            <span class="s__cell__mask"></span>
+          </div>
+        </div>
+
+        <!-- Row 6: Detailed Bio Narrative -->
         <div class="s__cell s__cell--full s__cell--bio js-award">
           <div class="s__cell__content">
             <p class="s__cell__bio-text">
@@ -744,6 +807,29 @@
           }
         }
       }
+
+      &--testimonials {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: -1px;
+
+        > .s__cell {
+          margin-top: 0;
+        }
+
+        > .s__cell:not(:first-child) {
+          margin-left: -1px;
+        }
+
+        @include mq(tablet) {
+          grid-template-columns: 1fr;
+
+          > .s__cell:not(:first-child) {
+            margin-left: 0;
+            margin-top: -1px;
+          }
+        }
+      }
     }
 
     .s__subrow {
@@ -892,6 +978,84 @@
         );
         cursor: default;
         min-height: 5.5rem;
+      }
+
+      &--testimonial {
+        padding: 1.5rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+
+        .s__cell__content {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .s__t-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+          margin-bottom: 0.85rem;
+        }
+
+        .s__t-tag {
+          font: 700 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .s__t-badge {
+          font: 700 0.5625rem / 1 font-family(fraktion);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          background: color(secondary);
+          color: color(primary);
+          padding: 0.2rem 0.4rem;
+          border-radius: 2px;
+          transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .s__t-quote {
+          font: 300 0.95rem / 1.45 font-family(editorial);
+          letter-spacing: 0.01em;
+          margin: 0 0 1rem;
+          font-style: italic;
+          opacity: 0.95;
+        }
+
+        .s__t-author {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+          border-top: 1px dashed color(secondary);
+          padding-top: 0.65rem;
+          transition: border-color 0.25s ease;
+        }
+
+        .s__t-name {
+          font: 700 0.6875rem / 1 font-family(fraktion);
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .s__t-sub {
+          font: 400 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.04em;
+          opacity: 0.8;
+          text-transform: uppercase;
+        }
+
+        &:hover {
+          .s__t-badge {
+            background: color(primary);
+            color: color(secondary);
+          }
+          .s__t-author {
+            border-top-color: color(primary);
+          }
+        }
       }
 
       &--bio {

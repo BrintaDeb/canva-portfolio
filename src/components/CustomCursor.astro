@@ -1,0 +1,291 @@
+---
+---
+
+<div class="custom-cursor js-custom-cursor" aria-hidden="true">
+  <div class="cursor__dot js-cursor-dot"></div>
+  <div class="cursor__follower js-cursor-follower">
+    <span class="cursor__label js-cursor-label"></span>
+  </div>
+</div>
+
+<script>
+  class CustomCursor {
+    cursorEl: HTMLElement | null
+    dotEl: HTMLElement | null
+    followerEl: HTMLElement | null
+    labelEl: HTMLElement | null
+
+    mouse: { x: number; y: number }
+    dotPos: { x: number; y: number }
+    followerPos: { x: number; y: number }
+    rafId: number | null
+    isVisible: boolean
+    isHoveringInteractive: boolean
+    currentLabel: string
+
+    constructor() {
+      this.cursorEl = document.querySelector('.js-custom-cursor')
+      this.dotEl = document.querySelector('.js-cursor-dot')
+      this.followerEl = document.querySelector('.js-cursor-follower')
+      this.labelEl = document.querySelector('.js-cursor-label')
+
+      this.mouse = { x: -100, y: -100 }
+      this.dotPos = { x: -100, y: -100 }
+      this.followerPos = { x: -100, y: -100 }
+      this.rafId = null
+      this.isVisible = false
+      this.isHoveringInteractive = false
+      this.currentLabel = ''
+
+      // Check for touch / coarse pointer
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+        return
+      }
+
+      this.init()
+    }
+
+    init() {
+      window.addEventListener('mousemove', this.onMouseMove.bind(this), { passive: true })
+      document.documentElement.addEventListener('mouseenter', this.onMouseEnter.bind(this))
+      document.documentElement.addEventListener('mouseleave', this.onMouseLeave.bind(this))
+      window.addEventListener('mousedown', this.onMouseDown.bind(this))
+      window.addEventListener('mouseup', this.onMouseUp.bind(this))
+
+      this.bindInteractiveElements()
+      this.render()
+    }
+
+    onMouseMove(e: MouseEvent) {
+      this.mouse.x = e.clientX
+      this.mouse.y = e.clientY
+
+      if (!this.isVisible) {
+        this.isVisible = true
+        this.dotPos.x = this.mouse.x
+        this.dotPos.y = this.mouse.y
+        this.followerPos.x = this.mouse.x
+        this.followerPos.y = this.mouse.y
+        this.cursorEl?.classList.add('is-visible')
+      }
+    }
+
+    onMouseEnter() {
+      this.isVisible = true
+      this.cursorEl?.classList.add('is-visible')
+    }
+
+    onMouseLeave() {
+      this.isVisible = false
+      this.cursorEl?.classList.remove('is-visible')
+    }
+
+    onMouseDown() {
+      this.cursorEl?.classList.add('is-pressed')
+    }
+
+    onMouseUp() {
+      this.cursorEl?.classList.remove('is-pressed')
+    }
+
+    bindInteractiveElements() {
+      // General links & clickable elements
+      const interactiveSelector = 'a, button, [role="button"], input, select, textarea, .js-contrast, .js-audio-toggle'
+      
+      document.addEventListener('mouseover', (e) => {
+        const target = e.target as HTMLElement | null
+        if (!target) return
+
+        // 1. Check for Project Card / Lightbox triggers
+        const lightboxTrigger = target.closest('[data-lightbox], .clickable-project, .s-work__card, .js-work-card, .s-work__column') as HTMLElement | null
+        if (lightboxTrigger) {
+          this.setLabel('VIEW ↗')
+          this.cursorEl?.classList.add('has-label', 'is-hovering')
+          return
+        }
+
+        // 2. Check for sketches / artworks
+        const sketchTrigger = target.closest('.sketch-card, .ctrl-illustration, .item-masks, .item-spongebob') as HTMLElement | null
+        if (sketchTrigger) {
+          this.setLabel('ZOOM')
+          this.cursorEl?.classList.add('has-label', 'is-hovering')
+          return
+        }
+
+        // 3. Check for copy triggers
+        const copyTrigger = target.closest('.js-copy-email, [data-copy]') as HTMLElement | null
+        if (copyTrigger) {
+          this.setLabel('COPY')
+          this.cursorEl?.classList.add('has-label', 'is-hovering')
+          return
+        }
+
+        // 4. Check for standard clickable elements
+        const interactive = target.closest(interactiveSelector) as HTMLElement | null
+        if (interactive) {
+          this.clearLabel()
+          this.cursorEl?.classList.add('is-hovering')
+          return
+        }
+
+        // Default reset
+        this.clearLabel()
+        this.cursorEl?.classList.remove('is-hovering', 'has-label')
+      })
+    }
+
+    setLabel(text: string) {
+      if (this.labelEl && this.currentLabel !== text) {
+        this.currentLabel = text
+        this.labelEl.textContent = text
+      }
+    }
+
+    clearLabel() {
+      if (this.currentLabel !== '') {
+        this.currentLabel = ''
+        if (this.labelEl) this.labelEl.textContent = ''
+      }
+    }
+
+    render() {
+      // Lerp calculations for ultra-silky tracking
+      const lerpDot = 0.85
+      const lerpFollower = 0.16
+
+      this.dotPos.x += (this.mouse.x - this.dotPos.x) * lerpDot
+      this.dotPos.y += (this.mouse.y - this.dotPos.y) * lerpDot
+
+      this.followerPos.x += (this.mouse.x - this.followerPos.x) * lerpFollower
+      this.followerPos.y += (this.mouse.y - this.followerPos.y) * lerpFollower
+
+      if (this.dotEl) {
+        this.dotEl.style.transform = `translate3d(${this.dotPos.x}px, ${this.dotPos.y}px, 0)`
+      }
+
+      if (this.followerEl) {
+        this.followerEl.style.transform = `translate3d(${this.followerPos.x}px, ${this.followerPos.y}px, 0)`
+      }
+
+      this.rafId = requestAnimationFrame(this.render.bind(this))
+    }
+  }
+
+  // Initialize on page load
+  if (typeof window !== 'undefined') {
+    new CustomCursor()
+  }
+</script>
+
+<style lang="scss">
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+
+    &.is-visible {
+      opacity: 1;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      display: none !important;
+    }
+  }
+
+  .cursor__dot {
+    position: fixed;
+    top: -3px;
+    left: -3px;
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    z-index: 100001;
+    transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+    will-change: transform;
+  }
+
+  .cursor__follower {
+    position: fixed;
+    top: -18px;
+    left: -18px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                border-radius 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                background-color 0.25s ease,
+                border-color 0.25s ease;
+    will-change: transform;
+  }
+
+  .cursor__label {
+    font-family: 'PP Fraktion Mono', monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #000000;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  /* Hover state: scale ring slightly */
+  .custom-cursor.is-hovering:not(.has-label) .cursor__follower {
+    top: -24px;
+    left: -24px;
+    width: 48px;
+    height: 48px;
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .custom-cursor.is-hovering:not(.has-label) .cursor__dot {
+    opacity: 0.5;
+  }
+
+  /* Label active state: expand into solid badge */
+  .custom-cursor.has-label .cursor__follower {
+    top: -20px;
+    left: -42px;
+    width: 84px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    mix-blend-mode: normal;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .custom-cursor.has-label .cursor__dot {
+    opacity: 0;
+  }
+
+  .custom-cursor.has-label .cursor__label {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Click / Pressed state */
+  .custom-cursor.is-pressed .cursor__follower {
+    transform: scale(0.9);
+  }
+</style>

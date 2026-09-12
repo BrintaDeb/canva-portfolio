@@ -1,0 +1,448 @@
+---
+/**
+ * ScheduleModal.astro
+ * 1-Click 30-Minute Discovery Call Scheduler Modal
+ */
+---
+
+<div id="scheduleModal" class="schedule-modal hidden" aria-hidden="true" role="dialog" aria-labelledby="scheduleModalTitle">
+  <div class="modal-backdrop js-close-schedule"></div>
+  
+  <div class="modal-card">
+    <div class="modal-header">
+      <span class="modal-header-tag">[ 30-MINUTE STRATEGIC DISCOVERY CALL ]</span>
+      <button class="modal-close-btn js-close-schedule" aria-label="Close scheduling modal">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-intro">
+        <h3 id="scheduleModalTitle" class="modal-title">"Let's talk about your product and vision."</h3>
+        <p class="modal-desc">
+          A focused, zero-obligation 30-minute conversation. You show me what you sell and who buys it. I'll tell you straight whether I am the right partner to build it.
+        </p>
+      </div>
+
+      <!-- Agenda Blueprint -->
+      <div class="schedule-agenda">
+        <div class="agenda-label">[ CALL AGENDA BLUEPRINT ]</div>
+        <div class="agenda-grid">
+          <div class="agenda-item">
+            <span class="agenda-num">01</span>
+            <div class="agenda-text">
+              <strong>Objective &amp; Audience</strong>
+              <span>Target buyers, brand position &amp; core value prop.</span>
+            </div>
+          </div>
+          <div class="agenda-item">
+            <span class="agenda-num">02</span>
+            <div class="agenda-text">
+              <strong>Scope &amp; Tech Architecture</strong>
+              <span>Astro, Next.js, 3D WebGL, GSAP motion, or CMS.</span>
+            </div>
+          </div>
+          <div class="agenda-item">
+            <span class="agenda-num">03</span>
+            <div class="agenda-text">
+              <strong>Velocity &amp; Sprint Fit</strong>
+              <span>1-week rapid build schedule, deliverables &amp; pricing.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Channels -->
+      <form id="scheduleCallForm" class="schedule-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="schedName">YOUR NAME / BRAND *</label>
+            <input type="text" id="schedName" placeholder="e.g. Alex Morgan / Studio Pulse" required />
+          </div>
+          <div class="form-group">
+            <label for="schedTime">PREFERRED TIMEZONE / SLOT</label>
+            <input type="text" id="schedTime" placeholder="e.g. Tomorrow 4:00 PM IST / EST morning" />
+          </div>
+        </div>
+
+        <div class="form-group form-group--full">
+          <label for="schedNotes">PROJECT / WEBSITE TOPIC (OPTIONAL)</label>
+          <input type="text" id="schedNotes" placeholder="e.g. Redesigning agency website with 3D interactions..." />
+        </div>
+
+        <div class="schedule-actions">
+          <button type="submit" class="schedule-btn schedule-btn--wa">
+            <span>BOOK VIA WHATSAPP (INSTANT)</span>
+            <span class="btn-arrow">→</span>
+          </button>
+
+          <button type="button" class="schedule-btn schedule-btn--email js-sched-email">
+            <span>BOOK VIA EMAIL</span>
+            <span class="btn-icon">↗</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { audioEngine } from '../utils/AudioEngine.js'
+
+  class ScheduleController {
+    modal: HTMLElement | null
+    form: HTMLFormElement | null
+    phoneNumber = '917005581453'
+
+    constructor() {
+      this.modal = document.getElementById('scheduleModal')
+      this.form = document.getElementById('scheduleCallForm') as HTMLFormElement | null
+      this.bindEvents()
+    }
+
+    bindEvents() {
+      // Open triggers
+      document.querySelectorAll('.js-open-schedule').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault()
+          this.open()
+        })
+      })
+
+      // Close triggers
+      this.modal?.querySelectorAll('.js-close-schedule').forEach((btn) => {
+        btn.addEventListener('click', () => this.close())
+      })
+
+      // ESC key listener
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !this.modal?.classList.contains('hidden')) {
+          this.close()
+        }
+      })
+
+      // Form WhatsApp submit
+      this.form?.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const name = (document.getElementById('schedName') as HTMLInputElement)?.value.trim() || 'Client'
+        const timeSlot = (document.getElementById('schedTime') as HTMLInputElement)?.value.trim() || 'Flexible slot'
+        const notes = (document.getElementById('schedNotes') as HTMLInputElement)?.value.trim() || '30-minute discovery call request'
+
+        const message = [
+          `*30-MIN DISCOVERY CALL REQUEST — BRINTA DEB*`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `👤 *Client / Brand:* ${name}`,
+          `⏱ *Preferred Time Slot:* ${timeSlot}`,
+          `📋 *Topic / Scope:* ${notes}`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `_Looking forward to discussing project strategy!_`,
+        ].join('\n')
+
+        const waUrl = `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(message)}`
+        window.open(waUrl, '_blank', 'noopener,noreferrer')
+        this.close()
+      })
+
+      // Email action
+      const emailBtn = this.modal?.querySelector('.js-sched-email')
+      emailBtn?.addEventListener('click', () => {
+        const name = (document.getElementById('schedName') as HTMLInputElement)?.value.trim() || 'Client'
+        const timeSlot = (document.getElementById('schedTime') as HTMLInputElement)?.value.trim() || 'Flexible slot'
+        const notes = (document.getElementById('schedNotes') as HTMLInputElement)?.value.trim() || 'Discovery call request'
+
+        const body = `Hi Brinta,\n\nI'd like to schedule a 30-minute discovery call.\n\nName: ${name}\nPreferred Time: ${timeSlot}\nTopic: ${notes}\n\nBest regards,\n${name}`
+        const mailUrl = `mailto:debbrinta01@gmail.com?subject=${encodeURIComponent(`Discovery Call Request — ${name}`)}&body=${encodeURIComponent(body)}`
+        window.location.href = mailUrl
+        this.close()
+      })
+    }
+
+    open() {
+      audioEngine.playChime()
+      this.modal?.classList.remove('hidden')
+      this.modal?.setAttribute('aria-hidden', 'false')
+      document.body.style.overflow = 'hidden'
+      setTimeout(() => {
+        (document.getElementById('schedName') as HTMLInputElement)?.focus()
+      }, 150)
+    }
+
+    close() {
+      audioEngine.playClick()
+      this.modal?.classList.add('hidden')
+      this.modal?.setAttribute('aria-hidden', 'true')
+      document.body.style.overflow = ''
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new ScheduleController())
+  } else {
+    new ScheduleController()
+  }
+</script>
+
+<style lang="scss">
+  .schedule-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+
+    &.hidden {
+      display: none;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(22, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.15rem 1.5rem;
+      border-bottom: 1px solid color(secondary);
+      background: color(primary);
+
+      &-tag {
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+
+      .modal-close-btn {
+        background: transparent;
+        border: 1px solid color(secondary);
+        color: color(secondary);
+        font: 700 0.8125rem / 1 font-family(fraktion);
+        padding: 0.35rem 0.55rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: color(secondary);
+          color: color(primary);
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 1.75rem 1.75rem 2rem;
+
+      @include mq(phone) {
+        padding: 1.25rem 1.25rem 1.5rem;
+      }
+    }
+
+    .modal-intro {
+      margin-bottom: 1.5rem;
+
+      .modal-title {
+        font: 300 1.85rem / 1.2 font-family(editorial);
+        letter-spacing: -0.01em;
+        color: color(secondary);
+        margin: 0 0 0.5rem 0;
+
+        @include mq(phone) {
+          font-size: 1.5rem;
+        }
+      }
+
+      .modal-desc {
+        font: 400 0.875rem / 1.5 font-family(fraktion);
+        color: color(secondary);
+        opacity: 0.75;
+        margin: 0;
+      }
+    }
+
+    /* Agenda Blueprint */
+    .schedule-agenda {
+      margin-bottom: 1.75rem;
+      border: 1px solid rgba(22, 0, 0, 0.2);
+      background: rgba(22, 0, 0, 0.03);
+      padding: 1.25rem;
+
+      :global(.theme-contrasted) & {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .agenda-label {
+        font: 700 0.625rem / 1 font-family(fraktion);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: color(secondary);
+        opacity: 0.7;
+        margin-bottom: 0.85rem;
+      }
+
+      .agenda-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .agenda-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+
+        .agenda-num {
+          font: 700 0.6875rem / 1 font-family(fraktion);
+          padding: 0.25rem 0.45rem;
+          background: color(secondary);
+          color: color(primary);
+          flex-shrink: 0;
+        }
+
+        .agenda-text {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+
+          strong {
+            font: 600 0.8125rem / 1.2 font-family(fraktion);
+            color: color(secondary);
+          }
+
+          span {
+            font: 400 0.75rem / 1.3 font-family(fraktion);
+            color: color(secondary);
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+
+    /* Form & Buttons */
+    .schedule-form {
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+        margin-bottom: 0.85rem;
+
+        @include mq(phone) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-bottom: 0.85rem;
+
+        label {
+          font: 700 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: color(secondary);
+        }
+
+        input {
+          background: color(primary);
+          border: 1px solid color(secondary);
+          color: color(secondary);
+          font: 500 0.8125rem / 1.4 font-family(fraktion);
+          padding: 0.65rem 0.75rem;
+          outline: none;
+          transition: background 0.2s ease;
+
+          &:focus {
+            background: #ffffff;
+
+            :global(.theme-contrasted) & {
+              background: #111111;
+            }
+          }
+        }
+      }
+
+      .schedule-actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+
+        @include mq(phone) {
+          flex-direction: column;
+        }
+      }
+
+      .schedule-btn {
+        padding: 0.95rem 1.25rem;
+        font: 700 0.75rem / 1 font-family(fraktion);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.25s ease;
+
+        &--wa {
+          flex: 2;
+          background: color(secondary);
+          border: 1px solid color(secondary);
+          color: color(primary);
+
+          &:hover {
+            background: color(primary);
+            color: color(secondary);
+
+            .btn-arrow {
+              transform: translateX(4px);
+            }
+          }
+
+          .btn-arrow {
+            transition: transform 0.2s ease;
+          }
+        }
+
+        &--email {
+          flex: 1;
+          background: transparent;
+          border: 1px solid color(secondary);
+          color: color(secondary);
+
+          &:hover {
+            background: rgba(22, 0, 0, 0.08);
+
+            :global(.theme-contrasted) & {
+              background: rgba(255, 255, 255, 0.1);
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

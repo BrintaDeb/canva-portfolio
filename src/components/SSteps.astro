@@ -75,6 +75,12 @@ const steps = [
                 <span>(Zero Obligation)</span>
                 <span>(30 Minutes)</span>
               </div>
+              <div class="s__step-action">
+                <button type="button" class="s__step-schedule-btn js-open-schedule" aria-label="Schedule 30-Minute Discovery Call">
+                  <span>SCHEDULE 30-MIN CALL</span>
+                  <span class="btn-arrow" aria-hidden="true">→</span>
+                </button>
+              </div>
             </div>
             <span class="s__cell__mask"></span>
           </div>
@@ -346,6 +352,16 @@ const steps = [
           background: color(primary);
           color: color(secondary);
         }
+
+        .s__step-schedule-btn {
+          border-color: color(primary);
+          color: color(primary);
+
+          &:hover {
+            background: color(primary);
+            color: color(secondary);
+          }
+        }
       }
 
       &--full {
@@ -499,6 +515,46 @@ const steps = [
 
       @include mq(phone) {
         font-size: 1.35rem;
+      }
+    }
+
+    .s__step-action {
+      margin-top: 1.25rem;
+    }
+
+    .s__step-schedule-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background: transparent;
+      border: 1px solid color(secondary);
+      color: color(secondary);
+      font: 700 0.6875rem / 1 font-family(fraktion);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s ease;
+
+      .btn-arrow {
+        font-size: 0.875rem;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      &:hover {
+        background: color(secondary);
+        color: color(primary);
+
+        .btn-arrow {
+          transform: translateX(4px);
+        }
+      }
+
+      &:active {
+        transform: scale(0.98);
       }
     }
 

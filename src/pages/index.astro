@@ -12,6 +12,9 @@ import SCTA from '../components/SCTA.astro'
 import ASeparator from '../components/ASeparator.astro'
 import ProjectLightbox from '../components/ProjectLightbox.astro'
 import WhatsAppChatbot from '../components/WhatsAppChatbot.astro'
+import ScheduleModal from '../components/ScheduleModal.astro'
+import ResumeModal from '../components/ResumeModal.astro'
+import CustomCursor from '../components/CustomCursor.astro'
 
 import '../styles/global.scss'
 ---
@@ -42,6 +45,7 @@ import '../styles/global.scss'
       href="/icons/apple-touch-icon.png"
     />
     <meta name="apple-mobile-web-app-title" content="Brinta Deb" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta name="theme-color" content="#160000" />
     <meta name="msapplication-navbutton-color" content="#160000" />
@@ -50,10 +54,15 @@ import '../styles/global.scss'
     <meta property="og:locale" content="en_IN" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Brinta Deb — Creative Developer &amp; UI/UX Portfolio" />
-    <meta property="og:description" content="Portfolio of Brinta Deb — Creative Developer, UI/UX Specialist, and Video Editor based in Kolkata." />
+    <meta property="og:description" content="Portfolio of Brinta Deb — Creative Developer, UI/UX Specialist, and Digital Nomad based in Kolkata. Specializing in bespoke digital experiences, responsive web architecture, and motion systems." />
     <meta property="og:site_name" content="Brinta Deb Portfolio" />
-    <meta property="og:image" content="/assets/media/f0c4e3145a63a79c8df7c323af904f65.png" />
+    <meta property="og:image" content="/assets/media/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Brinta Deb — Creative Developer &amp; UI/UX Portfolio" />
+    <meta name="twitter:description" content="Bespoke digital experiences, responsive web architecture, and motion systems." />
+    <meta name="twitter:image" content="/assets/media/og-image.png" />
 
     <link
       rel="preload"
@@ -123,6 +132,10 @@ import '../styles/global.scss'
       <ProjectLightbox />
 
       <WhatsAppChatbot />
+
+      <ScheduleModal />
+
+      <ResumeModal />
     </div><!-- .site-wrapper -->
 
     <div
@@ -152,6 +165,7 @@ import '../styles/global.scss'
     <div class="site-contrast-mask js-contrast-mask"></div>
 
     <SiteScrollbar />
+    <CustomCursor />
   </body>
 
   <script>
@@ -163,6 +177,8 @@ import '../styles/global.scss'
     import { gsap } from 'gsap'
     import { ScrollTrigger } from 'gsap/ScrollTrigger'
     gsap.registerPlugin(ScrollTrigger)
+
+    import { CardTilt } from '../utils/Tilt.js'
 
     declare global {
       interface Window {
@@ -226,6 +242,9 @@ import '../styles/global.scss'
 
         this.onResize()
         Ticker.nextTick(this.intro, this)
+
+        // Initialize 3D Card Hover Tilt on Bento cells & project cards
+        new CardTilt()
       }
 
       /**

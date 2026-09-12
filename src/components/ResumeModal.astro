@@ -1,0 +1,647 @@
+---
+/**
+ * ResumeModal.astro
+ * Digital Resume / Curriculum Vitae One-Pager Modal
+ * Brutalist editorial design with 1-click Print/PDF export.
+ */
+---
+
+<div id="resumeModal" class="resume-modal hidden" aria-hidden="true" role="dialog" aria-labelledby="resumeModalTitle">
+  <div class="modal-backdrop js-close-resume"></div>
+
+  <div class="modal-card">
+    <!-- Modal Control Header -->
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <span class="modal-header-tag">[ CURRICULUM VITAE &bull; ONE-PAGER ]</span>
+      </div>
+      <div class="modal-header-actions">
+        <button type="button" class="resume-header-btn js-print-resume" title="Print or Save CV as PDF">
+          <span class="btn-icon">🖨</span>
+          <span>PRINT / PDF</span>
+        </button>
+        <button type="button" class="modal-close-btn js-close-resume" aria-label="Close CV modal">✕</button>
+      </div>
+    </div>
+
+    <!-- Printable Resume Sheet -->
+    <div class="resume-sheet">
+      <!-- Header Banner -->
+      <header class="resume-top">
+        <div class="resume-identity">
+          <h2 id="resumeModalTitle" class="resume-name">BRINTA DEB</h2>
+          <div class="resume-title-row">
+            <span class="resume-role">CREATIVE DEVELOPER &amp; UI/UX SPECIALIST</span>
+            <span class="resume-loc">KOLKATA, INDIA &bull; REMOTE / GLOBAL</span>
+          </div>
+        </div>
+
+        <div class="resume-contact-pills">
+          <a href="mailto:debbrinta01@gmail.com" class="contact-pill">
+            <span class="pill-k">EMAIL</span>
+            <span class="pill-v">debbrinta01@gmail.com</span>
+          </a>
+          <a href="https://wa.me/917005581453" target="_blank" rel="noopener" class="contact-pill">
+            <span class="pill-k">TEL / WA</span>
+            <span class="pill-v">+91 70055 81453</span>
+          </a>
+          <a href="https://instagram.com/http.shreyam.adhd" target="_blank" rel="noopener" class="contact-pill">
+            <span class="pill-k">IG</span>
+            <span class="pill-v">@http.shreyam.adhd</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Executive Overview -->
+      <section class="resume-section resume-overview">
+        <div class="section-label">[ EXECUTIVE SUMMARY ]</div>
+        <p class="overview-text">
+          Multi-disciplinary Creative Developer &amp; UI/UX Designer with <strong>3+ years of commercial experience</strong> bridging high-concept visual art with robust engineering. Proven capability in architecting bespoke web platforms (Astro, Next.js, Webflow), immersive micro-interactions (GSAP, WebGL, Web Audio), and high-velocity digital branding sprints for global agencies, social enterprises, and e-commerce leaders.
+        </p>
+      </section>
+
+      <!-- Two-Column Grid: Left (Skills & Education) | Right (Experience & Projects) -->
+      <div class="resume-body-grid">
+        <!-- Column 1: Tech Stack & Methodologies -->
+        <div class="resume-col resume-col--left">
+          <section class="resume-section">
+            <div class="section-label">[ CORE COMPETENCIES ]</div>
+            
+            <div class="skill-group">
+              <div class="skill-heading">ENGINEERING &amp; ARCHITECTURE</div>
+              <p class="skill-items">Astro, Next.js, TypeScript, JavaScript (ESNext), GSAP Motion, Canvas API, Web Audio API, Responsive CSS/SCSS, Git, Node.js.</p>
+            </div>
+
+            <div class="skill-group">
+              <div class="skill-heading">INTERFACE &amp; SYSTEM DESIGN</div>
+              <p class="skill-items">Figma, Design Tokens, Design Systems, Mobile-First UX, Rapid Wireframing, WCAG Accessibility, Micro-interactions.</p>
+            </div>
+
+            <div class="skill-group">
+              <div class="skill-heading">NO-CODE / LOW-CODE VELOCITY</div>
+              <p class="skill-items">Webflow CMS &amp; Interactions, Wix Studio, Client Co-Design, Custom Code Embeds, Domain &amp; SSL Deployment.</p>
+            </div>
+
+            <div class="skill-group">
+              <div class="skill-heading">MOTION, MEDIA &amp; ART</div>
+              <p class="skill-items">DaVinci Resolve, Video Editing, Motion Graphics, Procreate Digital Illustration, Anime Concept Art.</p>
+            </div>
+          </section>
+
+          <section class="resume-section">
+            <div class="section-label">[ WORK PHILOSOPHY ]</div>
+            <ul class="resume-bullets">
+              <li><strong>7-Day Sprints:</strong> Focused cycle from kickoff to production launch with daily transparency.</li>
+              <li><strong>0kB Bloat:</strong> Preference for native browser APIs over heavyweight dependencies.</li>
+              <li><strong>Taste-First:</strong> Brutalist typography and balanced editorial art direction.</li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- Column 2: Work Experience & Flagship Deliverables -->
+        <div class="resume-col resume-col--right">
+          <section class="resume-section">
+            <div class="section-label">[ PROFESSIONAL EXPERIENCE ]</div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-company">MINERVA INFOTECH</span>
+                <span class="exp-date">2024</span>
+              </div>
+              <div class="exp-role">Creative Developer &amp; Video Producer</div>
+              <p class="exp-desc">
+                Engineered custom frontend landing pages and high-impact motion collaterals. Accelerated client delivery cycles by 30% through modular component architecture and interactive micro-animations.
+              </p>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-company">NETSCRIBES INDIA (CLIENT: AJIO)</span>
+                <span class="exp-date">2024</span>
+              </div>
+              <div class="exp-role">Creative Specialist &bull; Digital Art Consultant</div>
+              <p class="exp-desc">
+                Spearheaded design of high-volume digital campaign collaterals and catalog assets for enterprise e-commerce (AJIO). Maintained 100% brand consistency under tight sprint deadlines.
+              </p>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-company">WORLD MARK FOUNDATION</span>
+                <span class="exp-date">2021 — PRESENT</span>
+              </div>
+              <div class="exp-role">Lead Web &amp; UI/UX Designer</div>
+              <p class="exp-desc">
+                Architected and deployed accessible Webflow digital ecosystem for non-profit initiatives, resulting in record donor clarity, responsive mobile access, and international reach.
+              </p>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-company">FREELANCE DIGITAL NOMAD</span>
+                <span class="exp-date">2021 — PRESENT</span>
+              </div>
+              <div class="exp-role">Independent Creative Technologist &amp; Designer</div>
+              <p class="exp-desc">
+                Partnered with global creators and brands to deliver bespoke digital web experiences, custom interactive calculators, 3D presentations, and visual identity systems.
+              </p>
+            </div>
+          </section>
+
+          <section class="resume-section">
+            <div class="section-label">[ SELECTED PORTFOLIO HIGHLIGHTS ]</div>
+            <div class="project-tags">
+              <span class="p-tag"><strong>Nest Services:</strong> Corporate platform with live pricing estimator</span>
+              <span class="p-tag"><strong>Saffron &amp; Sage:</strong> Organic culinary editorial brand system</span>
+              <span class="p-tag"><strong>Demon Slayer Studies:</strong> Custom Procreate hand-drawn anime collection</span>
+              <span class="p-tag"><strong>Humlya &amp; PetFirst:</strong> E-commerce &amp; veterinary care concepts</span>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Footer / Print Signature -->
+      <footer class="resume-bottom">
+        <span class="resume-bottom-text">VERIFIED RESUME &bull; BRINTA DEB &bull; CURRENT AS OF 2024/2025</span>
+        <button type="button" class="resume-quick-schedule js-open-schedule" aria-label="Book a 30-min call">
+          [ 🗓 SCHEDULE DISCOVERY CALL → ]
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { audioEngine } from '../utils/AudioEngine.js'
+
+  class ResumeController {
+    modal: HTMLElement | null
+
+    constructor() {
+      this.modal = document.getElementById('resumeModal')
+      this.bindEvents()
+    }
+
+    bindEvents() {
+      // Open triggers
+      document.querySelectorAll('.js-open-resume').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault()
+          this.open()
+        })
+      })
+
+      // Close triggers
+      this.modal?.querySelectorAll('.js-close-resume').forEach((btn) => {
+        btn.addEventListener('click', () => this.close())
+      })
+
+      // ESC key listener
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !this.modal?.classList.contains('hidden')) {
+          this.close()
+        }
+      })
+
+      // Print button
+      const printBtn = this.modal?.querySelector('.js-print-resume')
+      printBtn?.addEventListener('click', () => {
+        audioEngine.playClick()
+        window.print()
+      })
+    }
+
+    open() {
+      audioEngine.playChime()
+      this.modal?.classList.remove('hidden')
+      this.modal?.setAttribute('aria-hidden', 'false')
+      document.body.style.overflow = 'hidden'
+    }
+
+    close() {
+      audioEngine.playClick()
+      this.modal?.classList.add('hidden')
+      this.modal?.setAttribute('aria-hidden', 'true')
+      document.body.style.overflow = ''
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new ResumeController())
+  } else {
+    new ResumeController()
+  }
+</script>
+
+<style lang="scss">
+  .resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+
+    &.hidden {
+      display: none;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(22, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 820px;
+      max-height: 92vh;
+      overflow-y: auto;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid color(secondary);
+      background: color(primary);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+
+      &-tag {
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+
+      &-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+      }
+
+      .resume-header-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: transparent;
+        border: 1px solid color(secondary);
+        color: color(secondary);
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        padding: 0.4rem 0.65rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: color(secondary);
+          color: color(primary);
+        }
+      }
+
+      .modal-close-btn {
+        background: transparent;
+        border: 1px solid color(secondary);
+        color: color(secondary);
+        font: 700 0.8125rem / 1 font-family(fraktion);
+        padding: 0.35rem 0.55rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: color(secondary);
+          color: color(primary);
+        }
+      }
+    }
+
+    /* Resume Sheet */
+    .resume-sheet {
+      padding: 2rem 2.25rem 2.5rem;
+      color: color(secondary);
+
+      @include mq(phone) {
+        padding: 1.25rem 1.25rem 1.75rem;
+      }
+    }
+
+    /* Top Identity */
+    .resume-top {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid color(secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .resume-name {
+      font: 700 3.25rem / 0.95 font-family(bigger);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem 0;
+      color: color(secondary);
+
+      @include mq(phone) {
+        font-size: 2.25rem;
+      }
+    }
+
+    .resume-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.5rem;
+      font: 700 0.75rem / 1.4 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .resume-loc {
+      opacity: 0.7;
+    }
+
+    .resume-contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid color(secondary);
+      padding: 0.3rem 0.6rem;
+      font: 400 0.6875rem / 1 font-family(fraktion);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: color(secondary);
+      transition: all 0.2s ease;
+
+      .pill-k {
+        font-weight: 700;
+        opacity: 0.65;
+      }
+
+      &:hover {
+        background: color(secondary);
+        color: color(primary);
+      }
+    }
+
+    /* Sections */
+    .resume-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-label {
+      font: 700 0.6875rem / 1 font-family(fraktion);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: color(secondary);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px dashed color(secondary);
+      opacity: 0.85;
+    }
+
+    .overview-text {
+      font: 300 1.05rem / 1.55 font-family(editorial);
+      margin: 0;
+      color: color(secondary);
+
+      strong {
+        font-weight: 700;
+      }
+    }
+
+    /* Body Grid */
+    .resume-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 1.75rem;
+
+      @include mq(tablet) {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    /* Left Col */
+    .skill-group {
+      margin-bottom: 1rem;
+
+      .skill-heading {
+        font: 700 0.625rem / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+      }
+
+      .skill-items {
+        font: 400 0.75rem / 1.45 font-family(fraktion);
+        opacity: 0.85;
+        margin: 0;
+      }
+    }
+
+    .resume-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font: 400 0.75rem / 1.45 font-family(fraktion);
+
+      li {
+        position: relative;
+        padding-left: 1rem;
+
+        &::before {
+          content: '→';
+          position: absolute;
+          left: 0;
+          font-weight: 700;
+        }
+      }
+    }
+
+    /* Right Col - Experience */
+    .exp-item {
+      margin-bottom: 1.25rem;
+
+      .exp-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .exp-company {
+        font: 700 0.75rem / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .exp-date {
+        font: 700 0.625rem / 1 font-family(fraktion);
+        letter-spacing: 0.1em;
+        padding: 0.15rem 0.35rem;
+        background: color(secondary);
+        color: color(primary);
+        border-radius: 2px;
+      }
+
+      .exp-role {
+        font: italic 300 0.9rem / 1.2 font-family(editorial);
+        margin-bottom: 0.35rem;
+        opacity: 0.9;
+      }
+
+      .exp-desc {
+        font: 400 0.75rem / 1.45 font-family(fraktion);
+        opacity: 0.85;
+        margin: 0;
+      }
+    }
+
+    .project-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font: 400 0.75rem / 1.4 font-family(fraktion);
+
+      .p-tag {
+        padding-left: 0.85rem;
+        position: relative;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
+
+    /* Footer */
+    .resume-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid color(secondary);
+      margin-top: 1.5rem;
+
+      @include mq(phone) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      &-text {
+        font: 400 0.625rem / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+
+      .resume-quick-schedule {
+        background: transparent;
+        border: none;
+        color: color(secondary);
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        padding: 0.3rem 0;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 0.7;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  /* Dedicated Print Stylesheet */
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+
+    .resume-modal,
+    .resume-modal * {
+      visibility: visible;
+    }
+
+    .resume-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      background: white !important;
+      color: black !important;
+      display: block !important;
+
+      .modal-backdrop,
+      .modal-header {
+        display: none !important;
+      }
+
+      .modal-card {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        max-height: none !important;
+        background: white !important;
+        color: black !important;
+      }
+
+      .resume-sheet {
+        padding: 0 !important;
+        color: black !important;
+      }
+
+      .resume-name,
+      .section-label,
+      .exp-company,
+      .contact-pill,
+      .overview-text,
+      .skill-items,
+      .exp-desc {
+        color: black !important;
+      }
+
+      .exp-date {
+        background: #eee !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+      }
+
+      .contact-pill {
+        border-color: #ccc !important;
+      }
+    }
+  }
+</style>
