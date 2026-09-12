@@ -1,1224 +1,991 @@
 ---
-const frames = [
-  {
-    caption: 'Saffron & Sage — Fine Dining Web Architecture',
-    src: '/assets/media/saffron_sage_preview.png',
-  },
-  {
-    caption: 'Nest Services — Rental Platform UI/UX',
-    src: '/assets/media/nestservices_preview.png',
-  },
-  {
-    caption: 'Hymalya Salt — Pure Himalayan Salt Architecture',
-    src: '/assets/media/humlya_salt_preview.png',
-  },
-  {
-    caption: 'Burger — Eco-Friendly Food Ordering Platform',
-    src: '/assets/media/burger_food_preview.png',
-  },
-  {
-    caption: 'Pet-First — Pet Wellness & Healthcare Platform',
-    src: '/assets/media/pet_first_preview.png',
-  },
-  {
-    caption: 'Netflix Streaming Clone — Believer 2',
-    src: '/assets/media/4196fb390cbd9b45ba4dad6f2a98b397.png',
-  },
-  {
-    caption: 'World Mark Foundation — Webflow Platform',
-    src: '/assets/media/47dffeb11d199c8b13a8c5880bfa8623.png',
-  },
-  {
-    caption: 'Wix Studio Responsive Architecture',
-    src: '/assets/media/5aa8400b1c1748a45c1e52546bbed452.png',
-  },
-  {
-    caption: 'Brinta Deb — Visual Designer & Creative Nomad',
-    src: '/assets/media/2a5160353cd722b13a4cac7f8001bf02.jpg',
-  },
-  {
-    caption: 'Creative Nomad Workstation Setup',
-    src: '/assets/media/8c5d49a78adb34ed9a7f1f713a52b177.png',
-  },
-  {
-    caption: 'Video Editing & Motion Suite in Kolkata',
-    src: '/assets/media/3059c8e3a2d51d54ee89b7286a2384d5.png',
-  },
-  {
-    caption: 'Created to Create — Hand Lettering',
-    src: '/assets/media/1b611b37bc50a9f5f415016f6cad0398.png',
-  },
-  {
-    caption: 'Drawing Tablet In-Progress Canvas',
-    src: '/assets/media/a5ca302546f934c5fcac0bcfc0c630ad.png',
-  },
-  {
-    caption: 'Inosuke Hashibira — Beast Slash Illustration',
-    src: '/assets/media/79d412c14dc811f1b5d941f703114591.png',
-  },
-  {
-    caption: 'Spongebob Dual Face Pop Surrealism',
-    src: '/assets/media/b35bbed35c5bc0673fa97ebc938b796a.png',
-  },
-  {
-    caption: 'Khyber Pass Chicken Tikka Branding',
-    src: '/assets/media/411051247f7f5c4f0f29b4c70b5efc89.jpg',
-  },
-  {
-    caption: '3Rooms Wednesday Banquet Social Campaign',
-    src: '/assets/media/9cc1d42fca2ab95b600c86de7ae288f8.jpg',
-  },
-  {
-    caption: 'Brinta Deb — Kolkata, India',
-    src: '/assets/media/f0c4e3145a63a79c8df7c323af904f65.png',
-  },
-  {
-    caption: 'Anti-Ragging Safety Campaign Poster',
-    src: '/assets/media/4160d5c43f0e3bbaa41ea2868029c7e4.png',
-  },
-  {
-    caption: 'Holi 2021 Stadium Visual Art',
-    src: '/assets/media/94ba33e622970233daf0a5937daab451.png',
-  },
-  {
-    caption: 'Online Class Ctrl+C / Ctrl+V Art',
-    src: '/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png',
-  },
-  {
-    caption: 'Zion Wellness Tri-Fold Brochure',
-    src: '/assets/media/12b430f652a6514e21dfbee23e054ad2.png',
-  },
-  {
-    caption: 'Traditional Indian Folk Masks Illustration',
-    src: '/assets/media/6ee9649b6e33f8953e379bfbcdbb4bb5.png',
-  },
-  {
-    caption: 'COVID Doodle — Procreate Sketch',
-    src: '/assets/media/f26306e352b919ace2a2407aaa72342e.png',
-  },
-  {
-    caption: 'Demon Slayer Tanjiro Digital Sketch',
-    src: '/assets/media/28b35d4e8aee8a2836b9dd9fa522f520.png',
-  },
-  {
-    caption: 'Zenitsu Agatsuma — Thunder Breathing Art',
-    src: '/assets/media/ec03fe34a4d885c6c1faff01a49bd99e.png',
-  },
-  {
-    caption: 'Brinta Deb Custom Graffiti Lettering',
-    src: '/assets/media/0319cbb7b797d9165ae3fac260776d4a.png',
-  },
-]
+/**
+ * SJourneyBooking (formerly SMyWay)
+ * Direct 15-Minute Discovery Call Scheduling Hub with Cal.com / Calendly Popup
+ */
 ---
 
-<section id="my-way" class="s-my-way" data-intersect>
-  <svg
-    class="s__smiley js-smiley"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 77.8 77.8"
-    xml:space="preserve"
-  >
-    <circle cx="38.9" cy="38.9" r="38.9"></circle>
+<section id="journey" class="s-journey-booking" data-intersect>
+  <div id="my-way" class="u-anchor-target" aria-hidden="true"></div>
 
-    <path
-      d="M38.9 77.8c-2 0-4.1-.2-6.2-.5C11.6 73.9-2.9 53.9.5 32.8 2.1 22.5 7.7 13.5 16.1 7.4c8.4-6.1 18.7-8.5 29-6.9 10.3 1.6 19.3 7.2 25.4 15.6 6.1 8.4 8.5 18.7 6.9 29-3.1 19.1-19.7 32.7-38.5 32.7zM38.8 1c-7.9 0-15.6 2.5-22.1 7.2C8.5 14.1 3.1 22.9 1.5 32.9-1.8 53.5 12.3 73 32.9 76.3 53.5 79.6 73 65.5 76.3 44.9l.5.1-.5-.1c1.6-10-.8-20-6.7-28.2S54.9 3.1 44.9 1.5c-2-.3-4.1-.5-6.1-.5zM25.5 23.1c-1.9 0-3.5 2-4.1 5.1l-.1.3 3 2.2-2.9 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.4-7.6-4.3-7.6zm26.6 0c-1.9 0-3.5 2-4.1 5.1v.3l3 2.2-3 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.3-7.6-4.3-7.6zM62 39c0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.2-9.9 22.1-22.1 22.1-12.2 0-22.1-9.9-22.1-22.1 0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.7 10.4 23.1 23.1 23.1S62 51.7 62 39z"
-    >
-    </path>
-  </svg>
+  <div class="booking-container">
+    <!-- Top Meta Bar -->
+    <div class="booking-header">
+      <div class="booking-header__left">
+        <span class="booking-tag">[ 04 / STRATEGIC DISCOVERY CALL ]</span>
+        <span class="booking-pulse-badge">
+          <span class="pulse-dot"></span>
+          <span>REAL-TIME AVAILABILITY</span>
+        </span>
+      </div>
 
-  <div class="s__objects js-objects">
-    {
-      frames.map((frame) => (
-        <div class="a-object a-object--frame">
-          <figure class="a__inner">
-            <img
-              loading="lazy"
-              class="a__img"
-              src={frame.src}
-              alt={frame.caption}
-            />
+      <div class="booking-header__right">
+        <span class="tz-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span class="js-visitor-tz">DETECTING TIMEZONE...</span>
+          <span class="tz-sep">|</span>
+          <span class="js-visitor-time">--:--:--</span>
+        </span>
+      </div>
+    </div>
 
-            <figcaption class="a__caption">{frame.caption}</figcaption>
-          </figure>
+    <!-- Main Title & Pitch -->
+    <div class="booking-hero">
+      <h2 class="booking-title">RESERVE A 15-MIN INTRO CALL</h2>
+      <p class="booking-subtitle">
+        Zero high-pressure sales pitch. A focused, 1-on-1 strategy conversation where we review your product vision, brand positioning, GSAP &amp; WebGL motion requirements, and verify 7-day turnaround feasibility.
+      </p>
+    </div>
 
-          <div class="a__side a__side--vertical" />
-          <div class="a__side a__side--horizontal" />
+    <!-- Interactive Booking Station Grid -->
+    <div class="booking-grid">
+      <!-- Left Column: Interactive Slot Selector -->
+      <div class="booking-card booking-card--selector">
+        <div class="card-inner-header">
+          <div class="card-step-badge">STEP 01</div>
+          <h3 class="card-heading">SELECT YOUR PREFERRED TIME SLOT</h3>
         </div>
-      ))
-    }
 
-    {
-      Array(10)
-        .fill(0)
-        .map(() => (
-          <div class="a-object a-object--star">
-            <div class="a__side a__side--top-left" />
-            <div class="a__side a__side--top-right" />
-            <div class="a__side a__side--bottom-left" />
-            <div class="a__side a__side--bottom-right" />
+        <!-- Date Tabs -->
+        <div class="date-tabs-container">
+          <div class="date-tabs-label">UPCOMING BUSINESS SPRINT DAYS:</div>
+          <div class="date-tabs js-date-tabs" role="tablist">
+            <!-- Dynamically populated via JS -->
           </div>
-        ))
-    }
-
-    <div class="s__ruler js-ruler"></div>
-  </div><!-- .s__objects -->
-
-  <div class="s__catcher">
-    <div class="s__catcher__distorted-wrapper">
-      <div class="s__catcher__distorted">
-        <div class="s__catcher__text">
-          Created <br />
-          to <br />
-          create <br />
-          always
         </div>
-      </div><!-- .s__catcher__distorted -->
-    </div><!-- .s__catcher__distorted-wrapper -->
-  </div><!-- .s__catcher -->
 
-  <svg class="s__svg js-svg">
-    <path class="s__svg__circular-path js-lines-circular-path" d=""></path>
-  </svg>
+        <!-- Time Slot Chips -->
+        <div class="time-slots-container">
+          <div class="time-slots-label">AVAILABLE 15-MINUTE INTRO SLOTS:</div>
+          <div class="time-slots-grid js-slots-grid">
+            <button type="button" class="slot-chip is-active" data-time="11:00 AM – 11:15 AM">
+              <span class="chip-status">●</span>
+              <span class="chip-time">11:00 AM – 11:15 AM</span>
+            </button>
+            <button type="button" class="slot-chip" data-time="02:30 PM – 02:45 PM">
+              <span class="chip-status">●</span>
+              <span class="chip-time">02:30 PM – 02:45 PM</span>
+            </button>
+            <button type="button" class="slot-chip" data-time="05:00 PM – 05:15 PM">
+              <span class="chip-status">●</span>
+              <span class="chip-time">05:00 PM – 05:15 PM</span>
+            </button>
+            <button type="button" class="slot-chip" data-time="08:30 PM – 08:45 PM">
+              <span class="chip-status">●</span>
+              <span class="chip-time">08:30 PM – 08:45 PM</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Call Agenda Blueprint -->
+        <div class="agenda-blueprint">
+          <div class="blueprint-title">[ 15-MINUTE CONVERSATION BLUEPRINT ]</div>
+          <div class="blueprint-list">
+            <div class="blueprint-row">
+              <span class="blueprint-index">01</span>
+              <div class="blueprint-info">
+                <strong>Objectives &amp; Brand Tone</strong>
+                <span>Who is your target buyer and what problem are we solving?</span>
+              </div>
+            </div>
+            <div class="blueprint-row">
+              <span class="blueprint-index">02</span>
+              <div class="blueprint-info">
+                <strong>Architecture &amp; Motion Fit</strong>
+                <span>Astro, Next.js, WebGL shader ripples, GSAP kinetics, or CMS.</span>
+              </div>
+            </div>
+            <div class="blueprint-row">
+              <span class="blueprint-index">03</span>
+              <div class="blueprint-info">
+                <strong>Sprint Feasibility &amp; Quote</strong>
+                <span>Immediate 7-day turnaround kickoff date &amp; fixed-scope quote.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Booking Execution & Cal.com Popup -->
+      <div class="booking-card booking-card--actions">
+        <div class="card-inner-header">
+          <div class="card-step-badge">STEP 02</div>
+          <h3 class="card-heading">CONFIRM YOUR RESERVATION</h3>
+        </div>
+
+        <!-- Selected Slot Summary Box -->
+        <div class="selection-summary js-selection-summary">
+          <div class="summary-label">CURRENT SELECTION</div>
+          <div class="summary-details">
+            <div class="summary-datetime js-summary-text">
+              <strong class="js-summary-day">Monday</strong>, 
+              <span class="js-summary-date">Loading...</span> 
+              at <span class="js-summary-time">11:00 AM – 11:15 AM</span>
+            </div>
+            <div class="summary-tz js-summary-tz">Timezone: UTC</div>
+          </div>
+        </div>
+
+        <!-- Primary Action: WhatsApp Instant Booking -->
+        <div class="action-block">
+          <a
+            href="https://wa.me/917005581453"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="booking-btn booking-btn--wa js-wa-booking-btn"
+          >
+            <div class="btn-left">
+              <span class="btn-tag">[ RECOMMENDED &bull; FASTEST ]</span>
+              <span class="btn-text">CONFIRM CALL ON WHATSAPP</span>
+            </div>
+            <span class="btn-icon">→</span>
+          </a>
+          <p class="action-caption">Direct WhatsApp chat with Brinta Deb. Auto-reserves your spot in under 60 seconds.</p>
+        </div>
+
+        <!-- Secondary Action: Open Cal.com / Calendly Popup -->
+        <div class="action-block">
+          <button
+            type="button"
+            class="booking-btn booking-btn--cal js-open-schedule"
+          >
+            <div class="btn-left">
+              <span class="btn-tag">[ ZERO REDIRECT &bull; IN-APP ]</span>
+              <span class="btn-text">OPEN CAL.COM / CALENDLY POPUP</span>
+            </div>
+            <span class="btn-icon">📅</span>
+          </button>
+          <p class="action-caption">Interactive in-browser calendar modal to pick Google Meet or Zoom slots.</p>
+        </div>
+
+        <!-- Tertiary Action: Direct Email Dispatch -->
+        <div class="action-block">
+          <a
+            href="mailto:brintadeb15@gmail.com"
+            class="booking-btn booking-btn--email js-email-booking-btn"
+          >
+            <div class="btn-left">
+              <span class="btn-tag">[ ASYNCHRONOUS ]</span>
+              <span class="btn-text">CONFIRM VIA EMAIL</span>
+            </div>
+            <span class="btn-icon">↗</span>
+          </a>
+        </div>
+
+        <!-- Guarantee Badge -->
+        <div class="booking-guarantee">
+          <div class="guarantee-icon">✦</div>
+          <div class="guarantee-text">
+            <strong>100% Zero-Obligation Guarantee:</strong> If we aren't a mutual fit for your timeline or budget, I will gladly refer you to trusted creative engineers from my network.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
-  import Emitter from '../utils/Emitter'
-  import Ticker from '../utils/Ticker'
+  import { audioEngine } from '../utils/AudioEngine.js'
 
-  class Section {
-    el: HTMLElement
-    svg: HTMLElement
-    objectsWrapper: HTMLElement
-    ruler: HTMLElement
+  class JourneyBookingController {
+    el: HTMLElement | null
+    dateTabsContainer: HTMLElement | null
+    slotsGrid: HTMLElement | null
+    summaryDayEl: HTMLElement | null
+    summaryDateEl: HTMLElement | null
+    summaryTimeEl: HTMLElement | null
+    summaryTzEl: HTMLElement | null
+    waBtn: HTMLAnchorElement | null
+    emailBtn: HTMLAnchorElement | null
+    tzDisplayEl: HTMLElement | null
+    timeDisplayEl: HTMLElement | null
 
-    objects: any[]
-    canThrow: boolean
-    lastThrow: number
-    throwDelay: number
-    thrownObjects: any[]
-    draggedObject: any
+    selectedDate: string
+    selectedDayName: string
+    selectedTime: string
+    visitorTz: string
 
-    smiley: {
-      el: HTMLElement
-      bounding: DOMRect | null
-      rel: {
-        x: number
-        y: number
-      }
-    }
-
-    lines: {
-      circularPath: SVGPathElement
-      lines: any[]
-    }
-
-    bounding: {
-      left: number
-      top: number
-      width: number
-      height: number
-    }
-
-    scroll: {
-      start: number
-      end: number
-      p: number
-      sp: number
-    }
-
-    mouse: {
-      x: number
-      y: number
-      oy: number
-      sx: number
-      sy: number
-      d: number
-      set: boolean
-    }
-
-    lastTouch: number
-    isPaused: boolean
-
-    /**
-     * Constructor
-     */
     constructor() {
-      // Elements
-      this.el = document.querySelector('.s-my-way') as HTMLElement
-      this.svg = this.el?.querySelector('.js-svg') as HTMLElement
-      this.objectsWrapper = this.el?.querySelector('.js-objects') as HTMLElement
-      this.ruler = this.el?.querySelector('.js-ruler') as HTMLElement
+      this.el = document.getElementById('journey')
+      this.dateTabsContainer = this.el?.querySelector('.js-date-tabs') || null
+      this.slotsGrid = this.el?.querySelector('.js-slots-grid') || null
+      this.summaryDayEl = this.el?.querySelector('.js-summary-day') || null
+      this.summaryDateEl = this.el?.querySelector('.js-summary-date') || null
+      this.summaryTimeEl = this.el?.querySelector('.js-summary-time') || null
+      this.summaryTzEl = this.el?.querySelector('.js-summary-tz') || null
+      this.waBtn = this.el?.querySelector('.js-wa-booking-btn') as HTMLAnchorElement | null
+      this.emailBtn = this.el?.querySelector('.js-email-booking-btn') as HTMLAnchorElement | null
+      this.tzDisplayEl = this.el?.querySelector('.js-visitor-tz') || null
+      this.timeDisplayEl = this.el?.querySelector('.js-visitor-time') || null
 
-      // Properties
-      this.objects = []
-      if (this.objectsWrapper) {
-        Array.from(this.objectsWrapper.children).forEach((el) => {
-          if (!el.classList.contains('js-ruler')) {
-            this.objects.push(new Obj(el as HTMLElement, this))
-          }
-        })
-      }
+      this.visitorTz = 'Asia/Kolkata'
+      try {
+        this.visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Kolkata'
+      } catch (_) {}
 
-      this.canThrow = false
-      this.lastThrow = 0
-      this.throwDelay = 2000
-      this.thrownObjects = []
-      this.draggedObject = null
+      this.selectedDate = ''
+      this.selectedDayName = ''
+      this.selectedTime = '11:00 AM – 11:15 AM'
 
-      this.smiley = {
-        el: this.el?.querySelector('.js-smiley') as HTMLElement,
-        bounding: null,
-        rel: {
-          x: 0,
-          y: 0,
-        },
-      }
-
-      this.lines = {
-        circularPath: this.el?.querySelector('.js-lines-circular-path') as SVGPathElement,
-        lines: [],
-      }
-
-      this.bounding = {
-        left: 0,
-        top: 0,
-        width: 0,
-        height: 0,
-      }
-
-      this.scroll = {
-        start: 0,
-        end: 0,
-        p: 0,
-        sp: 0,
-      }
-
-      this.mouse = {
-        x: 0,
-        y: 0,
-        oy: 0,
-        sx: 0,
-        sy: 0,
-        d: 0,
-        set: false,
-      }
-
-      this.lastTouch = 0
-      this.isPaused = true
-
-      // Init
-      if (document.readyState === 'complete') {
-        Ticker.nextTick(this.init, this)
-      } else {
-        Emitter.once('siteLoaded', this.init, this)
-      }
+      this.init()
     }
 
-    /**
-     * Init
-     */
     init() {
-      this.setSize()
-      this.setScroll()
-      this.setLines()
+      this.initTimezoneAndClock()
+      this.generateDateTabs()
+      this.bindSlotClicks()
+      this.updateSummaryAndLinks()
+    }
 
-      this.bindEvents()
+    initTimezoneAndClock() {
+      if (this.tzDisplayEl) {
+        const cleanTz = this.visitorTz.replace(/_/g, ' ')
+        this.tzDisplayEl.textContent = cleanTz
+      }
 
-      this.firstObjects()
+      const updateClock = () => {
+        if (!this.timeDisplayEl) return
+        try {
+          const now = new Date()
+          const timeStr = new Intl.DateTimeFormat('en-US', {
+            timeZone: this.visitorTz,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+          }).format(now)
+          this.timeDisplayEl.textContent = timeStr
+        } catch (_) {}
+      }
 
-      if (this.el?.classList.contains('is-in-view') || (this.scroll && this.scroll.p > 0 && this.scroll.p < 1)) {
-        this.isPaused = false
-        this.canThrow = true
-        this.thrownObjects.forEach((object) => {
-          object.isWaiting = false
-        })
+      updateClock()
+      setInterval(updateClock, 1000)
+    }
+
+    generateDateTabs() {
+      if (!this.dateTabsContainer) return
+      this.dateTabsContainer.innerHTML = ''
+
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+      const today = new Date()
+      let businessDaysFound = 0
+      let offsetDays = 0
+
+      while (businessDaysFound < 5 && offsetDays < 14) {
+        const checkDate = new Date()
+        checkDate.setDate(today.getDate() + offsetDays)
+        const dayOfWeek = checkDate.getDay()
+
+        if (offsetDays === 0 || (dayOfWeek !== 0 && dayOfWeek !== 6)) {
+          const isSelected = businessDaysFound === 0
+          const dayName = days[dayOfWeek]
+          const monthName = months[checkDate.getMonth()]
+          const dayNum = checkDate.getDate()
+          const fullDateStr = monthName + ' ' + dayNum + ', ' + checkDate.getFullYear()
+
+          if (isSelected) {
+            this.selectedDate = fullDateStr
+            this.selectedDayName = dayName
+          }
+
+          const btn = document.createElement('button')
+          btn.type = 'button'
+          btn.className = 'date-tab ' + (isSelected ? 'is-active' : '')
+          btn.dataset.fullDate = fullDateStr
+          btn.dataset.dayName = dayName
+          btn.innerHTML =
+            '<span class="tab-day">' + dayName + '</span>' +
+            '<span class="tab-num">' + (dayNum < 10 ? '0' + dayNum : dayNum) + '</span>' +
+            '<span class="tab-month">' + monthName + '</span>' +
+            '<span class="tab-slots">● 4 SLOTS</span>'
+
+          btn.addEventListener('click', () => {
+            this.dateTabsContainer?.querySelectorAll('.date-tab').forEach((t) => t.classList.remove('is-active'))
+            btn.classList.add('is-active')
+            this.selectedDate = fullDateStr
+            this.selectedDayName = dayName
+            audioEngine.playTab()
+            this.updateSummaryAndLinks()
+          })
+
+          this.dateTabsContainer.appendChild(btn)
+          businessDaysFound++
+        }
+        offsetDays++
       }
     }
 
-    /**
-     * Bind events
-     */
-    bindEvents() {
-      Emitter.on('mousemove', this.onMouseMove, this)
-      Emitter.on('resize', this.onResize, this)
-      Emitter.on('scroll', this.onScroll, this)
-      Emitter.on('tick', this.tick, this)
-
-      this.objects.forEach((object) => {
-        object.el.addEventListener('mousedown', this.objectDragStart.bind(this))
-        object.el.addEventListener(
-          'touchstart',
-          this.objectDragStart.bind(this)
-        )
+    bindSlotClicks() {
+      if (!this.slotsGrid) return
+      const chips = this.slotsGrid.querySelectorAll('.slot-chip')
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          chips.forEach((c) => c.classList.remove('is-active'))
+          chip.classList.add('is-active')
+          this.selectedTime = chip.getAttribute('data-time') || '11:00 AM – 11:15 AM'
+          audioEngine.playTab()
+          this.updateSummaryAndLinks()
+        })
       })
-      this.el?.addEventListener('mouseup', this.objectDragEnd.bind(this))
-      this.el?.addEventListener('touchend', this.objectDragEnd.bind(this))
-
-      this.objectsWrapper?.addEventListener(
-        'touchmove',
-        this.onTouchMove.bind(this)
-      )
-
-      this.el?.addEventListener('intersect', this.onIntersect.bind(this), {
-        passive: true,
-      })
     }
 
-    /**
-     * Intersect handler
-     */
-    onIntersect(e: any) {
-      this.isPaused = !e.detail.isIntersecting
-      this.canThrow = e.detail.isIntersecting
+    updateSummaryAndLinks() {
+      if (this.summaryDayEl) this.summaryDayEl.textContent = this.selectedDayName
+      if (this.summaryDateEl) this.summaryDateEl.textContent = this.selectedDate
+      if (this.summaryTimeEl) this.summaryTimeEl.textContent = this.selectedTime
+      if (this.summaryTzEl) this.summaryTzEl.textContent = 'Timezone: ' + this.visitorTz
 
-      if (!this.isPaused) {
-        this.thrownObjects.forEach((object) => {
-          object.isWaiting = false
-        })
-      }
-    }
+      const message = 'Hi Brinta! I would like to book a 15-minute intro discovery call on ' +
+        this.selectedDayName + ' (' + this.selectedDate + ') at ' + this.selectedTime + ' (' + this.visitorTz + '). My product/project details:'
+      const encodedMsg = encodeURIComponent(message)
 
-    /**
-     * Mouse handler
-     */
-    onMouseMove(x: number, y: number) {
-      this.updateMousePosition(x, y)
-    }
-
-    /**
-     * Touch handler
-     */
-    onTouchMove(e: TouchEvent) {
-      e.preventDefault()
-
-      const delta = performance.now() - this.lastTouch
-      if (delta < Ticker.delta) return
-
-      const touch = e.touches[0]
-      this.updateMousePosition(touch.clientX, touch.clientY)
-
-      this.lastTouch = performance.now()
-    }
-
-    /**
-     * Update mouse position
-     */
-    updateMousePosition(x: number, y: number) {
-      const { mouse } = this
-
-      mouse.x = x - this.bounding.left
-      mouse.y = y - mouse.oy + window.scrollY
-
-      if (!mouse.set) {
-        mouse.sx = mouse.x
-        mouse.sy = mouse.y
-
-        mouse.set = true
-      }
-    }
-
-    /**
-     * Resize handler
-     */
-    onResize() {
-      this.setSize()
-      this.setScroll()
-      this.setLines()
-    }
-
-    /**
-     * Scroll handler
-     */
-    onScroll(scrollY: number) {
-      const { scroll } = this
-      if (!scroll) return
-
-      const trigger = scrollY + (window.safeHeight || window.innerHeight)
-
-      if (trigger < scroll.start) {
-        scroll.p = 0
-      } else if (trigger > scroll.end) {
-        scroll.p = 1
-      } else {
-        scroll.p = (trigger - scroll.start) / (scroll.end - scroll.start)
-      }
-    }
-
-    /**
-     * Set size
-     */
-    setSize() {
-      if (!this.el || !this.svg || !this.smiley.el) return
-
-      const bounding = this.el.getBoundingClientRect()
-
-      this.bounding = {
-        left: bounding.left,
-        top: bounding.top,
-        width: bounding.width,
-        height: bounding.height,
+      if (this.waBtn) {
+        this.waBtn.href = 'https://wa.me/917005581453?text=' + encodedMsg
       }
 
-      this.svg.style.width = this.bounding.width + 'px'
-      this.svg.style.height = this.bounding.height + 'px'
-
-      this.smiley.bounding = this.smiley.el.getBoundingClientRect()
-      this.smiley.rel.x =
-        this.smiley.bounding.left -
-        this.bounding.left +
-        this.smiley.bounding.width / 2
-      this.smiley.rel.y =
-        this.smiley.bounding.top -
-        this.bounding.top +
-        this.smiley.bounding.height / 2
-
-      this.mouse.oy = this.bounding.top + window.scrollY
-
-      if (this.ruler && this.objectsWrapper) {
-        const pOriginY = this.ruler.clientHeight
-        this.objectsWrapper.style.perspectiveOrigin = `50% ${pOriginY}px `
-      }
-    }
-
-    /**
-     * Set scroll
-     */
-    setScroll() {
-      const { bounding } = this
-      if (!bounding) return
-
-      this.scroll = {
-        start: bounding.top + window.scrollY,
-        end:
-          bounding.top + window.scrollY + bounding.height + (window.safeHeight || window.innerHeight),
-        p: 0,
-        sp: 0,
-      }
-
-      this.onScroll(window.scrollY)
-      this.scroll.sp = this.scroll.p
-    }
-
-    /**
-     * Set lines
-     */
-    setLines() {
-      const { lines, smiley, bounding } = this
-      if (!smiley.rel) return
-
-      lines.lines = []
-
-      const vLines = (window.safeWidth || window.innerWidth) > 767 ? 12 : 8
-      const gapX = bounding.width / vLines
-
-      for (let i = 0; i <= vLines; i++) {
-        lines.lines.push({
-          p1: { x: gapX * i, y: 0 },
-          p2: { x: smiley.rel.x, y: smiley.rel.y },
-        })
-
-        lines.lines.push({
-          p1: { x: gapX * i, y: bounding.height },
-          p2: { x: smiley.rel.x, y: smiley.rel.y },
-        })
-      }
-
-      const dx = bounding.width
-      const dy = (bounding.height - smiley.rel.y) / 2
-
-      this.el?.style.setProperty(
-        '--distortion',
-        String(Math.hypot(dx, dy) * 0.14)
-      )
-
-      const hLines = vLines
-      const gapY = bounding.height / hLines
-      const offsetY = (bounding.height - gapY * hLines) / 2
-
-      for (let i = 1; i < hLines; i++) {
-        lines.lines.push({
-          p1: { x: 0, y: offsetY + gapY * i },
-          p2: { x: smiley.rel.x, y: smiley.rel.y },
-        })
-
-        lines.lines.push({
-          p1: { x: bounding.width, y: offsetY + gapY * i },
-          p2: { x: smiley.rel.x, y: smiley.rel.y },
-        })
-      }
-
-      this.drawLines()
-    }
-
-    /**
-     * Draw lines
-     */
-    drawLines() {
-      const { lines, bounding } = this
-      if (!lines.circularPath) return
-
-      let d = `M 0 ${bounding.height} L ${bounding.width} ${bounding.height}`
-
-      lines.lines.forEach((line) => {
-        d += `M ${line.p1.x} ${line.p1.y} L ${line.p2.x} ${line.p2.y} `
-      })
-
-      lines.circularPath.setAttribute('d', d)
-    }
-
-    /**
-     * Throw object
-     */
-    throwObject() {
-      if (this.objects.length > 0) {
-        const object = this.objects.splice(
-          Math.floor(Math.random() * this.objects.length),
-          1
-        )[0]
-
-        object.set(true)
-        this.thrownObjects.push(object)
-      }
-
-      this.lastThrow = performance.now()
-
-      const rate = (window.safeWidth || window.innerWidth) > 767 ? 1 : 1.5
-      this.throwDelay = (800 + Math.random() * 600) * rate
-    }
-
-    /**
-     * Initial objects
-     */
-    firstObjects() {
-      const totalObjects = 5
-
-      for (let i = 0; i < totalObjects; i++) {
-        if (this.objects.length === 0) break
-        const object = this.objects.splice(
-          Math.floor(Math.random() * this.objects.length),
-          1
-        )[0]
-
-        object.set(false)
-        object.z = -400 - (i * 700)
-        object.s = 1
-        object.isWaiting = false
-
-        this.thrownObjects.push(object)
-      }
-    }
-
-    /**
-     * Object move end
-     */
-    objectMoveEnd(object: any) {
-      const idx = this.thrownObjects.indexOf(object)
-      if (idx > -1) {
-        this.thrownObjects.splice(idx, 1)
-        this.objects.push(object)
-      }
-    }
-
-    /**
-     * Object drag start
-     */
-    objectDragStart(e: MouseEvent | TouchEvent) {
-      e.preventDefault()
-
-      this.lastTouch = performance.now()
-
-      if (!(e instanceof MouseEvent)) {
-        this.onTouchMove(e)
-      }
-
-      const el = e.currentTarget as HTMLElement
-      const object = this.thrownObjects.find((o) => o.el === el)
-
-      if (!object || object.isDragging || object.isVanishing) return
-
-      this.draggedObject = object
-      object.isDragging = true
-      el.classList.add('is-dragging')
-    }
-
-    /**
-     * Object drag end
-     */
-    objectDragEnd(e: Event) {
-      e.preventDefault()
-
-      const object = this.draggedObject
-
-      if (object) {
-        object.isDragging = false
-        object.el.classList.remove('is-dragging')
-
-        object.isVanishing = true
-        object.el.classList.add('is-vanishing')
-
-        object.vanishStart = performance.now()
-      }
-    }
-
-    /**
-     * Tick
-     */
-    tick(time: number) {
-      const { scroll, el, mouse } = this
-      if (!el || !scroll) return
-
-      mouse.sx += (mouse.x - mouse.sx) * 0.1
-      mouse.sy += (mouse.y - mouse.sy) * 0.1
-
-      const dx = mouse.x - mouse.sx
-      const dy = mouse.y - mouse.sy
-      mouse.d = Math.hypot(dx, dy)
-
-      scroll.sp += (scroll.p - scroll.sp) * 0.1
-
-      el.style.setProperty('--scroll-progress', String(scroll.sp))
-
-      this.thrownObjects.forEach((object) => {
-        object.move(time)
-      })
-
-      if (this.isPaused) return
-
-      if (this.canThrow && time - this.lastThrow > this.throwDelay) {
-        this.throwObject()
+      if (this.emailBtn) {
+        const subject = encodeURIComponent('15-Min Discovery Call: ' + this.selectedDayName + ' (' + this.selectedDate + ') at ' + this.selectedTime)
+        this.emailBtn.href = 'mailto:brintadeb15@gmail.com?subject=' + subject + '&body=' + encodedMsg
       }
     }
   }
 
-  class Obj {
-    el: HTMLElement
-    parent: Section
-
-    index: number
-    vanishStart: number
-    vanishDelay: number
-
-    s: number
-    x: number
-    y: number
-    z: number
-
-    rx: number
-    ry: number
-    rz: number
-
-    vx: number
-    vy: number
-    vz: number
-    vrx: number
-    vry: number
-
-    isWaiting: boolean
-    isDragging: boolean
-    isVanishing: boolean
-
-    /**
-     * Constructor
-     */
-    constructor(el: HTMLElement, parent: Section) {
-      this.parent = parent
-      this.el = el
-      this.index = Array.from(this.el.parentNode?.children || []).indexOf(this.el)
-
-      this.s = 0
-      this.x = 0
-      this.y = 0
-      this.z = 0
-      this.rx = 0
-      this.ry = 0
-      this.rz = 0
-      this.vx = 0
-      this.vy = 0
-      this.vz = 0
-      this.vrx = 0
-      this.vry = 0
-      this.vanishStart = 0
-      this.vanishDelay = 1000
-      this.isWaiting = true
-      this.isDragging = false
-      this.isVanishing = false
-    }
-
-    /**
-     * Set position
-     */
-    set(fromScratch = true) {
-      this.el.style.setProperty('--size', String(0.6 + Math.random() * 0.4))
-
-      this.s = fromScratch ? 0 : 1
-      this.x = (Math.random() * 2 - 1) * 80
-      this.y = (Math.random() * 2 - 1) * 60
-      this.z = fromScratch ? -4500 : -2000
-
-      this.rx = Math.random() * 360
-      this.ry = Math.random() * 360
-      this.rz = 0
-
-      this.vz = 25 + Math.random() * 15
-      this.vx =
-        (Math.random() * 2 - 1) * (window.safeWidth || window.innerWidth || 1000) * 0.002
-      this.vy =
-        (Math.random() * 2 - 1) * (window.safeHeight || window.innerHeight || 800) * 0.002
-      this.vrx = 0.2 + Math.random() * 0.6
-      this.vry = 0.2 + Math.random() * 0.6
-
-      this.isWaiting = false
-      this.isDragging = false
-      this.isVanishing = false
-
-      this.el.classList.remove('is-waiting', 'is-dragging', 'is-vanishing')
-
-      this.vanishStart = 0
-      this.vanishDelay = 1000
-
-      this.el.style.setProperty('--s', String(this.s))
-    }
-
-    /**
-     * Tick
-     */
-    move(time: number) {
-      if (this.isWaiting) return
-
-      if (this.isDragging) {
-        const x = this.parent.mouse.x - this.parent.smiley.rel.x
-        const y = this.parent.mouse.y - this.parent.smiley.rel.y * 1.5
-
-        this.vx += (x - this.x) * 0.075
-        this.vy += (y - this.y) * 0.075
-        this.vz += (0 - this.z) * 0.3
-
-        this.ry = this.vx * 0.15
-        this.rx = this.vy * -0.15
-        this.rz = this.ry + this.rx
-
-        this.vx *= 0.9
-        this.vy *= 0.9
-        this.vz *= 0.75
-
-        this.x += this.vx * 0.5
-        this.y += this.vy * 0.5
-        this.z += this.vz * 0.25
-
-        this.z = Math.min(this.z, 500)
-        this.s += (1 - this.s) * 0.5
-      } else if (this.isVanishing) {
-        this.vy += 0.5
-        this.x += this.vx
-        this.y += this.vy
-        this.rx += this.vrx
-        this.ry += this.vry
-
-        if (time - this.vanishStart > this.vanishDelay) {
-          this.isWaiting = true
-          this.el.classList.add('is-waiting')
-          this.parent.objectMoveEnd(this)
-        }
-      } else {
-        if (this.z > 800) {
-          this.isWaiting = true
-          this.el.classList.add('is-waiting')
-          this.parent.objectMoveEnd(this)
-        } else {
-          this.s += 0.015
-          this.s = Math.min(this.s, 1)
-
-          this.z += this.vz
-          this.x += this.vx
-          this.y += this.vy
-
-          this.rx += this.vrx
-          this.ry += this.vry
-        }
-      }
-
-      this.el.style.setProperty('--x', this.x + 'px')
-      this.el.style.setProperty('--y', this.y + 'px')
-      this.el.style.setProperty('--z', this.z + 'px')
-      this.el.style.setProperty('--rx', String(this.rx))
-      this.el.style.setProperty('--ry', String(this.ry))
-      this.el.style.setProperty('--rz', String(this.rz))
-      this.el.style.setProperty('--s', String(this.s))
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', () => new JourneyBookingController())
+    } else {
+      new JourneyBookingController()
     }
   }
-
-  new Section()
 </script>
 
 <style lang="scss">
-  .s-my-way {
-    --padding: 40rem;
-    --smiley-size: 5.625rem;
-
-    @include flex(column, center, center);
-
+  .s-journey-booking {
     position: relative;
-    z-index: 3;
-
-    padding: calc(var(--padding) * 0.75) 0 calc(var(--padding) * 1.5);
-    clip-path: inset(-100vh 0 calc(var(--padding) * -1.375));
-
-    @include mq(desktop-lg) {
-      --padding: 35rem;
-    }
-
-    @include mq(desktop-md) {
-      --padding: 30rem;
-    }
-
-    @include mq(desktop-sm) {
-      --padding: 25rem;
-    }
+    z-index: 5;
+    background-color: color(primary);
+    color: color(secondary);
+    padding: 8rem 0;
+    border-top: 1px solid color(secondary);
+    border-bottom: 1px solid color(secondary);
 
     @include mq(tablet) {
-      --padding: 30rem;
-      padding: calc(var(--padding) * 0.75) 0 calc(var(--padding) * 1.25);
-      clip-path: inset(-100vh 0 calc(var(--padding) * -1.2));
-    }
-
-    @include mq(tablet-sm) {
-      --padding: 25rem;
+      padding: 5rem 0;
     }
 
     @include mq(phone) {
-      --padding: 18rem;
+      padding: 3.5rem 0 6rem;
+    }
+  }
+
+  .u-anchor-target {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    pointer-events: none;
+  }
+
+  .booking-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 4rem;
+
+    @include mq(tablet) {
+      padding: 0 2rem;
     }
 
-    @keyframes rotate {
-      0% {
-        transform: rotate(0);
-      }
+    @include mq(phone) {
+      padding: 0 1rem;
+    }
+  }
 
-      100% {
-        transform: rotate(360deg);
-      }
+  /* Header Meta Bar */
+  .booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.15);
+    margin-bottom: 3.5rem;
+
+    @include mq(phone) {
+      margin-bottom: 2rem;
     }
 
-    .s__smiley {
-      position: relative;
-      z-index: 2;
+    &__left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+  }
 
-      display: block;
-      width: var(--smiley-size);
-      height: var(--smiley-size);
+  .booking-tag {
+    font-family: font-family(mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color(secondary);
+  }
 
-      background: color(primary);
-      border-radius: 999rem;
+  .booking-pulse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.25);
+    border-radius: 9999px;
+    font-family: font-family(mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 
-      animation: rotate 10s linear infinite;
-      will-change: transform;
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+      animation: pulse 1.8s infinite;
+    }
+  }
 
-      path {
-        fill: color(secondary);
-      }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
 
-      circle {
-        fill: color(primary);
-      }
+  .tz-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.04);
+    border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.15);
+    border-radius: 4px;
+    font-family: font-family(mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: color(secondary);
+
+    .tz-sep {
+      opacity: 0.3;
+    }
+  }
+
+  /* Hero Section */
+  .booking-hero {
+    max-width: 980px;
+    margin-bottom: 4rem;
+
+    @include mq(phone) {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  .booking-title {
+    font-family: font-family(bigger);
+    font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.5rem 0;
+    color: color(secondary);
+  }
+
+  .booking-subtitle {
+    font-family: font-family(editorial);
+    font-size: clamp(1.15rem, 2vw, 1.6rem);
+    line-height: 1.45;
+    color: color(secondary);
+    opacity: 0.88;
+    margin: 0;
+    max-width: 820px;
+  }
+
+  /* Booking Grid */
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+
+    @include mq(desktop-sm) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* Cards */
+  .booking-card {
+    border: 1px solid color(secondary);
+    padding: 2.5rem;
+    background-color: color(primary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    @include mq(phone) {
+      padding: 1.25rem 1rem;
     }
 
-    .s__objects {
-      position: absolute;
-      top: -100vh;
-      bottom: -100vh;
-      left: 0;
-      z-index: 3;
+    &--actions {
+      background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.015);
+    }
+  }
 
-      width: 100%;
-      height: auto;
+  .card-inner-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.12);
+  }
 
-      overflow: hidden;
-      perspective: 1000px;
-      perspective-origin: 50% calc(50% - var(--padding) * 0.4);
-      pointer-events: none;
-      transform-style: preserve-3d;
+  .card-step-badge {
+    font-family: font-family(mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.5rem;
+    background: color(secondary);
+    color: color(primary);
+  }
 
-      will-change: opacity;
+  .card-heading {
+    font-family: font-family(mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin: 0;
+    text-transform: uppercase;
+  }
 
-      @include mq(tablet) {
-        perspective-origin: 50% calc(50% - var(--padding) * 0.275);
+  /* Date Tabs */
+  .date-tabs-container {
+    margin-bottom: 2rem;
+  }
+
+  .date-tabs-label,
+  .time-slots-label {
+    font-family: font-family(mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+    margin-bottom: 0.85rem;
+  }
+
+  .date-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.6rem;
+
+    @include mq(phone) {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 0.5rem;
+      padding-bottom: 0.4rem;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
+  }
 
-    .s__ruler {
-      position: absolute;
-      top: 0;
-      left: 0;
+  :global(.date-tab) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.85rem 0.5rem;
+    background: transparent;
+    border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.2);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    color: color(secondary);
 
-      width: 0;
-      height: calc(50% - var(--padding) * 0.4);
-
-      opacity: 0;
-      pointer-events: none;
-
-      @include mq(tablet) {
-        height: calc(50% - var(--padding) * 0.275);
-      }
+    @include mq(phone) {
+      flex: 0 0 76px;
+      scroll-snap-align: start;
+      padding: 0.65rem 0.35rem;
     }
 
-    .a-object {
-      --s: 0;
-      --x: 50vw;
-      --y: 50vh;
-      --z: -1000vw;
-      --rx: 0;
-      --ry: 0;
-      --rz: 0;
-      --depth: 1rem;
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      display: block;
-      cursor: grab;
-
-      transform: translate3d(
-          calc(var(--x) - 50%),
-          calc(var(--y) - 50%),
-          var(--z)
-        )
-        rotateX(calc(var(--rx) * 1deg)) rotateY(calc(var(--ry) * 1deg))
-        rotateZ(calc(var(--rz) * 1deg)) scale(var(--s));
-      transform-style: preserve-3d;
-
-      pointer-events: none;
-      will-change: transform;
-
-      &.is-waiting {
-        transform: scale(0);
-      }
-
-      &--frame {
-        width: 500px;
-        pointer-events: all;
-
-        @include mq(tablet-sm) {
-          width: 300px;
-        }
-
-        .a__inner {
-          display: block;
-          margin: 0;
-          padding: 1.5rem 1.5rem 0;
-          background: color(secondary);
-          border-radius: 4px;
-        }
-
-        .a__img {
-          display: block;
-          width: 100%;
-          height: auto;
-          border-radius: 2px;
-        }
-
-        .a__caption {
-          display: block;
-          padding: 1.2rem 0;
-
-          color: color(white);
-          font: 400 12px / 1.3 font-family(fraktion);
-          text-align: center;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        &:after {
-          position: absolute;
-          top: 0;
-          left: 0;
-
-          width: 100%;
-          height: 100%;
-
-          background: color(secondary);
-          transform: translateZ(calc(var(--depth) * -1 + 1px)) rotateY(180deg);
-
-          content: '';
-        }
-
-        .a__side {
-          position: absolute;
-          top: 0;
-          left: 0;
-
-          width: 100%;
-          height: 100%;
-
-          transform-style: preserve-3d;
-
-          &:before,
-          &:after {
-            position: absolute;
-
-            background: color(shadow);
-            backface-visibility: visible;
-
-            content: '';
-          }
-
-          &--horizontal:before {
-            top: 0;
-            left: 0;
-
-            width: var(--depth);
-            height: 100%;
-
-            transform: rotateY(90deg);
-            transform-origin: 0 50%;
-          }
-
-          &--horizontal:after {
-            top: 0;
-            right: 0;
-
-            width: var(--depth);
-            height: 100%;
-
-            transform: rotateY(-90deg);
-            transform-origin: 100% 50%;
-          }
-
-          &--vertical:before {
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: var(--depth);
-
-            transform: rotateX(-90deg);
-            transform-origin: 50% 0;
-          }
-
-          &--vertical:after {
-            bottom: 0;
-            left: 0;
-
-            width: 100%;
-            height: var(--depth);
-
-            transform: rotateX(90deg);
-            transform-origin: 50% 100%;
-          }
-        }
-      }
-
-      &--star {
-        --depth: 1rem;
-
-        left: 65%;
-
-        width: calc(var(--size) * 400px);
-        height: calc(var(--size) * 400px);
-
-        @include mq(tablet-sm) {
-          width: calc(var(--size) * 200px);
-          height: calc(var(--size) * 200px);
-        }
-
-        &:before,
-        &:after {
-          position: absolute;
-          top: 0;
-          left: 0;
-
-          display: block;
-          width: 100%;
-          height: 100%;
-
-          background: url('/images/asset-star.svg') center / cover no-repeat;
-
-          content: '';
-        }
-
-        &:after {
-          transform: translateZ(calc(var(--depth) * -1 + 1px));
-        }
-
-        .a__side {
-          position: absolute;
-          top: 0;
-          left: 0;
-
-          width: 100%;
-          height: 100%;
-
-          transform-style: preserve-3d;
-        }
-      }
+    .tab-day {
+      font-family: font-family(mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0.7;
     }
 
-    .s__catcher {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
+    .tab-num {
+      font-family: font-family(bigger);
+      font-size: 1.75rem;
+      line-height: 1;
+      margin: 0.35rem 0;
+    }
 
-      width: 100%;
-      height: 100%;
+    .tab-month {
+      font-family: font-family(mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
 
-      overflow: hidden;
-      pointer-events: none;
+    .tab-slots {
+      margin-top: 0.5rem;
+      font-family: font-family(mono);
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #10b981;
+      white-space: nowrap;
 
-      &__distorted-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 100%;
-
-        perspective: 1000px;
-        perspective-origin: 50% calc(var(--padding) * 0.75 + var(--smiley-size) / 2);
-      }
-
-      &__distorted {
-        position: absolute;
-        top: calc(var(--padding) * 0.75 + var(--smiley-size) / 2);
-        left: 0;
-
-        width: 100%;
-
-        transform: rotateX(calc(var(--scroll-progress) * 80deg));
-        transform-origin: 50% 0;
-        transform-style: preserve-3d;
-
-        will-change: transform;
-      }
-
-      &__text {
-        font: 700 min(16vw, 14rem) / 0.85 font-family(bigger);
-        text-align: center;
-        text-transform: uppercase;
-        color: color(secondary);
-        opacity: 0.15;
-        letter-spacing: 0.02em;
-
-        @include mq(phone) {
-          font-size: 18vw;
-        }
+      @include mq(phone) {
+        display: block;
+        font-size: 0.5rem;
+        margin-top: 0.3rem;
       }
     }
 
-    .s__svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
+    &:hover {
+      border-color: color(secondary);
+      background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.04);
+      transform: translateY(-2px);
+    }
 
-      pointer-events: none;
+    &.is-active {
+      background: color(secondary);
+      color: color(primary);
+      border-color: color(secondary);
 
-      &__circular-path {
-        fill: none;
-        stroke: color(secondary);
-        stroke-width: 0.5px;
-        opacity: 0.15;
+      .tab-day,
+      .tab-month {
+        color: color(primary);
+        opacity: 0.9;
       }
+
+      .tab-slots {
+        color: #6ee7b7;
+      }
+    }
+  }
+
+  /* Time Slots */
+  .time-slots-container {
+    margin-bottom: 2.5rem;
+  }
+
+  .time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+
+    @include mq(phone) {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+    }
+  }
+
+  .slot-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.1rem;
+    background: transparent;
+    border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.2);
+    color: color(secondary);
+    font-family: font-family(mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @include mq(phone) {
+      padding: 0.65rem 0.25rem;
+      font-size: 0.625rem;
+      letter-spacing: -0.01em;
+      gap: 0.25rem;
+      justify-content: center;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+
+    .chip-status {
+      color: #10b981;
+      font-size: 0.7rem;
+    }
+
+    &:hover {
+      border-color: color(secondary);
+      background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.04);
+      transform: translateX(3px);
+    }
+
+    &.is-active {
+      background: color(secondary);
+      color: color(primary);
+      border-color: color(secondary);
+
+      .chip-status {
+        color: #6ee7b7;
+      }
+    }
+  }
+
+  /* Blueprint */
+  .agenda-blueprint {
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(var(--color-secondary-rgb, 0, 0, 0), 0.2);
+  }
+
+  .blueprint-title {
+    font-family: font-family(mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  .blueprint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .blueprint-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .blueprint-index {
+    font-family: font-family(mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    opacity: 0.5;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .blueprint-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    strong {
+      font-family: font-family(mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    span {
+      font-family: font-family(editorial);
+      font-size: 0.92rem;
+      opacity: 0.8;
+      line-height: 1.35;
+    }
+  }
+
+  /* Right Column Actions */
+  .selection-summary {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid color(secondary);
+    background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.03);
+    margin-bottom: 2rem;
+
+    @include mq(phone) {
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .summary-label {
+    font-family: font-family(mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    margin-bottom: 0.4rem;
+  }
+
+  .summary-datetime {
+    font-family: font-family(mono);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+
+    @include mq(phone) {
+      font-size: 0.85rem;
+    }
+  }
+
+  .summary-tz {
+    font-family: font-family(mono);
+    font-size: 0.68rem;
+    opacity: 0.65;
+  }
+
+  .action-block {
+    margin-bottom: 1.5rem;
+
+    @include mq(phone) {
+      margin-bottom: 1.15rem;
+    }
+  }
+
+  .booking-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.15rem 1.4rem;
+    text-decoration: none;
+    border: 1.5px solid color(secondary);
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    color: color(secondary);
+    background: transparent;
+
+    @include mq(phone) {
+      padding: 0.95rem 1rem;
+      min-height: 48px;
+    }
+
+    .btn-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+
+    .btn-tag {
+      font-family: font-family(mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      opacity: 0.75;
+    }
+
+    .btn-text {
+      font-family: font-family(mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+
+      @include mq(phone) {
+        font-size: 0.76rem;
+      }
+    }
+
+    .btn-icon {
+      font-size: 1.25rem;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(var(--color-secondary-rgb, 0, 0, 0), 0.1);
+
+      .btn-icon {
+        transform: translateX(4px);
+      }
+    }
+
+    &--wa {
+      background: color(secondary);
+      color: color(primary);
+
+      .btn-tag {
+        color: #6ee7b7;
+      }
+
+      &:hover {
+        background: #059669;
+        border-color: #059669;
+        color: #ffffff;
+
+        .btn-tag {
+          color: #ffffff;
+        }
+      }
+    }
+
+    &--cal {
+      background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.04);
+
+      &:hover {
+        background: color(secondary);
+        color: color(primary);
+
+        .btn-icon {
+          transform: rotate(15deg);
+        }
+      }
+    }
+
+    &--email {
+      opacity: 0.85;
+
+      &:hover {
+        opacity: 1;
+        background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.08);
+      }
+    }
+  }
+
+  .action-caption {
+    font-family: font-family(mono);
+    font-size: 0.65rem;
+    opacity: 0.65;
+    margin: 0.45rem 0 0 0.25rem;
+    line-height: 1.4;
+  }
+
+  .booking-guarantee {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.12);
+  }
+
+  .guarantee-icon {
+    font-size: 1.1rem;
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  .guarantee-text {
+    font-family: font-family(editorial);
+    font-size: 0.95rem;
+    line-height: 1.45;
+    opacity: 0.85;
+
+    strong {
+      font-family: font-family(mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
     }
   }
 </style>

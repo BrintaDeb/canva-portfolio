@@ -1,7 +1,8 @@
 ---
 /**
  * ScheduleModal.astro
- * 1-Click 30-Minute Discovery Call Scheduler Modal
+ * 1-Click 15-Minute Strategic Discovery Call Scheduler
+ * Includes: Instant Direct Form + Interactive In-App Calendar Scheduler with Google Calendar & .ICS sync
  */
 ---
 
@@ -10,76 +11,234 @@
   
   <div class="modal-card">
     <div class="modal-header">
-      <span class="modal-header-tag">[ 30-MINUTE STRATEGIC DISCOVERY CALL ]</span>
+      <span class="modal-header-tag">[ 15-MINUTE STRATEGIC DISCOVERY CALL ]</span>
       <button class="modal-close-btn js-close-schedule" aria-label="Close scheduling modal">✕</button>
     </div>
 
+    <!-- Mode Selector Tabs -->
+    <div class="modal-mode-tabs">
+      <button type="button" class="mode-tab is-active js-tab-form">
+        <span class="tab-label-full">[ 01 &bull; INSTANT BOOKING FORM ]</span>
+        <span class="tab-label-short">[ 01 &bull; FORM ]</span>
+      </button>
+      <button type="button" class="mode-tab js-tab-cal">
+        <span class="tab-label-full">[ 02 &bull; INTERACTIVE CALENDAR ]</span>
+        <span class="tab-label-short">[ 02 &bull; CALENDAR ]</span>
+      </button>
+    </div>
+
     <div class="modal-body">
-      <div class="modal-intro">
-        <h3 id="scheduleModalTitle" class="modal-title">"Let's talk about your product and vision."</h3>
-        <p class="modal-desc">
-          A focused, zero-obligation 30-minute conversation. You show me what you sell and who buys it. I'll tell you straight whether I am the right partner to build it.
-        </p>
+      <!-- Panel 1: Direct Form -->
+      <div class="modal-panel js-panel-form">
+        <div class="modal-intro">
+          <h3 id="scheduleModalTitle" class="modal-title">"Let's talk about your product and vision."</h3>
+          <p class="modal-desc">
+            A focused, zero-obligation 15-minute strategy conversation. You show me what you build and who buys it. I'll tell you straight whether I am the right partner to build it.
+          </p>
+        </div>
+
+        <!-- Agenda Blueprint -->
+        <div class="schedule-agenda">
+          <div class="agenda-label">[ CALL AGENDA BLUEPRINT ]</div>
+          <div class="agenda-grid">
+            <div class="agenda-item">
+              <span class="agenda-num">01</span>
+              <div class="agenda-text">
+                <strong>Objective &amp; Audience</strong>
+                <span>Target buyers, brand position &amp; core value prop.</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-num">02</span>
+              <div class="agenda-text">
+                <strong>Scope &amp; Tech Architecture</strong>
+                <span>Astro, Next.js, 3D WebGL, GSAP motion, or CMS.</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-num">03</span>
+              <div class="agenda-text">
+                <strong>Velocity &amp; Sprint Fit</strong>
+                <span>1-week rapid build schedule, deliverables &amp; pricing.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Action Channels -->
+        <form id="scheduleCallForm" class="schedule-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="schedName">YOUR NAME / BRAND *</label>
+              <input type="text" id="schedName" placeholder="e.g. Alex Morgan / Studio Pulse" required />
+            </div>
+            <div class="form-group">
+              <label for="schedTime">PREFERRED TIMEZONE / SLOT</label>
+              <input type="text" id="schedTime" placeholder="e.g. Tomorrow 4:00 PM IST / EST morning" />
+            </div>
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="schedNotes">PROJECT / WEBSITE TOPIC (OPTIONAL)</label>
+            <input type="text" id="schedNotes" placeholder="e.g. Redesigning agency website with 3D interactions..." />
+          </div>
+
+          <div class="schedule-actions">
+            <button type="submit" class="schedule-btn schedule-btn--wa">
+              <span>BOOK VIA WHATSAPP (INSTANT)</span>
+              <span class="btn-arrow">→</span>
+            </button>
+
+            <button type="button" class="schedule-btn schedule-btn--email js-sched-email">
+              <span>BOOK VIA EMAIL</span>
+              <span class="btn-icon">↗</span>
+            </button>
+          </div>
+        </form>
       </div>
 
-      <!-- Agenda Blueprint -->
-      <div class="schedule-agenda">
-        <div class="agenda-label">[ CALL AGENDA BLUEPRINT ]</div>
-        <div class="agenda-grid">
-          <div class="agenda-item">
-            <span class="agenda-num">01</span>
-            <div class="agenda-text">
-              <strong>Objective &amp; Audience</strong>
-              <span>Target buyers, brand position &amp; core value prop.</span>
+      <!-- Panel 2: In-App Interactive Calendar Scheduler (Zero 404s, Fully Native) -->
+      <div class="modal-panel cal-embed-panel js-panel-cal hidden">
+        <div class="cal-embed-header">
+          <div class="cal-header-left">
+            <span class="cal-tag">[ DISCOVERY CALENDAR ]</span>
+            <span class="cal-status-pill">LIVE SLOTS OPEN</span>
+          </div>
+          <div class="cal-header-right">
+            <span class="cal-tz-pill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span class="js-native-tz">DETECTING TIMEZONE...</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Native Calendar + Slot Selection Screen -->
+        <div class="native-scheduler js-native-scheduler-view">
+          <!-- Left Column: Interactive Month Grid -->
+          <div class="cal-card cal-card--calendar">
+            <div class="cal-nav-bar">
+              <button type="button" class="cal-nav-btn js-cal-prev" aria-label="Previous Month">‹</button>
+              <span class="cal-month-title js-cal-month-title">SEPTEMBER 2026</span>
+              <button type="button" class="cal-nav-btn js-cal-next" aria-label="Next Month">›</button>
+            </div>
+
+            <div class="cal-weekdays-row">
+              <span>MO</span><span>TU</span><span>WE</span><span>TH</span><span>FR</span><span>SA</span><span>SU</span>
+            </div>
+
+            <div class="cal-days-grid js-cal-days-grid">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="cal-legend-bar">
+              <span class="cal-legend-item"><span class="cal-legend-dot is-avail"></span> Available Slot</span>
+              <span class="cal-legend-item"><span class="cal-legend-dot is-picked"></span> Selected</span>
             </div>
           </div>
-          <div class="agenda-item">
-            <span class="agenda-num">02</span>
-            <div class="agenda-text">
-              <strong>Scope &amp; Tech Architecture</strong>
-              <span>Astro, Next.js, 3D WebGL, GSAP motion, or CMS.</span>
+
+          <!-- Right Column: Slots & Confirmation -->
+          <div class="cal-card cal-card--slots">
+            <div class="slots-header">
+              <div class="slots-date-label js-active-date-label">SELECT A DATE</div>
+              <div class="slots-sub js-active-slot-sub">4 Available 15-Min Slots</div>
+            </div>
+
+            <div class="slots-chips-grid js-native-slots-grid">
+              <button type="button" class="native-slot-chip is-selected" data-slot="11:00 AM – 11:15 AM">
+                <span class="chip-pip">●</span>
+                <span class="chip-text">11:00 AM – 11:15 AM</span>
+              </button>
+              <button type="button" class="native-slot-chip" data-slot="02:30 PM – 02:45 PM">
+                <span class="chip-pip">●</span>
+                <span class="chip-text">02:30 PM – 02:45 PM</span>
+              </button>
+              <button type="button" class="native-slot-chip" data-slot="05:00 PM – 05:15 PM">
+                <span class="chip-pip">●</span>
+                <span class="chip-text">05:00 PM – 05:15 PM</span>
+              </button>
+              <button type="button" class="native-slot-chip" data-slot="08:30 PM – 08:45 PM">
+                <span class="chip-pip">●</span>
+                <span class="chip-text">08:30 PM – 08:45 PM</span>
+              </button>
+            </div>
+
+            <!-- Booking Inputs -->
+            <div class="slots-form">
+              <div class="s-input-field">
+                <label for="nativeClientName">YOUR NAME / BRAND *</label>
+                <input type="text" id="nativeClientName" placeholder="e.g. Alex Morgan / Studio Pulse" required />
+              </div>
+              <div class="s-input-field">
+                <label for="nativeClientEmail">YOUR EMAIL *</label>
+                <input type="email" id="nativeClientEmail" placeholder="alex@studiopulse.design" required />
+              </div>
+              <div class="s-input-field">
+                <label for="nativeClientTopic">PROJECT TOPIC (OPTIONAL)</label>
+                <input type="text" id="nativeClientTopic" placeholder="e.g. 3D Web App / Brand Design" />
+              </div>
+
+              <!-- Action Triggers -->
+              <div class="slots-actions">
+                <button type="button" class="slots-btn slots-btn--wa js-book-wa-btn">
+                  <span>CONFIRM ON WHATSAPP</span>
+                  <span class="btn-arrow">→</span>
+                </button>
+                <div class="slots-actions-secondary">
+                  <button type="button" class="slots-btn slots-btn--gcal js-book-gcal-btn" title="Add directly to Google Calendar">
+                    <span>+ GOOGLE CALENDAR</span>
+                  </button>
+                  <button type="button" class="slots-btn slots-btn--ics js-book-ics-btn" title="Download standard .ics file for Apple Calendar or Outlook">
+                    <span>DOWNLOAD .ICS</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="agenda-item">
-            <span class="agenda-num">03</span>
-            <div class="agenda-text">
-              <strong>Velocity &amp; Sprint Fit</strong>
-              <span>1-week rapid build schedule, deliverables &amp; pricing.</span>
+        </div>
+
+        <!-- Success Confirmation State (Hidden initially) -->
+        <div class="native-success js-native-success hidden">
+          <div class="success-badge">✓</div>
+          <h4 class="success-headline">15-MINUTE INTRO CALL RESERVED</h4>
+          <p class="success-caption">
+            Your discovery strategy slot has been booked with Brinta Deb.
+          </p>
+
+          <div class="success-details-card">
+            <div class="success-row">
+              <span class="success-label">SELECTED DATE:</span>
+              <strong class="success-value js-confirmed-date">--</strong>
             </div>
+            <div class="success-row">
+              <span class="success-label">TIME SLOT:</span>
+              <strong class="success-value js-confirmed-time">--</strong>
+            </div>
+            <div class="success-row">
+              <span class="success-label">YOUR TIMEZONE:</span>
+              <strong class="success-value js-confirmed-tz">--</strong>
+            </div>
+            <div class="success-row">
+              <span class="success-label">MEETING LOCATION:</span>
+              <strong class="success-value">Google Meet / Video Room</strong>
+            </div>
+          </div>
+
+          <div class="success-action-group">
+            <button type="button" class="slots-btn slots-btn--gcal js-success-gcal-btn">
+              <span>ADD TO GOOGLE CALENDAR ↗</span>
+            </button>
+            <button type="button" class="slots-btn slots-btn--wa js-success-wa-btn">
+              <span>SEND WHATSAPP CONFIRMATION →</span>
+            </button>
+            <button type="button" class="success-reset-link js-success-reset">
+              [ Schedule Another Call ]
+            </button>
           </div>
         </div>
       </div>
-
-      <!-- Quick Action Channels -->
-      <form id="scheduleCallForm" class="schedule-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="schedName">YOUR NAME / BRAND *</label>
-            <input type="text" id="schedName" placeholder="e.g. Alex Morgan / Studio Pulse" required />
-          </div>
-          <div class="form-group">
-            <label for="schedTime">PREFERRED TIMEZONE / SLOT</label>
-            <input type="text" id="schedTime" placeholder="e.g. Tomorrow 4:00 PM IST / EST morning" />
-          </div>
-        </div>
-
-        <div class="form-group form-group--full">
-          <label for="schedNotes">PROJECT / WEBSITE TOPIC (OPTIONAL)</label>
-          <input type="text" id="schedNotes" placeholder="e.g. Redesigning agency website with 3D interactions..." />
-        </div>
-
-        <div class="schedule-actions">
-          <button type="submit" class="schedule-btn schedule-btn--wa">
-            <span>BOOK VIA WHATSAPP (INSTANT)</span>
-            <span class="btn-arrow">→</span>
-          </button>
-
-          <button type="button" class="schedule-btn schedule-btn--email js-sched-email">
-            <span>BOOK VIA EMAIL</span>
-            <span class="btn-icon">↗</span>
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 </div>
@@ -92,18 +251,135 @@
     form: HTMLFormElement | null
     phoneNumber = '917005581453'
 
+    tabForm: HTMLButtonElement | null
+    tabCal: HTMLButtonElement | null
+    panelForm: HTMLElement | null
+    panelCal: HTMLElement | null
+
+    // Calendar Elements
+    calViewEl: HTMLElement | null
+    successViewEl: HTMLElement | null
+    monthTitleEl: HTMLElement | null
+    daysGridEl: HTMLElement | null
+    dateLabelEl: HTMLElement | null
+    slotSubEl: HTMLElement | null
+    slotsGridEl: HTMLElement | null
+    tzLabelEl: HTMLElement | null
+
+    // Success elements
+    confirmedDateEl: HTMLElement | null
+    confirmedTimeEl: HTMLElement | null
+    confirmedTzEl: HTMLElement | null
+
+    // Calendar state
+    currentViewDate = new Date()
+    selectedDate = new Date()
+    selectedSlot = '11:00 AM – 11:15 AM'
+    visitorTz = 'UTC'
+
     constructor() {
       this.modal = document.getElementById('scheduleModal')
       this.form = document.getElementById('scheduleCallForm') as HTMLFormElement | null
+
+      this.tabForm = this.modal?.querySelector('.js-tab-form') as HTMLButtonElement | null
+      this.tabCal = this.modal?.querySelector('.js-tab-cal') as HTMLButtonElement | null
+      this.panelForm = this.modal?.querySelector('.js-panel-form') as HTMLElement | null
+      this.panelCal = this.modal?.querySelector('.js-panel-cal') as HTMLElement | null
+
+      // Calendar bindings
+      this.calViewEl = this.modal?.querySelector('.js-native-scheduler-view') as HTMLElement | null
+      this.successViewEl = this.modal?.querySelector('.js-native-success') as HTMLElement | null
+      this.monthTitleEl = this.modal?.querySelector('.js-cal-month-title') as HTMLElement | null
+      this.daysGridEl = this.modal?.querySelector('.js-cal-days-grid') as HTMLElement | null
+      this.dateLabelEl = this.modal?.querySelector('.js-active-date-label') as HTMLElement | null
+      this.slotSubEl = this.modal?.querySelector('.js-active-slot-sub') as HTMLElement | null
+      this.slotsGridEl = this.modal?.querySelector('.js-native-slots-grid') as HTMLElement | null
+      this.tzLabelEl = this.modal?.querySelector('.js-native-tz') as HTMLElement | null
+
+      this.confirmedDateEl = this.modal?.querySelector('.js-confirmed-date') as HTMLElement | null
+      this.confirmedTimeEl = this.modal?.querySelector('.js-confirmed-time') as HTMLElement | null
+      this.confirmedTzEl = this.modal?.querySelector('.js-confirmed-tz') as HTMLElement | null
+
+      this.detectTimezone()
+      this.setInitialDate()
       this.bindEvents()
     }
 
+    detectTimezone() {
+      try {
+        this.visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Calcutta'
+      } catch (e) {
+        this.visitorTz = 'Asia/Calcutta'
+      }
+      if (this.tzLabelEl) {
+        this.tzLabelEl.textContent = this.visitorTz
+      }
+    }
+
+    setInitialDate() {
+      const d = new Date()
+      d.setDate(d.getDate() + 1)
+      if (d.getDay() === 0) d.setDate(d.getDate() + 1) // skip Sunday
+      this.selectedDate = d
+      this.currentViewDate = new Date(d.getFullYear(), d.getMonth(), 1)
+    }
+
     bindEvents() {
-      // Open triggers
+      // Tab switching
+      this.tabForm?.addEventListener('click', () => {
+        this.tabForm?.classList.add('is-active')
+        this.tabCal?.classList.remove('is-active')
+        this.panelForm?.classList.remove('hidden')
+        this.panelCal?.classList.add('hidden')
+        audioEngine.playTab()
+      })
+
+      this.tabCal?.addEventListener('click', () => {
+        this.activateCalendarTab()
+      })
+
+      // Month navigation
+      this.modal?.querySelector('.js-cal-prev')?.addEventListener('click', () => {
+        this.currentViewDate.setMonth(this.currentViewDate.getMonth() - 1)
+        audioEngine.playTab()
+        this.renderCalendar()
+      })
+
+      this.modal?.querySelector('.js-cal-next')?.addEventListener('click', () => {
+        this.currentViewDate.setMonth(this.currentViewDate.getMonth() + 1)
+        audioEngine.playTab()
+        this.renderCalendar()
+      })
+
+      // Slot chips
+      this.slotsGridEl?.querySelectorAll('.native-slot-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          this.slotsGridEl?.querySelectorAll('.native-slot-chip').forEach((c) => c.classList.remove('is-selected'))
+          chip.classList.add('is-selected')
+          this.selectedSlot = chip.getAttribute('data-slot') || '11:00 AM – 11:15 AM'
+          audioEngine.playSnap()
+        })
+      })
+
+      // Booking buttons
+      this.modal?.querySelector('.js-book-wa-btn')?.addEventListener('click', () => this.confirmBooking('whatsapp'))
+      this.modal?.querySelector('.js-book-gcal-btn')?.addEventListener('click', () => this.confirmBooking('gcal'))
+      this.modal?.querySelector('.js-book-ics-btn')?.addEventListener('click', () => this.confirmBooking('ics'))
+
+      // Success buttons
+      this.modal?.querySelector('.js-success-gcal-btn')?.addEventListener('click', () => this.openGoogleCalendar())
+      this.modal?.querySelector('.js-success-wa-btn')?.addEventListener('click', () => this.openWhatsApp())
+      this.modal?.querySelector('.js-success-reset')?.addEventListener('click', () => {
+        this.successViewEl?.classList.add('hidden')
+        this.calViewEl?.classList.remove('hidden')
+        audioEngine.playClick()
+      })
+
+      // Open triggers across entire site
       document.querySelectorAll('.js-open-schedule').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.preventDefault()
-          this.open()
+          this.open('calendar')
         })
       })
 
@@ -119,21 +395,21 @@
         }
       })
 
-      // Form WhatsApp submit
+      // Form 1 WhatsApp submit
       this.form?.addEventListener('submit', (e) => {
         e.preventDefault()
         const name = (document.getElementById('schedName') as HTMLInputElement)?.value.trim() || 'Client'
         const timeSlot = (document.getElementById('schedTime') as HTMLInputElement)?.value.trim() || 'Flexible slot'
-        const notes = (document.getElementById('schedNotes') as HTMLInputElement)?.value.trim() || '30-minute discovery call request'
+        const notes = (document.getElementById('schedNotes') as HTMLInputElement)?.value.trim() || '15-minute discovery call request'
 
         const message = [
-          `*30-MIN DISCOVERY CALL REQUEST — BRINTA DEB*`,
-          `━━━━━━━━━━━━━━━━━━━━━`,
+          '*15-MIN DISCOVERY CALL REQUEST — BRINTA DEB*',
+          '━━━━━━━━━━━━━━━━━━━━━',
           `👤 *Client / Brand:* ${name}`,
           `⏱ *Preferred Time Slot:* ${timeSlot}`,
           `📋 *Topic / Scope:* ${notes}`,
-          `━━━━━━━━━━━━━━━━━━━━━`,
-          `_Looking forward to discussing project strategy!_`,
+          '━━━━━━━━━━━━━━━━━━━━━',
+          '_Looking forward to discussing project strategy!_',
         ].join('\n')
 
         const waUrl = `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(message)}`
@@ -141,28 +417,265 @@
         this.close()
       })
 
-      // Email action
+      // Form 1 Email action
       const emailBtn = this.modal?.querySelector('.js-sched-email')
       emailBtn?.addEventListener('click', () => {
         const name = (document.getElementById('schedName') as HTMLInputElement)?.value.trim() || 'Client'
         const timeSlot = (document.getElementById('schedTime') as HTMLInputElement)?.value.trim() || 'Flexible slot'
         const notes = (document.getElementById('schedNotes') as HTMLInputElement)?.value.trim() || 'Discovery call request'
 
-        const body = `Hi Brinta,\n\nI'd like to schedule a 30-minute discovery call.\n\nName: ${name}\nPreferred Time: ${timeSlot}\nTopic: ${notes}\n\nBest regards,\n${name}`
-        const mailUrl = `mailto:debbrinta01@gmail.com?subject=${encodeURIComponent(`Discovery Call Request — ${name}`)}&body=${encodeURIComponent(body)}`
+        const body = `Hi Brinta,\n\nI'd like to schedule a 15-minute discovery call.\n\nName: ${name}\nPreferred Time: ${timeSlot}\nTopic: ${notes}\n\nBest regards,\n${name}`
+        const mailUrl = `mailto:brintadeb15@gmail.com?subject=${encodeURIComponent(`15-Min Discovery Call Request — ${name}`)}&body=${encodeURIComponent(body)}`
         window.location.href = mailUrl
         this.close()
       })
     }
 
-    open() {
+    activateCalendarTab() {
+      this.tabCal?.classList.add('is-active')
+      this.tabForm?.classList.remove('is-active')
+      this.panelCal?.classList.remove('hidden')
+      this.panelForm?.classList.add('hidden')
+      audioEngine.playTab()
+      this.renderCalendar()
+    }
+
+    renderCalendar() {
+      if (!this.daysGridEl || !this.monthTitleEl) return
+
+      const year = this.currentViewDate.getFullYear()
+      const month = this.currentViewDate.getMonth()
+
+      const monthNames = [
+        'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+        'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
+      ]
+      this.monthTitleEl.textContent = `${monthNames[month]} ${year}`
+
+      this.daysGridEl.innerHTML = ''
+
+      // Monday-based first day: 0=Mon, 6=Sun
+      const firstDayRaw = new Date(year, month, 1).getDay()
+      const firstDay = firstDayRaw === 0 ? 6 : firstDayRaw - 1
+      const daysInMonth = new Date(year, month + 1, 0).getDate()
+      const daysInPrevMonth = new Date(year, month, 0).getDate()
+
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      // Previous month padding
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const cell = document.createElement('div')
+        cell.className = 'cal-day is-pad'
+        cell.textContent = String(daysInPrevMonth - i)
+        this.daysGridEl.appendChild(cell)
+      }
+
+      // Current month days
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateObj = new Date(year, month, d)
+        dateObj.setHours(0, 0, 0, 0)
+
+        const isPast = dateObj < today
+        const isSunday = dateObj.getDay() === 0
+        const isToday = dateObj.getTime() === today.getTime()
+        const isSelected = dateObj.getTime() === this.selectedDate.getTime()
+
+        const btn = document.createElement('button')
+        btn.type = 'button'
+        btn.className = 'cal-day'
+        btn.textContent = String(d)
+
+        if (isPast) {
+          btn.classList.add('is-past')
+          btn.disabled = true
+        } else if (isSunday) {
+          btn.classList.add('is-weekend')
+          btn.disabled = true
+        } else {
+          btn.classList.add('is-available')
+          if (isToday) btn.classList.add('is-today')
+          if (isSelected) btn.classList.add('is-selected')
+
+          btn.addEventListener('click', () => {
+            this.selectedDate = dateObj
+            audioEngine.playTab()
+            this.renderCalendar()
+            this.updateSelectedDateUI()
+          })
+        }
+
+        this.daysGridEl.appendChild(btn)
+      }
+
+      this.updateSelectedDateUI()
+    }
+
+    updateSelectedDateUI() {
+      if (!this.dateLabelEl) return
+
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      }
+      const formatted = this.selectedDate.toLocaleDateString('en-US', options)
+      this.dateLabelEl.textContent = `SLOTS FOR ${formatted.toUpperCase()}`
+      if (this.slotSubEl) {
+        this.slotSubEl.textContent = `4 Intro Slots Open (${this.visitorTz})`
+      }
+    }
+
+    confirmBooking(type: 'whatsapp' | 'gcal' | 'ics') {
+      const nameInput = document.getElementById('nativeClientName') as HTMLInputElement | null
+      const emailInput = document.getElementById('nativeClientEmail') as HTMLInputElement | null
+      const topicInput = document.getElementById('nativeClientTopic') as HTMLInputElement | null
+
+      const name = nameInput?.value.trim() || 'Client'
+      const email = emailInput?.value.trim() || ''
+      const topic = topicInput?.value.trim() || '15-Minute Strategy & Project Discovery'
+
+      if (!email && type !== 'whatsapp') {
+        emailInput?.focus()
+      }
+
+      audioEngine.playChime()
+
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }
+      const dateStr = this.selectedDate.toLocaleDateString('en-US', options)
+
+      // Populate confirmation view
+      if (this.confirmedDateEl) this.confirmedDateEl.textContent = dateStr
+      if (this.confirmedTimeEl) this.confirmedTimeEl.textContent = this.selectedSlot
+      if (this.confirmedTzEl) this.confirmedTzEl.textContent = this.visitorTz
+
+      if (type === 'whatsapp') {
+        this.openWhatsApp(name, email, topic)
+      } else if (type === 'gcal') {
+        this.openGoogleCalendar(name, topic)
+      } else if (type === 'ics') {
+        this.downloadIcs(name, topic)
+      }
+
+      // Switch to success view
+      this.calViewEl?.classList.add('hidden')
+      this.successViewEl?.classList.remove('hidden')
+    }
+
+    openWhatsApp(name = 'Client', email = '', topic = 'Discovery Call') {
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }
+      const dateStr = this.selectedDate.toLocaleDateString('en-US', options)
+
+      const lines = [
+        '*15-MIN DISCOVERY CALL RESERVED — BRINTA DEB*',
+        '━━━━━━━━━━━━━━━━━━━━━',
+        `👤 *Client / Brand:* ${name}`,
+        email ? `📧 *Email:* ${email}` : '',
+        `📅 *Reserved Date:* ${dateStr}`,
+        `⏱ *Time Slot:* ${this.selectedSlot}`,
+        `🌍 *Timezone:* ${this.visitorTz}`,
+        `📋 *Topic:* ${topic}`,
+        '━━━━━━━━━━━━━━━━━━━━━',
+        '_Looking forward to connecting on Google Meet!_',
+      ].filter(Boolean).join('\n')
+
+      const url = `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(lines)}`
+      window.open(url, '_blank', 'noopener,noreferrer')
+    }
+
+    openGoogleCalendar(name = 'Client', topic = 'Discovery Call') {
+      const year = this.selectedDate.getFullYear()
+      const month = String(this.selectedDate.getMonth() + 1).padStart(2, '0')
+      const day = String(this.selectedDate.getDate()).padStart(2, '0')
+
+      let startHour = 11
+      let startMin = 0
+      if (this.selectedSlot.includes('02:30 PM')) { startHour = 14; startMin = 30 }
+      else if (this.selectedSlot.includes('05:00 PM')) { startHour = 17; startMin = 0 }
+      else if (this.selectedSlot.includes('08:30 PM')) { startHour = 20; startMin = 30 }
+
+      const pad = (n: number) => String(n).padStart(2, '0')
+      const startIso = `${year}${month}${day}T${pad(startHour)}${pad(startMin)}00`
+      const endMin = startMin + 15
+      const endIso = `${year}${month}${day}T${pad(startHour)}${pad(endMin)}00`
+
+      const title = encodeURIComponent(`15-Min Strategy Call: ${name} & Brinta Deb`)
+      const details = encodeURIComponent(
+        `15-Minute Strategic Discovery Call with Brinta Deb (Creative Developer & UI/UX Specialist).\n\nTopic: ${topic}\nLocation: Google Meet room\nHost: Brinta Deb (+91 7005581453 / brintadeb15@gmail.com)`
+      )
+      const loc = encodeURIComponent('Google Meet')
+
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${loc}&dates=${startIso}/${endIso}`
+      window.open(gcalUrl, '_blank', 'noopener,noreferrer')
+    }
+
+    downloadIcs(name = 'Client', topic = 'Discovery Call') {
+      const year = this.selectedDate.getFullYear()
+      const month = String(this.selectedDate.getMonth() + 1).padStart(2, '0')
+      const day = String(this.selectedDate.getDate()).padStart(2, '0')
+
+      let startHour = 11
+      let startMin = 0
+      if (this.selectedSlot.includes('02:30 PM')) { startHour = 14; startMin = 30 }
+      else if (this.selectedSlot.includes('05:00 PM')) { startHour = 17; startMin = 0 }
+      else if (this.selectedSlot.includes('08:30 PM')) { startHour = 20; startMin = 30 }
+
+      const pad = (n: number) => String(n).padStart(2, '0')
+      const startStr = `${year}${month}${day}T${pad(startHour)}${pad(startMin)}00`
+      const endStr = `${year}${month}${day}T${pad(startHour)}${pad(startMin + 15)}00`
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Brinta Deb//Discovery Call Scheduler//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:REQUEST',
+        'BEGIN:VEVENT',
+        `DTSTAMP:${startStr}Z`,
+        `DTSTART:${startStr}`,
+        `DTEND:${endStr}`,
+        `SUMMARY:15-Min Strategy Call: ${name} & Brinta Deb`,
+        `DESCRIPTION:15-Minute Strategy Call with Brinta Deb.\\nTopic: ${topic}\\nHost: Brinta Deb (+91 7005581453 / brintadeb15@gmail.com)`,
+        'LOCATION:Google Meet',
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n')
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'brinta-deb-15min-call.ics'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+    }
+
+    open(mode = 'calendar') {
       audioEngine.playChime()
       this.modal?.classList.remove('hidden')
       this.modal?.setAttribute('aria-hidden', 'false')
       document.body.style.overflow = 'hidden'
-      setTimeout(() => {
-        (document.getElementById('schedName') as HTMLInputElement)?.focus()
-      }, 150)
+
+      if (mode === 'calendar') {
+        this.activateCalendarTab()
+      } else {
+        setTimeout(() => {
+          (document.getElementById('schedName') as HTMLInputElement)?.focus()
+        }, 150)
+      }
     }
 
     close() {
@@ -194,8 +707,12 @@
     padding: 1.5rem;
     box-sizing: border-box;
 
+    @include mq(phone) {
+      padding: 0.5rem;
+    }
+
     &.hidden {
-      display: none;
+      display: none !important;
     }
 
     .modal-backdrop {
@@ -213,12 +730,16 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 620px;
-      max-height: 90vh;
+      max-width: 760px;
+      max-height: 92vh;
       overflow-y: auto;
       background: color(primary);
       border: 1px solid color(secondary);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+
+      @include mq(phone) {
+        max-height: 95vh;
+      }
     }
 
     .modal-header {
@@ -229,11 +750,20 @@
       border-bottom: 1px solid color(secondary);
       background: color(primary);
 
+      @include mq(phone) {
+        padding: 0.85rem 1rem;
+      }
+
       &-tag {
         font: 700 0.6875rem / 1 font-family(fraktion);
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: color(secondary);
+
+        @include mq(phone) {
+          font-size: 0.6rem;
+          letter-spacing: 0.08em;
+        }
       }
 
       .modal-close-btn {
@@ -252,14 +782,74 @@
       }
     }
 
+    .modal-mode-tabs {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.15);
+      background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.03);
+
+      .tab-label-short {
+        display: none;
+      }
+
+      @include mq(phone) {
+        padding: 0.5rem 0.75rem;
+        gap: 0.35rem;
+
+        .tab-label-full {
+          display: none;
+        }
+
+        .tab-label-short {
+          display: inline;
+        }
+      }
+
+      .mode-tab {
+        flex: 1;
+        padding: 0.6rem 0.75rem;
+        background: transparent;
+        border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.2);
+        color: color(secondary);
+        font: 700 0.68rem / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+
+        @include mq(phone) {
+          padding: 0.55rem 0.35rem;
+          font-size: 0.65rem;
+        }
+
+        &:hover {
+          background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.06);
+          border-color: color(secondary);
+        }
+
+        &.is-active {
+          background: color(secondary);
+          color: color(primary);
+          border-color: color(secondary);
+        }
+      }
+    }
+
     .modal-body {
       padding: 1.75rem 1.75rem 2rem;
 
       @include mq(phone) {
-        padding: 1.25rem 1.25rem 1.5rem;
+        padding: 1rem 0.85rem 1.25rem;
       }
     }
 
+    .modal-panel.hidden {
+      display: none !important;
+    }
+
+    /* Panel 1 Form Styles */
     .modal-intro {
       margin-bottom: 1.5rem;
 
@@ -282,7 +872,6 @@
       }
     }
 
-    /* Agenda Blueprint */
     .schedule-agenda {
       margin-bottom: 1.75rem;
       border: 1px solid rgba(22, 0, 0, 0.2);
@@ -341,7 +930,6 @@
       }
     }
 
-    /* Form & Buttons */
     .schedule-form {
       .form-row {
         display: grid;
@@ -374,15 +962,6 @@
           font: 500 0.8125rem / 1.4 font-family(fraktion);
           padding: 0.65rem 0.75rem;
           outline: none;
-          transition: background 0.2s ease;
-
-          &:focus {
-            background: #ffffff;
-
-            :global(.theme-contrasted) & {
-              background: #111111;
-            }
-          }
         }
       }
 
@@ -417,14 +996,6 @@
           &:hover {
             background: color(primary);
             color: color(secondary);
-
-            .btn-arrow {
-              transform: translateX(4px);
-            }
-          }
-
-          .btn-arrow {
-            transition: transform 0.2s ease;
           }
         }
 
@@ -436,11 +1007,505 @@
 
           &:hover {
             background: rgba(22, 0, 0, 0.08);
-
-            :global(.theme-contrasted) & {
-              background: rgba(255, 255, 255, 0.1);
-            }
           }
+        }
+      }
+    }
+
+    /* Panel 2 Native Calendar Styles */
+    .cal-embed-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cal-embed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      font: 700 0.6875rem / 1 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      .cal-header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cal-tag {
+        white-space: nowrap;
+
+        @include mq(phone) {
+          font-size: 0.625rem;
+          letter-spacing: 0.05em;
+        }
+      }
+
+      .cal-status-pill {
+        font-size: 0.5625rem;
+        padding: 0.2rem 0.45rem;
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 2px;
+      }
+
+      .cal-tz-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.625rem;
+        color: color(secondary);
+        opacity: 0.8;
+      }
+    }
+
+    .native-scheduler {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 1.25rem;
+      align-items: start;
+
+      &.hidden {
+        display: none !important;
+      }
+
+      @include mq(tablet) {
+        grid-template-columns: 1fr;
+      }
+
+      @include mq(phone) {
+        gap: 0.85rem;
+      }
+    }
+
+    .cal-card {
+      border: 1px solid color(secondary);
+      background: color(primary);
+      padding: 1.25rem;
+
+      @include mq(phone) {
+        padding: 0.85rem 0.7rem;
+      }
+    }
+
+    /* Month Navigator */
+    .cal-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.15);
+      padding-bottom: 0.75rem;
+
+      .cal-month-title {
+        font: 700 0.8125rem / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+
+      .cal-nav-btn {
+        background: transparent;
+        border: 1px solid color(secondary);
+        color: color(secondary);
+        font: 700 1rem / 1 font-family(fraktion);
+        width: 1.85rem;
+        height: 1.85rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: color(secondary);
+          color: color(primary);
+        }
+      }
+    }
+
+    .cal-weekdays-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 0.5rem;
+      text-align: center;
+
+      span {
+        font: 700 0.5625rem / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        color: color(secondary);
+        opacity: 0.55;
+      }
+    }
+
+    .cal-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+
+      .cal-day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: 600 0.75rem / 1 font-family(fraktion);
+        background: transparent;
+        border: 1px solid transparent;
+        color: color(secondary);
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        padding: 0;
+
+        &.is-pad {
+          opacity: 0.2;
+          cursor: default;
+        }
+
+        &.is-past,
+        &.is-weekend {
+          opacity: 0.25;
+          cursor: not-allowed;
+        }
+
+        &.is-available {
+          border-color: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.2);
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #10b981;
+          }
+
+          &:hover {
+            background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.1);
+            border-color: color(secondary);
+          }
+        }
+
+        &.is-today {
+          border-style: dashed;
+          border-color: color(secondary);
+        }
+
+        &.is-selected {
+          background: color(secondary) !important;
+          color: color(primary) !important;
+          border-color: color(secondary) !important;
+          font-weight: 700;
+
+          &::after {
+            background: color(primary);
+          }
+        }
+      }
+    }
+
+    .cal-legend-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.12);
+
+      .cal-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font: 500 0.5625rem / 1 font-family(fraktion);
+        color: color(secondary);
+        opacity: 0.7;
+      }
+
+      .cal-legend-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+
+        &.is-avail {
+          background: #10b981;
+        }
+
+        &.is-picked {
+          background: color(secondary);
+        }
+      }
+    }
+
+    /* Slots Right Column */
+    .slots-header {
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.15);
+
+      .slots-date-label {
+        font: 700 0.8125rem / 1 font-family(fraktion);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: color(secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .slots-sub {
+        font: 400 0.6875rem / 1 font-family(fraktion);
+        color: #10b981;
+        opacity: 0.9;
+      }
+    }
+
+    .slots-chips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+
+      @include mq(phone) {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.35rem;
+        margin-bottom: 0.85rem;
+      }
+
+      .native-slot-chip {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.65rem 0.5rem;
+        background: transparent;
+        border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.25);
+        color: color(secondary);
+        font: 600 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        @include mq(phone) {
+          padding: 0.55rem 0.3rem;
+          font-size: 0.625rem;
+          min-height: 42px;
+          justify-content: center;
+        }
+
+        .chip-pip {
+          color: #10b981;
+          font-size: 0.6rem;
+        }
+
+        &:hover {
+          border-color: color(secondary);
+          background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.06);
+        }
+
+        &.is-selected {
+          background: color(secondary);
+          color: color(primary);
+          border-color: color(secondary);
+
+          .chip-pip {
+            color: color(primary);
+          }
+        }
+      }
+    }
+
+    /* Slots Form */
+    .slots-form {
+      .s-input-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-bottom: 0.75rem;
+
+        label {
+          font: 700 0.5625rem / 1 font-family(fraktion);
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: color(secondary);
+          opacity: 0.8;
+        }
+
+        input {
+          background: color(primary);
+          border: 1px solid color(secondary);
+          color: color(secondary);
+          font: 500 0.75rem / 1.2 font-family(fraktion);
+          padding: 0.55rem 0.65rem;
+          outline: none;
+
+          @include mq(phone) {
+            font-size: 16px;
+            padding: 0.65rem;
+          }
+        }
+      }
+
+      .slots-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .slots-actions-secondary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+
+        @include mq(phone) {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.35rem;
+        }
+      }
+
+      .slots-btn {
+        padding: 0.8rem 1rem;
+        font: 700 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        transition: all 0.2s ease;
+
+        @include mq(phone) {
+          padding: 0.75rem 0.4rem;
+          font-size: 0.65rem;
+          min-height: 44px;
+        }
+
+        &--wa {
+          background: color(secondary);
+          border: 1px solid color(secondary);
+          color: color(primary);
+
+          &:hover {
+            background: color(primary);
+            color: color(secondary);
+          }
+        }
+
+        &--gcal,
+        &--ics {
+          background: transparent;
+          border: 1px solid color(secondary);
+          color: color(secondary);
+
+          &:hover {
+            background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.08);
+          }
+        }
+      }
+    }
+
+    /* Success Confirmation */
+    .native-success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border: 1px solid color(secondary);
+      background: color(primary);
+
+      &.hidden {
+        display: none !important;
+      }
+
+      .success-badge {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background: #10b981;
+        color: #160000;
+        font: 700 1.75rem / 3.5rem font-family(fraktion);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+      }
+
+      .success-headline {
+        font: 300 1.85rem / 1.2 font-family(editorial);
+        letter-spacing: -0.01em;
+        color: color(secondary);
+        margin: 0 0 0.5rem 0;
+      }
+
+      .success-caption {
+        font: 400 0.8125rem / 1.5 font-family(fraktion);
+        color: color(secondary);
+        opacity: 0.75;
+        max-width: 480px;
+        margin: 0 0 1.5rem 0;
+      }
+
+      .success-details-card {
+        width: 100%;
+        max-width: 460px;
+        border: 1px solid rgba(var(--color-secondary-rgb, 0, 0, 0), 0.25);
+        background: rgba(var(--color-secondary-rgb, 0, 0, 0), 0.03);
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+
+      .success-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.4rem 0;
+        border-bottom: 1px dashed rgba(var(--color-secondary-rgb, 0, 0, 0), 0.12);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .success-label {
+          font: 700 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.1em;
+          color: color(secondary);
+          opacity: 0.7;
+        }
+
+        .success-value {
+          font: 600 0.75rem / 1 font-family(fraktion);
+          color: color(secondary);
+        }
+      }
+
+      .success-action-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        width: 100%;
+        max-width: 460px;
+      }
+
+      .success-reset-link {
+        background: transparent;
+        border: none;
+        color: color(secondary);
+        font: 600 0.6875rem / 1 font-family(fraktion);
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 1;
+          text-decoration: underline;
         }
       }
     }

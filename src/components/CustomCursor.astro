@@ -1,43 +1,84 @@
 ---
 ---
 
+<svg class="cursor-svg-filters" aria-hidden="true" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+  <defs>
+    <filter id="cursor-goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="goo" />
+      <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+    </filter>
+  </defs>
+</svg>
+
 <div class="custom-cursor js-custom-cursor" aria-hidden="true">
-  <div class="cursor__dot js-cursor-dot"></div>
-  <div class="cursor__follower js-cursor-follower">
-    <span class="cursor__label js-cursor-label"></span>
+  <div class="cursor__fluid-wrap js-cursor-fluid">
+    <div class="cursor__dot js-cursor-dot"></div>
+    <div class="cursor__droplet js-cursor-drop-1"></div>
+    <div class="cursor__droplet js-cursor-drop-2"></div>
+    <div class="cursor__follower js-cursor-follower">
+      <span class="cursor__label js-cursor-label"></span>
+    </div>
   </div>
 </div>
 
 <script>
+  import { gsap } from 'gsap'
+  import { audioEngine } from '../utils/AudioEngine.js'
+
+  interface Point {
+    x: number
+    y: number
+  }
+
   class CustomCursor {
     cursorEl: HTMLElement | null
+    fluidEl: HTMLElement | null
     dotEl: HTMLElement | null
+    drop1El: HTMLElement | null
+    drop2El: HTMLElement | null
     followerEl: HTMLElement | null
     labelEl: HTMLElement | null
 
-    mouse: { x: number; y: number }
-    dotPos: { x: number; y: number }
-    followerPos: { x: number; y: number }
+    mouse: Point
+    dotPos: Point
+    drop1Pos: Point
+    drop2Pos: Point
+    followerPos: Point
+    velocity: Point
+
     rafId: number | null
     isVisible: boolean
     isHoveringInteractive: boolean
     currentLabel: string
 
+    magneticTarget: HTMLElement | null
+    targetRect: DOMRect | null
+
     constructor() {
       this.cursorEl = document.querySelector('.js-custom-cursor')
+      this.fluidEl = document.querySelector('.js-cursor-fluid')
       this.dotEl = document.querySelector('.js-cursor-dot')
+      this.drop1El = document.querySelector('.js-cursor-drop-1')
+      this.drop2El = document.querySelector('.js-cursor-drop-2')
       this.followerEl = document.querySelector('.js-cursor-follower')
       this.labelEl = document.querySelector('.js-cursor-label')
 
       this.mouse = { x: -100, y: -100 }
       this.dotPos = { x: -100, y: -100 }
+      this.drop1Pos = { x: -100, y: -100 }
+      this.drop2Pos = { x: -100, y: -100 }
       this.followerPos = { x: -100, y: -100 }
+      this.velocity = { x: 0, y: 0 }
+
       this.rafId = null
       this.isVisible = false
       this.isHoveringInteractive = false
       this.currentLabel = ''
 
-      // Check for touch / coarse pointer
+      this.magneticTarget = null
+      this.targetRect = null
+
       if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
         return
       }
@@ -57,13 +98,23 @@
     }
 
     onMouseMove(e: MouseEvent) {
+      const prevX = this.mouse.x
+      const prevY = this.mouse.y
+
       this.mouse.x = e.clientX
       this.mouse.y = e.clientY
+
+      this.velocity.x = this.mouse.x - prevX
+      this.velocity.y = this.mouse.y - prevY
 
       if (!this.isVisible) {
         this.isVisible = true
         this.dotPos.x = this.mouse.x
         this.dotPos.y = this.mouse.y
+        this.drop1Pos.x = this.mouse.x
+        this.drop1Pos.y = this.mouse.y
+        this.drop2Pos.x = this.mouse.x
+        this.drop2Pos.y = this.mouse.y
         this.followerPos.x = this.mouse.x
         this.followerPos.y = this.mouse.y
         this.cursorEl?.classList.add('is-visible')
@@ -78,6 +129,7 @@
     onMouseLeave() {
       this.isVisible = false
       this.cursorEl?.classList.remove('is-visible')
+      this.releaseMagneticTarget()
     }
 
     onMouseDown() {
@@ -88,16 +140,43 @@
       this.cursorEl?.classList.remove('is-pressed')
     }
 
+    releaseMagneticTarget() {
+      if (this.magneticTarget) {
+        gsap.to(this.magneticTarget, {
+          x: 0,
+          y: 0,
+          duration: 0.6,
+          ease: 'elastic.out(1.1, 0.4)',
+        })
+        this.magneticTarget = null
+        this.targetRect = null
+        this.cursorEl?.classList.remove('is-magnetic')
+      }
+    }
+
     bindInteractiveElements() {
-      // General links & clickable elements
+      const magneticSelector = '.s__button, .s__cta__link, .site-foot__resume-btn, .sb__link, .js-audio-toggle, .js-contrast, .copy-small-btn'
       const interactiveSelector = 'a, button, [role="button"], input, select, textarea, .js-contrast, .js-audio-toggle'
-      
+
       document.addEventListener('mouseover', (e) => {
         const target = e.target as HTMLElement | null
         if (!target) return
 
+        // Magnetic Attraction
+        const magnetic = target.closest(magneticSelector) as HTMLElement | null
+        if (magnetic) {
+          if (!this.magneticTarget) {
+            audioEngine.playSnap()
+          }
+          this.magneticTarget = magnetic
+          this.targetRect = magnetic.getBoundingClientRect()
+          this.cursorEl?.classList.add('is-magnetic')
+        } else {
+          this.releaseMagneticTarget()
+        }
+
         // 1. Check for Project Card / Lightbox triggers
-        const lightboxTrigger = target.closest('[data-lightbox], .clickable-project, .s-work__card, .js-work-card, .s-work__column') as HTMLElement | null
+        const lightboxTrigger = target.closest('[data-lightbox], .clickable-project, .s-work__card, .js-work-card, .s-work__column, a-work, .js-card-link') as HTMLElement | null
         if (lightboxTrigger) {
           this.setLabel('VIEW ↗')
           this.cursorEl?.classList.add('has-label', 'is-hovering')
@@ -132,6 +211,10 @@
         this.clearLabel()
         this.cursorEl?.classList.remove('is-hovering', 'has-label')
       })
+
+      document.addEventListener('mouseleave', () => {
+        this.releaseMagneticTarget()
+      })
     }
 
     setLabel(text: string) {
@@ -149,29 +232,89 @@
     }
 
     render() {
-      // Lerp calculations for ultra-silky tracking
-      const lerpDot = 0.85
+      let targetFollowerX = this.mouse.x
+      let targetFollowerY = this.mouse.y
+
+      // Magnetic interpolation when locking onto elements
+      if (this.magneticTarget && this.targetRect) {
+        const freshRect = this.magneticTarget.getBoundingClientRect()
+        const centerX = freshRect.left + freshRect.width / 2
+        const centerY = freshRect.top + freshRect.height / 2
+
+        const dx = this.mouse.x - centerX
+        const dy = this.mouse.y - centerY
+        const dist = Math.hypot(dx, dy)
+        const radius = Math.max(freshRect.width, freshRect.height) * 0.9 + 40
+
+        if (dist < radius) {
+          const strength = 1 - dist / radius
+          targetFollowerX = centerX + dx * (1 - strength * 0.6)
+          targetFollowerY = centerY + dy * (1 - strength * 0.6)
+
+          // Magnetic tug on target element itself
+          gsap.to(this.magneticTarget, {
+            x: dx * strength * 0.28,
+            y: dy * strength * 0.28,
+            duration: 0.25,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          })
+        } else {
+          this.releaseMagneticTarget()
+        }
+      }
+
+      // Physics lerping with viscous trail
+      const lerpDot = 0.88
+      const lerpDrop1 = 0.42
+      const lerpDrop2 = 0.25
       const lerpFollower = 0.16
 
       this.dotPos.x += (this.mouse.x - this.dotPos.x) * lerpDot
       this.dotPos.y += (this.mouse.y - this.dotPos.y) * lerpDot
 
-      this.followerPos.x += (this.mouse.x - this.followerPos.x) * lerpFollower
-      this.followerPos.y += (this.mouse.y - this.followerPos.y) * lerpFollower
+      this.drop1Pos.x += (this.mouse.x - this.drop1Pos.x) * lerpDrop1
+      this.drop1Pos.y += (this.mouse.y - this.drop1Pos.y) * lerpDrop1
+
+      this.drop2Pos.x += (this.mouse.x - this.drop2Pos.x) * lerpDrop2
+      this.drop2Pos.y += (this.mouse.y - this.drop2Pos.y) * lerpDrop2
+
+      this.followerPos.x += (targetFollowerX - this.followerPos.x) * lerpFollower
+      this.followerPos.y += (targetFollowerY - this.followerPos.y) * lerpFollower
+
+      // Speed-based elongation vector for liquid stretching
+      const speed = Math.hypot(this.velocity.x, this.velocity.y)
+      const stretch = Math.min(1.4, 1 + speed * 0.012)
+      const angle = Math.atan2(this.velocity.y, this.velocity.x) * (180 / Math.PI)
+
+      // Friction on velocity
+      this.velocity.x *= 0.82
+      this.velocity.y *= 0.82
 
       if (this.dotEl) {
         this.dotEl.style.transform = `translate3d(${this.dotPos.x}px, ${this.dotPos.y}px, 0)`
       }
 
+      if (this.drop1El) {
+        this.drop1El.style.transform = `translate3d(${this.drop1Pos.x}px, ${this.drop1Pos.y}px, 0) scale(${Math.max(0.7, 1 - speed * 0.005)})`
+      }
+
+      if (this.drop2El) {
+        this.drop2El.style.transform = `translate3d(${this.drop2Pos.x}px, ${this.drop2Pos.y}px, 0) scale(${Math.max(0.5, 0.85 - speed * 0.006)})`
+      }
+
       if (this.followerEl) {
-        this.followerEl.style.transform = `translate3d(${this.followerPos.x}px, ${this.followerPos.y}px, 0)`
+        const transformStr = !this.cursorEl?.classList.contains('has-label') && speed > 2
+          ? `translate3d(${this.followerPos.x}px, ${this.followerPos.y}px, 0) rotate(${angle}deg) scale(${stretch}, ${2 - stretch})`
+          : `translate3d(${this.followerPos.x}px, ${this.followerPos.y}px, 0)`
+
+        this.followerEl.style.transform = transformStr
       }
 
       this.rafId = requestAnimationFrame(this.render.bind(this))
     }
   }
 
-  // Initialize on page load
   if (typeof window !== 'undefined') {
     new CustomCursor()
   }
@@ -198,19 +341,55 @@
     }
   }
 
+  .cursor__fluid-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    filter: url('#cursor-goo');
+  }
+
   .cursor__dot {
     position: fixed;
-    top: -3px;
-    left: -3px;
-    width: 6px;
-    height: 6px;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
     background-color: #ffffff;
     border-radius: 50%;
     pointer-events: none;
     mix-blend-mode: difference;
-    z-index: 100001;
-    transition: transform 0.05s linear, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+    z-index: 100002;
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
     will-change: transform;
+  }
+
+  .cursor__droplet {
+    position: fixed;
+    border-radius: 50%;
+    background-color: #ffffff;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    z-index: 100001;
+    will-change: transform;
+    opacity: 0.85;
+
+    &.js-cursor-drop-1 {
+      top: -3px;
+      left: -3px;
+      width: 6px;
+      height: 6px;
+    }
+
+    &.js-cursor-drop-2 {
+      top: -2.5px;
+      left: -2.5px;
+      width: 5px;
+      height: 5px;
+      opacity: 0.65;
+    }
   }
 
   .cursor__follower {
@@ -219,7 +398,8 @@
     left: -18px;
     width: 36px;
     height: 36px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.12);
     border-radius: 50%;
     pointer-events: none;
     mix-blend-mode: difference;
@@ -227,11 +407,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                border-radius 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                background-color 0.25s ease,
-                border-color 0.25s ease;
+    transition:
+      width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      border-radius 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
     will-change: transform;
   }
 
@@ -255,18 +437,25 @@
     width: 48px;
     height: 48px;
     border-color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.22);
   }
 
   .custom-cursor.is-hovering:not(.has-label) .cursor__dot {
-    opacity: 0.5;
+    opacity: 0.4;
+  }
+
+  /* Magnetic state: fluid snap and subtle glow */
+  .custom-cursor.is-magnetic .cursor__follower {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
   }
 
   /* Label active state: expand into solid badge */
   .custom-cursor.has-label .cursor__follower {
     top: -20px;
-    left: -42px;
-    width: 84px;
+    left: -44px;
+    width: 88px;
     height: 40px;
     border-radius: 20px;
     background-color: #ffffff;
@@ -275,7 +464,8 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
-  .custom-cursor.has-label .cursor__dot {
+  .custom-cursor.has-label .cursor__dot,
+  .custom-cursor.has-label .cursor__droplet {
     opacity: 0;
   }
 
@@ -286,6 +476,6 @@
 
   /* Click / Pressed state */
   .custom-cursor.is-pressed .cursor__follower {
-    transform: scale(0.9);
+    transform: scale(0.88);
   }
 </style>

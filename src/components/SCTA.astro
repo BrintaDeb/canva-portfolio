@@ -114,6 +114,7 @@ const lines = [
 
   import { gsap } from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { audioEngine } from '../utils/AudioEngine.js'
   gsap.registerPlugin(ScrollTrigger)
 
   class Section {
@@ -230,6 +231,16 @@ const lines = [
 
       this.hover?.addEventListener('touchstart', this.onButtonHover.bind(this), {
         passive: true,
+      })
+
+      this.button?.addEventListener('click', (e) => {
+        e.stopPropagation()
+        this.waveShock(true)
+        if (this.hover?.classList.contains('is-active')) {
+          this.onButtonLeave()
+        } else {
+          this.onButtonHover()
+        }
       })
 
       this.el?.addEventListener('intersect', this.onIntersect.bind(this), {
@@ -539,14 +550,16 @@ const lines = [
     /**
      * Wave shock
      */
-    waveShock() {
+    waveShock(force: boolean = false) {
       const { wave } = this
-      if (!this.buttonIsHovered || wave.state === 'shock') return
+      if (!force && (!this.buttonIsHovered || (wave.state === 'shock' && wave.progress < 250))) return
 
       wave.progress = 0
       wave.state = 'shock'
-      wave.speed = 30
-      wave.strength = 5
+      wave.speed = (window.safeWidth || window.innerWidth) > 767 ? 35 : 22
+      wave.strength = (window.safeWidth || window.innerWidth) > 767 ? 6.5 : 4
+
+      audioEngine.playShockwave()
     }
 
     /**
@@ -555,10 +568,12 @@ const lines = [
     tick(time: number) {
       const { wave, grid } = this
 
-      if (wave.progress < grid.height) {
+      if (wave.progress < grid.height * 1.5) {
         if (wave.state !== 'paused') {
           wave.progress += wave.speed
         }
+      } else if (wave.state === 'shock') {
+        wave.state = 'idle'
       }
 
       this.movePoints(time)
@@ -571,35 +586,49 @@ const lines = [
 
 <style lang="scss">
   .s-cta {
+    --size: 64rem;
+
+    @include mq(desktop-sm) {
+      --size: 54rem;
+    }
+
+    @include mq(tablet) {
+      --size: min(44rem, 90vw);
+    }
+
+    @include mq(phone) {
+      --size: min(22rem, 92vw);
+    }
+
     position: relative;
     z-index: 2;
     overflow: hidden;
     max-width: 100%;
 
-    padding: 40rem 0 0;
+    padding: 14rem 0 4rem;
 
     @include mq(desktop-lg) {
-      padding-top: 35rem;
+      padding: 12rem 0 3.5rem;
     }
 
     @include mq(desktop-md) {
-      padding-top: 30rem;
+      padding: 10rem 0 3.5rem;
     }
 
     @include mq(desktop-sm) {
-      padding-top: 25rem;
+      padding: 9rem 0 3rem;
     }
 
     @include mq(tablet) {
-      padding-top: 25rem;
+      padding: 7rem 0 2.5rem;
     }
 
     @include mq(tablet-sm) {
-      padding-top: 20rem;
+      padding: 6rem 0 2rem;
     }
 
     @include mq(phone) {
-      padding-top: 15rem;
+      padding: 4rem 0 1.5rem;
     }
 
     .s__inner {
@@ -607,13 +636,15 @@ const lines = [
 
       position: relative;
       z-index: 3;
-      overflow: hidden;
       max-width: 100%;
+      overflow: hidden;
 
-      height: calc(100vh - 8rem - 2px);
+      min-height: calc(var(--size) + 8rem);
+      padding: 4rem 1rem;
 
       @include mq(phone) {
-        height: calc(100vh - 4.375rem);
+        min-height: calc(var(--size) + 4rem);
+        padding: 2rem 0.5rem;
       }
     }
 
@@ -695,20 +726,6 @@ const lines = [
     }
 
     .s__cta {
-      --size: 64rem;
-
-      @include mq(desktop-sm) {
-        --size: 54rem;
-      }
-
-      @include mq(tablet) {
-        --size: min(44rem, 96vw);
-      }
-
-      @include mq(phone) {
-        --size: min(22rem, 94vw);
-      }
-
       position: absolute;
       top: calc(50% - var(--size) / 2);
       left: calc(50% - var(--size) / 2);
@@ -759,40 +776,68 @@ const lines = [
 
       &__link {
         position: absolute;
-        top: calc(50% + var(--size) * 0.36);
+        top: calc(50% + var(--size) * 0.34);
         left: 50%;
-        z-index: 3;
+        z-index: 5;
 
-        display: block;
-        padding: 1em 1.5em;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8em 1.75em 0.8em 2.2em;
 
         background: color(secondary);
         opacity: 0;
-        transform: translate3d(-50%, 1em, 0);
+        transform: translate3d(-50%, 0.8rem, 0);
 
         color: color(primary);
-        font: 700 14px / 1 font-family(fraktion);
+        font: 700 13px / 1 font-family(fraktion);
         letter-spacing: 0.1em;
         text-decoration: none;
         text-transform: uppercase;
         border: 1px solid color(primary);
         border-radius: 999px;
+        white-space: nowrap;
+        pointer-events: auto;
+        cursor: pointer;
 
         transition:
+          background-color 0.25s ease,
+          color 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease,
           transform 0s linear 0.3s,
           opacity 0s linear 0.3s;
         will-change: transform, opacity;
 
+        &:hover {
+          background: color(primary);
+          color: color(secondary);
+          border-color: color(primary);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @include mq(desktop-sm) {
+          top: calc(50% + var(--size) * 0.34);
+          font-size: 12px;
+          padding: 0.75em 1.5em 0.75em 2em;
+        }
+
+        @include mq(tablet) {
+          top: calc(50% + var(--size) * 0.32);
+          font-size: 12px;
+          padding: 0.75em 1.4em 0.75em 1.8em;
+        }
+
         @include mq(phone) {
           top: calc(50% + var(--size) * 0.28);
-          padding: 0.8em 1.2em;
-          font-size: 13px;
+          padding: 0.7em 1.2em;
+          font-size: 11px;
         }
 
         &:before {
           position: absolute;
           top: calc(50% - 3px);
-          left: 0.6em;
+          left: 0.85em;
 
           border-top: 3px solid transparent;
           border-left: 6px solid currentcolor;
@@ -1042,8 +1087,12 @@ const lines = [
         opacity: 1;
         transform: translate3d(-50%, 0, 0);
         transition:
-          transform 0.6s ease(out-expo) 1s,
-          opacity 0.3s ease(out-expo) 1s;
+          background-color 0.25s ease,
+          color 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease,
+          transform 0.5s ease(out-expo) 0.35s,
+          opacity 0.4s ease(out-expo) 0.35s;
       }
 
       .a-dots {

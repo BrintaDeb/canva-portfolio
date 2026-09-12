@@ -22,6 +22,8 @@ html {
 
   background-color: color(secondary);
   scrollbar-width: none;
+  overflow-x: hidden;
+  max-width: 100%;
 
   color: color(secondary);
 

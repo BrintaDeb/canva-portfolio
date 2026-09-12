@@ -38,6 +38,7 @@ import ASeparator from './ASeparator.astro'
   import Ticker from '../utils/Ticker'
 
   import { gsap } from 'gsap'
+  import { audioEngine } from '../utils/AudioEngine.js'
 
   class Section {
     el: HTMLElement
@@ -88,6 +89,9 @@ import ASeparator from './ASeparator.astro'
         passive: true,
       })
 
+      window.addEventListener('mousemove', this.onMouseMove.bind(this), { passive: true })
+      this.el?.addEventListener('mouseleave', this.resetChars.bind(this))
+
       Emitter.on('tick', this.tick, this)
     }
 
@@ -99,6 +103,7 @@ import ASeparator from './ASeparator.astro'
 
       if (this.isPaused) {
         Emitter.off('tick', this.tick, this)
+        this.resetChars()
       } else {
         Emitter.on('tick', this.tick, this)
       }
@@ -309,6 +314,95 @@ import ASeparator from './ASeparator.astro'
     tick() {
       this.animateChar()
     }
+
+    /**
+     * Mouse move proximity physics
+     */
+    onMouseMove(e: MouseEvent) {
+      if (this.isPaused || this.isWaiting || this.chars.length === 0) return
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return
+
+      const mouseX = e.clientX
+      const mouseY = e.clientY
+
+      const heroRect = this.el?.getBoundingClientRect()
+      if (!heroRect) return
+
+      if (
+        mouseY < heroRect.top - 120 ||
+        mouseY > heroRect.bottom + 120 ||
+        mouseX < heroRect.left - 120 ||
+        mouseX > heroRect.right + 120
+      ) {
+        this.resetChars()
+        return
+      }
+
+      const radius = 140
+
+      this.chars.forEach((char) => {
+        const rect = char.getBoundingClientRect()
+        const charCenterX = rect.left + rect.width / 2
+        const charCenterY = rect.top + rect.height / 2
+
+        const dx = charCenterX - mouseX
+        const dy = charCenterY - mouseY
+        const dist = Math.hypot(dx, dy)
+
+        if (dist < radius && dist > 0) {
+          if (char.dataset.displaced !== 'true') {
+            audioEngine.playKineticWhoosh()
+          }
+          const force = 1 - dist / radius
+          const moveX = (dx / dist) * force * 30
+          const moveY = (dy / dist) * force * 24
+          const rot = (dx > 0 ? 1 : -1) * force * 14
+          const scale = 1 + force * 0.1
+
+          gsap.to(char, {
+            x: moveX,
+            y: moveY,
+            rotation: rot,
+            scale: scale,
+            duration: 0.25,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          })
+          char.dataset.displaced = 'true'
+        } else if (char.dataset.displaced === 'true') {
+          gsap.to(char, {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: 'elastic.out(1.1, 0.4)',
+            overwrite: 'auto',
+          })
+          char.dataset.displaced = 'false'
+        }
+      })
+    }
+
+    /**
+     * Reset all displaced characters
+     */
+    resetChars() {
+      this.chars.forEach((char) => {
+        if (char.dataset.displaced === 'true') {
+          gsap.to(char, {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: 'elastic.out(1.1, 0.4)',
+            overwrite: 'auto',
+          })
+          char.dataset.displaced = 'false'
+        }
+      })
+    }
   }
 
   new Section()
@@ -492,6 +586,8 @@ import ASeparator from './ASeparator.astro'
         clip-path: inset(0 0.005em);
 
         color: transparent;
+        transform-origin: center center;
+        will-change: transform;
       }
 
       :global(.char__inner) {

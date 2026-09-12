@@ -13,8 +13,8 @@ const menu = [
     text: 'Process',
   },
   {
-    id: 'my-way',
-    text: 'Journey',
+    id: 'journey',
+    text: 'Book Call',
   },
   {
     id: 'services',
@@ -547,6 +547,8 @@ const menu = [
 
       @include mq(phone) {
         height: 4rem;
+        max-width: 100%;
+        overflow: hidden;
       }
     }
 
@@ -564,9 +566,10 @@ const menu = [
       }
 
       @include mq(phone) {
-        padding: 1rem;
-        width: 4rem;
+        padding: 0.85rem;
+        width: 3.75rem;
         height: 4rem;
+        flex-shrink: 0;
       }
 
       &__link {
@@ -766,14 +769,7 @@ const menu = [
       }
 
       @include mq(phone) {
-        @include flex(row, center, center);
-
-        order: 3;
-
-        margin-left: auto;
-
-        background: none;
-        border-left: 0;
+        display: none !important;
       }
 
       .sb__item {
@@ -893,6 +889,9 @@ const menu = [
 
       @include mq(phone) {
         height: 100%;
+        width: 38px;
+        flex-shrink: 0;
+        order: 5;
       }
 
       &:before {
@@ -966,8 +965,9 @@ const menu = [
       transition: background 0.25s ease;
 
       @include mq(phone) {
-        width: 48px;
+        width: 38px;
         order: 2;
+        flex-shrink: 0;
       }
 
       &__waves {
@@ -1039,10 +1039,12 @@ const menu = [
 
       @include mq(phone) {
         @include flex(column, center, center);
-        flex-grow: 0;
+        flex: 1 1 auto;
+        min-width: 0;
         background: none;
         border-left: 1px solid color(secondary);
         order: 3;
+        overflow: hidden;
       }
 
       p {
@@ -1050,6 +1052,7 @@ const menu = [
         flex-direction: column;
         height: 100%;
         margin: 0;
+        width: 100%;
       }
 
       .sb__line {
@@ -1067,7 +1070,9 @@ const menu = [
         }
 
         @include mq(phone) {
-          padding: 0 0.5rem;
+          padding: 0 0.4rem;
+          font-size: 0.8rem;
+          justify-content: center;
         }
       }
 
@@ -1085,8 +1090,9 @@ const menu = [
 
         @include mq(phone) {
           margin-right: 0;
-          font-size: 0.65rem;
-          padding: 0.15rem 0.45rem;
+          font-size: 0.62rem;
+          padding: 0.12rem 0.35rem;
+          gap: 0.25rem;
         }
       }
 
@@ -1102,6 +1108,10 @@ const menu = [
 
       .sb__status-city {
         opacity: 0.75;
+
+        @include mq(phone) {
+          display: none;
+        }
       }
 
       .sb__status-time {

@@ -117,7 +117,7 @@ import '../styles/global.scss'
 
       <SSteps />
 
-      <ASeparator style="secondary" strings={['Created', 'To', 'Create', 'Always']} />
+      <ASeparator style="secondary" strings={['Book', 'Call', 'Fifteen', 'Minutes']} />
 
       <SMyWay />
 
@@ -319,10 +319,39 @@ import '../styles/global.scss'
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         })
 
+        let currentVelocity = 0
+        let isActivelyDecaying = false
+        const rootStyle = document.documentElement.style
+
         lenis.on('scroll', ScrollTrigger.update)
 
         gsap.ticker.add((time) => {
           lenis.raf(time * 1000)
+
+          const vel = lenis.velocity || 0
+          currentVelocity += (vel - currentVelocity) * 0.25
+
+          if (Math.abs(currentVelocity) > 0.05 || isActivelyDecaying) {
+            if (Math.abs(currentVelocity) <= 0.05) {
+              currentVelocity = 0
+              isActivelyDecaying = false
+              rootStyle.setProperty('--scroll-velocity', '0')
+              rootStyle.setProperty('--chromatic-offset', '0px')
+              rootStyle.setProperty('--chromatic-alpha', '0')
+              rootStyle.setProperty('--scroll-skew', '0deg')
+            } else {
+              isActivelyDecaying = true
+              const clampedVel = Math.max(-35, Math.min(35, currentVelocity))
+              const offset = clampedVel * 0.28
+              const alpha = Math.min(0.85, Math.abs(clampedVel) * 0.04)
+              const skew = Math.max(-1.8, Math.min(1.8, clampedVel * 0.04))
+
+              rootStyle.setProperty('--scroll-velocity', `${currentVelocity.toFixed(2)}`)
+              rootStyle.setProperty('--chromatic-offset', `${offset.toFixed(2)}px`)
+              rootStyle.setProperty('--chromatic-alpha', `${alpha.toFixed(3)}`)
+              rootStyle.setProperty('--scroll-skew', `${skew.toFixed(2)}deg`)
+            }
+          }
         })
 
         gsap.ticker.lagSmoothing(0)

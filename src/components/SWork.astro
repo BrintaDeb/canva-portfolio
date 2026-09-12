@@ -995,6 +995,8 @@ const worksList = [
     height: var(--height);
 
     background: color(primary);
+    overflow: hidden;
+    max-width: 100%;
 
     &:before {
       position: absolute;
@@ -1071,6 +1073,12 @@ const worksList = [
       height: var(--height);
 
       clip-path: inset(0 -1rem);
+      overflow: hidden;
+      max-width: 100%;
+
+      @include mq(phone) {
+        clip-path: inset(0);
+      }
     }
 
     .s__inner {
