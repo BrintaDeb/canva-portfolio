@@ -223,6 +223,10 @@ const steps = [
       width: 38rem;
       max-width: calc(100% - 2.5rem);
 
+      @include mq(tablet) {
+        width: min(46rem, calc(100% - 2.5rem));
+      }
+
       @include mq(phone) {
         width: 100%;
         max-width: calc(100% - 1.5rem);
@@ -335,33 +339,39 @@ const steps = [
         pointer-events: none;
       }
 
-      &:hover {
-        .s__cell__mask {
-          scale: 1 1;
-        }
+      @media (hover: hover) {
+        &:hover {
+          .s__cell__mask {
+            scale: 1 1;
+          }
 
-        .s__cell__content {
-          color: color(primary);
-        }
+          .s__cell__content {
+            color: color(primary);
+          }
 
-        .s__crosshair {
-          color: color(primary);
-        }
+          .s__crosshair {
+            color: color(primary);
+          }
 
-        .s__step-day {
-          background: color(primary);
-          color: color(secondary);
-        }
-
-        .s__step-schedule-btn {
-          border-color: color(primary);
-          color: color(primary);
-
-          &:hover {
+          .s__step-day {
             background: color(primary);
             color: color(secondary);
           }
+
+          .s__step-schedule-btn {
+            border-color: color(primary);
+            color: color(primary);
+
+            &:hover {
+              background: color(primary);
+              color: color(secondary);
+            }
+          }
         }
+      }
+
+      &:active {
+        transform: scale(0.99);
       }
 
       &--full {

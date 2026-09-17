@@ -17,16 +17,16 @@
           <span class="s__cell__mask"></span>
         </div>
 
-        <!-- Row 2: Split 2 Column (3+ YRS EXP left, Minerva & AJIO right) -->
+        <!-- Row 2: Split 2 Column (4+ YRS EXP left, Minerva & AJIO right) -->
         <div class="s__row s__row--split">
-          <!-- Left: 3+ YRS EXP tall box -->
+          <!-- Left: 4+ YRS EXP tall box -->
           <div class="s__cell s__cell--awwwards js-award">
             <div class="s__cell__content">
               <div class="s__cell__huge">
-                3+ YRS<br />EXP.
+                4+ YRS<br />EXP.
               </div>
               <div class="s__cell__meta">
-                <span>(3+ Years Experience)</span>
+                <span>(4+ Years Experience)</span>
                 <span>(Digital Nomad)</span>
                 <span>(Bespoke Dev & Art)</span>
               </div>
@@ -74,7 +74,7 @@
           <span class="s__cell__mask"></span>
         </div>
 
-        <!-- Row 4: Bottom 3-cell Row (Globe + Skills + Stripes) -->
+        <!-- Row 4: Bottom 3-cell Row (Globe + Skills + Marquee) -->
         <div class="s__row s__row--bottom">
           <!-- Left: Wireframe Globe with Crosshairs -->
           <div class="s__cell s__cell--globe js-award">
@@ -97,17 +97,38 @@
             <div class="s__cell__content">
               <div class="s__cell__bold">SKILLS</div>
               <div class="s__cell__meta">
+                <span>(Next.js & React 19)</span>
+                <span>(TypeScript & Astro)</span>
                 <span>(Figma & UI/UX)</span>
-                <span>(Motion & DaVinci)</span>
-                <span>(Webflow & Dev)</span>
+                <span>(GSAP & Motion)</span>
               </div>
             </div>
             <span class="s__cell__mask"></span>
           </div>
 
-          <!-- Right: Stripes Card -->
-          <div class="s__cell s__cell--stripes">
-            <div class="s__stripes-pattern"></div>
+          <!-- Right: Live Dual-Track Tech Marquee -->
+          <div class="s__cell s__cell--tech-marquee js-award" title="Fullstack Creative Developer Stack">
+            <div class="s__crosshair s__crosshair--tl">+</div>
+            <div class="s__crosshair s__crosshair--tr">+</div>
+            <div class="s__marquee-inner">
+              <div class="s__marquee-header">
+                <span class="s__marquee-pulse"></span>
+                <span class="s__marquee-title">TECH RADAR</span>
+              </div>
+              <div class="s__marquee-track s__marquee-track--left">
+                <div class="s__marquee-content">
+                  <span>Next.js 15 &bull; React 19 &bull; TypeScript &bull; Astro 5 &bull; GSAP 3 &bull; Tailwind CSS &bull; Lenis &bull; SCSS &bull;&nbsp;</span>
+                  <span>Next.js 15 &bull; React 19 &bull; TypeScript &bull; Astro 5 &bull; GSAP 3 &bull; Tailwind CSS &bull; Lenis &bull; SCSS &bull;&nbsp;</span>
+                </div>
+              </div>
+              <div class="s__marquee-track s__marquee-track--right">
+                <div class="s__marquee-content">
+                  <span>Figma &bull; DaVinci Resolve &bull; Illustrator &bull; After Effects &bull; Vercel Edge &bull; Render &bull; Procreate &bull;&nbsp;</span>
+                  <span>Figma &bull; DaVinci Resolve &bull; Illustrator &bull; After Effects &bull; Vercel Edge &bull; Render &bull; Procreate &bull;&nbsp;</span>
+                </div>
+              </div>
+            </div>
+            <span class="s__cell__mask"></span>
           </div>
         </div>
 
@@ -178,7 +199,7 @@
         <div class="s__cell s__cell--full s__cell--bio js-award">
           <div class="s__cell__content">
             <p class="s__cell__bio-text">
-              Immersed for 3+ years in creative development, responsive web design, visual branding, and motion graphics. From Netflix streaming clones and NGO platforms on Webflow & Wix Studio to custom anime sketch art in Procreate and high-impact social campaigns, turning complex ideas into captivating digital experiences.
+              Immersed for 4+ years in creative development, responsive web design, visual branding, and motion graphics. From Netflix streaming clones and NGO platforms on Webflow & Wix Studio to custom anime sketch art in Procreate and high-impact social campaigns, turning complex ideas into captivating digital experiences.
             </p>
           </div>
           <span class="s__cell__mask"></span>
@@ -726,6 +747,10 @@
       width: 38rem;
       max-width: calc(100% - 2.5rem);
 
+      @include mq(tablet) {
+        width: min(46rem, calc(100% - 2.5rem));
+      }
+
       @include mq(phone) {
         width: 100%;
         max-width: calc(100% - 1.5rem);
@@ -879,22 +904,28 @@
         pointer-events: none;
       }
 
-      &:hover {
-        .s__cell__mask {
-          scale: 1 1;
-        }
+      @media (hover: hover) {
+        &:hover {
+          .s__cell__mask {
+            scale: 1 1;
+          }
 
-        .s__cell__content {
-          color: color(primary);
-        }
+          .s__cell__content {
+            color: color(primary);
+          }
 
-        svg path {
-          stroke: color(primary);
-        }
+          svg path {
+            stroke: color(primary);
+          }
 
-        .s__crosshair {
-          color: color(primary);
+          .s__crosshair {
+            color: color(primary);
+          }
         }
+      }
+
+      &:active {
+        transform: scale(0.99);
       }
 
       &--full {
@@ -966,6 +997,104 @@
             transition: stroke 0.25s ease;
           }
         }
+      }
+
+      &--tech-marquee {
+        position: relative;
+        padding: 0.85rem 0.75rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: color(primary);
+        min-height: 7.5rem;
+
+        .s__marquee-inner {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.45rem;
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .s__marquee-header {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          margin-bottom: 0.15rem;
+
+          .s__marquee-pulse {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #4ade80;
+            animation: radarPulse 2s infinite ease-in-out;
+          }
+
+          .s__marquee-title {
+            font: 700 9px / 1 font-family(fraktion);
+            letter-spacing: 0.14em;
+            color: color(secondary);
+            opacity: 0.85;
+            text-transform: uppercase;
+          }
+        }
+
+        .s__marquee-track {
+          display: flex;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+
+          .s__marquee-content {
+            display: flex;
+            white-space: nowrap;
+            font: 600 11px / 1.2 font-family(fraktion);
+            letter-spacing: 0.04em;
+            color: color(secondary);
+          }
+
+          &--left .s__marquee-content {
+            animation: marqueeLeft 18s linear infinite;
+          }
+
+          &--right .s__marquee-content {
+            animation: marqueeRight 22s linear infinite;
+          }
+        }
+
+        &:hover {
+          .s__marquee-track--left .s__marquee-content,
+          .s__marquee-track--right .s__marquee-content {
+            animation-play-state: paused;
+          }
+
+          .s__marquee-header .s__marquee-title {
+            color: color(primary);
+          }
+
+          .s__marquee-track .s__marquee-content {
+            color: color(primary);
+          }
+        }
+      }
+
+      @keyframes marqueeLeft {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      @keyframes marqueeRight {
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
+      }
+
+      @keyframes radarPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.3; transform: scale(0.8); }
       }
 
       &--stripes {

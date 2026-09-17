@@ -252,40 +252,174 @@ class AudioEngine {
   }
 
   /**
-   * Generative Harmonic Ambient Drone (Warm low-volume room chord)
+   * Generative Studio Ambient Mood Player Tracks
+   * 0kB external files, completely synthesized via Web Audio API oscillators, noise, and filters.
    */
-  startAmbientDrone() {
-    if (!this.enabled || this.droneGain) return
-    this.ensureContext()
+  ensureAnalyser() {
     if (!this.ctx) return
+    if (!this.analyser) {
+      this.analyser = this.ctx.createAnalyser()
+      this.analyser.fftSize = 64
+      this.analyserData = new Uint8Array(this.analyser.frequencyBinCount)
+      this.masterGain = this.ctx.createGain()
+      this.masterGain.gain.setValueAtTime(0.8, this.ctx.currentTime)
+      this.masterGain.connect(this.analyser)
+      this.analyser.connect(this.ctx.destination)
+    }
+  }
+
+  getFrequencyData() {
+    if (!this.analyser || !this.analyserData) return null
+    this.analyser.getByteFrequencyData(this.analyserData)
+    return this.analyserData
+  }
+
+  setMasterVolume(val) {
+    this.ensureContext()
+    this.ensureAnalyser()
+    if (!this.masterGain || !this.ctx) return
+    const v = Math.max(0, Math.min(1, val))
+    this.masterGain.gain.linearRampToValueAtTime(v, this.ctx.currentTime + 0.05)
+  }
+
+  startAmbientDrone() {
+    this.playMoodTrack(this.currentMood || 'coffee')
+  }
+
+  playMoodTrack(trackId) {
+    if (!this.enabled) return
+    this.ensureContext()
+    this.ensureAnalyser()
+    if (!this.ctx) return
+
+    this.stopAmbientDrone()
+    this.currentMood = trackId
 
     const now = this.ctx.currentTime
     this.droneGain = this.ctx.createGain()
     this.droneGain.gain.setValueAtTime(0.0001, now)
-    this.droneGain.gain.linearRampToValueAtTime(0.018, now + 2) // Slow fade in
+    this.droneGain.gain.linearRampToValueAtTime(0.024, now + 1.5)
 
     const filter = this.ctx.createBiquadFilter()
-    filter.type = 'lowpass'
-    filter.frequency.setValueAtTime(220, now)
 
-    this.droneGain.connect(filter)
-    filter.connect(this.ctx.destination)
+    if (trackId === 'coffee') {
+      // "Coffee & Wireframes" - Warm Tape Lofi + Rain/Vinyl Texture + Cmaj7/Am7 Pad
+      filter.type = 'lowpass'
+      filter.frequency.setValueAtTime(260, now)
 
-    const chord = [65.41, 98.0, 130.81, 164.81] // C2, G2, C3, E3 harmonic chord
-    this.droneOscs = chord.map((freq) => {
-      const osc = this.ctx.createOscillator()
-      osc.type = 'sine'
-      osc.frequency.setValueAtTime(freq, now)
-      osc.connect(this.droneGain)
-      osc.start(now)
-      return osc
-    })
+      this.droneGain.connect(filter)
+      filter.connect(this.masterGain)
+
+      // Warm lofi pad chords: C2 (65.41), G2 (98.0), E3 (164.81), B3 (246.94)
+      const chord = [65.41, 98.0, 164.81, 246.94]
+      this.droneOscs = chord.map((freq, idx) => {
+        const osc = this.ctx.createOscillator()
+        osc.type = idx % 2 === 0 ? 'sine' : 'triangle'
+        osc.frequency.setValueAtTime(freq, now)
+        osc.connect(this.droneGain)
+        osc.start(now)
+        return osc
+      })
+
+      // Soft generative rain noise buffer
+      try {
+        const bufferSize = this.ctx.sampleRate * 2
+        const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate)
+        const output = noiseBuffer.getChannelData(0)
+        let b0 = 0, b1 = 0, b2 = 0
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1
+          b0 = 0.99 * b0 + white * 0.05
+          b1 = 0.96 * b1 + white * 0.11
+          b2 = 0.86 * b2 + white * 0.25
+          output[i] = (b0 + b1 + b2) * 0.04
+        }
+        const whiteNoise = this.ctx.createBufferSource()
+        whiteNoise.buffer = noiseBuffer
+        whiteNoise.loop = true
+
+        const noiseFilter = this.ctx.createBiquadFilter()
+        noiseFilter.type = 'bandpass'
+        noiseFilter.frequency.setValueAtTime(800, now)
+        noiseFilter.Q.setValueAtTime(1.2, now)
+
+        const noiseGain = this.ctx.createGain()
+        noiseGain.gain.setValueAtTime(0.008, now)
+
+        whiteNoise.connect(noiseFilter)
+        noiseFilter.connect(noiseGain)
+        noiseGain.connect(this.masterGain)
+        whiteNoise.start(now)
+
+        this.ambientNoise = whiteNoise
+        this.ambientNoiseGain = noiseGain
+      } catch (_) {}
+    } else if (trackId === 'midnight') {
+      // "Midnight Coding" - Deep Analog Synthwave Drone + Harmonic Resonance
+      filter.type = 'lowpass'
+      filter.frequency.setValueAtTime(180, now)
+      filter.Q.setValueAtTime(4, now)
+
+      this.droneGain.connect(filter)
+      filter.connect(this.masterGain)
+
+      // Deep synth bass: F1 (43.65), C2 (65.41), Ab2 (103.83), Eb3 (155.56)
+      const chord = [43.65, 65.41, 103.83, 155.56]
+      this.droneOscs = chord.map((freq) => {
+        const osc = this.ctx.createOscillator()
+        osc.type = 'sawtooth'
+        osc.frequency.setValueAtTime(freq, now)
+
+        // Subtly detune for analog warmth
+        osc.detune.setValueAtTime((Math.random() - 0.5) * 12, now)
+        osc.connect(this.droneGain)
+        osc.start(now)
+        return osc
+      })
+    } else {
+      // "Creative Flow" - 432Hz Harmonic Sine & Alpha Wave Meditation Tone
+      filter.type = 'lowpass'
+      filter.frequency.setValueAtTime(450, now)
+
+      this.droneGain.connect(filter)
+      filter.connect(this.masterGain)
+
+      // 432Hz harmonic series with subtle pulsing binaural beat (10Hz alpha state)
+      const chord = [108, 216, 432, 442]
+      this.droneOscs = chord.map((freq) => {
+        const osc = this.ctx.createOscillator()
+        osc.type = 'sine'
+        osc.frequency.setValueAtTime(freq, now)
+        osc.connect(this.droneGain)
+        osc.start(now)
+        return osc
+      })
+    }
+
+    window.dispatchEvent(
+      new CustomEvent('moodtrack:changed', {
+        detail: { trackId, enabled: this.enabled },
+      })
+    )
   }
 
   stopAmbientDrone() {
+    if (this.ambientNoise) {
+      try {
+        this.ambientNoise.stop()
+        this.ambientNoise.disconnect()
+      } catch (_) {}
+      this.ambientNoise = null
+    }
+    if (this.ambientNoiseGain) {
+      try {
+        this.ambientNoiseGain.disconnect()
+      } catch (_) {}
+      this.ambientNoiseGain = null
+    }
     if (!this.droneGain || !this.ctx) return
     const now = this.ctx.currentTime
-    this.droneGain.gain.linearRampToValueAtTime(0.0001, now + 0.8) // Smooth fade out
+    this.droneGain.gain.linearRampToValueAtTime(0.0001, now + 0.6)
     setTimeout(() => {
       this.droneOscs.forEach((osc) => {
         try {
@@ -298,7 +432,7 @@ class AudioEngine {
         this.droneGain.disconnect()
         this.droneGain = null
       }
-    }, 850)
+    }, 650)
   }
 
   attachListeners() {

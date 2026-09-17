@@ -10,11 +10,15 @@ const {
   poster = '',
   total = '25',
   tag = '',
+  stack = [],
+  impact = '',
+  isLive = false,
 } = Astro.props
 
 const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
 const isVideo = type === 'video' || (typeof src === 'string' && src.endsWith('.mp4'))
 const fullPreviewSrc = modalSrc || src
+const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
 ---
 
 <a-work
@@ -25,6 +29,9 @@ const fullPreviewSrc = modalSrc || src
   data-site={site}
   data-src={fullPreviewSrc}
   data-poster={poster}
+  data-stack={stackString}
+  data-impact={impact}
+  data-live={isLive ? 'true' : 'false'}
 >
   <div class="a__inner">
     <a
@@ -170,11 +177,14 @@ const fullPreviewSrc = modalSrc || src
       const src = this.dataset.src || ''
       const type = this.dataset.type || 'image'
       const poster = this.dataset.poster || ''
+      const stack = this.dataset.stack ? this.dataset.stack.split(',').filter(Boolean) : []
+      const impact = this.dataset.impact || ''
+      const isLive = this.dataset.live === 'true'
 
       // If card doesn't have an external URL, or user clicked to open lightbox
       event.preventDefault()
       window.dispatchEvent(new CustomEvent('open-project-lightbox', {
-        detail: { caption, tag, site, src, type, poster }
+        detail: { caption, tag, site, src, type, poster, stack, impact, isLive }
       }))
     }
   }

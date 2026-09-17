@@ -1,0 +1,378 @@
+---
+// Spotlight Projects Floating Quick-Nav Dock
+const spotlightItems = [
+  {
+    id: 'youandme',
+    caption: 'YOU & ME — Cinematic Wedding Photography Platform',
+    name: 'YOU & ME',
+    icon: '📸',
+    tag: 'Fullstack Web & UI/UX',
+    site: 'https://youandme-smoky.vercel.app/',
+    src: '/assets/media/youandme_preview.png',
+    stack: 'React / Next.js, Vercel Edge, Cinematic Motion, Tailwind CSS',
+    impact: '+65% Inquiry Conversion • High-Ticket Booking Flow',
+    isLive: true,
+  },
+  {
+    id: 'currycraft',
+    caption: 'CurryCraft — Authentic Indian Gourmet Dining Platform',
+    name: 'CurryCraft',
+    icon: '🍛',
+    tag: 'Fullstack Web & UI/UX',
+    site: 'https://food-website-ashy-nine.vercel.app/',
+    src: '/assets/media/burger_food_preview.png',
+    stack: 'Next.js App Router, React, Tailwind CSS, Gourmet Cart',
+    impact: 'Sub-1s Load Time • Instant Drag-and-Drop Cart & Ordering',
+    isLive: true,
+  },
+  {
+    id: 'petfirst',
+    caption: 'Pet-First — Modern Pet Wellness & Healthcare Platform',
+    name: 'Pet-First',
+    icon: '🐾',
+    tag: 'Fullstack Web & UI/UX',
+    site: 'https://pet-first-web.vercel.app/',
+    src: '/assets/media/pet_first_preview.png',
+    stack: 'React, Nutrition Calculator, Accessible UX, Vercel',
+    impact: 'Custom Nutrition Tool & Vet Booking for 10K+ Pets',
+    isLive: true,
+  },
+  {
+    id: 'saffronsage',
+    caption: 'Saffron & Sage — Royal Indian Fine Dining Web Experience',
+    name: 'Saffron & Sage',
+    icon: '🏰',
+    tag: 'Fullstack Web & UI/UX',
+    site: 'https://restaurantweb-ruby.vercel.app/',
+    src: '/assets/media/saffron_sage_preview.png',
+    stack: 'Astro, GSAP Motion, SCSS Architecture, Reservation Flow',
+    impact: 'Royal Heritage Visual Identity & Table Booking',
+    isLive: true,
+  },
+  {
+    id: 'nestservices',
+    caption: 'Nest Services — Rental Marketplace & Tenant Platform',
+    name: 'Nest Services',
+    icon: '🏠',
+    tag: 'Fullstack Web & UI/UX',
+    site: 'https://nestservices.vercel.app/',
+    src: '/assets/media/nestservices_preview.png',
+    stack: 'Fullstack Web, Vercel, Marketplace Architecture, Filters',
+    impact: 'Frictionless Tenant Onboarding & Search',
+    isLive: true,
+  },
+]
+---
+
+<nav id="spotlightDock" class="spotlight-dock" aria-label="Spotlight Live Projects Quick Navigation">
+  <div class="dock-container">
+    <div class="dock-header">
+      <span class="dock-live-dot"></span>
+      <span class="dock-label">LIVE WORK</span>
+    </div>
+
+    <div class="dock-items">
+      {
+        spotlightItems.map((item) => (
+          <button
+            type="button"
+            class="dock-item js-dock-trigger"
+            data-caption={item.caption}
+            data-tag={item.tag}
+            data-site={item.site}
+            data-src={item.src}
+            data-stack={item.stack}
+            data-impact={item.impact}
+            data-live={item.isLive ? 'true' : 'false'}
+            title={`Preview ${item.name} (${item.tag})`}
+          >
+            <span class="dock-item-icon">{item.icon}</span>
+            <span class="dock-item-name">{item.name}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <a href="#work" class="dock-jump-btn" title="Jump to 3D Work Experience">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+      </svg>
+    </a>
+  </div>
+</nav>
+
+<script>
+  class SpotlightDock {
+    dock: HTMLElement | null
+
+    constructor() {
+      this.dock = document.getElementById('spotlightDock')
+      if (!this.dock) return
+
+      this.bindEvents()
+    }
+
+    bindEvents() {
+      // Click on item pills -> launch Lightbox preview
+      this.dock?.querySelectorAll('.js-dock-trigger').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault()
+          const target = e.currentTarget as HTMLElement
+          const caption = target.dataset.caption || ''
+          const tag = target.dataset.tag || ''
+          const site = target.dataset.site || ''
+          const src = target.dataset.src || ''
+          const stack = target.dataset.stack ? target.dataset.stack.split(',').map((s) => s.trim()) : []
+          const impact = target.dataset.impact || ''
+          const isLive = target.dataset.live === 'true'
+
+          window.dispatchEvent(
+            new CustomEvent('open-project-lightbox', {
+              detail: {
+                caption,
+                tag,
+                site,
+                src,
+                type: 'image',
+                stack,
+                impact,
+                isLive,
+              },
+            })
+          )
+        })
+      })
+
+      // Hide dock when Project Lightbox or any modal is open
+      window.addEventListener('open-project-lightbox', () => {
+        if (this.dock) this.dock.classList.add('is-hidden')
+      })
+
+      const modalCloseObserver = new MutationObserver(() => {
+        const lightbox = document.getElementById('projectLightbox')
+        const isLightboxOpen = lightbox?.classList.contains('is-open')
+        const isWaOpen = document.getElementById('waChatWindow')?.classList.contains('is-open')
+        const isScheduleOpen = document.getElementById('scheduleModal')?.classList.contains('is-open')
+        const isResumeOpen = document.getElementById('resumeModal')?.classList.contains('is-open')
+
+        if (this.dock) {
+          if (isLightboxOpen || isWaOpen || isScheduleOpen || isResumeOpen) {
+            this.dock.classList.add('is-hidden')
+          } else {
+            this.dock.classList.remove('is-hidden')
+          }
+        }
+      })
+
+      const observeModal = (id: string) => {
+        const el = document.getElementById(id)
+        if (el) modalCloseObserver.observe(el, { attributes: true, attributeFilter: ['class'] })
+      }
+
+      observeModal('projectLightbox')
+      observeModal('waChatWindow')
+      observeModal('scheduleModal')
+      observeModal('resumeModal')
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new SpotlightDock())
+  } else {
+    new SpotlightDock()
+  }
+</script>
+
+<style lang="scss">
+  .spotlight-dock {
+    position: fixed;
+    bottom: max(1.25rem, calc(0.75rem + env(safe-area-inset-bottom, 0px)));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 45;
+    pointer-events: auto;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+
+    &.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(16px);
+      pointer-events: none;
+    }
+
+    @include mq(phone) {
+      bottom: max(12px, calc(6px + env(safe-area-inset-bottom, 0px)));
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100vw - 2rem);
+      max-width: 360px;
+
+      &.is-hidden {
+        transform: translateX(-50%) translateY(16px);
+      }
+    }
+  }
+
+  .dock-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.5rem 0.35rem 0.75rem;
+    background: rgba(18, 5, 5, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 240, 235, 0.18);
+    border-radius: 999px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 1px rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+
+    @include mq(phone) {
+      width: 100%;
+      justify-content: space-between;
+      padding: 0.3rem 0.4rem 0.3rem 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .dock-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-right: 0.4rem;
+    border-right: 1px solid rgba(255, 240, 235, 0.12);
+    flex-shrink: 0;
+
+    .dock-live-dot {
+      width: 6px;
+      height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #4ade80;
+      animation: dockDotPulse 2s infinite ease-in-out;
+    }
+
+    .dock-label {
+      font: 700 9px / 1 font-family(fraktion);
+      letter-spacing: 0.12em;
+      color: color(primary);
+      opacity: 0.85;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @include mq(phone) {
+      display: none;
+    }
+  }
+
+  @keyframes dockDotPulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.85);
+      opacity: 0.4;
+    }
+  }
+
+  .dock-items {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    @include mq(phone) {
+      gap: 0.2rem;
+      flex: 1 1 auto;
+      justify-content: space-around;
+    }
+  }
+
+  .dock-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: color(primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+
+    &-icon {
+      font-size: 13px;
+      line-height: 1;
+      transform: translateY(-0.5px);
+    }
+
+    &-name {
+      font: 600 11px / 1 font-family(fraktion);
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover {
+      background: rgba(255, 240, 235, 0.12);
+      border-color: rgba(255, 240, 235, 0.22);
+      transform: translateY(-1px);
+
+      .dock-item-name {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+      background: rgba(255, 240, 235, 0.18);
+    }
+
+    @include mq(phone) {
+      padding: 0.35rem 0.45rem;
+
+      &-name {
+        display: none;
+      }
+
+      &-icon {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .dock-jump-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 240, 235, 0.15);
+    border-radius: 50%;
+    color: color(primary);
+    text-decoration: none;
+    margin-left: 0.25rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: color(primary);
+      color: color(secondary);
+      transform: translateY(1px);
+    }
+
+    @include mq(phone) {
+      width: 24px;
+      height: 24px;
+      margin-left: 0.1rem;
+    }
+  }
+</style>

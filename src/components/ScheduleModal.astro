@@ -700,15 +700,16 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: max(1.5rem, var(--safe-top, 0px)) max(1.5rem, var(--safe-right, 0px)) max(1.5rem, var(--safe-bottom, 0px)) max(1.5rem, var(--safe-left, 0px));
     box-sizing: border-box;
 
     @include mq(phone) {
-      padding: 0.5rem;
+      padding: max(0.5rem, var(--safe-top, 0px)) max(0.5rem, var(--safe-right, 0px)) max(0.5rem, var(--safe-bottom, 0px)) max(0.5rem, var(--safe-left, 0px));
     }
 
     &.hidden {
@@ -732,6 +733,7 @@
       width: 100%;
       max-width: 760px;
       max-height: 92vh;
+      max-height: 92dvh;
       overflow-y: auto;
       background: color(primary);
       border: 1px solid color(secondary);
@@ -739,6 +741,7 @@
 
       @include mq(phone) {
         max-height: 95vh;
+        max-height: 95dvh;
       }
     }
 

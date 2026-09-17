@@ -1,0 +1,552 @@
+---
+/**
+ * StudioMoodPlayer.astro
+ * Option 4: Retro-minimalist studio ambient workflow player & audio-reactive visualizer.
+ * 0kB external audio dependencies — 100% synthesized Web Audio API.
+ */
+---
+
+<div class="studio-player js-studio-player" id="studio-audio-player">
+  <div class="studio-player__bar js-player-toggle" title="Toggle Studio Ambient Player">
+    <div class="studio-player__indicator">
+      <canvas class="studio-player__visualizer js-player-vis" width="64" height="24"></canvas>
+    </div>
+
+    <div class="studio-player__meta">
+      <span class="studio-player__title js-active-track-name">Coffee &amp; Wireframes</span>
+      <span class="studio-player__status js-player-status">LOFI AMBIENT</span>
+    </div>
+
+    <button class="studio-player__btn js-player-play-btn" type="button" aria-label="Play or Pause Ambient Track">
+      <svg class="icon icon-play js-icon-play" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg class="icon icon-pause js-icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="studio-player__drawer js-player-drawer">
+    <div class="studio-player__header">
+      <div class="studio-player__branding">
+        <span class="studio-player__tape-dot"></span>
+        <span class="studio-player__tag">STUDIO WORKBENCH // 0kB SYNTH</span>
+      </div>
+      <button type="button" class="studio-player__close-btn js-player-close" aria-label="Close studio player drawer">✕</button>
+    </div>
+
+    <p class="studio-player__desc">
+      Soundtrack to my workflow. Organic generative frequencies synthesized directly in your browser.
+    </p>
+
+    <div class="studio-player__tracks">
+      <button class="studio-track is-active js-track-btn" data-track="coffee" type="button">
+        <span class="studio-track__icon">☕</span>
+        <span class="studio-track__info">
+          <strong class="studio-track__title">Coffee &amp; Wireframes</strong>
+          <small class="studio-track__sub">Warm Lo-Fi Chords + Ambient Rain</small>
+        </span>
+        <span class="studio-track__wave"></span>
+      </button>
+
+      <button class="studio-track js-track-btn" data-track="midnight" type="button">
+        <span class="studio-track__icon">🌙</span>
+        <span class="studio-track__info">
+          <strong class="studio-track__title">Midnight Coding</strong>
+          <small class="studio-track__sub">Deep Analog Synth + Tape Drone</small>
+        </span>
+        <span class="studio-track__wave"></span>
+      </button>
+
+      <button class="studio-track js-track-btn" data-track="flow" type="button">
+        <span class="studio-track__icon">⚡</span>
+        <span class="studio-track__info">
+          <strong class="studio-track__title">Creative Flow</strong>
+          <small class="studio-track__sub">432Hz Harmonic Sine + Alpha Wave</small>
+        </span>
+        <span class="studio-track__wave"></span>
+      </button>
+    </div>
+
+    <div class="studio-player__controls">
+      <label class="studio-player__vol-label" for="studio-vol">VOLUME</label>
+      <input
+        type="range"
+        id="studio-vol"
+        class="studio-player__volume js-player-volume"
+        min="0"
+        max="100"
+        value="75"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  import { audioEngine } from '../utils/AudioEngine.js'
+
+  class StudioPlayer {
+    constructor() {
+      this.el = document.getElementById('studio-audio-player')
+      if (!this.el) return
+
+      this.bar = this.el.querySelector('.js-player-toggle')
+      this.drawer = this.el.querySelector('.js-player-drawer')
+      this.playBtn = this.el.querySelector('.js-player-play-btn')
+      this.iconPlay = this.el.querySelector('.js-icon-play')
+      this.iconPause = this.el.querySelector('.js-icon-pause')
+      this.titleEl = this.el.querySelector('.js-active-track-name')
+      this.statusEl = this.el.querySelector('.js-player-status')
+      this.canvas = this.el.querySelector('.js-player-vis')
+      this.ctx = this.canvas ? this.canvas.getContext('2d') : null
+      this.trackBtns = this.el.querySelectorAll('.js-track-btn')
+      this.volInput = this.el.querySelector('.js-player-volume')
+
+      this.currentTrack = 'coffee'
+      this.trackNames = {
+        coffee: 'Coffee & Wireframes',
+        midnight: 'Midnight Coding',
+        flow: 'Creative Flow',
+      }
+
+      this.init()
+    }
+
+    init() {
+      // Toggle expanded drawer on header click (except clicking play button directly)
+      this.bar?.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).closest('.js-player-play-btn')) return
+        this.el?.classList.toggle('is-expanded')
+        audioEngine.playTab()
+      })
+
+      // Close button inside drawer
+      this.el?.querySelector('.js-player-close')?.addEventListener('click', (e) => {
+        e.stopPropagation()
+        this.el?.classList.remove('is-expanded')
+      })
+
+      // Click outside to close drawer
+      document.addEventListener('click', (e) => {
+        if (this.el?.classList.contains('is-expanded')) {
+          if (!this.el.contains(e.target as Node)) {
+            this.el.classList.remove('is-expanded')
+          }
+        }
+      })
+
+      // Play/Pause button
+      this.playBtn?.addEventListener('click', (e) => {
+        e.stopPropagation()
+        this.togglePlay()
+      })
+
+      // Track selection
+      this.trackBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const track = btn.getAttribute('data-track')
+          if (!track) return
+          this.switchTrack(track)
+          audioEngine.playSnap()
+        })
+      })
+
+      // Volume slider
+      this.volInput?.addEventListener('input', (e) => {
+        const val = Number((e.target as HTMLInputElement).value) / 100
+        audioEngine.setMasterVolume(val)
+      })
+
+      // Listen to external sound events (e.g. from header audio button)
+      window.addEventListener('sound:state-changed', ((e: CustomEvent) => {
+        this.updatePlayState(e.detail.enabled)
+      }) as EventListener)
+
+      window.addEventListener('moodtrack:changed', ((e: CustomEvent) => {
+        if (e.detail.trackId) {
+          this.currentTrack = e.detail.trackId
+          this.updateTrackUI(this.currentTrack)
+        }
+      }) as EventListener)
+
+      this.startVisualizerLoop()
+    }
+
+    togglePlay() {
+      const isNowEnabled = audioEngine.toggle()
+      if (isNowEnabled) {
+        audioEngine.playMoodTrack(this.currentTrack)
+      }
+      this.updatePlayState(isNowEnabled)
+    }
+
+    switchTrack(trackId: string) {
+      this.currentTrack = trackId
+      this.updateTrackUI(trackId)
+      if (!audioEngine.isEnabled()) {
+        audioEngine.toggle()
+      }
+      audioEngine.playMoodTrack(trackId)
+      this.updatePlayState(true)
+    }
+
+    updateTrackUI(trackId: string) {
+      this.trackBtns.forEach((btn) => {
+        if (btn.getAttribute('data-track') === trackId) {
+          btn.classList.add('is-active')
+        } else {
+          btn.classList.remove('is-active')
+        }
+      })
+
+      if (this.titleEl) {
+        this.titleEl.textContent = this.trackNames[trackId as keyof typeof this.trackNames] || trackId
+      }
+    }
+
+    updatePlayState(isPlaying: boolean) {
+      if (this.iconPlay && this.iconPause) {
+        this.iconPlay.style.display = isPlaying ? 'none' : 'block'
+        this.iconPause.style.display = isPlaying ? 'block' : 'none'
+      }
+      if (this.statusEl) {
+        this.statusEl.textContent = isPlaying ? 'SYNTH PLAYING' : 'PAUSED'
+      }
+      if (isPlaying) {
+        this.el?.classList.add('is-playing')
+      } else {
+        this.el?.classList.remove('is-playing')
+      }
+    }
+
+    startVisualizerLoop() {
+      const draw = () => {
+        requestAnimationFrame(draw)
+        if (!this.ctx || !this.canvas) return
+
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+        const isPlaying = audioEngine.isEnabled()
+        const freqData = audioEngine.getFrequencyData()
+
+        const numBars = 8
+        const barWidth = 4
+        const gap = 3
+
+        for (let i = 0; i < numBars; i++) {
+          let height = 3
+          if (isPlaying && freqData && freqData.length > 0) {
+            const index = Math.floor((i / numBars) * (freqData.length * 0.5))
+            const raw = freqData[index] || 0
+            height = Math.max(3, (raw / 255) * (this.canvas.height - 2))
+          } else if (isPlaying) {
+            height = 4 + Math.sin(Date.now() * 0.005 + i) * 3
+          }
+
+          const x = i * (barWidth + gap)
+          const y = this.canvas.height - height
+
+          const style = getComputedStyle(document.documentElement)
+          this.ctx.fillStyle = isPlaying
+            ? style.getPropertyValue('--color-primary').trim() || '#fff'
+            : 'rgba(255, 255, 255, 0.25)'
+
+          this.ctx.fillRect(x, y, barWidth, height)
+        }
+      }
+      requestAnimationFrame(draw)
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new StudioPlayer())
+  } else {
+    new StudioPlayer()
+  }
+</script>
+
+<style lang="scss">
+  .studio-player {
+    position: fixed;
+    bottom: max(1.25rem, calc(0.75rem + env(safe-area-inset-bottom, 0px)));
+    left: max(1.5rem, calc(1rem + env(safe-area-inset-left, 0px)));
+    z-index: 90;
+
+    width: 280px;
+
+    background: color(secondary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px var(--theme-glow, rgba(0, 0, 0, 0.2));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    font-family: font-family(mono);
+    color: color(primary);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    display: flex;
+    flex-direction: column-reverse;
+
+    @include mq(phone) {
+      bottom: max(78px, calc(68px + env(safe-area-inset-bottom, 0px)));
+      left: max(16px, calc(12px + env(safe-area-inset-left, 0px)));
+      width: auto;
+      max-width: fit-content;
+      border-radius: 999px;
+
+      .studio-player__bar {
+        padding: 0.45rem 0.65rem;
+        gap: 0.4rem;
+      }
+
+      .studio-player__meta {
+        display: none;
+      }
+
+      .studio-player__visualizer {
+        width: 36px;
+        height: 18px;
+      }
+
+      .studio-player__btn {
+        margin-left: 0;
+        width: 26px;
+        height: 26px;
+      }
+
+      .studio-player__drawer {
+        display: none;
+      }
+
+      &.is-expanded {
+        border-radius: 12px;
+        width: calc(100vw - 2rem);
+        max-width: 320px;
+
+        .studio-player__meta {
+          display: flex;
+        }
+
+        .studio-player__drawer {
+          display: block;
+        }
+      }
+    }
+
+    &.is-expanded {
+      .studio-player__drawer {
+        display: block;
+        max-height: 420px;
+        opacity: 1;
+        padding: 0.85rem 0.85rem 0.75rem;
+      }
+    }
+
+    &__bar {
+      @include flex(row, space-between, center);
+      padding: 0.65rem 0.85rem;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 11px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+
+    &__indicator {
+      @include flex(row, center, center);
+      margin-right: 0.65rem;
+    }
+
+    &__visualizer {
+      display: block;
+      width: 52px;
+      height: 20px;
+    }
+
+    &__meta {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: color(primary);
+    }
+
+    &__status {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.15rem;
+    }
+
+    &__btn {
+      @include flex(row, center, center);
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      margin-left: 0.5rem;
+
+      background: rgba(255, 255, 255, 0.08);
+      color: color(primary);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+
+      &:hover {
+        transform: scale(1.08);
+        background: color(primary);
+        color: color(secondary);
+      }
+
+      .icon {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__drawer {
+      display: none;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 0.85rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    &__header {
+      @include flex(row, space-between, center);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 0.4rem;
+
+      .studio-player__close-btn {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.75rem;
+        cursor: pointer;
+        padding: 0.15rem 0.35rem;
+        border-radius: 4px;
+        transition: color 0.2s ease, background 0.2s ease;
+
+        &:hover {
+          color: color(primary);
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    &__branding {
+      @include flex(row, flex-start, center);
+      gap: 0.35rem;
+    }
+
+    &__tape-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff4d6d;
+      box-shadow: 0 0 6px #ff4d6d;
+    }
+
+    &__desc {
+      font-size: 0.65rem;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 0.75rem;
+    }
+
+    &__tracks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .studio-track {
+      @include flex(row, flex-start, center);
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      color: color(primary);
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      &.is-active {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: color(primary);
+        box-shadow: 0 0 12px var(--theme-glow, rgba(255, 255, 255, 0.1));
+
+        .studio-track__icon {
+          transform: scale(1.15);
+        }
+      }
+
+      &__icon {
+        font-size: 0.95rem;
+        margin-right: 0.55rem;
+        transition: transform 0.2s ease;
+      }
+
+      &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__title {
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      &__sub {
+        font-size: 0.56rem;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 0.1rem;
+      }
+    }
+
+    &__controls {
+      @include flex(row, space-between, center);
+      gap: 0.75rem;
+      padding-top: 0.45rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    &__vol-label {
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    &__volume {
+      flex: 1;
+      accent-color: color(primary);
+      height: 4px;
+      cursor: pointer;
+    }
+  }
+</style>

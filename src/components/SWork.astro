@@ -9,6 +9,9 @@ const worksList = [
     src: '/assets/media/youandme_preview.png',
     modalSrc: '/assets/media/youandme_preview.png',
     type: 'image',
+    stack: ['React / Next.js', 'Vercel Edge', 'Cinematic Motion', 'Tailwind CSS', 'Booking Systems'],
+    impact: '+65% Inquiry Conversion • Documentary Love Stories & High-Ticket Booking Flow',
+    isLive: true,
   },
   {
     caption: 'Saffron & Sage — Royal Indian Fine Dining Web Experience',
@@ -17,6 +20,9 @@ const worksList = [
     src: '/assets/media/saffron_sage_preview.png',
     modalSrc: '/assets/media/saffron_sage_preview.png',
     type: 'image',
+    stack: ['Astro', 'GSAP Motion', 'SCSS Architecture', 'Responsive UI/UX', 'Reservation Flow'],
+    impact: 'Royal Heritage Visual Identity • Immersive Storytelling & Table Booking Experience',
+    isLive: true,
   },
   {
     caption: 'Nest Services — Rental Marketplace & Tenant Platform',
@@ -25,6 +31,9 @@ const worksList = [
     src: '/assets/media/nestservices_preview.png',
     modalSrc: '/assets/media/nestservices_preview.png',
     type: 'image',
+    stack: ['Fullstack Web', 'Vercel', 'Marketplace Architecture', 'Dynamic Filters', 'Tenant Portal'],
+    impact: 'Frictionless Tenant Onboarding • Verified Rental Listings & Interactive Search',
+    isLive: true,
   },
   {
     caption: 'Hymalya Salt — Premium Himalayan Pink Salt Experience',
@@ -33,6 +42,9 @@ const worksList = [
     src: '/assets/media/humlya_salt_preview.png',
     modalSrc: '/assets/media/humlya_salt_preview.png',
     type: 'image',
+    stack: ['Modern Web', 'Product Showcase', 'Render Cloud', 'Bespoke UI/UX', 'Brand Identity'],
+    impact: 'Luxury E-Commerce Storytelling • Organic Pink Salt Mineral Heritage Showcase',
+    isLive: true,
   },
   {
     caption: 'CurryCraft — Authentic Indian Gourmet Dining Platform',
@@ -41,6 +53,9 @@ const worksList = [
     src: '/assets/media/burger_food_preview.png',
     modalSrc: '/assets/media/burger_food_preview.png',
     type: 'image',
+    stack: ['Next.js App Router', 'React', 'Tailwind CSS', 'Cart Architecture', 'Admin Dashboard'],
+    impact: 'Sub-1s Load Time • Instant Drag-and-Drop Gourmet Cart & Frictionless Ordering',
+    isLive: true,
   },
   {
     caption: 'Pet-First — Modern Pet Wellness & Healthcare Platform',
@@ -49,6 +64,9 @@ const worksList = [
     src: '/assets/media/pet_first_preview.png',
     modalSrc: '/assets/media/pet_first_preview.png',
     type: 'image',
+    stack: ['React', 'Interactive Health Flow', 'Nutrition Calculator', 'Accessible UX', 'Vercel'],
+    impact: 'Custom Nutrition Tool & Vet Consultation Booking for 10,000+ Happy Pets',
+    isLive: true,
   },
   {
     caption: 'Netflix Web Application Clone (Believer 2)',
@@ -226,49 +244,56 @@ const worksList = [
 
 <section id="work" class="s-work" data-intersect>
   <div class="s__outer">
-    <div class="s__inner js-container">
-      <h2 class="s__title">
-        <span class="s__title__inner js-title">
-          <span class="s__title__letter js-letter">W</span>
-          <span class="s__title__letter js-letter">O</span>
-          <span class="s__title__letter js-letter">R</span>
-          <span class="s__title__letter js-letter">K</span>
-        </span>
-      </h2>
+    <div class="s__stage js-stage">
+      <div class="s__inner js-container">
+        <h2 class="s__title">
+          <span class="s__title__inner js-title">
+            <span class="s__title__letter js-letter">W</span>
+            <span class="s__title__letter js-letter">O</span>
+            <span class="s__title__letter js-letter">R</span>
+            <span class="s__title__letter js-letter">K</span>
+          </span>
+        </h2>
 
-      <div class="s__scene js-scene">
-        {
-          worksList.map((work, index) => (
-            <AWork
-              cssClass="s__scene__work s__scene__work--card js-work"
-              caption={work.caption}
-              tag={work.tag}
-              site={work.site}
-              src={work.src}
-              modalSrc={work.modalSrc}
-              poster={work.poster}
-              type={work.type}
-              index={String(index + 1).padStart(4, '0')}
-              total={String(worksList.length).padStart(2, '0')}
-            />
-          ))
-        }
-      </div><!-- .s__scene -->
+        <div class="s__scene js-scene">
+          {
+            worksList.map((work, index) => (
+              <AWork
+                cssClass="s__scene__work s__scene__work--card js-work"
+                caption={work.caption}
+                tag={work.tag}
+                site={work.site}
+                src={work.src}
+                modalSrc={work.modalSrc}
+                poster={work.poster}
+                type={work.type}
+                stack={work.stack}
+                impact={work.impact}
+                isLive={work.isLive}
+                index={String(index + 1).padStart(4, '0')}
+                total={String(worksList.length).padStart(2, '0')}
+              />
+            ))
+          }
+        </div><!-- .s__scene -->
 
-      <canvas class="s__canvas js-canvas"></canvas>
-    </div><!-- .s__inner -->
+        <canvas class="s__canvas js-canvas"></canvas>
+      </div><!-- .s__inner -->
 
-    <div class="s__mask-outer">
       <div class="s__mask js-mask">
         <svg class="s__mask__svg js-mask-svg">
-          <path class="s__mask__path-inner js-mask-path-inner" d=""></path>
-          <path class="s__mask__path-outer js-mask-path-outer" d=""></path>
-          <path class="s__mask__path-lines js-mask-path-lines" d=""></path>
+          <defs>
+            <clipPath id="workMaskLinesClip" clipPathUnits="userSpaceOnUse">
+              <path class="js-lines-clip" clip-rule="evenodd" fill-rule="evenodd" d=""></path>
+            </clipPath>
+          </defs>
+          <path class="s__mask__path-outer js-mask-path-outer" fill-rule="evenodd" d=""></path>
+          <path class="s__mask__path-lines js-mask-path-lines" clip-path="url(#workMaskLinesClip)" d=""></path>
         </svg>
       </div><!-- .s__mask -->
-    </div><!-- .s__mask-outer -->
 
-    <div class="s__ruler js-ruler"></div>
+      <div class="s__ruler js-ruler"></div>
+    </div><!-- .s__stage -->
   </div><!-- .s__outer -->
 </section>
 
@@ -282,6 +307,7 @@ const worksList = [
 
   class Section {
     el: HTMLElement
+    stage: HTMLElement
     container: HTMLElement
     ruler: HTMLElement
     scene: HTMLElement
@@ -298,7 +324,6 @@ const worksList = [
       el: HTMLElement
       svg: HTMLElement
       pathOuter: SVGPathElement
-      pathInner: SVGPathElement
       pathLines: SVGPathElement
     }
 
@@ -332,6 +357,7 @@ const worksList = [
     constructor() {
       // Elements
       this.el = document.querySelector('.s-work') as HTMLElement
+      this.stage = this.el?.querySelector('.js-stage') as HTMLElement
       this.container = this.el?.querySelector('.js-container') as HTMLElement
       this.ruler = this.el?.querySelector('.js-ruler') as HTMLElement
       this.scene = this.container?.querySelector('.js-scene') as HTMLElement
@@ -349,7 +375,6 @@ const worksList = [
         el: this.el?.querySelector('.js-mask') as HTMLElement,
         svg: this.el?.querySelector('.js-mask-svg') as HTMLElement,
         pathOuter: this.el?.querySelector('.js-mask-path-outer') as SVGPathElement,
-        pathInner: this.el?.querySelector('.js-mask-path-inner') as SVGPathElement,
         pathLines: this.el?.querySelector('.js-mask-path-lines') as SVGPathElement,
       }
 
@@ -504,26 +529,28 @@ const worksList = [
      * Set mask
      */
     setMask() {
-      const { mask, el, ruler } = this
-      if (!mask.el || !el || !ruler) return
+      const { mask, el } = this
+      if (!mask.el || !el || !this.bounding) return
 
-      const width = mask.el.clientWidth
-      const height = mask.el.clientHeight
+      const width = this.bounding.width || window.innerWidth
+      const height = this.bounding.height || window.innerHeight
 
       mask.width = width
       mask.height = height
 
-      mask.svg.style.width = mask.width + 'px'
-      mask.svg.style.height = mask.height + 'px'
+      mask.svg.style.width = width + 'px'
+      mask.svg.style.height = height + 'px'
+      mask.svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
 
-      const elBounding = el.getBoundingClientRect()
-      const rulerBounding = ruler.getBoundingClientRect()
-      const rulerWidth = rulerBounding.width
-      const rulerHeight = rulerBounding.height
-      const offsetX = rulerBounding.left - elBounding.left
-      const offsetY = rulerBounding.top - elBounding.top
+      const isMobile = width <= 767
+      const isTablet = width > 767 && width <= 1024
 
-      const dOuter = `M -1 0 L ${width + 2} 0 L ${width + 2} ${height} L -1 ${height} Z`
+      const rulerWidth = isMobile ? width * 0.5 : (isTablet ? width * 0.3333 : Math.min(width * 0.16667, 314))
+      const rulerHeight = height * 0.8
+      const offsetX = (width - rulerWidth) / 2
+      const offsetY = height * 0.1
+
+      const dOuter = `M -2 -2 L ${width + 4} -2 L ${width + 4} ${height + 4} L -2 ${height + 4} Z`
 
       const corners = {
         tl: { x: offsetX, y: offsetY },
@@ -533,49 +560,60 @@ const worksList = [
       }
 
       let size = (corners.tr.x - corners.tl.x) / 2
-      mask.maxScale = Math.max(2, (window.safeWidth || window.innerWidth) / (size || 1))
+      mask.maxScale = Math.max(3.2, (Math.max(width, height) / (size || 1)) * 1.6)
 
-      let dInner = `M ${corners.tl.x} ${corners.tl.y + size} A ${size} ${size} 0 0 1 ${corners.tr.x} ${corners.tr.y + size} L ${corners.br.x} ${corners.br.y - size} A ${size} ${size} 0 0 1 ${corners.bl.x} ${corners.bl.y - size} Z`
+      let dInner = `M ${corners.tl.x} ${corners.tl.y + size} L ${corners.bl.x} ${corners.bl.y - size} A ${size} ${size} 0 0 0 ${corners.br.x} ${corners.br.y - size} L ${corners.tr.x} ${corners.tr.y + size} A ${size} ${size} 0 0 0 ${corners.tl.x} ${corners.tl.y + size} Z`
       const linesClip = `${dOuter} ${dInner}`
 
-      mask.pathOuter?.setAttribute('d', `${dOuter} ${dInner}`)
+      mask.pathOuter?.setAttribute('d', linesClip)
 
-      const thickness = (window.safeWidth || window.innerWidth) > 767 ? 16 : 8
-      corners.tl.x += thickness
-      corners.tl.y += thickness
-      corners.tr.x -= thickness
-      corners.tr.y += thickness
-      corners.br.x -= thickness
-      corners.br.y -= thickness
-      corners.bl.x += thickness
-      corners.bl.y -= thickness
-
-      size = Math.max(1, (corners.tr.x - corners.tl.x) / 2)
-
-      dInner = `M ${corners.tl.x} ${corners.tl.y + size} A ${size} ${size} 0 0 1 ${corners.tr.x} ${corners.tr.y + size} L ${corners.br.x} ${corners.br.y - size} A ${size} ${size} 0 0 1 ${corners.bl.x} ${corners.bl.y - size} Z`
-
-      mask.pathInner?.setAttribute('d', `${dOuter} ${dInner}`)
+      const linesClipEl = this.el?.querySelector('.js-lines-clip')
+      if (linesClipEl) {
+        linesClipEl.setAttribute('d', linesClip)
+      }
 
       mask.lines = []
-      const vLines = (window.safeWidth || window.innerWidth) > 767 ? 12 : 8
+      const vLines = isMobile ? 8 : 12
       const gapX = width / vLines
       const gapY = height * 0.1
       const hLines = Math.ceil(height / (gapY || 1))
 
       for (let i = 1; i < vLines; i++) {
         const x = gapX * i
-        mask.lines.push({
-          p1: { x, y: 0 },
-          p2: { x, y: height },
-        })
+        if (x > offsetX && x < offsetX + rulerWidth) {
+          mask.lines.push({
+            p1: { x, y: 0 },
+            p2: { x, y: offsetY },
+          })
+          mask.lines.push({
+            p1: { x, y: offsetY + rulerHeight },
+            p2: { x, y: height },
+          })
+        } else {
+          mask.lines.push({
+            p1: { x, y: 0 },
+            p2: { x, y: height },
+          })
+        }
       }
 
       for (let i = 0; i < hLines; i++) {
         const y = gapY * i
-        mask.lines.push({
-          p1: { x: 0, y },
-          p2: { x: width, y },
-        })
+        if (y > offsetY && y < offsetY + rulerHeight) {
+          mask.lines.push({
+            p1: { x: 0, y },
+            p2: { x: offsetX, y },
+          })
+          mask.lines.push({
+            p1: { x: offsetX + rulerWidth, y },
+            p2: { x: width, y },
+          })
+        } else {
+          mask.lines.push({
+            p1: { x: 0, y },
+            p2: { x: width, y },
+          })
+        }
       }
 
       let dLines = ''
@@ -584,9 +622,6 @@ const worksList = [
       })
 
       mask.pathLines?.setAttribute('d', dLines)
-      if (mask.pathLines) {
-        mask.pathLines.style.clipPath = `path(evenodd, '${linesClip}')`
-      }
     }
 
     /**
@@ -678,9 +713,11 @@ const worksList = [
       this.tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
-          start: 'top 20%',
-          end: 'bottom 80%',
-          scrub: 1.2,
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: this.stage,
+          pinSpacing: false,
+          scrub: 1,
         },
         onUpdate: () => {
           scene.style.setProperty('--state', String(this.state))
@@ -693,39 +730,37 @@ const worksList = [
       const exitDuration = 0.9
       const stepDuration = 2.4
 
-      // Initial intro transition
+      // Initial intro transition: Expand aperture smoothly to reveal WORK universe
       this.tl.fromTo(
         mask.el,
-        { scale: 1 },
-        { scale: mask.maxScale, duration: introDuration, ease: 'power3.inOut' },
+        { scale: 1, opacity: 1 },
+        { scale: mask.maxScale, opacity: 1, duration: introDuration, ease: 'power2.inOut' },
         0
+      )
+      this.tl.to(
+        mask.el,
+        { opacity: 0, duration: 0.2, ease: 'power1.out' },
+        introDuration
       )
 
       this.tl.fromTo(
         scene,
         { scale: 0.75 },
-        { scale: 1, duration: introDuration, ease: 'power3.inOut' },
-        0
-      )
-
-      this.tl.fromTo(
-        container,
-        { clipPath: 'inset(0 1rem)' },
-        { clipPath: 'inset(0 0rem)', duration: introDuration, ease: 'power3.inOut' },
+        { scale: 1, duration: introDuration, ease: 'power2.inOut' },
         0
       )
 
       this.tl.fromTo(
         this,
         { pointsProgress: 0 },
-        { pointsProgress: 1, duration: introDuration, ease: 'power3.inOut' },
+        { pointsProgress: 1, duration: introDuration, ease: 'power2.inOut' },
         0
       )
 
       this.tl.fromTo(
         this,
         { state: 0 },
-        { state: 1, duration: introDuration, ease: 'power3.inOut' },
+        { state: 1, duration: introDuration, ease: 'power2.inOut' },
         0
       )
 
@@ -785,35 +820,35 @@ const worksList = [
       this.tl.fromTo(
         this,
         { state: 1 },
-        { state: 0, duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        { state: 0, duration: introDuration, ease: 'power2.inOut', immediateRender: false },
         outroStart
       )
 
       this.tl.fromTo(
         mask.el,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.2, ease: 'power1.in' },
+        outroStart - 0.2
+      )
+
+      this.tl.fromTo(
+        mask.el,
         { scale: mask.maxScale },
-        { scale: 1, duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        { scale: 1, duration: introDuration, ease: 'power2.inOut', immediateRender: false },
         outroStart
       )
 
       this.tl.fromTo(
         scene,
         { scale: 1 },
-        { scale: 0.75, duration: introDuration, ease: 'power3.inOut', immediateRender: false },
-        outroStart
-      )
-
-      this.tl.fromTo(
-        container,
-        { clipPath: 'inset(0 0rem)' },
-        { clipPath: 'inset(0 1rem)', duration: introDuration, ease: 'power3.inOut', immediateRender: false },
+        { scale: 0.75, duration: introDuration, ease: 'power2.inOut', immediateRender: false },
         outroStart
       )
 
       this.tl.fromTo(
         this,
         { pointsProgress: 1 },
-        { pointsProgress: 0, duration: introDuration, ease: 'power3.inOut' },
+        { pointsProgress: 0, duration: introDuration, ease: 'power2.inOut' },
         outroStart
       )
     }
@@ -1002,8 +1037,8 @@ const worksList = [
 
     height: var(--height);
 
-    background: color(primary);
-    overflow: hidden;
+    background: color(secondary);
+    overflow: visible;
     max-width: 100%;
 
     &:before {
@@ -1020,16 +1055,24 @@ const worksList = [
       content: '';
     }
 
-    .s__mask-outer {
-      position: sticky;
+    .s__outer {
+      position: relative;
+      height: var(--height);
+      overflow: visible;
+      max-width: 100%;
+    }
+
+    .s__stage {
+      position: relative;
       top: 0;
       left: 0;
-
       width: 100%;
+      height: 100vh;
       height: 100lvh;
-
       overflow: hidden;
-      pointer-events: none;
+      background: color(secondary);
+      contain: paint;
+      pointer-events: auto;
     }
 
     .s__mask {
@@ -1040,7 +1083,9 @@ const worksList = [
       width: 100%;
       height: 100%;
 
-      will-change: scale, transform;
+      pointer-events: none;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
 
       &__svg {
         position: absolute;
@@ -1048,6 +1093,7 @@ const worksList = [
         left: 0;
         width: 100%;
         height: 100%;
+        overflow: visible;
       }
 
       &__path-outer {
@@ -1057,17 +1103,6 @@ const worksList = [
         stroke-width: 1px;
       }
 
-      &__path-inner {
-        fill: color(primary);
-        fill-rule: evenodd;
-        stroke: color(secondary);
-        stroke-width: 1px;
-
-        transform: translate3d(0, calc(var(--scroll-progress) * 48px), 0);
-
-        will-change: transform;
-      }
-
       &__path-lines {
         fill: none;
         stroke: color(secondary);
@@ -1075,24 +1110,10 @@ const worksList = [
       }
     }
 
-    .s__outer {
-      position: relative;
-
-      height: var(--height);
-
-      clip-path: inset(0 -1rem);
-      overflow: hidden;
-      max-width: 100%;
-
-      @include mq(phone) {
-        clip-path: inset(0);
-      }
-    }
-
     .s__inner {
       @include flex(column, center, center);
 
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
 
@@ -1100,15 +1121,9 @@ const worksList = [
       height: 100%;
 
       background: color(secondary);
-      transform: translate3d(0, calc(var(--scroll-progress) * -15%), 0);
-
       color: color(primary);
 
-      will-change: clip-path, transform;
-
-      @include mq(phone) {
-        transform: none;
-      }
+      will-change: transform;
     }
 
     .s__ruler {

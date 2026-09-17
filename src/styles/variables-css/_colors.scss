@@ -6,14 +6,43 @@
 
 /* CSS properties */
 :root {
-  // Colors
+  // Default Colors
   @each $variable, $color in map.get($theme-colors, 'default') {
     --color-#{"" + $variable}: #{$color};
   }
+  --theme-glow: rgba(244, 12, 63, 0.2);
+  --theme-accent: #ff4d6d;
 }
 
-.theme-contrasted {
+.theme-contrasted,
+html[data-theme='sepia'] {
   @each $variable, $color in map.get($theme-colors, 'contrasted') {
     --color-#{"" + $variable}: #{$color};
   }
+  --theme-glow: rgba(255, 242, 237, 0.15);
+  --theme-accent: #ff4d6d;
+}
+
+html[data-theme='cyberpunk'] {
+  @each $variable, $color in map.get($theme-colors, 'cyberpunk') {
+    --color-#{"" + $variable}: #{$color};
+  }
+  --theme-glow: rgba(0, 240, 255, 0.3);
+  --theme-accent: #ff007f;
+}
+
+html[data-theme='acidlime'] {
+  @each $variable, $color in map.get($theme-colors, 'acidlime') {
+    --color-#{"" + $variable}: #{$color};
+  }
+  --theme-glow: rgba(212, 255, 0, 0.3);
+  --theme-accent: #00ff88;
+}
+
+html[data-theme='monochrome'] {
+  @each $variable, $color in map.get($theme-colors, 'monochrome') {
+    --color-#{"" + $variable}: #{$color};
+  }
+  --theme-glow: rgba(255, 255, 255, 0.2);
+  --theme-accent: #888888;
 }

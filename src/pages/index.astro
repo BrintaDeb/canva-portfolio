@@ -7,6 +7,7 @@ import SAbout from '../components/SAbout.astro'
 import SWork from '../components/SWork.astro'
 import SSteps from '../components/SSteps.astro'
 import SMyWay from '../components/SMyWay.astro'
+import SLab from '../components/SLab.astro'
 import SServices from '../components/SServices.astro'
 import SCTA from '../components/SCTA.astro'
 import ASeparator from '../components/ASeparator.astro'
@@ -14,7 +15,9 @@ import ProjectLightbox from '../components/ProjectLightbox.astro'
 import WhatsAppChatbot from '../components/WhatsAppChatbot.astro'
 import ScheduleModal from '../components/ScheduleModal.astro'
 import ResumeModal from '../components/ResumeModal.astro'
+import StudioMoodPlayer from '../components/StudioMoodPlayer.astro'
 import CustomCursor from '../components/CustomCursor.astro'
+import SpotlightNav from '../components/SpotlightNav.astro'
 
 import '../styles/global.scss'
 ---
@@ -28,7 +31,7 @@ import '../styles/global.scss'
     <meta
       name="description"
       content="Brinta Deb is a Creative Developer, UI/UX Specialist, and Digital Nomad based in Kolkata, India. Specializing in bespoke digital experiences, responsive web architecture, motion systems, and creative design." />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
 
     <link
@@ -121,6 +124,10 @@ import '../styles/global.scss'
 
       <SMyWay />
 
+      <ASeparator style="secondary" strings={['Playground', 'Nomad', 'Themes', 'Physics']} />
+
+      <SLab />
+
       <ASeparator style="secondary" strings={['Services', 'Packages', 'Pricing', 'Bespoke']} />
 
       <SServices />
@@ -131,11 +138,15 @@ import '../styles/global.scss'
 
       <ProjectLightbox />
 
+      <SpotlightNav />
+
       <WhatsAppChatbot />
 
       <ScheduleModal />
 
       <ResumeModal />
+
+      <StudioMoodPlayer />
     </div><!-- .site-wrapper -->
 
     <div
@@ -179,6 +190,7 @@ import '../styles/global.scss'
     gsap.registerPlugin(ScrollTrigger)
 
     import { CardTilt } from '../utils/Tilt.js'
+    import { themeManager } from '../utils/ThemeManager.js'
 
     declare global {
       interface Window {

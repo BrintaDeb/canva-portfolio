@@ -1,0 +1,1532 @@
+---
+/**
+ * SLab.astro
+ * The Creative Nomad Lab & Tech Radar
+ * Redesigned 1:1 to adhere to the website's Architectural Swiss-Bento UI/UX Theory:
+ * - Warm Cream Primary Canvas: color(primary)
+ * - Sharp Espresso Hairline Borders: 1px solid color(secondary)
+ * - Corner Crosshairs (+) & Monospace Technical Indexing
+ * - Kinetic Hover Inversion: cells invert to color(secondary) on hover
+ * - 3D Gyroscopic Tilt & Holographic Specular Sheen
+ * - Dual Mode: Architectural Bento Grid vs Zero-G Magnetic Floating Field
+ * - Chromatic Morpher Studio matching the editorial aesthetic
+ */
+const techStack = [
+  {
+    id: 'threejs',
+    category: '3d-motion',
+    categoryLabel: '01 / 3D & MOTION',
+    code: '01',
+    name: 'Three.js',
+    role: 'WebGL & 3D Shaders',
+    desc: 'Interactive 3D viewports, procedural geometries, camera choreography & lighting.',
+    icon: '🌐',
+    accent: '#00c8d7',
+    badge: '3D CORE',
+    exp: '3+ Yrs',
+  },
+  {
+    id: 'canva',
+    category: 'design-systems',
+    categoryLabel: '02 / DESIGN SYSTEMS',
+    code: '02',
+    name: 'Canva Pro',
+    role: 'Brand Systems & Decks',
+    desc: 'Bespoke corporate presentation decks, brand toolkits & marketing systems.',
+    icon: '🎨',
+    accent: '#7d2ae8',
+    badge: 'SIGNATURE',
+    exp: '4+ Yrs',
+  },
+  {
+    id: 'figma',
+    category: 'design-systems',
+    categoryLabel: '02 / DESIGN SYSTEMS',
+    code: '03',
+    name: 'Figma',
+    role: 'UI/UX Architecture',
+    desc: 'Design tokens, auto-layout components, interactive wireframes & prototypes.',
+    icon: '📐',
+    accent: '#f24e1e',
+    badge: 'WIREFRAMES',
+    exp: '4+ Yrs',
+  },
+  {
+    id: 'astro',
+    category: 'architecture',
+    categoryLabel: '03 / ARCHITECTURE',
+    code: '04',
+    name: 'Astro 5',
+    role: 'Zero-JS Islands Engine',
+    desc: 'High-speed content collections, static generation & sub-1s LCP loading.',
+    icon: '🚀',
+    accent: '#e64a00',
+    badge: 'ULTRA FAST',
+    exp: '2+ Yrs',
+  },
+  {
+    id: 'gsap',
+    category: '3d-motion',
+    categoryLabel: '01 / 3D & MOTION',
+    code: '05',
+    name: 'GSAP Motion',
+    role: 'ScrollTrigger Timelines',
+    desc: 'Physics scrubbers, kinetic typography, magnetic cursors & smooth pinning.',
+    icon: '✨',
+    accent: '#6ea800',
+    badge: 'KINETIC FX',
+    exp: '3+ Yrs',
+  },
+  {
+    id: 'procreate',
+    category: 'design-systems',
+    categoryLabel: '02 / DESIGN SYSTEMS',
+    code: '06',
+    name: 'Procreate',
+    role: 'Digital Art & Sketching',
+    desc: 'Custom anime character art, textured brushes & bespoke visual illustrations.',
+    icon: '🖌️',
+    accent: '#0088cc',
+    badge: 'DIGITAL ART',
+    exp: '4+ Yrs',
+  },
+  {
+    id: 'nextjs',
+    category: 'architecture',
+    categoryLabel: '03 / ARCHITECTURE',
+    code: '07',
+    name: 'Next.js 15 & React',
+    role: 'Fullstack App Router',
+    desc: 'Server actions, SSR caching, API routes & production-grade web deployments.',
+    icon: '▲',
+    accent: '#160000',
+    badge: 'FULLSTACK',
+    exp: '3+ Yrs',
+  },
+  {
+    id: 'webgl',
+    category: '3d-motion',
+    categoryLabel: '01 / 3D & MOTION',
+    code: '08',
+    name: 'WebGL Shaders',
+    role: 'GPU Fragment Shaders',
+    desc: 'Liquid ripples, noise displacement, chromatic aberration & particle fields.',
+    icon: '⚡',
+    accent: '#d97706',
+    badge: 'GPU ACCEL',
+    exp: '2+ Yrs',
+  },
+  {
+    id: 'typescript',
+    category: 'architecture',
+    categoryLabel: '03 / ARCHITECTURE',
+    code: '09',
+    name: 'TypeScript',
+    role: 'Type-Safe Architecture',
+    desc: 'Clean interfaces, strong contracts, strict typing & bulletproof logic.',
+    icon: '🔷',
+    accent: '#1e5fad',
+    badge: 'STRICT CODE',
+    exp: '3+ Yrs',
+  },
+  {
+    id: 'styling',
+    category: 'architecture',
+    categoryLabel: '03 / ARCHITECTURE',
+    code: '10',
+    name: 'SCSS & Tailwind',
+    role: 'Modular Design Tokens',
+    desc: 'Fluid clamp scaling, modern CSS nesting, glassmorphism & responsive layouts.',
+    icon: '💎',
+    accent: '#0284c7',
+    badge: 'RESPONSIVE',
+    exp: '4+ Yrs',
+  },
+]
+---
+
+<section id="lab" class="s-lab" data-intersect>
+  <div class="s-lab__wrapper">
+    <!-- Top Pill Header (1:1 with SAbout, SSteps, SServices) -->
+    <div class="s-lab__pill-header">
+      <span class="s-lab__pill-text">SECTION // 05 &bull; THE NOMAD TECH RADAR &bull; AESTHETIC STUDIO</span>
+    </div>
+
+    <!-- Outer Bento Grid with Hairline Collapsed Borders -->
+    <div class="s-lab__bento">
+      <!-- Row 1: Full-Width Section Header Cell -->
+      <div class="s-lab__cell s-lab__cell--hero">
+        <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
+        <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
+        
+        <div class="s-lab__hero-content">
+          <div class="s-lab__coords-badge">
+            <span class="pulse-dot"></span>
+            <span>22.57° N, 88.36° E • KOLKATA // DEPLOYING GLOBALLY</span>
+          </div>
+
+          <h2 class="s-lab__title">
+            THE CREATIVE <span class="s-lab__title--italic">Nomad Lab</span>
+          </h2>
+
+          <p class="s-lab__lead">
+            "Most developers can’t design. Most designers can’t write code. I live at the intersection — turning static Canva decks, Figma blueprints, and raw imagination into tactile, production-grade digital reality."
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2: 2-Column Split (Tech Radar on Left, Chromatic Morpher on Right) -->
+      <div class="s-lab__split-row">
+        <!-- Left Cell: Tech Capability Deck -->
+        <div class="s-lab__cell s-lab__cell--radar">
+          <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
+
+          <!-- Architectural Toolbar -->
+          <div class="s-lab__toolbar">
+            <div class="s-lab__filter-tabs" role="tablist">
+              <button class="s-lab__filter-btn is-active js-filter-btn" data-filter="all" type="button">ALL [10]</button>
+              <button class="s-lab__filter-btn js-filter-btn" data-filter="3d-motion" type="button">3D &amp; MOTION</button>
+              <button class="s-lab__filter-btn js-filter-btn" data-filter="design-systems" type="button">DESIGN</button>
+              <button class="s-lab__filter-btn js-filter-btn" data-filter="architecture" type="button">ENGINE</button>
+            </div>
+
+            <div class="s-lab__view-toggle">
+              <button class="s-lab__toggle-btn is-active js-view-mode" data-mode="grid" type="button" title="Architectural Bento Grid View">
+                <span>⊞ BENTO</span>
+              </button>
+              <button class="s-lab__toggle-btn js-view-mode" data-mode="zero-g" type="button" title="Zero-Gravity Magnetic Float Playground">
+                <span>⚛ ZERO-G</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- View 1: Bento Grid Cards -->
+          <div class="s-lab__cards-grid js-grid-view">
+            {
+              techStack.map((item) => (
+                <div
+                  class="tech-card js-tilt-card"
+                  data-category={item.category}
+                  style={`--card-accent: ${item.accent};`}
+                >
+                  <span class="tech-card__mask"></span>
+                  <div class="tech-card__sheen js-card-sheen"></div>
+                  
+                  <div class="tech-card__content">
+                    <div class="tech-card__top">
+                      <span class="tech-card__code">[{item.code}]</span>
+                      <span class="tech-card__badge">{item.badge}</span>
+                      <span class="tech-card__exp">{item.exp}</span>
+                    </div>
+
+                    <div class="tech-card__body">
+                      <div class="tech-card__icon-box">
+                        <span class="tech-card__icon">{item.icon}</span>
+                      </div>
+                      <div class="tech-card__names">
+                        <h3 class="tech-card__title">{item.name}</h3>
+                        <span class="tech-card__role">{item.role}</span>
+                      </div>
+                    </div>
+
+                    <p class="tech-card__desc">{item.desc}</p>
+
+                    <div class="tech-card__foot">
+                      <span class="tech-card__cat-label">{item.categoryLabel}</span>
+                      <span class="tech-card__arrow">→</span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- View 2: Zero-G Magnetic Floating Field -->
+          <div class="s-lab__zerog-container js-zerog-view" style="display: none;">
+            <div class="s-lab__zerog-bar">
+              <span class="s-lab__zerog-status">
+                <span class="pulse-dot"></span>
+                <span>MAGNETIC FIELD ACTIVE: DRAG, THROW &amp; BOUNCE TECH NODES</span>
+              </span>
+              <button class="s-lab__realign-btn js-realign-zerog" type="button">RE-ORBIT NODES</button>
+            </div>
+
+            <div class="s-lab__arena js-zerog-canvas" id="zerog-arena">
+              {
+                techStack.map((item) => (
+                  <div
+                    class="zerog-badge js-zerog-node"
+                    data-name={item.name}
+                    style={`--node-accent: ${item.accent};`}
+                  >
+                    <span class="zerog-icon">{item.icon}</span>
+                    <div class="zerog-info">
+                      <strong class="zerog-title">{item.name}</strong>
+                      <small class="zerog-role">{item.role}</small>
+                    </div>
+                    <span class="zerog-indicator"></span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Cell: Aesthetic Chromatic Studio -->
+        <div class="s-lab__cell s-lab__cell--studio">
+          <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
+
+          <div class="studio-header">
+            <div class="studio-header__left">
+              <span class="studio-tag">AESTHETIC THEME ENGINE</span>
+              <h3 class="studio-title">CHROMATIC MORPHER</h3>
+            </div>
+            <span class="studio-badge">LIVE COLORWAYS</span>
+          </div>
+
+          <p class="studio-desc">
+            Shift the portfolio through different aesthetic lenses. Selecting a palette dynamically re-skins the typography, SVG paths, and WebGL canvases across all sections in real time:
+          </p>
+
+          <!-- Palettes Deck -->
+          <div class="studio-palettes">
+            <!-- 1. Editorial Sepia -->
+            <button
+              class="palette-tile is-active js-theme-switch"
+              data-theme="sepia"
+              data-primary="#fff2ed"
+              data-secondary="#160000"
+              data-accent="#ff4d6d"
+              type="button"
+            >
+              <div class="palette-swatch" style="background: linear-gradient(135deg, #fff2ed 50%, #160000 50%); border-color: #160000;"></div>
+              <div class="palette-text">
+                <div class="palette-top">
+                  <strong class="palette-name">Editorial Sepia</strong>
+                  <span class="palette-status">DEFAULT</span>
+                </div>
+                <span class="palette-notes">Warm cream, deep espresso &amp; editorial serif</span>
+                <span class="palette-specimen">Aa Bb 123 • 21:1 AAA</span>
+              </div>
+            </button>
+
+            <!-- 2. Cyberpunk Neon -->
+            <button
+              class="palette-tile js-theme-switch"
+              data-theme="cyberpunk"
+              data-primary="#00f0ff"
+              data-secondary="#090a0f"
+              data-accent="#ff007f"
+              type="button"
+            >
+              <div class="palette-swatch" style="background: linear-gradient(135deg, #00f0ff 50%, #090a0f 50%); border-color: #00f0ff;"></div>
+              <div class="palette-text">
+                <div class="palette-top">
+                  <strong class="palette-name">Cyberpunk Neon</strong>
+                  <span class="palette-status">NEON GLOW</span>
+                </div>
+                <span class="palette-notes">Obsidian dark, laser cyan &amp; electric magenta</span>
+                <span class="palette-specimen">Aa Bb 123 • 18:1 AAA</span>
+              </div>
+            </button>
+
+            <!-- 3. Acid Lime -->
+            <button
+              class="palette-tile js-theme-switch"
+              data-theme="acidlime"
+              data-primary="#d4ff00"
+              data-secondary="#0d0f0d"
+              data-accent="#00ff88"
+              type="button"
+            >
+              <div class="palette-swatch" style="background: linear-gradient(135deg, #d4ff00 50%, #0d0f0d 50%); border-color: #d4ff00;"></div>
+              <div class="palette-text">
+                <div class="palette-top">
+                  <strong class="palette-name">Acid Lime</strong>
+                  <span class="palette-status">BRUTALIST</span>
+                </div>
+                <span class="palette-notes">High-voltage brutalist black &amp; electric neon lime</span>
+                <span class="palette-specimen">Aa Bb 123 • 19:1 AAA</span>
+              </div>
+            </button>
+
+            <!-- 4. Pure Monochrome -->
+            <button
+              class="palette-tile js-theme-switch"
+              data-theme="monochrome"
+              data-primary="#f0f0f0"
+              data-secondary="#000000"
+              data-accent="#999999"
+              type="button"
+            >
+              <div class="palette-swatch" style="background: linear-gradient(135deg, #ffffff 50%, #000000 50%); border-color: #160000;"></div>
+              <div class="palette-text">
+                <div class="palette-top">
+                  <strong class="palette-name">Pure Monochrome</strong>
+                  <span class="palette-status">MINIMAL</span>
+                </div>
+                <span class="palette-notes">Carbon black, architectural white &amp; starkness</span>
+                <span class="palette-specimen">Aa Bb 123 • 22:1 AAA</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Architectural Telemetry Box -->
+          <div class="studio-telemetry">
+            <div class="telemetry-row">
+              <span class="telemetry-label">ACTIVE MATRIX:</span>
+              <span class="telemetry-val js-telemetry-values">PRIMARY: #fff2ed | SECONDARY: #160000</span>
+            </div>
+            <p class="telemetry-quote">
+              "Design without technical rigor is just an image. Code without aesthetic nuance is just logic. I merge both into digital art."
+            </p>
+            <div class="telemetry-footer">
+              <span>BRINTA DEB // CREATIVE NOMAD</span>
+              <span>4+ YRS EXPERIENCE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { themeManager } from '../utils/ThemeManager.js'
+  import { audioEngine } from '../utils/AudioEngine.js'
+
+  class LabProMax {
+    constructor() {
+      this.root = document.getElementById('lab')
+      if (!this.root) return
+
+      // Mode toggling
+      this.viewBtns = this.root.querySelectorAll('.js-view-mode')
+      this.gridView = this.root.querySelector('.js-grid-view')
+      this.zeroGView = this.root.querySelector('.js-zerog-view')
+
+      // Filtering
+      this.filterBtns = this.root.querySelectorAll('.js-filter-btn')
+      this.cards = this.root.querySelectorAll('.tech-card')
+
+      // Theme Studio
+      this.themeBtns = this.root.querySelectorAll('.js-theme-switch')
+      this.telemetryEl = this.root.querySelector('.js-telemetry-values')
+
+      // Zero-G Physics
+      this.arena = document.getElementById('zerog-arena')
+      this.nodes = Array.from(this.root.querySelectorAll('.js-zerog-node')) as HTMLElement[]
+      this.realignBtn = this.root.querySelector('.js-realign-zerog')
+
+      this.zeroGItems = [] as any[]
+      this.animId = 0
+      this.isZeroGActive = false
+
+      this.init()
+    }
+
+    init() {
+      this.initCardTilt()
+      this.initFilters()
+      this.initViewToggle()
+      this.initThemes()
+      this.initZeroGPhysics()
+    }
+
+    /* 3D Holographic Gyroscopic Card Tilt */
+    initCardTilt() {
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return
+
+      this.cards.forEach((card) => {
+        const sheen = card.querySelector('.js-card-sheen') as HTMLElement
+
+        card.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = card.getBoundingClientRect()
+          const x = e.clientX - rect.left
+          const y = e.clientY - rect.top
+
+          const centerX = rect.width / 2
+          const centerY = rect.height / 2
+
+          const rotateX = ((y - centerY) / centerY) * -8
+          const rotateY = ((x - centerX) / centerX) * 8
+
+          card.style.transform = `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`
+
+          if (sheen) {
+            sheen.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.22) 0%, transparent 65%)`
+          }
+        })
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0)'
+          if (sheen) {
+            sheen.style.background = 'none'
+          }
+        })
+
+        card.addEventListener('mouseenter', () => {
+          audioEngine.playTab()
+        })
+      })
+    }
+
+    /* Domain Filtering */
+    initFilters() {
+      this.filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter')
+          this.filterBtns.forEach((b) => b.classList.remove('is-active'))
+          btn.classList.add('is-active')
+          audioEngine.playSnap()
+
+          this.cards.forEach((card) => {
+            const cat = card.getAttribute('data-category')
+            if (filter === 'all' || cat === filter) {
+              card.style.display = 'block'
+              card.style.opacity = '1'
+            } else {
+              card.style.display = 'none'
+              card.style.opacity = '0'
+            }
+          })
+        })
+      })
+    }
+
+    /* Bento Grid vs Zero-G Switcher */
+    initViewToggle() {
+      this.viewBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.getAttribute('data-mode')
+          this.viewBtns.forEach((b) => b.classList.remove('is-active'))
+          btn.classList.add('is-active')
+          audioEngine.playChime()
+
+          if (mode === 'zero-g') {
+            if (this.gridView) this.gridView.style.display = 'none'
+            if (this.zeroGView) this.zeroGView.style.display = 'block'
+            this.isZeroGActive = true
+            this.realignZeroG()
+          } else {
+            if (this.gridView) this.gridView.style.display = 'grid'
+            if (this.zeroGView) this.zeroGView.style.display = 'none'
+            this.isZeroGActive = false
+          }
+        })
+      })
+    }
+
+    /* Theme Studio */
+    initThemes() {
+      const activeTheme = themeManager.getTheme()
+      this.updateActiveThemeUI(activeTheme)
+
+      this.themeBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const themeId = btn.getAttribute('data-theme')
+          if (!themeId) return
+          themeManager.setTheme(themeId)
+          this.updateActiveThemeUI(themeId)
+          audioEngine.playSnap()
+        })
+      })
+
+      window.addEventListener('theme:change', ((e: CustomEvent) => {
+        if (e.detail.theme) {
+          this.updateActiveThemeUI(e.detail.theme)
+        }
+      }) as EventListener)
+    }
+
+    updateActiveThemeUI(themeId: string) {
+      this.themeBtns.forEach((btn) => {
+        const id = btn.getAttribute('data-theme')
+        if (id === themeId) {
+          btn.classList.add('is-active')
+          const p = btn.getAttribute('data-primary')
+          const s = btn.getAttribute('data-secondary')
+          if (this.telemetryEl && p && s) {
+            this.telemetryEl.textContent = `PRIMARY: ${p} | SECONDARY: ${s}`
+          }
+        } else {
+          btn.classList.remove('is-active')
+        }
+      })
+    }
+
+    /* Zero-Gravity Floating Physics Engine */
+    initZeroGPhysics() {
+      if (!this.arena || this.nodes.length === 0) return
+
+      const arenaRect = this.arena.getBoundingClientRect()
+      const w = arenaRect.width || 600
+      const h = arenaRect.height || 420
+
+      this.zeroGItems = this.nodes.map((el, i) => {
+        const nw = el.offsetWidth || 140
+        const nh = el.offsetHeight || 48
+
+        const cols = 3
+        const row = Math.floor(i / cols)
+        const col = i % cols
+
+        const targetX = 30 + col * ((w - 60) / 3) + (Math.random() * 20 - 10)
+        const targetY = 30 + row * 95 + (Math.random() * 20 - 10)
+
+        const item = {
+          el,
+          x: Math.max(10, Math.min(w - nw - 10, targetX)),
+          y: Math.max(10, Math.min(h - nh - 10, targetY)),
+          originX: targetX,
+          originY: targetY,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: (Math.random() - 0.5) * 1.2,
+          w: nw,
+          h: nh,
+          floatPhase: Math.random() * Math.PI * 2,
+          isDragging: false,
+        }
+
+        this.bindZeroGDrag(item)
+        return item
+      })
+
+      this.realignBtn?.addEventListener('click', () => {
+        this.realignZeroG()
+        audioEngine.playChime()
+      })
+
+      this.runZeroGLoop()
+    }
+
+    realignZeroG() {
+      if (!this.arena) return
+      const rect = this.arena.getBoundingClientRect()
+      const w = rect.width || 600
+      const h = rect.height || 420
+
+      this.zeroGItems.forEach((item, i) => {
+        const cols = 3
+        const row = Math.floor(i / cols)
+        const col = i % cols
+        item.x = 30 + col * ((w - 60) / 3)
+        item.y = 30 + row * 95
+        item.vx = (Math.random() - 0.5) * 0.5
+        item.vy = (Math.random() - 0.5) * 0.5
+      })
+    }
+
+    bindZeroGDrag(item: any) {
+      const el = item.el
+      let offX = 0
+      let offY = 0
+
+      const onPointerDown = (e: MouseEvent | TouchEvent) => {
+        const cx = 'touches' in e ? e.touches[0].clientX : e.clientX
+        const cy = 'touches' in e ? e.touches[0].clientY : e.clientY
+        const aRect = this.arena?.getBoundingClientRect()
+        if (!aRect) return
+
+        offX = cx - aRect.left - item.x
+        offY = cy - aRect.top - item.y
+
+        item.isDragging = true
+        el.classList.add('is-dragging')
+        audioEngine.playClick()
+
+        const onPointerMove = (me: MouseEvent | TouchEvent) => {
+          if (!item.isDragging) return
+          const mcx = 'touches' in me ? me.touches[0].clientX : me.clientX
+          const mcy = 'touches' in me ? me.touches[0].clientY : me.clientY
+          const arenaRect = this.arena?.getBoundingClientRect()
+          if (!arenaRect) return
+
+          const newX = mcx - arenaRect.left - offX
+          const newY = mcy - arenaRect.top - offY
+
+          item.vx = (newX - item.x) * 0.45
+          item.vy = (newY - item.y) * 0.45
+          item.x = newX
+          item.y = newY
+        }
+
+        const onPointerUp = () => {
+          item.isDragging = false
+          el.classList.remove('is-dragging')
+          window.removeEventListener('mousemove', onPointerMove)
+          window.removeEventListener('mouseup', onPointerUp)
+          window.removeEventListener('touchmove', onPointerMove)
+          window.removeEventListener('touchend', onPointerUp)
+          audioEngine.playTab()
+        }
+
+        window.addEventListener('mousemove', onPointerMove)
+        window.addEventListener('mouseup', onPointerUp)
+        window.addEventListener('touchmove', onPointerMove)
+        window.addEventListener('touchend', onPointerUp)
+      }
+
+      el.addEventListener('mousedown', onPointerDown)
+      el.addEventListener('touchstart', onPointerDown, { passive: true })
+    }
+
+    runZeroGLoop() {
+      const tick = () => {
+        if (this.isZeroGActive && this.arena) {
+          const rect = this.arena.getBoundingClientRect()
+          const w = rect.width
+          const h = rect.height
+
+          for (let i = 0; i < this.zeroGItems.length; i++) {
+            const item = this.zeroGItems[i]
+
+            if (!item.isDragging) {
+              item.floatPhase += 0.02
+              const floatOffsetY = Math.sin(item.floatPhase) * 0.35
+
+              item.x += item.vx
+              item.y += item.vy + floatOffsetY
+              item.vx *= 0.97
+              item.vy *= 0.97
+
+              // Inter-Node Repulsion
+              for (let j = i + 1; j < this.zeroGItems.length; j++) {
+                const other = this.zeroGItems[j]
+                const dx = other.x - item.x
+                const dy = other.y - item.y
+                const dist = Math.hypot(dx, dy)
+                const minDist = 90
+                if (dist < minDist && dist > 0.1) {
+                  const force = (minDist - dist) * 0.03
+                  const fx = (dx / dist) * force
+                  const fy = (dy / dist) * force
+                  if (!item.isDragging) {
+                    item.vx -= fx
+                    item.vy -= fy
+                  }
+                  if (!other.isDragging) {
+                    other.vx += fx
+                    other.vy += fy
+                  }
+                }
+              }
+
+              // Elastic boundary walls
+              const pad = 10
+              if (item.x < pad) {
+                item.x = pad
+                item.vx = -item.vx * 0.8
+              } else if (item.x + item.w > w - pad) {
+                item.x = w - item.w - pad
+                item.vx = -item.vx * 0.8
+              }
+
+              if (item.y < pad) {
+                item.y = pad
+                item.vy = -item.vy * 0.8
+              } else if (item.y + item.h > h - pad) {
+                item.y = h - item.h - pad
+                item.vy = -item.vy * 0.8
+              }
+            }
+
+            item.el.style.transform = `translate3d(${item.x.toFixed(1)}px, ${item.y.toFixed(1)}px, 0)`
+          }
+        }
+
+        this.animId = requestAnimationFrame(tick)
+      }
+      this.animId = requestAnimationFrame(tick)
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new LabProMax())
+  } else {
+    new LabProMax()
+  }
+</script>
+
+<style lang="scss">
+  .s-lab {
+    position: relative;
+    z-index: 3;
+    padding: 7rem 0 10rem;
+    background: color(primary); // 100% true to website UI theory (Warm Cream Canvas)
+    color: color(secondary); // 100% true to website UI theory (Architectural Espresso)
+    border-top: 1px solid color(secondary);
+    border-bottom: 1px solid color(secondary);
+    overflow: hidden;
+
+    @include mq(tablet) {
+      padding: 4.5rem 0 8.5rem;
+    }
+
+    &__wrapper {
+      position: relative;
+      margin: 0 auto;
+      width: min(84rem, calc(100% - 3rem));
+
+      @include mq(phone) {
+        width: calc(100% - 1.5rem);
+      }
+    }
+
+    /* Top Pill Header (1:1 with SAbout & SSteps) */
+    &__pill-header {
+      display: block;
+      background: color(secondary);
+      color: color(primary);
+      text-align: center;
+      padding: 0.45rem 1rem;
+      border: 1px solid color(secondary);
+      border-bottom: 0;
+    }
+
+    &__pill-text {
+      font: 700 0.6875rem / 1 font-family(fraktion);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* Bento Grid Container */
+    &__bento {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* Generic Architectural Cell */
+    &__cell {
+      position: relative;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      margin-top: -1px;
+      overflow: hidden;
+
+      &--hero {
+        padding: 3rem 2.5rem 2.75rem;
+
+        @include mq(phone) {
+          padding: 2rem 1.25rem;
+        }
+      }
+
+      &--radar {
+        padding: 1.75rem;
+        flex: 1.35;
+
+        @include mq(phone) {
+          padding: 1.25rem;
+        }
+      }
+
+      &--studio {
+        padding: 1.75rem;
+        flex: 0.85;
+
+        @include mq(phone) {
+          padding: 1.25rem;
+        }
+      }
+    }
+
+    /* Corner Crosshairs (+) */
+    &__crosshair {
+      position: absolute;
+      font-family: font-family(mono);
+      font-size: 0.85rem;
+      line-height: 1;
+      color: color(secondary);
+      pointer-events: none;
+      z-index: 5;
+
+      &--tl { top: 0.5rem; left: 0.65rem; }
+      &--tr { top: 0.5rem; right: 0.65rem; }
+    }
+
+    /* Hero Section Content */
+    &__coords-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid color(secondary);
+      border-radius: 20px;
+      font-family: font-family(mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.5rem;
+
+      .pulse-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--theme-accent, #ff4d6d);
+        animation: labPulse 1.8s infinite;
+      }
+
+      @include mq(phone) {
+        font-size: 0.58rem;
+        padding: 0.2rem 0.5rem;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &__title {
+      font: 700 min(7.5vw, 4.25rem) / 1.05 font-family(bigger);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      color: color(secondary);
+
+      &--italic {
+        font-family: font-family(editorial);
+        font-weight: 300;
+        font-style: italic;
+        text-transform: none;
+      }
+    }
+
+    &__lead {
+      font-family: font-family(editorial);
+      font-size: 1.3rem;
+      line-height: 1.55;
+      max-width: 54rem;
+      color: color(secondary);
+      opacity: 0.85;
+
+      @include mq(phone) {
+        font-size: 1.05rem;
+      }
+    }
+
+    /* Split Row */
+    &__split-row {
+      display: flex;
+      margin-top: -1px;
+
+      > .s-lab__cell:not(:first-child) {
+        margin-left: -1px;
+      }
+
+      @include mq(desktop-xs) {
+        flex-direction: column;
+
+        > .s-lab__cell:not(:first-child) {
+          margin-left: 0;
+          margin-top: -1px;
+        }
+      }
+    }
+
+    /* Toolbar */
+    &__toolbar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid color(secondary);
+      margin-bottom: 1.5rem;
+
+      @include mq(phone) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding-bottom: 1rem;
+      }
+    }
+
+    &__filter-tabs {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+
+      @include mq(phone) {
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+
+    &__filter-btn {
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-family: font-family(mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 0.35rem 0.7rem;
+      background: transparent;
+      border: 1px solid color(secondary);
+      color: color(secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(22, 0, 0, 0.08);
+      }
+
+      &.is-active {
+        background: color(secondary);
+        color: color(primary);
+        font-weight: 700;
+      }
+    }
+
+    &__view-toggle {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem;
+      border: 1px solid color(secondary);
+    }
+
+    &__toggle-btn {
+      font-family: font-family(mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.6rem;
+      border: none;
+      background: transparent;
+      color: color(secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &.is-active {
+        background: color(secondary);
+        color: color(primary);
+        font-weight: 700;
+      }
+    }
+
+    /* Cards Grid */
+    &__cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      @include mq(phone) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 3D Gyroscopic Architectural Tech Card */
+    .tech-card {
+      position: relative;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      padding: 1.25rem;
+      cursor: pointer;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+
+      &__mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background: color(secondary);
+        scale: 0 1;
+        transform-origin: 0 50%;
+        transition: scale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+
+      &__sheen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      &__content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transition: color 0.25s ease;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          box-shadow: 0 12px 28px rgba(22, 0, 0, 0.15);
+
+          .tech-card__mask {
+            scale: 1 1;
+          }
+
+          .tech-card__content {
+            color: color(primary);
+          }
+
+          .tech-card__top,
+          .tech-card__role,
+          .tech-card__desc,
+          .tech-card__foot {
+            color: color(primary);
+          }
+
+          .tech-card__title {
+            color: color(primary);
+          }
+
+          .tech-card__badge {
+            background: color(primary);
+            color: color(secondary);
+            border-color: color(primary);
+          }
+
+          .tech-card__arrow {
+            transform: translateX(4px);
+          }
+        }
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &__top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-family: font-family(mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        color: color(secondary);
+        opacity: 0.75;
+      }
+
+      &__badge {
+        padding: 0.15rem 0.45rem;
+        border: 1px solid color(secondary);
+        border-radius: 2px;
+        font-weight: 700;
+        transition: all 0.25s ease;
+      }
+
+      &__body {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.85rem;
+      }
+
+      &__icon-box {
+        width: 42px;
+        height: 42px;
+        border: 1px solid color(secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        background: rgba(22, 0, 0, 0.03);
+      }
+
+      &__names {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__title {
+        font-family: font-family(mono);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: color(secondary);
+      }
+
+      &__role {
+        font-size: 0.68rem;
+        color: color(secondary);
+        opacity: 0.7;
+      }
+
+      &__desc {
+        font-size: 0.72rem;
+        line-height: 1.45;
+        color: color(secondary);
+        opacity: 0.85;
+        flex: 1;
+      }
+
+      &__foot {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid color(secondary);
+        padding-top: 0.6rem;
+        font-family: font-family(mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        color: color(secondary);
+        opacity: 0.7;
+      }
+
+      &__arrow {
+        transition: transform 0.2s ease;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+    }
+
+    /* Zero-G Arena */
+    &__zerog-container {
+      position: relative;
+    }
+
+    &__zerog-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1rem;
+      border: 1px solid color(secondary);
+      font-family: font-family(mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    &__zerog-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+
+      .pulse-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--theme-accent, #ff4d6d);
+        animation: labPulse 1.8s infinite;
+      }
+    }
+
+    &__realign-btn {
+      font-family: font-family(mono);
+      font-size: 0.6rem;
+      padding: 0.25rem 0.6rem;
+      background: color(secondary);
+      color: color(primary);
+      border: 1px solid color(secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: transparent;
+        color: color(secondary);
+      }
+    }
+
+    &__arena {
+      position: relative;
+      height: 480px;
+      width: 100%;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      overflow: hidden;
+      user-select: none;
+      touch-action: none;
+
+      // Subtle architectural grid dots on cream canvas
+      background-image: radial-gradient(color(secondary) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .zerog-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 1rem;
+      background: color(primary);
+      border: 1.5px solid color(secondary);
+      cursor: grab;
+      box-shadow: 0 8px 24px rgba(22, 0, 0, 0.12);
+      will-change: transform;
+      user-select: none;
+      transition: background 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background: color(secondary);
+        color: color(primary);
+
+        .zerog-title,
+        .zerog-role {
+          color: color(primary);
+        }
+      }
+
+      &.is-dragging {
+        cursor: grabbing;
+        z-index: 50;
+        transform: scale(1.08) !important;
+        background: color(secondary);
+        color: color(primary);
+        box-shadow: 0 20px 48px rgba(22, 0, 0, 0.25);
+
+        .zerog-title,
+        .zerog-role {
+          color: color(primary);
+        }
+      }
+
+      .zerog-icon {
+        font-size: 1.15rem;
+      }
+
+      .zerog-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .zerog-title {
+        font-family: font-family(mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: color(secondary);
+      }
+
+      .zerog-role {
+        font-size: 0.56rem;
+        color: color(secondary);
+        opacity: 0.7;
+      }
+
+      .zerog-indicator {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--node-accent, color(secondary));
+      }
+    }
+
+    /* Aesthetic Studio (Right Column) */
+    .studio-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid color(secondary);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .studio-tag {
+      font-family: font-family(mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: color(secondary);
+      opacity: 0.7;
+    }
+
+    .studio-title {
+      font-family: font-family(bigger);
+      font-size: 1.6rem;
+      letter-spacing: -0.01em;
+      margin-top: 0.2rem;
+      color: color(secondary);
+    }
+
+    .studio-badge {
+      font-family: font-family(mono);
+      font-size: 0.62rem;
+      padding: 0.25rem 0.6rem;
+      background: color(secondary);
+      color: color(primary);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      height: fit-content;
+    }
+
+    .studio-desc {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: color(secondary);
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .studio-palettes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .palette-tile {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.15rem;
+      padding: 0.95rem 1.15rem;
+      background: color(primary);
+      border: 1px solid color(secondary);
+      cursor: pointer;
+      text-align: left;
+      color: color(secondary);
+      transition: all 0.25s ease;
+
+      &:hover {
+        transform: translateX(4px);
+        box-shadow: 0 8px 20px rgba(22, 0, 0, 0.08);
+      }
+
+      &.is-active {
+        background: color(secondary);
+        color: color(primary);
+        box-shadow: 0 12px 28px rgba(22, 0, 0, 0.15);
+
+        .palette-name,
+        .palette-notes,
+        .palette-specimen {
+          color: color(primary);
+        }
+
+        .palette-status {
+          background: color(primary);
+          color: color(secondary);
+        }
+      }
+
+      .palette-swatch {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid color(secondary);
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(22, 0, 0, 0.15);
+      }
+
+      .palette-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .palette-top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .palette-name {
+        font-family: font-family(mono);
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: color(secondary);
+      }
+
+      .palette-status {
+        font-family: font-family(mono);
+        font-size: 0.58rem;
+        padding: 0.15rem 0.4rem;
+        border: 1px solid color(secondary);
+        letter-spacing: 0.08em;
+      }
+
+      .palette-notes {
+        font-size: 0.68rem;
+        color: color(secondary);
+        opacity: 0.7;
+      }
+
+      .palette-specimen {
+        font-family: font-family(mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        opacity: 0.7;
+        margin-top: 0.15rem;
+      }
+    }
+
+    /* Telemetry Box */
+    .studio-telemetry {
+      padding: 1.25rem;
+      background: rgba(22, 0, 0, 0.03);
+      border: 1px dashed color(secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      .telemetry-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-family: font-family(mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        color: color(secondary);
+        font-weight: 700;
+        border-bottom: 1px solid color(secondary);
+        padding-bottom: 0.45rem;
+      }
+
+      .telemetry-quote {
+        font-family: font-family(editorial);
+        font-size: 0.95rem;
+        font-style: italic;
+        line-height: 1.45;
+        color: color(secondary);
+      }
+
+      .telemetry-footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-family: font-family(mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        color: color(secondary);
+        opacity: 0.6;
+      }
+    }
+  }
+
+  @keyframes labPulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 1;
+    }
+  }
+</style>

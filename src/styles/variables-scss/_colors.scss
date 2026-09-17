@@ -9,6 +9,7 @@ $theme-colors: (
     secondary: #160000,
     shadow: #540000,
     white: #fff0eb,
+    accent: #ff4d6d,
   ),
 
   contrasted: (
@@ -16,5 +17,30 @@ $theme-colors: (
     secondary: #160000,
     shadow: #4d4040,
     white: #fff0eb,
+    accent: #ff4d6d,
+  ),
+
+  cyberpunk: (
+    primary: #00f0ff,
+    secondary: #090a0f,
+    shadow: #ff007f,
+    white: #ffffff,
+    accent: #ff007f,
+  ),
+
+  acidlime: (
+    primary: #d4ff00,
+    secondary: #0d0f0d,
+    shadow: #445500,
+    white: #f5f5f5,
+    accent: #00ff88,
+  ),
+
+  monochrome: (
+    primary: #f0f0f0,
+    secondary: #000000,
+    shadow: #333333,
+    white: #ffffff,
+    accent: #999999,
   ),
 );
