@@ -420,8 +420,12 @@ import ASeparator from './ASeparator.astro'
     opacity: 1;
     overflow: hidden;
 
+    @include mq(tablet) {
+      min-height: auto;
+    }
+
     @include mq(phone) {
-      min-height: calc(100svh - 4.5rem - 1px);
+      min-height: auto;
     }
 
     .s__waves {
@@ -432,13 +436,14 @@ import ASeparator from './ASeparator.astro'
       flex-shrink: 1;
 
       @include mq(tablet) {
-        max-height: 42vh;
-        min-height: 220px;
+        max-height: 35vh;
+        min-height: 180px;
+        flex-grow: 0;
       }
 
       @include mq(phone) {
-        max-height: 34vh;
-        min-height: 160px;
+        max-height: 30vh;
+        min-height: 140px;
         flex-grow: 0;
       }
     }

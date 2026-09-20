@@ -12,6 +12,7 @@
         <div class="lightbox-header-info">
           <div class="lightbox-meta-row">
             <span class="lightbox-tag js-lightbox-tag">Fullstack Web & UI/UX</span>
+            <span class="lightbox-category-badge js-lightbox-badge" style="display: none;"></span>
             <span class="lightbox-live-badge js-lightbox-live" style="display: none;">
               <span class="pulse-dot"></span>
               <span>Live Deployment</span>
@@ -51,12 +52,18 @@
         </div>
         <div class="lightbox-actions">
           <a href="#" target="_blank" rel="noopener noreferrer" class="lightbox-btn lightbox-btn-primary js-lightbox-link" style="display: none;">
-            <span>Visit Live Website</span>
+            <span class="js-lightbox-link-text">Visit Live Website</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
               <polyline points="15 3 21 3 21 9"></polyline>
               <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="lightbox-btn lightbox-btn-inquire js-lightbox-inquire">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+            <span>Inquire For Similar Work</span>
           </a>
           <button class="lightbox-btn lightbox-btn-secondary js-lightbox-close">Close</button>
         </div>
@@ -76,8 +83,11 @@
     desc: HTMLElement | null
     stackEl: HTMLElement | null
     liveBadge: HTMLElement | null
+    badgeEl: HTMLElement | null
     impactEl: HTMLElement | null
     impactText: HTMLElement | null
+    inquireBtn: HTMLAnchorElement | null
+    linkText: HTMLElement | null
 
     constructor() {
       this.modal = document.getElementById('projectLightbox')
@@ -91,8 +101,11 @@
       this.desc = this.modal.querySelector('.js-lightbox-desc')
       this.stackEl = this.modal.querySelector('.js-lightbox-stack')
       this.liveBadge = this.modal.querySelector('.js-lightbox-live')
+      this.badgeEl = this.modal.querySelector('.js-lightbox-badge')
       this.impactEl = this.modal.querySelector('.js-lightbox-impact')
       this.impactText = this.modal.querySelector('.js-lightbox-impact-text')
+      this.inquireBtn = this.modal.querySelector('.js-lightbox-inquire')
+      this.linkText = this.modal.querySelector('.js-lightbox-link-text')
 
       this.bindEvents()
     }
@@ -129,12 +142,23 @@
       poster?: string
       stack?: string[] | string
       impact?: string
+      badge?: string
       isLive?: boolean
     }) {
       if (!this.modal) return
 
       if (this.title) this.title.textContent = data.caption || 'Project Showcase'
       if (this.tag) this.tag.textContent = data.tag || 'Work Portfolio'
+
+      // Handle Category Badge
+      if (this.badgeEl) {
+        if (data.badge && data.badge.trim()) {
+          this.badgeEl.textContent = data.badge
+          this.badgeEl.style.display = 'inline-flex'
+        } else {
+          this.badgeEl.style.display = 'none'
+        }
+      }
 
       // Handle Live Badge
       const isActuallyLive = data.isLive === true || (data.site && data.site !== '#' && data.site.startsWith('http'))
@@ -195,10 +219,19 @@
         }
       }
 
+      // Handle WhatsApp Inquire Link
+      if (this.inquireBtn) {
+        const inquiryText = `Hi Brinta! I was exploring your portfolio project "${data.caption || 'your work'}" (${data.tag || 'Service'}) and would love to discuss a similar project.`
+        this.inquireBtn.href = `https://wa.me/918794174780?text=${encodeURIComponent(inquiryText)}`
+      }
+
       // Handle live site link
       if (this.link) {
         if (data.site && data.site !== '#' && data.site.startsWith('http')) {
           this.link.href = data.site
+          if (this.linkText) {
+            this.linkText.textContent = data.site.includes('canva.com') ? 'Open Interactive Canva Deck' : 'Visit Live Website'
+          }
           this.link.style.display = 'inline-flex'
         } else {
           this.link.style.display = 'none'
@@ -327,6 +360,19 @@
     text-transform: uppercase;
     color: color(primary);
     opacity: 0.75;
+  }
+
+  .lightbox-category-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.55rem;
+    font: 700 9px / 1 font-family(fraktion);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color(primary);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 240, 235, 0.18);
+    border-radius: 999px;
   }
 
   .lightbox-live-badge {
@@ -531,6 +577,19 @@
       &:hover {
         background: transparent;
         color: color(primary);
+      }
+    }
+
+    &-inquire {
+      background: rgba(37, 211, 102, 0.14);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.35);
+
+      &:hover {
+        background: #25d366;
+        color: #0c0202;
+        border-color: #25d366;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
       }
     }
 

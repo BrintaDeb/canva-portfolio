@@ -5,18 +5,67 @@ const categories = [
     code: '01',
     navTitle: 'WEB DEV',
     title: 'Web Development Packages',
-    tagline: 'High-performance responsive websites, bespoke UI/UX, and 3D digital experiences.',
+    tagline: 'Bespoke, high-performance responsive web applications, landing pages & 3D digital experiences. Built with approachable pair-collaboration, structured milestone revisions (3, 7, or 12 rounds included • additional rounds at just ₹400/round), and modern speed optimization for a seamless launch.',
+    revisionPolicy: {
+      tag: 'STRUCTURED REVISION POLICY',
+      title: 'Clear Revision Tiers & Approachable Iterations',
+      description: 'Every web development project includes structured revision rounds (3 for Starter, 7 for Professional, and 12 for Custom) so your website is dialed in to perfection. Need additional iterations beyond your included quota? Extra revision rounds are billed at an approachable flat rate of ₹400 per revision.',
+      tiers: [
+        {
+          code: '01',
+          name: 'Starter Tier',
+          count: '3 Rounds Included',
+          subtitle: 'Foundational Launch',
+          dots: '● ● ● ○ ○ ○ ○',
+          badge: 'TIER 1 SPRINT',
+          icon: '✦',
+        },
+        {
+          code: '02',
+          name: 'Professional Tier',
+          count: '7 Rounds Included',
+          subtitle: 'Full Creative Polish',
+          dots: '● ● ● ● ● ● ●',
+          badge: 'MOST POPULAR',
+          icon: '★',
+          isPopular: true,
+        },
+        {
+          code: '03',
+          name: 'Custom / E-Com',
+          count: '12 Rounds Included',
+          subtitle: 'Enterprise Precision',
+          dots: '● ● ● ● ● ● ● ● ● ● ● ●',
+          badge: 'EXTENDED',
+          icon: '💎',
+        },
+        {
+          code: '+',
+          name: 'Extra Revisions',
+          count: '₹400 / revision round',
+          subtitle: 'Transparent 24h Tweaks',
+          dots: 'ON-DEMAND TWEAKS',
+          badge: 'FLAT RATE',
+          icon: '⚡',
+          isExtra: true,
+        },
+      ],
+    },
     tiers: [
       {
         name: 'Starter (Tier 1)',
         price: '₹15,000',
         period: '',
         isPopular: false,
+        revisions: '3 Rounds Included (+₹400/extra round)',
+        revisionsBadge: '✦ 3 REVISIONS INCLUDED • +₹400/EXTRA',
         specs: [
           { label: 'Pages', value: 'Up to 3 Pages' },
           { label: 'Design', value: 'Template-based UI' },
           { label: 'Device', value: 'Mobile & Tablet Friendly' },
           { label: 'Stack', value: 'Contact, CMS & Basic SEO' },
+          { label: 'Revisions', value: '3 Rounds Included' },
+          { label: 'Extra Tweaks', value: '₹400 / revision round' },
           { label: 'Support', value: '1 Month Support' },
         ],
       },
@@ -26,11 +75,15 @@ const categories = [
         period: '',
         isPopular: true,
         popularBadge: 'MOST POPULAR',
+        revisions: '7 Rounds Included (+₹400/extra round)',
+        revisionsBadge: '✦ 7 REVISIONS INCLUDED • +₹400/EXTRA',
         specs: [
           { label: 'Pages', value: 'Up to 8 Pages' },
           { label: 'Design', value: 'Custom UI/UX & 3D Assets' },
           { label: 'Speed', value: 'Fully Responsive & Ultra Fast' },
           { label: 'Stack', value: 'Advanced CMS + SEO Suite' },
+          { label: 'Revisions', value: '7 Rounds Included' },
+          { label: 'Extra Tweaks', value: '₹400 / revision round' },
           { label: 'Support', value: '1 Mo + 3 Mo Maintenance' },
         ],
       },
@@ -39,10 +92,14 @@ const categories = [
         price: '₹65,000+',
         period: '',
         isPopular: false,
+        revisions: '12 Rounds Included (+₹400/extra round)',
+        revisionsBadge: '✦ 12 REVISIONS INCLUDED • +₹400/EXTRA',
         specs: [
           { label: 'Scale', value: 'Unlimited Dynamic Pages' },
           { label: 'Design', value: 'Bespoke UI/UX & 3D Shaders' },
           { label: 'Ecommerce', value: 'Payment Gateway + CMS' },
+          { label: 'Revisions', value: '12 Rounds Included' },
+          { label: 'Extra Tweaks', value: '₹400 / revision round' },
           { label: 'Support', value: '1 Mo + 6 Mo Priority Support' },
         ],
       },
@@ -197,6 +254,429 @@ const categories = [
                   <span class="s__cell__mask"></span>
                 </div>
 
+                <!-- Revision & Collaboration Transparency Banner (Eye-catching & Approachable) -->
+                {cat.revisionPolicy && (
+                  <div class="s__cell s__cell--full s__cell--rev-policy js-cell">
+                    <div class="s__cell__content s__rev-policy-card">
+                      <div class="s__rev-policy-top">
+                        <div class="s__rev-policy-tag-wrap">
+                          <span class="s__rev-policy-tag">[ {cat.revisionPolicy.tag} ]</span>
+                          <span class="s__rev-policy-live-indicator"><span class="s__rev-policy-pulse"></span>ACTIVE POLICY</span>
+                        </div>
+                        <span class="s__rev-policy-extra-badge">⚡ EXTRA ITERATIONS: ₹400 / ROUND</span>
+                      </div>
+                      <h4 class="s__rev-policy-title">{cat.revisionPolicy.title}</h4>
+                      <p class="s__rev-policy-desc">{cat.revisionPolicy.description}</p>
+                      <div class="s__rev-policy-grid">
+                        {cat.revisionPolicy.tiers.map((t: any) => (
+                          <div class:list={['s__rev-policy-item', { 'is-popular': t.isPopular, 'is-extra': t.isExtra }]}>
+                            <div class="s__rev-policy-item-top">
+                              <span class="s__rev-policy-code">[{t.code}]</span>
+                              <span class="s__rev-policy-badge">{t.badge}</span>
+                            </div>
+                            <div class="s__rev-policy-item-center">
+                              <span class="s__rev-policy-icon">{t.icon}</span>
+                              <div class="s__rev-policy-info">
+                                <span class="s__rev-policy-name">{t.name}</span>
+                                <span class="s__rev-policy-count">{t.count}</span>
+                              </div>
+                            </div>
+                            <div class="s__rev-policy-item-bottom">
+                              <span class="s__rev-policy-dots">{t.dots}</span>
+                              <span class="s__rev-policy-sub">{t.subtitle}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <span class="s__cell__mask"></span>
+                  </div>
+                )}
+
+                <!-- Category Visual Showcase Architecture -->
+                {cat.id === 'web-dev' && (
+                  <div class="s__cell s__cell--full s__cell--visual-showcase js-cell">
+                    <div class="s__cell__content s__visual-box">
+                      <div class="s__visual-header">
+                        <div class="s__visual-header-left">
+                          <span class="s__visual-tag">[ ARCHITECTURE & PERFORMANCE RADAR ]</span>
+                          <span class="s__visual-status-pill"><span class="s__visual-pulse"></span>SUB-0.5s SPEED GUARANTEED</span>
+                        </div>
+                        <div class="s__visual-devices" role="tablist" aria-label="Device Viewport Switcher">
+                          <button type="button" class="s__visual-device js-device-btn is-active" data-device="desktop" role="tab" aria-selected="true">
+                            <span class="device-icon">🖥️</span> DESKTOP 1440px
+                          </button>
+                          <button type="button" class="s__visual-device js-device-btn" data-device="tablet" role="tab" aria-selected="false">
+                            <span class="device-icon">💻</span> TABLET 768px
+                          </button>
+                          <button type="button" class="s__visual-device js-device-btn" data-device="mobile" role="tab" aria-selected="false">
+                            <span class="device-icon">📱</span> MOBILE 390px
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="s__browser-mockup js-browser-mockup is-mode-desktop">
+                        <!-- Mobile Dynamic Island Notch (visible on mobile view) -->
+                        <div class="s__phone-notch">
+                          <span class="s__phone-speaker"></span>
+                          <span class="s__phone-cam"></span>
+                        </div>
+
+                        <div class="s__browser-bar">
+                          <div class="s__browser-dots">
+                            <span class="s__browser-dot s__browser-dot--red"></span>
+                            <span class="s__browser-dot s__browser-dot--yellow"></span>
+                            <span class="s__browser-dot s__browser-dot--green"></span>
+                          </div>
+                          <div class="s__browser-url">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            <span class="s__url-text js-browser-url-text">https://clientbrand.com/production-live</span>
+                            <span class="s__browser-viewport js-browser-viewport">1440 × 900</span>
+                            <span class="s__browser-ssl">SSL 256-BIT</span>
+                          </div>
+                          <div class="s__browser-speed">
+                            <span class="s__speed-num">0.42s</span>
+                            <span class="s__speed-lbl">LCP SPEED</span>
+                          </div>
+                        </div>
+
+                        <div class="s__browser-body">
+                          <!-- Lighthouse Live Scores -->
+                          <div class="s__lighthouse-strip">
+                            <div class="s__lh-card">
+                              <div class="s__lh-dial is-100"><span class="s__lh-val">100</span></div>
+                              <span class="s__lh-label">PERFORMANCE</span>
+                            </div>
+                            <div class="s__lh-card">
+                              <div class="s__lh-dial is-100"><span class="s__lh-val">100</span></div>
+                              <span class="s__lh-label">ACCESSIBILITY</span>
+                            </div>
+                            <div class="s__lh-card">
+                              <div class="s__lh-dial is-100"><span class="s__lh-val">100</span></div>
+                              <span class="s__lh-label">BEST PRACTICES</span>
+                            </div>
+                            <div class="s__lh-card">
+                              <div class="s__lh-dial is-100"><span class="s__lh-val">100</span></div>
+                              <span class="s__lh-label">SEO SCORE</span>
+                            </div>
+                          </div>
+
+                          <!-- High-Fidelity Website Clone Screen Preview -->
+                          <div class="s__clone-stage">
+                            <!-- Clone Header / Nav -->
+                            <div class="s__clone-navbar">
+                              <div class="s__clone-logo">
+                                <span class="s__clone-logo-badge">✦</span>
+                                <span class="s__clone-brand-text">BRINTA<span class="s__clone-brand-dot">.DEV</span></span>
+                              </div>
+                              <div class="s__clone-nav-links">
+                                <span class="s__clone-nav-link">WORKS</span>
+                                <span class="s__clone-nav-link">SERVICES</span>
+                                <span class="s__clone-nav-link">TECH STACK</span>
+                                <span class="s__clone-nav-link">REVIEWS</span>
+                              </div>
+                              <div class="s__clone-mobile-toggle" aria-hidden="true">
+                                <span></span><span></span>
+                              </div>
+                              <button type="button" class="s__clone-cta-pill js-clone-cta" title="Live Project Discovery CTA">
+                                <span>BOOK SPRINT</span>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                              </button>
+                            </div>
+
+                            <!-- Clone Hero -->
+                            <div class="s__clone-hero">
+                              <div class="s__clone-hero-copy">
+                                <div class="s__clone-status-ribbon">
+                                  <span class="s__clone-pulse-dot"></span>
+                                  <span>NEXT.JS 15 &bull; SUB-0.5s HYDRATION</span>
+                                </div>
+                                <h5 class="s__clone-h1">
+                                  HIGH-CONVERSION <span class="s__clone-accent-text">3D DIGITAL EXPERIENCES</span>
+                                </h5>
+                                <p class="s__clone-desc">
+                                  Bespoke WebGL animations, GSAP momentum physics & zero-latency edge delivery built to win premium clients.
+                                </p>
+                                <div class="s__clone-chips">
+                                  <span class="s__clone-chip s__clone-chip--emerald">⚡ 0.42s LCP</span>
+                                  <span class="s__clone-chip s__clone-chip--cyan">🔥 60 FPS WebGL</span>
+                                  <span class="s__clone-chip s__clone-chip--gold">🛡️ 100/100 Audit</span>
+                                </div>
+                              </div>
+
+                              <!-- Interactive 3D WebGL Artboard Box -->
+                              <div class="s__clone-artboard">
+                                <div class="s__artboard-grid-mesh"></div>
+                                <div class="s__artboard-centerpiece">
+                                  <div class="s__cyber-orb"></div>
+                                  <div class="s__artboard-badge-text">
+                                    <strong>INTERACTIVE 3D WEBGL ENGINE</strong>
+                                    <small>THREE.JS &bull; GLSL SHADERS &bull; 60FPS LOCKED</small>
+                                  </div>
+                                </div>
+                                <div class="s__artboard-telemetry">
+                                  <span>VERTICES: 14.8K</span>
+                                  <span>DRAWCALLS: 12</span>
+                                  <span>MEM: 24MB</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- Architecture Bento Grid -->
+                            <div class="s__clone-bento">
+                              <div class="s__clone-card">
+                                <div class="s__clone-card-icon">⚡</div>
+                                <div class="s__clone-card-info">
+                                  <strong>Next.js 15 App Router</strong>
+                                  <span>React Server Components & Turbopack</span>
+                                </div>
+                              </div>
+                              <div class="s__clone-card">
+                                <div class="s__clone-card-icon">✨</div>
+                                <div class="s__clone-card-info">
+                                  <strong>GSAP 3 Motion & Lenis</strong>
+                                  <span>Butter-Smooth Momentum Scroll Physics</span>
+                                </div>
+                              </div>
+                              <div class="s__clone-card">
+                                <div class="s__clone-card-icon">🌍</div>
+                                <div class="s__clone-card-info">
+                                  <strong>Edge CDN & Turbo Cache</strong>
+                                  <span>Global Sub-50ms TTFB Anywhere</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="s__sprint-pipeline">
+                        <div class="s__pipeline-step">
+                          <span class="s__pipeline-num">01</span>
+                          <div class="s__pipeline-info">
+                            <strong>₹100 Discovery</strong>
+                            <span>UPI Instant Pre-fill</span>
+                          </div>
+                        </div>
+                        <div class="s__pipeline-arrow">➔</div>
+                        <div class="s__pipeline-step">
+                          <span class="s__pipeline-num">02</span>
+                          <div class="s__pipeline-info">
+                            <strong>Figma Wireframe</strong>
+                            <span>Design System & UI</span>
+                          </div>
+                        </div>
+                        <div class="s__pipeline-arrow">➔</div>
+                        <div class="s__pipeline-step">
+                          <span class="s__pipeline-num">03</span>
+                          <div class="s__pipeline-info">
+                            <strong>High-Speed Code</strong>
+                            <span>Next.js & Astro 5</span>
+                          </div>
+                        </div>
+                        <div class="s__pipeline-arrow">➔</div>
+                        <div class="s__pipeline-step is-highlight">
+                          <span class="s__pipeline-num">04</span>
+                          <div class="s__pipeline-info">
+                            <strong>3 / 7 / 12 Rounds</strong>
+                            <span>Structured Revisions</span>
+                          </div>
+                        </div>
+                        <div class="s__pipeline-arrow">➔</div>
+                        <div class="s__pipeline-step">
+                          <span class="s__pipeline-num">05</span>
+                          <div class="s__pipeline-info">
+                            <strong>Live Deployment</strong>
+                            <span>100% Code Ownership</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="s__cell__mask"></span>
+                  </div>
+                )}
+
+                {cat.id === 'graphic-design' && (
+                  <div class="s__cell s__cell--full s__cell--visual-showcase js-cell">
+                    <div class="s__cell__content s__visual-box">
+                      <div class="s__visual-header">
+                        <div class="s__visual-header-left">
+                          <span class="s__visual-tag">[ BRAND DESIGN STUDIO & CANVA ARTIFACTS ]</span>
+                          <span class="s__visual-status-pill"><span class="s__visual-pulse"></span>VECTOR ACCURACY &bull; 300 DPI READY</span>
+                        </div>
+                        <div class="s__visual-devices">
+                          <span class="s__visual-device is-active">FIGMA MASTER</span>
+                          <span class="s__visual-device">CANVA PRO EDITABLE</span>
+                          <span class="s__visual-device">CMYK PRINT 300DPI</span>
+                        </div>
+                      </div>
+
+                      <div class="s__artboard-studio">
+                        <div class="s__artboard-left">
+                          <div class="s__palette-cluster">
+                            <span class="s__cluster-title">BRAND PALETTE TOKENS:</span>
+                            <div class="s__palette-swatches">
+                              <div class="s__swatch" style="background: #160000;">
+                                <span class="s__swatch-hex">#160000</span>
+                                <span class="s__swatch-name">Onyx Dark</span>
+                              </div>
+                              <div class="s__swatch" style="background: #FFF0EB; color: #160000;">
+                                <span class="s__swatch-hex">#FFF0EB</span>
+                                <span class="s__swatch-name">Warm Cream</span>
+                              </div>
+                              <div class="s__swatch" style="background: #E8C547; color: #160000;">
+                                <span class="s__swatch-hex">#E8C547</span>
+                                <span class="s__swatch-name">Champagne Gold</span>
+                              </div>
+                              <div class="s__swatch" style="background: #FF5500;">
+                                <span class="s__swatch-hex">#FF5500</span>
+                                <span class="s__swatch-name">Studio Ember</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="s__typography-cluster">
+                            <span class="s__cluster-title">TYPOGRAPHY SPECIMEN SCALE:</span>
+                            <div class="s__type-scale">
+                              <div class="s__type-row">
+                                <span class="s__type-meta">DISPLAY 48PX</span>
+                                <span class="s__type-sample s__type-sample--display">BRINTA STUDIO // 2026</span>
+                              </div>
+                              <div class="s__type-row">
+                                <span class="s__type-meta">MONO 14PX</span>
+                                <span class="s__type-sample s__type-sample--mono">0123456789 [BESPOKE ARTIFACT]</span>
+                              </div>
+                              <div class="s__type-row">
+                                <span class="s__type-meta">SERIF 18PX</span>
+                                <span class="s__type-sample s__type-sample--serif">Crafting timeless identity systems with heart.</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="s__artboard-right">
+                          <span class="s__cluster-title">MASTER DELIVERABLE ASSET PACKS:</span>
+                          <div class="s__template-cards">
+                            <div class="s__tpl-card">
+                              <div class="s__tpl-badge">16:9 DECK</div>
+                              <strong>Canva Pro Pitch Decks</strong>
+                              <p>Fully editable investor pitch presentations with custom graphs, slides & branding.</p>
+                            </div>
+                            <div class="s__tpl-card">
+                              <div class="s__tpl-badge">9:16 MOTION</div>
+                              <strong>Social Reel & Story Kits</strong>
+                              <p>High-conversion Instagram & LinkedIn motion templates with typography animation.</p>
+                            </div>
+                            <div class="s__tpl-card">
+                              <div class="s__tpl-badge">VECTOR AI / SVG</div>
+                              <strong>Full Brand Guideline Book</strong>
+                              <p>Primary logos, secondary marks, favicons, app icons & print-ready CMYK PDF assets.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="s__cell__mask"></span>
+                  </div>
+                )}
+
+                {cat.id === 'seo-management' && (
+                  <div class="s__cell s__cell--full s__cell--visual-showcase js-cell">
+                    <div class="s__cell__content s__visual-box">
+                      <div class="s__visual-header">
+                        <div class="s__visual-header-left">
+                          <span class="s__visual-tag">[ SEARCH CONSOLE & CORE WEB VITALS RADAR ]</span>
+                          <span class="s__visual-status-pill"><span class="s__visual-pulse"></span>LIVE GOOGLE INDEX GUARANTEE</span>
+                        </div>
+                        <div class="s__visual-devices">
+                          <span class="s__visual-device is-active">GOOGLE SERP #1</span>
+                          <span class="s__visual-device">CORE WEB VITALS</span>
+                          <span class="s__visual-device">ORGANIC TRAFFIC</span>
+                        </div>
+                      </div>
+
+                      <div class="s__seo-telemetry-grid">
+                        <div class="s__serp-card">
+                          <span class="s__cluster-title">GOOGLE SERP RICH SNIPPET PREVIEW:</span>
+                          <div class="s__serp-preview">
+                            <div class="s__serp-site">
+                              <div class="s__serp-favicon">B</div>
+                              <div class="s__serp-crumbs">
+                                <span>https://yourdomain.com</span>
+                                <span>&rsaquo; services &rsaquo; bespoke-digital</span>
+                              </div>
+                            </div>
+                            <h5 class="s__serp-title">Your Brand — Premium Web Design & High-Performance Development</h5>
+                            <div class="s__serp-rating">
+                              <span class="s__serp-stars">★★★★★</span>
+                              <span class="s__serp-score">5.0</span>
+                              <span class="s__serp-reviews">(32 verified reviews)</span>
+                              <span class="s__serp-price">&bull; Transparent Pricing</span>
+                            </div>
+                            <p class="s__serp-desc">
+                              Bespoke responsive web apps, Figma design systems & sub-second loading speeds. 7-business-day delivery with structured revisions and 100% code ownership.
+                            </p>
+                            <div class="s__serp-sitelinks">
+                              <span>✦ Live Portfolio</span>
+                              <span>✦ Pricing Calculator</span>
+                              <span>✦ ₹100 Discovery Call</span>
+                              <span>✦ Direct WhatsApp</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="s__cwv-metrics">
+                          <span class="s__cluster-title">CORE WEB VITALS TELEMETRY:</span>
+                          <div class="s__cwv-cards">
+                            <div class="s__cwv-item is-good">
+                              <div class="s__cwv-top">
+                                <span class="s__cwv-metric">LCP</span>
+                                <span class="s__cwv-badge">GOOD // FAST</span>
+                              </div>
+                              <strong class="s__cwv-val">0.58s</strong>
+                              <span class="s__cwv-sub">Largest Contentful Paint (&lt; 2.5s)</span>
+                            </div>
+
+                            <div class="s__cwv-item is-good">
+                              <div class="s__cwv-top">
+                                <span class="s__cwv-metric">INP</span>
+                                <span class="s__cwv-badge">EXCELLENT</span>
+                              </div>
+                              <strong class="s__cwv-val">24ms</strong>
+                              <span class="s__cwv-sub">Interaction to Next Paint (&lt; 200ms)</span>
+                            </div>
+
+                            <div class="s__cwv-item is-good">
+                              <div class="s__cwv-top">
+                                <span class="s__cwv-metric">CLS</span>
+                                <span class="s__cwv-badge">ZERO JITTER</span>
+                              </div>
+                              <strong class="s__cwv-val">0.000</strong>
+                              <span class="s__cwv-sub">Cumulative Layout Shift (&lt; 0.1)</span>
+                            </div>
+                          </div>
+
+                          <div class="s__growth-strip">
+                            <div class="s__growth-stat">
+                              <span class="s__growth-num">+340%</span>
+                              <span class="s__growth-lbl">Organic Search Traffic</span>
+                            </div>
+                            <div class="s__growth-stat">
+                              <span class="s__growth-num">#1 RANK</span>
+                              <span class="s__growth-lbl">Target Keywords</span>
+                            </div>
+                            <div class="s__growth-stat">
+                              <span class="s__growth-num">45+</span>
+                              <span class="s__growth-lbl">DA 80+ Backlinks</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="s__cell__mask"></span>
+                  </div>
+                )}
+
                 <!-- Row 2: Split 2 Column (Tier 1 left, Tier 2 Stack right) -->
                 <div class="s__row s__row--split">
                   <!-- Left: Tier 1 Tall Cell (Interactive Quotation Trigger) -->
@@ -206,14 +686,22 @@ const categories = [
                     data-tier={tier1.name}
                     data-price={tier1.price + tier1.period}
                     data-specs={tier1.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                    data-revisions={tier1.revisions || ''}
                     role="button"
                     tabindex="0"
                     title={`Request Full Quotation for ${tier1.name}`}
                   >
                     <div class="s__cell__content">
-                      <div class="s__cell__huge">
-                        {tier1.price}<br />
-                        <span class="s__cell__tiny-tier">{tier1.name}</span>
+                      <div>
+                        <div class="s__cell__huge">
+                          {tier1.price}<br />
+                          <span class="s__cell__tiny-tier">{tier1.name}</span>
+                        </div>
+                        {tier1.revisionsBadge && (
+                          <div class="s__cell__pill-tag">
+                            {tier1.revisionsBadge}
+                          </div>
+                        )}
                       </div>
                       <div class="s__cell__meta">
                         {tier1.specs.map((s) => (
@@ -236,6 +724,7 @@ const categories = [
                       data-tier={tier2.name}
                       data-price={tier2.price + tier2.period}
                       data-specs={tier2.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                      data-revisions={tier2.revisions || ''}
                       role="button"
                       tabindex="0"
                       title={`Request Full Quotation for ${tier2.name}`}
@@ -243,9 +732,19 @@ const categories = [
                       <div class="s__cell__content">
                         <div class="s__cell__badge-mono">★ {tier2.popularBadge} ★</div>
                         <h4 class="s__cell__serif">{tier2.name} — {tier2.price}</h4>
+                        {tier2.revisionsBadge && (
+                          <div class="s__cell__pill-tag s__cell__pill-tag--popular">
+                            {tier2.revisionsBadge}
+                          </div>
+                        )}
                         <p class="s__cell__serif-sub">
                           {tier2.specs[0].value} • {tier2.specs[1].value}
                         </p>
+                        <div class="s__cell__meta s__cell__meta--row">
+                          {tier2.specs.slice(2).map((s) => (
+                            <span>({s.label}: {s.value})</span>
+                          ))}
+                        </div>
                       </div>
                       <span class="s__cell__mask"></span>
                     </div>
@@ -262,6 +761,7 @@ const categories = [
                         data-tier={tier2.name}
                         data-price={tier2.price + tier2.period}
                         data-specs={tier2.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                        data-revisions={tier2.revisions || ''}
                         role="button"
                         tabindex="0"
                         title="Book Tier 2"
@@ -286,12 +786,18 @@ const categories = [
                   data-tier={tier3.name}
                   data-price={tier3.price + tier3.period}
                   data-specs={tier3.specs.map((s) => `${s.label}: ${s.value}`).join(' • ')}
+                  data-revisions={tier3.revisions || ''}
                   role="button"
                   tabindex="0"
                   title={`Request Full Quotation for ${tier3.name}`}
                 >
                   <div class="s__cell__content">
                     <h3 class="s__cell__serif">{tier3.name} — {tier3.price}{tier3.period}</h3>
+                    {tier3.revisionsBadge && (
+                      <div class="s__cell__pill-tag s__cell__pill-tag--tier3 s__cell__pill-tag--center">
+                        {tier3.revisionsBadge}
+                      </div>
+                    )}
                     <p class="s__cell__serif-sub">
                       {tier3.specs.map((s) => `(${s.label}: ${s.value})`).join(' • ')}
                     </p>
@@ -517,7 +1023,7 @@ const categories = [
         <div class="s__cell s__cell--full s__cell--bio js-cell">
           <div class="s__cell__content">
             <p class="s__cell__bio-text">
-              Transparent rates, rapid delivery, and direct pair-collaboration. Every project includes structured revisions, modern web performance optimization, and scalable source files.
+              Transparent rates, rapid delivery, and direct pair-collaboration. Every web development project includes structured revision rounds (3, 7, or 12 rounds included respectively • extra rounds at an approachable flat fee of ₹400), modern web performance optimization, and scalable source files.
             </p>
           </div>
           <span class="s__cell__mask"></span>
@@ -548,6 +1054,10 @@ const categories = [
           <div class="summary-line">
             <span class="summary-label">ESTIMATED RATE:</span>
             <span id="modalTierPrice" class="summary-val font-bold">₹35,000</span>
+          </div>
+          <div class="summary-line summary-line--rev">
+            <span class="summary-label">REVISION ALLOCATION:</span>
+            <span id="modalTierRevisions" class="summary-val summary-val--rev">7 Rounds Included (+₹400/extra)</span>
           </div>
         </div>
 
@@ -690,6 +1200,7 @@ const categories = [
     modalPackageName: HTMLElement | null
     modalTierName: HTMLElement | null
     modalTierPrice: HTMLElement | null
+    modalTierRevisions: HTMLElement | null
     tierQuoteForm: HTMLFormElement | null
     customQuoteForm: HTMLFormElement | null
 
@@ -698,6 +1209,7 @@ const categories = [
       tier: string
       price: string
       specs: string
+      revisions: string
     }
 
     smileyImages: {
@@ -732,6 +1244,7 @@ const categories = [
       this.modalPackageName = document.getElementById('modalPackageName')
       this.modalTierName = document.getElementById('modalTierName')
       this.modalTierPrice = document.getElementById('modalTierPrice')
+      this.modalTierRevisions = document.getElementById('modalTierRevisions')
       this.tierQuoteForm = document.getElementById('tierQuoteForm') as HTMLFormElement
       this.customQuoteForm = document.getElementById('customQuoteForm') as HTMLFormElement
 
@@ -740,6 +1253,7 @@ const categories = [
         tier: '',
         price: '',
         specs: '',
+        revisions: '',
       }
 
       this.smileys = []
@@ -755,9 +1269,72 @@ const categories = [
       }
 
       this.initTabs()
+      this.initDeviceSwitcher()
       this.initSmileyEngine()
       this.initQuotationSystem()
       this.initScopeEstimator()
+    }
+
+    initDeviceSwitcher() {
+      const deviceBtns = this.el?.querySelectorAll('.js-device-btn')
+      const mockup = this.el?.querySelector('.js-browser-mockup')
+      const urlText = this.el?.querySelector('.js-browser-url-text')
+      const viewportText = this.el?.querySelector('.js-browser-viewport')
+
+      if (!deviceBtns || !mockup) return
+
+      const deviceData: Record<string, { url: string; viewport: string }> = {
+        desktop: {
+          url: 'https://clientbrand.com/production-live',
+          viewport: '1440 × 900',
+        },
+        tablet: {
+          url: 'https://clientbrand.com/tablet-responsive',
+          viewport: '768 × 1024',
+        },
+        mobile: {
+          url: 'https://clientbrand.com/mobile-pwa',
+          viewport: '390 × 844',
+        },
+      }
+
+      deviceBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault()
+          const device = btn.getAttribute('data-device') || 'desktop'
+
+          deviceBtns.forEach((b) => {
+            const isActive = b === btn
+            b.classList.toggle('is-active', isActive)
+            b.setAttribute('aria-selected', isActive ? 'true' : 'false')
+          })
+
+          mockup.classList.remove('is-mode-desktop', 'is-mode-tablet', 'is-mode-mobile')
+          mockup.classList.add(`is-mode-${device}`)
+
+          const info = deviceData[device] || deviceData.desktop
+          if (urlText) urlText.textContent = info.url
+          if (viewportText) viewportText.textContent = info.viewport
+
+          try {
+            audioEngine?.play?.('click')
+          } catch (_) {}
+        })
+      })
+
+      // Interactive click feedback on clone CTA button
+      const cloneCta = this.el?.querySelector('.js-clone-cta') as HTMLButtonElement | null
+      if (cloneCta) {
+        cloneCta.addEventListener('click', (e) => {
+          e.preventDefault()
+          cloneCta.style.transform = 'scale(0.95)'
+          setTimeout(() => {
+            cloneCta.style.transform = ''
+          }, 150)
+          const starterTrigger = this.el?.querySelector('.js-open-quote') as HTMLElement | null
+          starterTrigger?.click()
+        })
+      }
     }
 
     initTabs() {
@@ -798,12 +1375,16 @@ const categories = [
           const tier = trigger.getAttribute('data-tier') || ''
           const price = trigger.getAttribute('data-price') || ''
           const specs = trigger.getAttribute('data-specs') || ''
+          const revisions = trigger.getAttribute('data-revisions') || ''
 
-          this.activeTierData = { package: pkg, tier, price, specs }
+          this.activeTierData = { package: pkg, tier, price, specs, revisions }
 
           if (this.modalPackageName) this.modalPackageName.textContent = pkg
           if (this.modalTierName) this.modalTierName.textContent = tier
           if (this.modalTierPrice) this.modalTierPrice.textContent = price
+          if (this.modalTierRevisions) {
+            this.modalTierRevisions.textContent = revisions || 'Standard revisions included'
+          }
 
           // Pre-fill UTR if stored in session
           const savedUtr = sessionStorage.getItem('call_payment_utr')
@@ -995,6 +1576,7 @@ const categories = [
           `📦 *Package:* ${pkg}`,
           `⭐ *Selected Tier:* ${tier}`,
           `💰 *Estimated Rate:* ${price}`,
+          this.activeTierData.revisions ? `🔄 *Revision Allocation:* ${this.activeTierData.revisions}` : '',
           `👤 *Client / Brand:* ${clientName}`,
           phone ? `📱 *Client WhatsApp:* ${phone}` : '',
           `⏱️ *Target Timeline:* ${timeline}`,
@@ -1018,6 +1600,7 @@ const categories = [
           `Service Package: ${pkg}`,
           `Selected Tier: ${tier}`,
           `Estimated Rate: ${price}`,
+          this.activeTierData.revisions ? `Revision Allocation: ${this.activeTierData.revisions}` : '',
           `Client Name / Brand: ${clientName}`,
           phone ? `Client WhatsApp: ${phone}` : '',
           `Target Timeline: ${timeline}`,
@@ -1374,8 +1957,8 @@ const categories = [
       position: relative;
       z-index: 2;
       margin: 0 auto;
-      width: 38rem;
-      max-width: calc(100% - 2.5rem);
+      width: min(48rem, calc(100% - 2.5rem));
+      max-width: 48rem;
 
       @include mq(tablet) {
         width: min(46rem, calc(100% - 2.5rem));
@@ -1638,6 +2221,17 @@ const categories = [
             color: color(primary);
             border-color: color(primary);
           }
+
+          .s__cell__pill-tag {
+            color: color(primary);
+            border-color: color(primary);
+
+            &--popular {
+              background: color(primary);
+              color: color(secondary);
+              border-color: color(primary);
+            }
+          }
         }
       }
 
@@ -1758,6 +2352,44 @@ const categories = [
           letter-spacing: 0.04em;
           opacity: 0.75;
         }
+        &--row {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.4rem;
+          margin-top: 0.5rem;
+        }
+      }
+
+      &__pill-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font: 700 0.625rem / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.6rem;
+        margin: 0.5rem 0 0.25rem;
+        border: 1px solid color(secondary);
+        background: transparent;
+        color: color(secondary);
+        transition: all 0.25s ease;
+
+        &--popular {
+          background: color(secondary);
+          color: color(primary);
+          border-color: color(secondary);
+        }
+
+        &--tier3 {
+          margin-top: 0.65rem;
+          margin-bottom: 0.4rem;
+        }
+
+        &--center {
+          margin-left: auto;
+          margin-right: auto;
+        }
       }
 
       &__badge-mono {
@@ -1778,6 +2410,1534 @@ const categories = [
         margin-top: 0.5rem;
         color: color(secondary);
         transition: color 0.25s ease;
+      }
+
+      /* Revision & Collaboration Feature Banner */
+      &--rev-policy {
+        padding: 1.5rem 1.75rem;
+        text-align: left;
+        cursor: default;
+
+        .s__cell__mask {
+          display: none !important;
+        }
+
+        .s__cell__content {
+          color: color(secondary) !important;
+        }
+
+        &:hover {
+          .s__cell__mask {
+            display: none !important;
+          }
+
+          .s__cell__content {
+            color: color(secondary) !important;
+          }
+        }
+
+        @include mq(phone) {
+          padding: 1.25rem 1rem;
+        }
+
+        .s__rev-policy-card {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .s__rev-policy-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.65rem;
+        }
+
+        .s__rev-policy-tag {
+          font: 800 0.75rem / 1.3 font-family(fraktion);
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: color(secondary);
+          opacity: 1;
+
+          @include mq(phone) {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+          }
+        }
+
+        .s__rev-policy-extra-badge {
+          display: inline-flex;
+          align-items: center;
+          font: 800 0.6875rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 0.35rem 0.75rem;
+          border: 1.5px dashed #d97706 !important;
+          background: #fef3c7 !important;
+          color: #92400e !important;
+          border-radius: 4px;
+          box-shadow: 0 1px 4px rgba(217, 119, 6, 0.1);
+          transition: all 0.25s ease;
+
+          @include mq(phone) {
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            padding: 0.25rem 0.55rem;
+          }
+        }
+
+        .s__rev-policy-title {
+          font: 900 1.25rem / 1.2 font-family(primary);
+          letter-spacing: -0.01em;
+          margin: 0;
+          text-transform: uppercase;
+          color: color(secondary);
+
+          @include mq(phone) {
+            font-size: 1.05rem;
+          }
+        }
+
+        .s__rev-policy-desc {
+          font: 400 0.95rem / 1.55 font-family(editorial);
+          letter-spacing: 0.01em;
+          margin: 0;
+          color: color(secondary);
+          opacity: 0.95;
+
+          @include mq(phone) {
+            font-size: 0.875rem;
+          }
+
+          strong {
+            font-weight: 700;
+          }
+        }
+
+        .s__rev-policy-tag-wrap {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+        }
+
+        .s__rev-policy-live-indicator {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          font: 800 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          color: #065f46;
+          background: #d1fae5;
+          border: 1.5px solid #10b981;
+          padding: 0.25rem 0.6rem;
+          border-radius: 999px;
+          box-shadow: 0 1px 4px rgba(16, 185, 129, 0.15);
+        }
+
+        .s__rev-policy-pulse {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #10b981;
+          animation: pulse 1.8s infinite;
+        }
+
+        .s__rev-policy-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.65rem;
+          margin-top: 0.75rem;
+
+          @include mq(tablet) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          @include mq(phone) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .s__rev-policy-item {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 0.65rem;
+          padding: 0.85rem 0.75rem;
+          border: 1.5px solid rgba(22, 0, 0, 0.22) !important;
+          background: #ffffff !important;
+          box-shadow: 0 2px 8px rgba(22, 0, 0, 0.05);
+          color: #160000 !important;
+          border-radius: 6px;
+          min-width: 0;
+          overflow: hidden;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+          .s__rev-policy-code {
+            color: #4b5563 !important;
+            font-weight: 800;
+            font-size: 0.6875rem;
+            letter-spacing: 0.1em;
+            opacity: 1;
+          }
+
+          .s__rev-policy-badge {
+            font: 800 0.5rem / 1 font-family(fraktion);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.4rem;
+            background: #160000 !important;
+            color: #ffffff !important;
+            border-radius: 3px;
+            white-space: nowrap;
+          }
+
+          .s__rev-policy-icon {
+            font-size: 1.1rem;
+            color: #160000 !important;
+            opacity: 1;
+            flex-shrink: 0;
+          }
+
+          .s__rev-policy-name {
+            font: 800 0.625rem / 1.25 font-family(fraktion);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #4b5563 !important;
+            opacity: 1;
+          }
+
+          .s__rev-policy-count {
+            font: 900 0.875rem / 1.15 font-family(fraktion);
+            letter-spacing: 0.01em;
+            color: #160000 !important;
+            word-break: break-word;
+          }
+
+          .s__rev-policy-dots {
+            color: #160000 !important;
+            font-weight: 800;
+            font-size: 0.5625rem;
+            letter-spacing: 0.12em;
+            opacity: 1;
+            line-height: 1.2;
+          }
+
+          .s__rev-policy-sub {
+            color: #374151 !important;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 0.6875rem;
+            opacity: 1;
+            font-family: font-family(fraktion);
+            letter-spacing: 0.02em;
+            line-height: 1.25;
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(22, 0, 0, 0.12);
+          }
+
+          &.is-popular {
+            border: 2px solid #160000 !important;
+            background: #160000 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 18px rgba(22, 0, 0, 0.2);
+
+            .s__rev-policy-code {
+              color: #d1d5db !important;
+            }
+
+            .s__rev-policy-badge {
+              background: #e8c547 !important;
+              color: #160000 !important;
+              font-weight: 900;
+            }
+
+            .s__rev-policy-icon {
+              color: #e8c547 !important;
+            }
+
+            .s__rev-policy-name {
+              color: #d1d5db !important;
+            }
+
+            .s__rev-policy-count {
+              color: #ffffff !important;
+            }
+
+            .s__rev-policy-dots {
+              color: #e8c547 !important;
+            }
+
+            .s__rev-policy-sub {
+              color: #f3f4f6 !important;
+            }
+          }
+
+          &.is-extra {
+            border: 2px dashed #d97706 !important;
+            background: #fffbeb !important;
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08);
+
+            .s__rev-policy-code {
+              color: #92400e !important;
+            }
+
+            .s__rev-policy-badge {
+              background: #fef3c7 !important;
+              color: #92400e !important;
+              border: 1px solid #f59e0b !important;
+              font-weight: 900;
+            }
+
+            .s__rev-policy-icon {
+              color: #d97706 !important;
+            }
+
+            .s__rev-policy-name {
+              color: #92400e !important;
+            }
+
+            .s__rev-policy-count {
+              color: #92400e !important;
+            }
+
+            .s__rev-policy-dots {
+              color: #d97706 !important;
+            }
+
+            .s__rev-policy-sub {
+              color: #78350f !important;
+            }
+          }
+        }
+
+        .s__rev-policy-item-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.35rem;
+        }
+
+        .s__rev-policy-item-center {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .s__rev-policy-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+          min-width: 0;
+          overflow: hidden;
+        }
+
+        .s__rev-policy-item-bottom {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          padding-top: 0.45rem;
+          border-top: 1.5px solid rgba(22, 0, 0, 0.1);
+        }
+      }
+
+      /* Visual Architecture Showcase Cells */
+      &--visual-showcase {
+        padding: 1.5rem 1.75rem;
+        cursor: default;
+
+        .s__cell__mask {
+          display: none !important;
+        }
+
+        &:hover {
+          .s__cell__mask {
+            display: none !important;
+          }
+        }
+
+        @include mq(phone) {
+          padding: 1.25rem 1rem;
+        }
+
+        .s__visual-box {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .s__visual-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+        }
+
+        .s__visual-header-left {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          flex-wrap: wrap;
+        }
+
+        .s__visual-tag {
+          font: 800 0.75rem / 1.3 font-family(fraktion);
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: color(secondary);
+          opacity: 1;
+
+          @include mq(phone) {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+          }
+        }
+
+        .s__visual-status-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          font: 800 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          color: #065f46;
+          background: #d1fae5;
+          border: 1.5px solid #10b981;
+          padding: 0.25rem 0.65rem;
+          border-radius: 999px;
+          box-shadow: 0 1px 4px rgba(16, 185, 129, 0.15);
+        }
+
+        .s__visual-pulse {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #10b981;
+          animation: pulse 1.8s infinite;
+        }
+
+        .s__visual-devices {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font: 800 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.1em;
+
+          .s__visual-device {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.45rem 0.85rem;
+            border: 1.5px solid rgba(22, 0, 0, 0.25);
+            background: #ffffff;
+            color: #160000;
+            border-radius: 999px;
+            font: 800 0.6875rem / 1 font-family(fraktion);
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow: 0 1px 4px rgba(22, 0, 0, 0.06);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+
+            .device-icon {
+              font-size: 0.85rem;
+              line-height: 1;
+            }
+
+            &:hover {
+              border-color: #160000;
+              background: #fdfaf8;
+              transform: translateY(-1px);
+              box-shadow: 0 4px 10px rgba(22, 0, 0, 0.12);
+            }
+
+            &:active {
+              transform: translateY(0);
+            }
+
+            &.is-active {
+              border-color: #160000 !important;
+              color: #e8c547 !important;
+              background: #160000 !important;
+              box-shadow: 0 4px 14px rgba(22, 0, 0, 0.3) !important;
+            }
+          }
+        }
+
+        /* Web Dev Browser Chrome Mockup */
+        .s__browser-mockup {
+          border: 2px solid rgba(22, 0, 0, 0.3);
+          background: #0d0404;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 16px 40px -10px rgba(22, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08);
+          margin: 0 auto;
+          width: 100%;
+          transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                      border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      border-color 0.35s ease,
+                      box-shadow 0.35s ease;
+
+          .s__phone-notch {
+            display: none;
+          }
+
+          &.is-mode-desktop {
+            max-width: 100%;
+            border-radius: 10px;
+          }
+
+          &.is-mode-tablet {
+            max-width: 720px;
+            border-radius: 20px;
+            border-color: rgba(232, 197, 71, 0.4);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.55), 0 0 20px rgba(232, 197, 71, 0.15);
+
+            .s__lighthouse-strip {
+              grid-template-columns: repeat(4, 1fr);
+            }
+
+            .s__clone-hero {
+              grid-template-columns: 1fr;
+              gap: 1rem;
+            }
+
+            .s__clone-bento {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+
+          &.is-mode-mobile {
+            max-width: 385px;
+            border-radius: 36px;
+            border: 3px solid #3d1212;
+            box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+            .s__phone-notch {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 0.5rem 0 0.2rem;
+              background: #180606;
+
+              .s__phone-speaker {
+                width: 48px;
+                height: 4px;
+                background: #331515;
+                border-radius: 2px;
+              }
+
+              .s__phone-cam {
+                width: 7px;
+                height: 7px;
+                background: #080202;
+                border: 1px solid #331515;
+                border-radius: 50%;
+              }
+            }
+
+            .s__browser-dots {
+              display: none;
+            }
+
+            .s__browser-bar {
+              padding: 0.5rem 0.85rem;
+              flex-wrap: wrap;
+              gap: 0.45rem;
+            }
+
+            .s__browser-url {
+              order: 1;
+              width: 100%;
+              padding: 0.3rem 0.65rem;
+              font-size: 0.625rem;
+            }
+
+            .s__browser-speed {
+              order: 2;
+              margin-left: auto;
+            }
+
+            .s__browser-body {
+              padding: 1rem;
+              gap: 0.85rem;
+            }
+
+            .s__lighthouse-strip {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 0.5rem;
+            }
+
+            .s__lh-card {
+              padding: 0.5rem 0.25rem;
+            }
+
+            .s__clone-nav-links {
+              display: none;
+            }
+
+            .s__clone-mobile-toggle {
+              display: flex;
+            }
+
+            .s__clone-hero {
+              grid-template-columns: 1fr;
+              gap: 0.85rem;
+            }
+
+            .s__clone-h1 {
+              font-size: 0.9375rem;
+            }
+
+            .s__clone-bento {
+              grid-template-columns: 1fr;
+              gap: 0.5rem;
+            }
+          }
+        }
+
+        .s__browser-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.75rem 1rem;
+          background: #180606;
+          border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
+          gap: 0.75rem;
+
+          @include mq(phone) {
+            flex-wrap: wrap;
+          }
+        }
+
+        .s__browser-dots {
+          display: flex;
+          gap: 6px;
+        }
+
+        .s__browser-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+
+          &--red { background: #ef4444; }
+          &--yellow { background: #f59e0b; }
+          &--green { background: #10b981; }
+        }
+
+        .s__browser-url {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: #060202;
+          border: 1.5px solid rgba(255, 255, 255, 0.16);
+          padding: 0.35rem 0.85rem;
+          border-radius: 4px;
+          font: 600 0.6875rem / 1 font-family(fraktion);
+          letter-spacing: 0.04em;
+          color: #ffffff;
+          opacity: 1;
+          min-width: 0;
+
+          svg {
+            color: #10b981;
+            flex-shrink: 0;
+          }
+
+          .s__url-text {
+            color: #f9fafb;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .s__browser-viewport {
+            font-size: 0.5625rem;
+            font-weight: 800;
+            color: #e8c547;
+            background: rgba(232, 197, 71, 0.15);
+            border: 1px solid rgba(232, 197, 71, 0.35);
+            padding: 0.15rem 0.45rem;
+            border-radius: 3px;
+            white-space: nowrap;
+            margin-left: auto;
+          }
+
+          @include mq(phone) {
+            order: 3;
+            width: 100%;
+          }
+        }
+
+        .s__browser-ssl {
+          font-size: 0.5625rem;
+          font-weight: 800;
+          color: #10b981;
+          background: rgba(16, 185, 129, 0.18);
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 0.15rem 0.45rem;
+          border-radius: 3px;
+          white-space: nowrap;
+        }
+
+        .s__browser-speed {
+          display: flex;
+          align-items: baseline;
+          gap: 0.35rem;
+          white-space: nowrap;
+
+          .s__speed-num {
+            font: 900 0.875rem / 1 font-family(fraktion);
+            color: #10b981;
+            text-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+          }
+
+          .s__speed-lbl {
+            font: 800 0.5625rem / 1 font-family(fraktion);
+            color: #e5e7eb;
+            opacity: 1;
+          }
+        }
+
+        .s__browser-body {
+          padding: 1.25rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          background: #0d0404;
+        }
+
+        .s__lighthouse-strip {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.65rem;
+
+          @include mq(phone) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        .s__lh-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          gap: 0.45rem;
+          padding: 0.75rem 0.4rem;
+          border: 1.5px solid rgba(16, 185, 129, 0.4);
+          background: #190707;
+          border-radius: 6px;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+          min-width: 0;
+        }
+
+        .s__lh-dial {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          border: 2.5px solid #10b981;
+          background: rgba(16, 185, 129, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+          flex-shrink: 0;
+
+          .s__lh-val {
+            font: 900 0.8125rem / 1 font-family(fraktion);
+            color: #10b981;
+          }
+        }
+
+        .s__lh-label {
+          font: 800 0.5625rem / 1.1 font-family(fraktion);
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ffffff !important;
+          opacity: 1 !important;
+          white-space: nowrap;
+        }
+
+        /* High-Fidelity Website Clone Screen Preview */
+        .s__clone-stage {
+          border: 1.5px solid rgba(255, 255, 255, 0.15);
+          border-radius: 8px;
+          background: #060202;
+          padding: 1.1rem 1.25rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.1rem;
+          position: relative;
+          overflow: hidden;
+          box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .s__clone-navbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          gap: 0.75rem;
+        }
+
+        .s__clone-logo {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font: 900 0.75rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          color: #ffffff;
+
+          .s__clone-logo-badge {
+            color: #e8c547;
+            font-size: 0.85rem;
+            filter: drop-shadow(0 0 6px rgba(232, 197, 71, 0.8));
+          }
+
+          .s__clone-brand-dot {
+            color: #e8c547;
+          }
+        }
+
+        .s__clone-nav-links {
+          display: flex;
+          align-items: center;
+          gap: 1.15rem;
+
+          .s__clone-nav-link {
+            font: 700 0.625rem / 1 font-family(fraktion);
+            letter-spacing: 0.1em;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: #e8c547;
+            }
+          }
+        }
+
+        .s__clone-mobile-toggle {
+          display: none;
+          flex-direction: column;
+          gap: 4px;
+          cursor: pointer;
+
+          span {
+            width: 18px;
+            height: 2px;
+            background: #e8c547;
+            border-radius: 1px;
+          }
+        }
+
+        .s__clone-cta-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          font: 900 0.625rem / 1 font-family(fraktion);
+          letter-spacing: 0.08em;
+          padding: 0.35rem 0.85rem;
+          background: #e8c547 !important;
+          color: #160000 !important;
+          border: none;
+          border-radius: 999px;
+          box-shadow: 0 2px 12px rgba(232, 197, 71, 0.45);
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(232, 197, 71, 0.6);
+          }
+        }
+
+        .s__clone-hero {
+          display: grid;
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 1.25rem;
+          align-items: center;
+        }
+
+        .s__clone-hero-copy {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .s__clone-status-ribbon {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font: 800 0.5625rem / 1 font-family(fraktion);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #10b981;
+          background: rgba(16, 185, 129, 0.12);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          width: fit-content;
+
+          .s__clone-pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse 1.5s infinite;
+          }
+        }
+
+        .s__clone-h1 {
+          font: 900 1.125rem / 1.2 font-family(fraktion);
+          letter-spacing: 0.02em;
+          color: #ffffff;
+          margin: 0;
+
+          .s__clone-accent-text {
+            color: #e8c547;
+            text-shadow: 0 0 14px rgba(232, 197, 71, 0.4);
+          }
+        }
+
+        .s__clone-desc {
+          font: 400 0.6875rem / 1.45 font-family(fraktion);
+          color: #d1d5db;
+          margin: 0;
+          opacity: 0.9;
+        }
+
+        .s__clone-chips {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          flex-wrap: wrap;
+          margin-top: 0.25rem;
+        }
+
+        .s__clone-chip {
+          font: 800 0.5625rem / 1 font-family(fraktion);
+          letter-spacing: 0.06em;
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          white-space: nowrap;
+
+          &--emerald {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+          }
+          &--cyan {
+            background: rgba(0, 240, 255, 0.12);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            color: #00f0ff;
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+          }
+          &--gold {
+            background: rgba(232, 197, 71, 0.15);
+            border: 1px solid rgba(232, 197, 71, 0.4);
+            color: #fbbf24;
+          }
+        }
+
+        .s__clone-artboard {
+          height: 115px;
+          border: 1.5px solid rgba(0, 240, 255, 0.4);
+          border-radius: 8px;
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 0.65rem;
+          background: radial-gradient(circle at 60% 40%, rgba(0, 240, 255, 0.22), #140404 80%);
+          box-shadow: inset 0 0 25px rgba(0, 240, 255, 0.15), 0 0 16px rgba(0, 240, 255, 0.18);
+
+          .s__artboard-grid-mesh {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+            background-size: 16px 16px;
+            pointer-events: none;
+          }
+
+          .s__artboard-centerpiece {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+          }
+
+          .s__cyber-orb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, #00f0ff, #e8c547, #ff007f, #00f0ff);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.7);
+            animation: rotate 6s linear infinite;
+            flex-shrink: 0;
+          }
+
+          .s__artboard-badge-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+
+            strong {
+              font: 900 0.6875rem / 1.1 font-family(fraktion);
+              letter-spacing: 0.08em;
+              color: #00f0ff;
+              text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+            }
+
+            small {
+              font: 700 0.5rem / 1 font-family(fraktion);
+              letter-spacing: 0.06em;
+              color: #9ca3af;
+            }
+          }
+
+          .s__artboard-telemetry {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font: 800 0.5rem / 1 font-family(fraktion);
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 0.35rem;
+          }
+        }
+
+        .s__clone-bento {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.65rem;
+        }
+
+        .s__clone-card {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.65rem 0.75rem;
+          background: #140505;
+          border: 1.5px solid rgba(255, 255, 255, 0.14);
+          border-radius: 6px;
+          transition: all 0.2s ease;
+          cursor: pointer;
+
+          &:hover {
+            border-color: #e8c547;
+            background: #1c0808;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(232, 197, 71, 0.18);
+          }
+
+          .s__clone-card-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+          }
+
+          .s__clone-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            min-width: 0;
+            overflow: hidden;
+
+            strong {
+              font: 900 0.6875rem / 1 font-family(fraktion);
+              letter-spacing: 0.04em;
+              color: #ffffff;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            span {
+              font: 500 0.5625rem / 1.2 font-family(fraktion);
+              color: #9ca3af;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+
+        /* 5-Step Web Sprint Pipeline Ribbon */
+        .s__sprint-pipeline {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.95rem 1.25rem;
+          background: #160505;
+          border: 1.5px solid rgba(255, 255, 255, 0.18);
+          border-radius: 8px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          gap: 0.75rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .s__pipeline-step {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-shrink: 0;
+
+          &.is-highlight {
+            padding: 0.35rem 0.65rem;
+            background: rgba(232, 197, 71, 0.2) !important;
+            border: 1.5px solid #e8c547 !important;
+            border-radius: 4px;
+            box-shadow: 0 0 14px rgba(232, 197, 71, 0.35);
+
+            strong { color: #e8c547 !important; }
+            span { color: #fef08a !important; }
+          }
+        }
+
+        .s__pipeline-num {
+          font: 900 0.875rem / 1 font-family(fraktion);
+          color: #e8c547 !important;
+          opacity: 1 !important;
+        }
+
+        .s__pipeline-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+
+          strong {
+            font: 800 0.75rem / 1 font-family(fraktion);
+            letter-spacing: 0.04em;
+            color: #ffffff !important;
+          }
+
+          span {
+            font: 600 0.6875rem / 1 font-family(fraktion);
+            color: #e5e7eb !important;
+            opacity: 1 !important;
+          }
+        }
+
+        .s__pipeline-arrow {
+          font-size: 0.875rem;
+          color: #e8c547 !important;
+          opacity: 1 !important;
+          flex-shrink: 0;
+        }
+
+        /* Graphic Design Canvas Visuals */
+        .s__artboard-studio {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+
+          @include mq(phone) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .s__cluster-title {
+          font: 800 0.6875rem / 1 font-family(fraktion);
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: color(secondary);
+          opacity: 1;
+          margin-bottom: 0.75rem;
+          display: block;
+        }
+
+        .s__palette-swatches {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .s__swatch {
+          padding: 0.75rem 0.6rem;
+          border-radius: 5px;
+          border: 1.5px solid rgba(22, 0, 0, 0.25);
+          box-shadow: 0 2px 8px rgba(22, 0, 0, 0.08);
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          font: 800 0.625rem / 1 font-family(fraktion);
+        }
+
+        .s__swatch-name {
+          font-size: 0.5625rem;
+          font-weight: 800;
+          opacity: 1;
+        }
+
+        .s__type-scale {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .s__type-row {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 1.5px solid rgba(22, 0, 0, 0.14);
+        }
+
+        .s__type-meta {
+          font: 800 0.5625rem / 1 font-family(fraktion);
+          color: #4b5563;
+          opacity: 1;
+          letter-spacing: 0.1em;
+        }
+
+        .s__type-sample {
+          color: color(secondary);
+          &--display {
+            font: 900 1.25rem / 1 font-family(primary);
+            letter-spacing: -0.01em;
+          }
+          &--mono {
+            font: 700 0.8125rem / 1 font-family(mono);
+            letter-spacing: 0.04em;
+          }
+          &--serif {
+            font: 400 0.95rem / 1.2 font-family(editorial);
+            font-style: italic;
+          }
+        }
+
+        .s__template-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .s__tpl-card {
+          padding: 0.85rem 1rem;
+          background: #ffffff;
+          border: 1.5px solid rgba(22, 0, 0, 0.22);
+          border-radius: 6px;
+          box-shadow: 0 2px 8px rgba(22, 0, 0, 0.05);
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+
+          strong {
+            font: 800 0.8125rem / 1 font-family(primary);
+            color: #160000;
+          }
+
+          p {
+            font: 500 0.75rem / 1.4 font-family(editorial);
+            color: #374151;
+            opacity: 1;
+            margin: 0;
+          }
+        }
+
+        .s__tpl-badge {
+          align-self: flex-start;
+          font: 800 0.5625rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          padding: 0.25rem 0.5rem;
+          background: #160000;
+          color: #e8c547;
+          border-radius: 3px;
+        }
+
+        /* SEO Telemetry & SERP Preview */
+        .s__seo-telemetry-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 1.25rem;
+
+          @include mq(phone) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .s__serp-preview {
+          padding: 1.15rem 1.25rem;
+          background: #ffffff;
+          border: 1.5px solid rgba(22, 0, 0, 0.22);
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(22, 0, 0, 0.05);
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .s__serp-site {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .s__serp-favicon {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #160000;
+          color: #e8c547;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font: 800 0.6875rem / 1 font-family(fraktion);
+        }
+
+        .s__serp-crumbs {
+          font: 700 0.625rem / 1 font-family(fraktion);
+          color: #4b5563;
+          opacity: 1;
+          display: flex;
+          gap: 0.25rem;
+        }
+
+        .s__serp-title {
+          font: 800 0.9375rem / 1.25 font-family(primary);
+          color: #1d4ed8;
+          margin: 0;
+        }
+
+        .s__serp-rating {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font: 800 0.6875rem / 1 font-family(fraktion);
+
+          .s__serp-stars { color: #f59e0b; }
+          .s__serp-score { color: #160000; font-weight: 900; }
+          .s__serp-reviews { color: #6b7280; opacity: 1; font-weight: 600; }
+          .s__serp-price { color: #160000; opacity: 1; font-weight: 700; }
+        }
+
+        .s__serp-desc {
+          font: 500 0.75rem / 1.45 font-family(editorial);
+          color: #374151;
+          opacity: 1;
+          margin: 0;
+        }
+
+        .s__serp-sitelinks {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.45rem;
+          margin-top: 0.5rem;
+          padding-top: 0.55rem;
+          border-top: 1.5px solid rgba(22, 0, 0, 0.12);
+
+          span {
+            font: 800 0.625rem / 1 font-family(fraktion);
+            color: #1d4ed8;
+            cursor: default;
+          }
+        }
+
+        .s__cwv-cards {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+          margin-bottom: 0.75rem;
+
+          @include mq(phone) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .s__cwv-item {
+          padding: 0.75rem 0.65rem;
+          background: #f0fdf4;
+          border: 1.5px solid #10b981;
+          border-radius: 6px;
+          box-shadow: 0 2px 6px rgba(16, 185, 129, 0.1);
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+
+          .s__cwv-metric {
+            font: 800 0.6875rem / 1 font-family(fraktion);
+            color: #065f46;
+            opacity: 1;
+          }
+
+          .s__cwv-badge {
+            font: 800 0.5rem / 1 font-family(fraktion);
+            color: #047857;
+            padding: 0.2rem 0.4rem;
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            border-radius: 2px;
+          }
+
+          .s__cwv-val {
+            font: 900 1.2rem / 1 font-family(fraktion);
+            color: #047857;
+          }
+
+          .s__cwv-sub {
+            font: 600 0.5625rem / 1.1 font-family(fraktion);
+            color: #065f46;
+            opacity: 1;
+          }
+        }
+
+        .s__cwv-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .s__growth-strip {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.65rem;
+          padding: 0.85rem;
+          background: #ffffff;
+          border: 1.5px solid rgba(22, 0, 0, 0.22);
+          border-radius: 6px;
+          box-shadow: 0 2px 8px rgba(22, 0, 0, 0.05);
+        }
+
+        .s__growth-stat {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+          text-align: center;
+
+          .s__growth-num {
+            font: 900 0.9375rem / 1 font-family(fraktion);
+            color: #160000;
+          }
+
+          .s__growth-lbl {
+            font: 700 0.5625rem / 1 font-family(fraktion);
+            color: #4b5563;
+            opacity: 1;
+          }
+        }
+      }
+
+      /* Dark mode contrast overrides */
+      :global(html.theme-is-dark) & {
+        &--rev-policy {
+          .s__cell__content {
+            color: #ffffff !important;
+          }
+
+          .s__rev-policy-item {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.18) !important;
+            color: #ffffff !important;
+
+            .s__rev-policy-code {
+              color: rgba(255, 255, 255, 0.7) !important;
+            }
+
+            .s__rev-policy-badge {
+              background: rgba(255, 255, 255, 0.15) !important;
+              color: #ffffff !important;
+            }
+
+            .s__rev-policy-name {
+              color: rgba(255, 255, 255, 0.7) !important;
+            }
+
+            .s__rev-policy-count {
+              color: #ffffff !important;
+            }
+
+            .s__rev-policy-dots {
+              color: rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .s__rev-policy-sub {
+              color: rgba(255, 255, 255, 0.65) !important;
+            }
+
+            &.is-popular {
+              background: #250a0a !important;
+              border-color: #e8c547 !important;
+              color: #ffffff !important;
+
+              .s__rev-policy-badge {
+                background: #e8c547 !important;
+                color: #160000 !important;
+              }
+
+              .s__rev-policy-dots {
+                color: #e8c547 !important;
+              }
+            }
+
+            &.is-extra {
+              background: rgba(217, 119, 6, 0.15) !important;
+              border-color: #f59e0b !important;
+              color: #fbbf24 !important;
+
+              .s__rev-policy-code,
+              .s__rev-policy-name,
+              .s__rev-policy-count,
+              .s__rev-policy-dots {
+                color: #fbbf24 !important;
+              }
+
+              .s__rev-policy-sub {
+                color: #fde68a !important;
+              }
+            }
+          }
+        }
+
+        &--visual-showcase {
+          .s__visual-device {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+
+            &.is-active {
+              background: #e8c547;
+              color: #160000;
+              border-color: #e8c547;
+            }
+          }
+
+          .s__tpl-card,
+          .s__serp-preview,
+          .s__growth-strip {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.16);
+
+            strong { color: #ffffff; }
+            p { color: rgba(255, 255, 255, 0.8); }
+          }
+
+          .s__growth-stat {
+            .s__growth-num { color: #e8c547; }
+            .s__growth-lbl { color: rgba(255, 255, 255, 0.7); }
+          }
+        }
       }
 
       /* Custom Quote Inline Form Cell (No Tilt for stable typing & clicking) */
@@ -2122,6 +4282,12 @@ const categories = [
         justify-content: space-between;
         align-items: baseline;
         gap: 0.5rem;
+
+        &--rev {
+          margin-top: 0.35rem;
+          padding-top: 0.45rem;
+          border-top: 1px dashed rgba(22, 0, 0, 0.15);
+        }
       }
 
       .summary-label {
@@ -2138,6 +4304,12 @@ const categories = [
         &.font-bold {
           font-weight: 700;
           font-size: 1rem;
+        }
+
+        &--rev {
+          font-weight: 700;
+          color: color(secondary);
+          letter-spacing: 0.04em;
         }
       }
     }

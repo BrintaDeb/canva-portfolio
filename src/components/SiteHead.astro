@@ -79,6 +79,20 @@ const menu = [
       </ul>
     </nav><!-- .sb-menu -->
 
+    <!-- Mobile Hamburger Button -->
+    <button
+      class="sb-hamburger js-hamburger"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span class="sb-hamburger__line sb-hamburger__line--1"></span>
+      <span class="sb-hamburger__line sb-hamburger__line--2"></span>
+      <span class="sb-hamburger__line sb-hamburger__line--3"></span>
+      <span class="u-sr-only">Menu</span>
+    </button>
+
     <ul class="sb-socials">
       <li class="sb__item">
         <a
@@ -380,6 +394,101 @@ const menu = [
       this.el?.addEventListener('intersect', this.onIntersect.bind(this), {
         passive: true,
       })
+
+      // Mobile nav
+      this.initMobileNav()
+    }
+
+    /**
+     * Mobile Navigation
+     */
+    initMobileNav() {
+      const hamburger = document.querySelector('.js-hamburger') as HTMLButtonElement | null
+      const mobileNav = document.querySelector('.js-mobile-nav') as HTMLElement | null
+      const closeBtn = document.querySelector('.js-mobile-nav-close') as HTMLButtonElement | null
+      const backdrop = document.querySelector('.js-mobile-nav-backdrop') as HTMLElement | null
+      const mobileLinks = document.querySelectorAll('.js-mobile-menu-link') as NodeListOf<HTMLAnchorElement>
+
+      if (!hamburger || !mobileNav) return
+
+      const openNav = () => {
+        mobileNav.classList.add('is-open')
+        mobileNav.setAttribute('aria-hidden', 'false')
+        hamburger.setAttribute('aria-expanded', 'true')
+        hamburger.setAttribute('aria-label', 'Close navigation menu')
+        document.documentElement.classList.add('is-scroll-blocked')
+        // Focus first link for accessibility
+        setTimeout(() => {
+          const firstLink = mobileNav.querySelector('.mobile-nav__link') as HTMLElement | null
+          firstLink?.focus()
+        }, 350)
+      }
+
+      const closeNav = () => {
+        mobileNav.classList.remove('is-open')
+        mobileNav.setAttribute('aria-hidden', 'true')
+        hamburger.setAttribute('aria-expanded', 'false')
+        hamburger.setAttribute('aria-label', 'Open navigation menu')
+        document.documentElement.classList.remove('is-scroll-blocked')
+        hamburger.focus()
+      }
+
+      hamburger.addEventListener('click', () => {
+        const isOpen = mobileNav.classList.contains('is-open')
+        isOpen ? closeNav() : openNav()
+      })
+
+      closeBtn?.addEventListener('click', closeNav)
+      backdrop?.addEventListener('click', closeNav)
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', (e: Event) => {
+          e.preventDefault()
+          closeNav()
+          const id = link.getAttribute('href')
+          setTimeout(() => {
+            if (window.lenis && id) {
+              window.lenis.scrollTo(id, {
+                duration: 1.5,
+                easing: (t: number) =>
+                  t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t,
+              })
+            } else if (id) {
+              const el = document.querySelector(id)
+              el?.scrollIntoView({ behavior: 'smooth' })
+            }
+          }, 400)
+        })
+      })
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) {
+          closeNav()
+        }
+      })
+
+      // Trap focus inside mobile nav when open
+      mobileNav.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key !== 'Tab') return
+        const focusable = Array.from(
+          mobileNav.querySelectorAll('a[href], button:not([disabled])')
+        ) as HTMLElement[]
+        if (!focusable.length) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault()
+            last.focus()
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault()
+            first.focus()
+          }
+        }
+      })
     }
 
     /**
@@ -594,10 +703,14 @@ const menu = [
       height: 6rem;
       overflow: hidden;
 
+      @include mq(tablet) {
+        overflow: visible;
+      }
+
       @include mq(phone) {
         height: 4rem;
         max-width: 100vw;
-        overflow: hidden;
+        overflow: visible;
       }
     }
 
@@ -706,6 +819,67 @@ const menu = [
         height: 5.6em;
 
         overflow: hidden;
+      }
+    }
+
+    .sb-hamburger {
+      display: none;
+      position: relative;
+      flex-shrink: 0;
+      width: 44px;
+      height: 100%;
+      border: 0;
+      border-left: 1px solid color(secondary);
+      background: transparent;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+      order: 10;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+
+      @include mq(tablet) {
+        display: flex;
+      }
+
+      @include mq(phone) {
+        width: 44px;
+        gap: 4px;
+      }
+
+      &__line {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: color(secondary);
+        border-radius: 1px;
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.2s ease;
+        pointer-events: none;
+
+        @include mq(phone) {
+          width: 18px;
+          height: 1.5px;
+        }
+      }
+
+      &[aria-expanded='true'] {
+        .sb-hamburger__line--1 {
+          transform: translateY(6px) rotate(45deg);
+        }
+
+        .sb-hamburger__line--2 {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+
+        .sb-hamburger__line--3 {
+          transform: translateY(-6px) rotate(-45deg);
+        }
       }
     }
 
@@ -1332,5 +1506,234 @@ const menu = [
         content: '';
       }
     }
+  }
+</style>
+
+<style is:global>
+  /* ===== MOBILE NAVIGATION OVERLAY ===== */
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .mobile-nav.is-open {
+    pointer-events: auto;
+  }
+
+  .mobile-nav.is-open .mobile-nav__backdrop {
+    opacity: 1;
+  }
+
+  .mobile-nav.is-open .mobile-nav__panel {
+    transform: translateX(0);
+  }
+
+  .mobile-nav.is-open .mobile-nav__item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-nav__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .mobile-nav__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 88vw);
+    display: flex;
+    flex-direction: column;
+    background: var(--color-primary);
+    border-left: 1px solid var(--color-secondary);
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-nav__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-secondary);
+    flex-shrink: 0;
+    min-height: 4rem;
+  }
+
+  .mobile-nav__label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    opacity: 0.6;
+    font-family: var(--font-family-fraktion, 'Fraktion Mono', monospace);
+  }
+
+  .mobile-nav__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-secondary);
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-secondary);
+    padding: 0;
+    transition: background 0.2s ease, color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+  }
+
+  .mobile-nav__close:hover,
+  .mobile-nav__close:focus-visible {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    outline: none;
+  }
+
+  .mobile-nav__close svg {
+    display: block;
+  }
+
+  .mobile-nav__list {
+    flex: 1;
+    margin: 0;
+    padding: 1rem 0;
+    list-style: none;
+  }
+
+  .mobile-nav__item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.4s ease calc(var(--i, 0) * 0.06s + 0.15s),
+      transform 0.5s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--i, 0) * 0.06s + 0.15s);
+  }
+
+  .mobile-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    color: var(--color-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .mobile-nav__link:hover,
+  .mobile-nav__link:focus-visible {
+    background: rgba(0, 0, 0, 0.04);
+    border-bottom-color: var(--color-secondary);
+    outline: none;
+  }
+
+  .mobile-nav__link:hover .mobile-nav__arrow,
+  .mobile-nav__link:focus-visible .mobile-nav__arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  .mobile-nav__index {
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    opacity: 0.4;
+    flex-shrink: 0;
+    width: 1.5rem;
+    font-family: var(--font-family-fraktion, 'Fraktion Mono', monospace);
+  }
+
+  .mobile-nav__text {
+    flex: 1;
+    font-size: 1.45rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-family: var(--font-family-editorial, 'Editorial New', serif);
+  }
+
+  .mobile-nav__arrow {
+    font-size: 1rem;
+    opacity: 0.3;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .mobile-nav__footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--color-secondary);
+    flex-shrink: 0;
+  }
+
+  .mobile-nav__socials {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .mobile-nav__social-link {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
+    font-family: var(--font-family-fraktion, 'Fraktion Mono', monospace);
+  }
+
+  .mobile-nav__social-link:hover {
+    opacity: 1;
+  }
+
+  .mobile-nav__tagline {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 200;
+    line-height: 1.4;
+    color: var(--color-secondary);
+    opacity: 0.5;
+    font-family: var(--font-family-editorial, 'Editorial New', serif);
+  }
+
+  /* Hide mobile nav on desktop */
+  @media (min-width: 1024px) {
+    .mobile-nav {
+      display: none !important;
+    }
+
+    .sb-hamburger {
+      display: none !important;
+    }
+  }
+
+  /* Dark/contrasted theme link hover */
+  html.theme-contrasted .mobile-nav__link:hover,
+  html.theme-contrasted .mobile-nav__link:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
   }
 </style>

@@ -8,10 +8,11 @@ const {
   modalSrc = '',
   type = 'video',
   poster = '',
-  total = '25',
+  total = '30',
   tag = '',
   stack = [],
   impact = '',
+  badge = '',
   isLive = false,
 } = Astro.props
 
@@ -19,6 +20,21 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
 const isVideo = type === 'video' || (typeof src === 'string' && src.endsWith('.mp4'))
 const fullPreviewSrc = modalSrc || src
 const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
+
+// Compute smart badge for prospective clients
+let badgeText = badge
+if (!badgeText) {
+  if (isLive || (site && site !== '#' && site.startsWith('http'))) {
+    badgeText = site.includes('canva.com') ? 'CANVA DECK' : 'LIVE PLATFORM'
+  } else if (isVideo) {
+    badgeText = '4K MOTION REEL'
+  } else {
+    badgeText = 'CASE STUDY'
+  }
+}
+
+const badgeType = isLive || site.startsWith('http') ? 'live' : isVideo ? 'video' : 'case'
+const impactSnippet = impact ? impact.split('•')[0].trim() : ''
 ---
 
 <a-work
@@ -31,56 +47,116 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
   data-poster={poster}
   data-stack={stackString}
   data-impact={impact}
+  data-badge={badgeText}
   data-live={isLive ? 'true' : 'false'}
 >
   <div class="a__inner">
-    <a
-      href={site !== '#' && site.startsWith('http') ? site : 'javascript:void(0)'}
-      target={site.startsWith('http') ? '_blank' : '_self'}
-      rel="noopener noreferrer"
+    <div
       data-caption={caption}
-      class="js-card-link"
+      class="a__card js-card-link"
+      role="button"
+      tabindex="0"
+      title={`Click to inspect ${caption}`}
     >
-      {
-        isVideo ? (
-          <video
-            data-src={src}
-            poster={poster}
-            class="a__video js-video"
-            loop
-            muted
-            playsinline
+      <!-- Floating Header Badges -->
+      <div class="a__badges">
+        <span class={`a__badge a__badge--${badgeType}`}>
+          {badgeType === 'live' && <span class="a__pulse"></span>}
+          {badgeType === 'video' && <span class="a__icon">▶</span>}
+          {badgeType === 'case' && <span class="a__icon">✦</span>}
+          <span class="a__badge-text">{badgeText}</span>
+        </span>
+
+        {site && site !== '#' && site.startsWith('http') ? (
+          <a
+            href={site}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="a__inspect-hint a__inspect-hint--direct js-direct-link"
+            title={`Open live deployment (${site})`}
           >
-          </video>
+            <span>LIVE ↗</span>
+          </a>
         ) : (
-          <img
-            src={src}
-            alt={caption}
-            class="a__image js-image"
-            loading="lazy"
-          />
-        )
-      }
+          <span class="a__inspect-hint">
+            <span>SPECS</span>
+            <svg class="a__inspect-svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+            </svg>
+          </span>
+        )}
+      </div>
 
+      <!-- Media Wrapper -->
+      <div class="a__media-wrap">
+        {
+          isVideo ? (
+            <video
+              data-src={src}
+              poster={poster}
+              class="a__video js-video"
+              loop
+              muted
+              playsinline
+            >
+            </video>
+          ) : (
+            <img
+              src={src}
+              alt={caption}
+              class="a__image js-image"
+              loading="lazy"
+            />
+          )
+        }
+        <div class="a__hover-overlay">
+          <span class="a__hover-pill">
+            <span>{isLive || (site && site.startsWith('http')) ? 'EXPLORE LIVE PLATFORM' : 'INSPECT CASE STUDY'}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Two-tier Structured Caption -->
       <div class="a__caption">
-        <div class="a__caption__text">
-          {caption}
-          {tag && <span class="a__caption__tag"> [{tag}]</span>}
-        </div><!-- .a__caption__text -->
+        <div class="a__caption__header">
+          <div class="a__caption__title" title={caption}>
+            {caption}
+          </div>
+          {tag && <div class="a__caption__tag">[{tag}]</div>}
+        </div>
 
-        <div class="a__caption__key">
-          #{key}
-        </div><!-- .a__caption__key -->
-      </div><!-- .a__caption -->
-    </a>
-  </div><!-- .a__inner -->
+        <div class="a__caption__sub">
+          {impactSnippet ? (
+            <div class="a__caption__impact" title={impact}>
+              <svg class="a__caption__impact-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              <span>{impactSnippet}</span>
+            </div>
+          ) : (
+            <div class="a__caption__tech">
+              {Array.isArray(stack) && stack.length > 0 ? stack.slice(0, 2).join(' • ') : 'Creative Engineering'}
+            </div>
+          )}
+          <div class="a__caption__key">
+            #{key}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </a-work>
 
 <script>
   class AWork extends HTMLElement {
     static observedAttributes = ['progress']
 
-    link: HTMLAnchorElement | null
+    card: HTMLElement | null
     video: HTMLVideoElement | null
     image: HTMLImageElement | null
 
@@ -93,13 +169,19 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
       // Elements
       this.video = this.querySelector('.js-video')
       this.image = this.querySelector('.js-image')
-      this.link = this.querySelector('.js-card-link')
+      this.card = this.querySelector('.js-card-link')
 
       // Properties
       this.isPlaying = false
 
-      // Events
-      this.link?.addEventListener('click', this.onClick.bind(this))
+      // Events: bind to custom element container for 100% reliable click capture
+      this.addEventListener('click', this.onClick.bind(this))
+      this.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          this.onClick(e as any)
+        }
+      })
     }
 
     /**
@@ -137,7 +219,7 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
             this.inView()
           }
           this.style.visibility = 'visible'
-          this.style.pointerEvents = opacity > 0.4 ? 'auto' : 'none'
+          this.style.pointerEvents = 'auto'
         }
       }
     }
@@ -168,23 +250,35 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
     }
 
     /**
-     * On click - open project in lightbox modal
+     * On click - open project in lightbox modal (or open direct link)
      */
     onClick(event: MouseEvent) {
+      // Direct live website button clicked -> open in new tab
+      const target = event.target as HTMLElement
+      if (target && target.closest('.js-direct-link')) {
+        return
+      }
+
+      // Cmd/Ctrl clicked -> if site is live, open directly in new tab
+      const site = this.dataset.site || ''
+      if ((event.metaKey || event.ctrlKey) && site && site !== '#' && site.startsWith('http')) {
+        window.open(site, '_blank', 'noopener,noreferrer')
+        return
+      }
+
       const caption = this.dataset.caption || ''
       const tag = this.dataset.tag || ''
-      const site = this.dataset.site || ''
       const src = this.dataset.src || ''
       const type = this.dataset.type || 'image'
       const poster = this.dataset.poster || ''
       const stack = this.dataset.stack ? this.dataset.stack.split(',').filter(Boolean) : []
       const impact = this.dataset.impact || ''
+      const badge = this.dataset.badge || ''
       const isLive = this.dataset.live === 'true'
 
-      // If card doesn't have an external URL, or user clicked to open lightbox
       event.preventDefault()
       window.dispatchEvent(new CustomEvent('open-project-lightbox', {
-        detail: { caption, tag, site, src, type, poster, stack, impact, isLive }
+        detail: { caption, tag, site, src, type, poster, stack, impact, isLive, badge }
       }))
     }
   }
@@ -205,36 +299,56 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
     width: max-content;
     max-width: fit-content;
     margin: 0;
-    padding: 0.5rem 0.5rem 0;
+    padding: 0.5rem 0.5rem 0.4rem;
 
     background: color(secondary);
     opacity: var(--card-opacity, 0);
     visibility: hidden;
 
     transform-style: preserve-3d;
-    border: 1px solid rgba(255, 240, 235, 0.18);
-    border-radius: 6px;
+    border: 1px solid rgba(255, 240, 235, 0.22);
+    border-radius: 8px;
     overflow: hidden;
     box-sizing: border-box;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
 
     will-change: transform, opacity;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 
     &:hover {
-      border-color: rgba(255, 240, 235, 0.38);
-      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
+      border-color: rgba(255, 240, 235, 0.45);
+      box-shadow: 0 30px 75px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 240, 235, 0.08);
+
+      .a__hover-overlay {
+        opacity: 1;
+      }
+
+      .a__inspect-hint {
+        background: color(primary);
+        color: color(secondary);
+      }
     }
 
     @include mq(phone) {
-      padding: 0.25rem 0.25rem 0;
+      padding: 0.35rem 0.35rem 0.3rem;
+      border-radius: 6px;
     }
 
-    a {
+    a,
+    .a__card {
       display: flex;
       flex-direction: column;
       width: 100%;
       text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+      outline: none;
+
+      &:focus-visible {
+        outline: 2px solid #4ade80;
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
     }
 
     .a__inner {
@@ -245,6 +359,106 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
       padding: 0;
     }
 
+    // Top badges header
+    .a__badges {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-bottom: 0.4rem;
+      gap: 0.5rem;
+    }
+
+    .a__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.5rem;
+      font: 700 9.5px / 1 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      white-space: nowrap;
+
+      &--live {
+        color: #4ade80;
+        background: rgba(74, 222, 128, 0.12);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+      }
+
+      &--video {
+        color: #facc15;
+        background: rgba(250, 204, 21, 0.12);
+        border: 1px solid rgba(250, 204, 21, 0.3);
+      }
+
+      &--case {
+        color: color(primary);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 240, 235, 0.18);
+      }
+
+      .a__pulse {
+        width: 5px;
+        height: 5px;
+        background: #4ade80;
+        border-radius: 50%;
+        box-shadow: 0 0 6px #4ade80;
+        animation: cardPulse 2s infinite ease-in-out;
+      }
+
+      .a__icon {
+        font-size: 8px;
+        line-height: 1;
+      }
+    }
+
+    @keyframes cardPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .a__inspect-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.18rem 0.45rem;
+      font: 600 9px / 1 font-family(fraktion);
+      letter-spacing: 0.06em;
+      color: color(primary);
+      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 240, 235, 0.15);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+
+      &--direct {
+        background: rgba(74, 222, 128, 0.15);
+        border-color: rgba(74, 222, 128, 0.4);
+        color: #4ade80 !important;
+        opacity: 0.95;
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover {
+          background: #4ade80;
+          color: #0d0404 !important;
+          box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+        }
+      }
+    }
+
+    // Media container & hover
+    .a__media-wrap {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
     .a__video,
     .a__image {
       display: block;
@@ -253,52 +467,164 @@ const stackString = Array.isArray(stack) ? stack.join(',') : (stack || '')
       max-width: 48vw;
       max-height: 52vh;
       object-fit: contain;
-      border-radius: 2px;
+      border-radius: 4px;
 
       @include mq(phone) {
-        max-width: 80vw;
-        max-height: 70vh;
+        max-width: 86vw;
+        max-height: 52vh;
       }
     }
 
-    .a__caption {
+    .a__hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
-      flex-direction: row;
       align-items: center;
-      justify-content: space-between;
-
-      width: 0;
-      min-width: 100%;
-      box-sizing: border-box;
-      padding: 0.5rem 0.25rem;
-      gap: 0.5rem;
-
-      color: color(primary);
-      font: 700 11px / 1.3 font-family(fraktion);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      justify-content: center;
+      background: rgba(10, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
 
       @include mq(phone) {
         display: none;
       }
+    }
 
-      &__text {
+    .a__hover-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.85rem;
+      font: 700 10.5px / 1 font-family(fraktion);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: color(secondary);
+      background: color(primary);
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transform: translateY(4px);
+      transition: transform 0.25s ease;
+    }
+
+    &:hover .a__hover-pill {
+      transform: translateY(0);
+    }
+
+    // Two-tier caption styling
+    .a__caption {
+      display: flex;
+      flex-direction: column;
+      width: 0;
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0.45rem 0.2rem 0.1rem;
+      gap: 0.3rem;
+
+      color: color(primary);
+
+      @include mq(phone) {
+        padding: 0.35rem 0.15rem 0.1rem;
+        gap: 0.25rem;
+      }
+
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        min-width: 0;
+      }
+
+      &__title {
         flex: 1 1 auto;
         min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font: 700 11.5px / 1.2 font-family(fraktion);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+
+        @include mq(phone) {
+          font-size: 10.5px;
+        }
+      }
+
+      &__tag {
+        flex-shrink: 0;
+        font: 500 10px / 1 font-family(fraktion);
+        color: color(primary);
+        opacity: 0.7;
+        white-space: nowrap;
+
+        @include mq(phone) {
+          font-size: 9px;
+        }
+      }
+
+      &__sub {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        min-width: 0;
+      }
+
+      &__impact {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font: 600 10px / 1.2 font-family(fraktion);
+        color: #fef08a;
+
+        span {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        @include mq(phone) {
+          font-size: 9px;
+        }
+      }
+
+      &__impact-icon {
+        color: #facc15;
+        flex-shrink: 0;
+      }
+
+      &__tech {
+        font: 400 10px / 1 font-family(fraktion);
+        opacity: 0.65;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        @include mq(phone) {
+          font-size: 9px;
+        }
       }
 
       &__key {
         flex-shrink: 0;
+        font: 600 10px / 1 font-family(fraktion);
+        opacity: 0.5;
+        letter-spacing: 0.05em;
         white-space: nowrap;
-      }
 
-      &__tag {
-        color: color(primary);
-        opacity: 0.7;
-        font-weight: 400;
+        @include mq(phone) {
+          font-size: 8.5px;
+        }
       }
     }
 

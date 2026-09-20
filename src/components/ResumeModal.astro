@@ -16,9 +16,21 @@
         <span class="modal-header-tag">[ CURRICULUM VITAE &bull; ONE-PAGER ]</span>
       </div>
       <div class="modal-header-actions">
-        <button type="button" class="resume-header-btn js-print-resume" title="Print or Save CV as PDF">
-          <span class="btn-icon">🖨</span>
-          <span>PRINT / PDF</span>
+        <button type="button" class="resume-header-btn js-download-png" title="Download clean One-Pager Image (PNG) directly">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span class="btn-text">DOWNLOAD PNG</span>
+        </button>
+        <button type="button" class="resume-header-btn js-print-resume" title="Print or Save CV as 1-Page PDF">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span class="btn-text">PRINT / PDF</span>
         </button>
         <button type="button" class="modal-close-btn js-close-resume" aria-label="Close CV modal">✕</button>
       </div>
@@ -173,6 +185,7 @@
 
 <script>
   import { audioEngine } from '../utils/AudioEngine.js'
+  import html2canvas from 'html2canvas'
 
   class ResumeController {
     modal: HTMLElement | null
@@ -203,11 +216,53 @@
         }
       })
 
-      // Print button
+      // Print button - triggers clean 1-page A4 native print
       const printBtn = this.modal?.querySelector('.js-print-resume')
       printBtn?.addEventListener('click', () => {
         audioEngine.playClick()
         window.print()
+      })
+
+      // Download PNG button - exports ONLY the resume sheet into crisp 2x retina PNG
+      const pngBtn = this.modal?.querySelector('.js-download-png') as HTMLButtonElement | null
+      pngBtn?.addEventListener('click', async () => {
+        audioEngine.playClick()
+        const sheet = this.modal?.querySelector('.resume-sheet') as HTMLElement | null
+        if (!sheet) return
+
+        const btnText = pngBtn.querySelector('.btn-text')
+        const originalText = btnText ? btnText.textContent : 'DOWNLOAD PNG'
+        if (btnText) btnText.textContent = 'EXPORTING...'
+        pngBtn.disabled = true
+
+        try {
+          const canvas = await html2canvas(sheet, {
+            scale: 2, // 2x sharp retina resolution
+            backgroundColor: '#fff2ed',
+            useCORS: true,
+            logging: false,
+            scrollX: 0,
+            scrollY: 0,
+          })
+
+          const link = document.createElement('a')
+          link.download = 'Brinta_Deb_Curriculum_Vitae_OnePager.png'
+          link.href = canvas.toDataURL('image/png')
+          link.click()
+        } catch (err) {
+          console.error('Failed to export one-pager PNG:', err)
+        } finally {
+          if (btnText) btnText.textContent = originalText
+          pngBtn.disabled = false
+        }
+      })
+
+      // Before print handler: ensure resume modal is fully active and visible
+      window.addEventListener('beforeprint', () => {
+        if (this.modal) {
+          this.modal.classList.remove('hidden')
+          this.modal.setAttribute('aria-hidden', 'false')
+        }
       })
     }
 
@@ -583,67 +638,176 @@
       }
     }
   }
+</style>
 
-  /* Dedicated Print Stylesheet */
+<!-- Dedicated Global Print Stylesheet: Isolates ONLY #resumeModal .resume-sheet -->
+<style is:global lang="scss">
   @media print {
-    body * {
-      visibility: hidden;
+    @page {
+      size: A4 portrait;
+      margin: 8mm 10mm 8mm 10mm;
     }
 
-    .resume-modal,
-    .resume-modal * {
-      visibility: visible;
+    /* 1. COMPLETELY HIDE every element in body and .site-wrapper except #resumeModal */
+    body > *:not(.site-wrapper),
+    .site-wrapper > *:not(#resumeModal),
+    .site-intro,
+    .site-scrollbar,
+    .custom-cursor,
+    .spotlight-nav,
+    .facts-faq-widget {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      max-height: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
-    .resume-modal {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      padding: 0;
-      background: white !important;
-      color: black !important;
+    /* 2. Reset html, body, and .site-wrapper to a single pristine document */
+    html,
+    body,
+    .site-wrapper {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      background: #ffffff !important;
+      color: #111111 !important;
+      font-size: 10.5pt !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* 3. Render ONLY the resume modal and its sheet */
+    #resumeModal {
+      position: static !important;
       display: block !important;
+      visibility: visible !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: #ffffff !important;
+      color: #111111 !important;
+      overflow: visible !important;
+      box-sizing: border-box !important;
+      z-index: 999999 !important;
+    }
 
-      .modal-backdrop,
-      .modal-header {
-        display: none !important;
-      }
+    #resumeModal .modal-backdrop,
+    #resumeModal .modal-header {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+    }
 
-      .modal-card {
-        box-shadow: none !important;
-        border: none !important;
-        max-width: 100% !important;
-        max-height: none !important;
-        background: white !important;
-        color: black !important;
-      }
+    #resumeModal .modal-card {
+      position: static !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      border: none !important;
+      box-shadow: none !important;
+      background: #ffffff !important;
+      color: #111111 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
 
-      .resume-sheet {
-        padding: 0 !important;
-        color: black !important;
-      }
+    #resumeModal .resume-sheet {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #ffffff !important;
+      color: #111111 !important;
+      box-sizing: border-box !important;
+      page-break-after: avoid !important;
+      page-break-inside: avoid !important;
+    }
 
-      .resume-name,
-      .section-label,
-      .exp-company,
-      .contact-pill,
-      .overview-text,
-      .skill-items,
-      .exp-desc {
-        color: black !important;
-      }
+    #resumeModal .resume-name {
+      font-size: 2.6rem !important;
+      color: #111111 !important;
+      margin-bottom: 0.2rem !important;
+    }
 
-      .exp-date {
-        background: #eee !important;
-        color: black !important;
-        border: 1px solid #ccc !important;
-      }
+    #resumeModal .resume-top {
+      padding-bottom: 0.85rem !important;
+      margin-bottom: 0.85rem !important;
+      border-bottom: 1px solid #111111 !important;
+    }
 
-      .contact-pill {
-        border-color: #ccc !important;
-      }
+    #resumeModal .resume-section {
+      margin-bottom: 0.9rem !important;
+      page-break-inside: avoid !important;
+    }
+
+    #resumeModal .section-label {
+      margin-bottom: 0.4rem !important;
+      padding-bottom: 0.2rem !important;
+      border-bottom: 1px dashed #111111 !important;
+      color: #111111 !important;
+      font-size: 0.65rem !important;
+    }
+
+    #resumeModal .resume-name,
+    #resumeModal .section-label,
+    #resumeModal .exp-company,
+    #resumeModal .contact-pill,
+    #resumeModal .overview-text,
+    #resumeModal .skill-items,
+    #resumeModal .exp-desc,
+    #resumeModal .resume-title-row,
+    #resumeModal .resume-bullets,
+    #resumeModal .project-tags,
+    #resumeModal .resume-bottom-text {
+      color: #111111 !important;
+    }
+
+    #resumeModal .overview-text {
+      font-size: 0.92rem !important;
+      line-height: 1.45 !important;
+    }
+
+    #resumeModal .exp-item {
+      margin-bottom: 0.75rem !important;
+      page-break-inside: avoid !important;
+    }
+
+    #resumeModal .skill-group {
+      margin-bottom: 0.65rem !important;
+      page-break-inside: avoid !important;
+    }
+
+    #resumeModal .exp-date {
+      background: #f0f0f0 !important;
+      color: #111111 !important;
+      border: 1px solid #cccccc !important;
+    }
+
+    #resumeModal .contact-pill {
+      border-color: #cccccc !important;
+      background: #fafafa !important;
+      color: #111111 !important;
+      padding: 0.2rem 0.45rem !important;
+    }
+
+    #resumeModal .resume-bottom {
+      border-top: 1px solid #111111 !important;
+      padding-top: 0.75rem !important;
+      margin-top: 0.85rem !important;
+    }
+
+    #resumeModal .resume-quick-schedule {
+      display: none !important;
     }
   }
 </style>

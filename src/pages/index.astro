@@ -12,7 +12,7 @@ import SCTA from '../components/SCTA.astro'
 import ASeparator from '../components/ASeparator.astro'
 import ProjectLightbox from '../components/ProjectLightbox.astro'
 import ResumeModal from '../components/ResumeModal.astro'
-import StudioMoodPlayer from '../components/StudioMoodPlayer.astro'
+import FactsFAQWidget from '../components/FactsFAQWidget.astro'
 import CustomCursor from '../components/CustomCursor.astro'
 import SpotlightNav from '../components/SpotlightNav.astro'
 
@@ -135,7 +135,7 @@ import '../styles/global.scss'
 
       <ResumeModal />
 
-      <StudioMoodPlayer />
+      <FactsFAQWidget />
     </div><!-- .site-wrapper -->
 
     <div
@@ -178,7 +178,6 @@ import '../styles/global.scss'
     import { ScrollTrigger } from 'gsap/ScrollTrigger'
     gsap.registerPlugin(ScrollTrigger)
 
-    import { CardTilt } from '../utils/Tilt.js'
     import { themeManager } from '../utils/ThemeManager.js'
 
     declare global {
@@ -243,9 +242,6 @@ import '../styles/global.scss'
 
         this.onResize()
         Ticker.nextTick(this.intro, this)
-
-        // Initialize 3D Card Hover Tilt on Bento cells & project cards
-        new CardTilt()
       }
 
       /**
