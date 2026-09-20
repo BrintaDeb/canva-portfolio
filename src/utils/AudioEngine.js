@@ -47,7 +47,7 @@ class AudioEngine {
     this.enabled = !this.enabled
     try {
       localStorage.setItem('bd_sound_enabled', this.enabled ? 'true' : 'false')
-    } catch (_) {}
+    } catch (_) { }
 
     window.dispatchEvent(
       new CustomEvent('sound:state-changed', {
@@ -353,7 +353,7 @@ class AudioEngine {
 
         this.ambientNoise = whiteNoise
         this.ambientNoiseGain = noiseGain
-      } catch (_) {}
+      } catch (_) { }
     } else if (trackId === 'midnight') {
       // "Midnight Coding" - Deep Analog Synthwave Drone + Harmonic Resonance
       filter.type = 'lowpass'
@@ -408,13 +408,13 @@ class AudioEngine {
       try {
         this.ambientNoise.stop()
         this.ambientNoise.disconnect()
-      } catch (_) {}
+      } catch (_) { }
       this.ambientNoise = null
     }
     if (this.ambientNoiseGain) {
       try {
         this.ambientNoiseGain.disconnect()
-      } catch (_) {}
+      } catch (_) { }
       this.ambientNoiseGain = null
     }
     if (!this.droneGain || !this.ctx) return
@@ -425,7 +425,7 @@ class AudioEngine {
         try {
           osc.stop()
           osc.disconnect()
-        } catch (_) {}
+        } catch (_) { }
       })
       this.droneOscs = []
       if (this.droneGain) {

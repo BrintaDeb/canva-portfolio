@@ -307,7 +307,7 @@ const categories = [
         }
 
         <!-- Row 4: Custom Project Scope Estimator & Quotation Builder -->
-        <div class="s__cell s__cell--custom-quote js-cell">
+        <div class="s__cell s__cell--custom-quote js-cell no-tilt" data-no-tilt>
           <div class="s__custom-quote-header">
             <span class="s__custom-tag">[ INTERACTIVE PROJECT SCOPE & TIMELINE ESTIMATOR ]</span>
             <h4 class="s__custom-title">Build your tailored scope across Web, UI/UX, 3D Motion & SEO</h4>
@@ -385,6 +385,46 @@ const categories = [
           </div>
 
           <form id="customQuoteForm" class="s__quote-form js-quote-form">
+            <!-- Upfront Fee Requirement Box -->
+            <div class="custom-paygate-box">
+              <div class="paygate-badge-row">
+                <div class="paygate-badge-left">
+                  <span class="paygate-lock-icon">🔒</span>
+                  <span class="paygate-tag">₹100 UPFRONT RESERVATION REQUIRED TO SUBMIT QUOTATION</span>
+                </div>
+                <span class="paygate-refund-pill">50% REFUNDABLE</span>
+              </div>
+              <p class="paygate-quote">
+                &ldquo;Upfront fee is required to value both our time and ensure custom scope calculations are reserved for serious clients. 50% refundable if not proceeding, or 100% credited against your final project invoice.&rdquo;
+              </p>
+              <div class="paygate-qr-preview">
+                <img
+                  src="/images/brinta-navi-upi-qr.jpg"
+                  alt="Navi UPI QR - Brinta Deb"
+                  class="paygate-mini-qr"
+                  width="75"
+                  height="108"
+                  loading="lazy"
+                />
+                <div class="paygate-qr-info">
+                  <span class="paygate-upi-label">SCAN WITH ANY UPI APP OR PAY DIRECT:</span>
+                  <div class="paygate-upi-row">
+                    <span class="paygate-upi-id js-custom-upi-val">brintadeb1453@nyes</span>
+                    <button type="button" class="paygate-copy-btn js-custom-copy-upi" title="Copy UPI ID">
+                      <span class="js-custom-copy-label">COPY</span> ⎘
+                    </button>
+                  </div>
+                  <a
+                    href="upi://pay?pa=brintadeb1453@nyes&pn=BRINTA%20DEB&am=100&cu=INR&tn=Custom%20Scope%20Quotation%20Fee"
+                    class="paygate-app-link"
+                    title="Open in UPI App on Mobile"
+                  >
+                    ⚡ OPEN IN UPI APP (GPAY / PHONEPE / PAYTM / NAVI) ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <div class="form-grid">
               <div class="form-group">
                 <label for="quoteClientName">YOUR NAME / COMPANY *</label>
@@ -407,6 +447,15 @@ const categories = [
               </div>
 
               <div class="form-group">
+                <label for="quotePhone">YOUR WHATSAPP NUMBER (IF SENDING ON WHATSAPP)</label>
+                <input
+                  type="tel"
+                  id="quotePhone"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+
+              <div class="form-group">
                 <label for="quoteBudget">ESTIMATED BUDGET / TIMELINE</label>
                 <input
                   type="text"
@@ -424,13 +473,42 @@ const categories = [
                   required
                 ></textarea>
               </div>
+
+              <!-- Mandatory UTR Field for in-page custom quote -->
+              <div class="form-group form-group--full form-group--utr">
+                <label for="quoteUtr">
+                  <span>UPI TRANSACTION REFERENCE / 12-DIGIT UTR *</span>
+                  <span class="field-hint">Required to verify ₹100 reservation fee before dispatching</span>
+                </label>
+                <input
+                  type="text"
+                  id="quoteUtr"
+                  class="js-quote-utr"
+                  placeholder="e.g. 423589123456 or Transaction ID from UPI receipt"
+                  required
+                />
+                <div id="quoteUtrError" class="modal-utr-error" style="display: none;">
+                  ⚠️ Upfront ₹100 fee verification required. Please transfer via UPI and enter your 12-digit UTR to send this quotation.
+                </div>
+              </div>
             </div>
 
-            <div class="form-submit-row">
-              <button type="submit" class="s__submit-quote-btn">
-                <span>SEND FULL QUOTATION TO WHATSAPP</span>
-                <span class="btn-arrow">→</span>
+            <!-- Dual Dispatch Action Buttons -->
+            <div class="custom-actions-row">
+              <button type="button" class="custom-action-btn custom-action-btn--wa js-custom-send-wa">
+                <span class="btn-icon">💬</span>
+                <span>SEND QUOTATION ON WHATSAPP</span>
+                <span class="btn-arrow">↗</span>
               </button>
+              <button type="button" class="custom-action-btn custom-action-btn--mail js-custom-send-mail">
+                <span class="btn-icon">✉️</span>
+                <span>SEND QUOTATION ON EMAIL</span>
+                <span class="btn-arrow">↗</span>
+              </button>
+            </div>
+
+            <div class="custom-fee-guarantee">
+              <span>🔒 Upfront ₹100 reservation fee required • 50% Refundable if not proceeding • 100% credited against project bill.</span>
             </div>
           </form>
         </div><!-- .s__cell--custom-quote -->
@@ -453,7 +531,7 @@ const categories = [
     <div class="modal-backdrop js-close-modal"></div>
     <div class="modal-card">
       <div class="modal-header">
-        <div class="modal-header-tag">[ INSTANT WHATSAPP QUOTATION ]</div>
+        <div class="modal-header-tag">[ REQUEST OFFICIAL QUOTATION // UPFRONT COMMITMENT REQUIRED ]</div>
         <button class="modal-close-btn js-close-modal" aria-label="Close modal">✕</button>
       </div>
 
@@ -473,6 +551,46 @@ const categories = [
           </div>
         </div>
 
+        <!-- Upfront Fee Requirement Box -->
+        <div class="modal-paygate-box">
+          <div class="paygate-badge-row">
+            <div class="paygate-badge-left">
+              <span class="paygate-lock-icon">🔒</span>
+              <span class="paygate-tag">₹100 UPFRONT FEE REQUIRED TO SEND QUOTATION</span>
+            </div>
+            <span class="paygate-refund-pill">50% REFUNDABLE</span>
+          </div>
+          <p class="paygate-quote">
+            &ldquo;This nominal upfront reservation ensures quotation reviews and scopes are reserved strictly for serious clients. 50% refundable if not proceeding, or 100% credited against your final project invoice.&rdquo;
+          </p>
+          <div class="paygate-qr-preview">
+            <img
+              src="/images/brinta-navi-upi-qr.jpg"
+              alt="Navi UPI QR - Brinta Deb"
+              class="paygate-mini-qr"
+              width="75"
+              height="108"
+              loading="lazy"
+            />
+            <div class="paygate-qr-info">
+              <span class="paygate-upi-label">SCAN WITH ANY UPI APP OR PAY DIRECT:</span>
+              <div class="paygate-upi-row">
+                <span class="paygate-upi-id js-modal-upi-val">brintadeb1453@nyes</span>
+                <button type="button" class="paygate-copy-btn js-modal-copy-upi" title="Copy UPI ID">
+                  <span class="js-modal-copy-label">COPY</span> ⎘
+                </button>
+              </div>
+              <a
+                href="upi://pay?pa=brintadeb1453@nyes&pn=BRINTA%20DEB&am=100&cu=INR&tn=Quotation%20Submission%20Fee"
+                class="paygate-app-link"
+                title="Open in UPI App on Mobile"
+              >
+                ⚡ OPEN IN UPI APP (GPAY / PHONEPE / PAYTM / NAVI) ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
         <form id="tierQuoteForm" class="modal-form">
           <div class="form-group">
             <label for="modalClientName">YOUR NAME / BRAND *</label>
@@ -481,6 +599,15 @@ const categories = [
               id="modalClientName"
               placeholder="e.g. John Doe / Acme Inc"
               required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="modalPhone">YOUR WHATSAPP NUMBER (IF SENDING ON WHATSAPP)</label>
+            <input
+              type="tel"
+              id="modalPhone"
+              placeholder="+91 98765 43210"
             />
           </div>
 
@@ -502,10 +629,41 @@ const categories = [
             ></textarea>
           </div>
 
-          <button type="submit" class="modal-send-btn">
-            <span>SEND FULL QUOTATION TO WHATSAPP</span>
-            <span class="btn-arrow">→</span>
-          </button>
+          <!-- Mandatory UTR Field -->
+          <div class="form-group form-group--utr">
+            <label for="modalUtr">
+              <span>UPI TRANSACTION REFERENCE / 12-DIGIT UTR *</span>
+              <span class="field-hint">Required to verify ₹100 reservation fee</span>
+            </label>
+            <input
+              type="text"
+              id="modalUtr"
+              class="js-modal-utr"
+              placeholder="e.g. 423589123456 or PhonePe Transaction ID"
+              required
+            />
+            <div id="modalUtrError" class="modal-utr-error" style="display: none;">
+              ⚠️ Upfront ₹100 fee verification required. Please transfer via UPI and enter your 12-digit UTR to send this quotation.
+            </div>
+          </div>
+
+          <!-- Dual Dispatch Action Buttons -->
+          <div class="modal-actions-row">
+            <button type="button" class="modal-action-btn modal-action-btn--wa js-send-quote-wa">
+              <span class="btn-icon">💬</span>
+              <span>SEND ON WHATSAPP</span>
+              <span class="btn-arrow">↗</span>
+            </button>
+            <button type="button" class="modal-action-btn modal-action-btn--mail js-send-quote-mail">
+              <span class="btn-icon">✉️</span>
+              <span>SEND ON EMAIL</span>
+              <span class="btn-arrow">↗</span>
+            </button>
+          </div>
+
+          <div class="modal-fee-guarantee">
+            <span>🔒 ₹100 Upfront Fee • 50% Refundable if not proceeding • 100% credited against project bill.</span>
+          </div>
         </form>
       </div>
     </div>
@@ -518,6 +676,7 @@ const categories = [
 <script>
   import Emitter from '../utils/Emitter'
   import gsap from 'gsap'
+  import { audioEngine } from '../utils/AudioEngine.js'
 
   class ServicesBento {
     el: HTMLElement | null
@@ -567,6 +726,9 @@ const categories = [
       this.ctx = this.canvas?.getContext('2d') || null
 
       this.quoteModal = document.getElementById('serviceQuoteModal')
+      if (this.quoteModal && this.quoteModal.parentElement !== document.body) {
+        document.body.appendChild(this.quoteModal)
+      }
       this.modalPackageName = document.getElementById('modalPackageName')
       this.modalTierName = document.getElementById('modalTierName')
       this.modalTierPrice = document.getElementById('modalTierPrice')
@@ -627,8 +789,6 @@ const categories = [
     }
 
     initQuotationSystem() {
-      const phoneNumber = '917005581453'
-
       // Tier Cell Clicks -> Open Full Quotation Modal
       const quoteTriggers = this.el?.querySelectorAll('.js-open-quote')
       quoteTriggers?.forEach((trigger) => {
@@ -644,6 +804,15 @@ const categories = [
           if (this.modalPackageName) this.modalPackageName.textContent = pkg
           if (this.modalTierName) this.modalTierName.textContent = tier
           if (this.modalTierPrice) this.modalTierPrice.textContent = price
+
+          // Pre-fill UTR if stored in session
+          const savedUtr = sessionStorage.getItem('call_payment_utr')
+          const modalUtr = document.getElementById('modalUtr') as HTMLInputElement | null
+          if (modalUtr && savedUtr && !modalUtr.value) {
+            modalUtr.value = savedUtr
+          }
+          const utrError = document.getElementById('modalUtrError')
+          if (utrError) utrError.style.display = 'none'
 
           this.quoteModal?.classList.remove('hidden')
           document.body.style.overflow = 'hidden'
@@ -673,63 +842,303 @@ const categories = [
         }
       })
 
-      // Modal Form Submit -> Send structured WhatsApp quotation
+      // Copy UPI ID functionality for both Modal and In-Page Estimator
+      const bindCopyUpi = (btnSelector: string, labelSelector: string) => {
+        const btn = document.querySelector(btnSelector)
+        const label = document.querySelector(labelSelector)
+        if (!btn) return
+        btn.addEventListener('click', async () => {
+          const upiId = 'brintadeb1453@nyes'
+          try { audioEngine?.playTone?.(750, 0.08) } catch (e) {}
+
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(upiId)
+            } else {
+              const temp = document.createElement('textarea')
+              temp.value = upiId
+              document.body.appendChild(temp)
+              temp.select()
+              document.execCommand('copy')
+              document.body.removeChild(temp)
+            }
+            if (label) {
+              const orig = label.textContent
+              label.textContent = '✓ COPIED'
+              btn.classList.add('is-copied')
+              setTimeout(() => {
+                if (label) label.textContent = orig
+                btn.classList.remove('is-copied')
+              }, 2500)
+            }
+          } catch {
+            if (label) label.textContent = 'COPIED'
+          }
+        })
+      }
+
+      bindCopyUpi('.js-modal-copy-upi', '.js-modal-copy-label')
+      bindCopyUpi('.js-custom-copy-upi', '.js-custom-copy-label')
+
+      // Pre-fill Custom Quote UTR if available in sessionStorage
+      const savedSessionUtr = sessionStorage.getItem('call_payment_utr')
+      const quoteUtrInput = document.getElementById('quoteUtr') as HTMLInputElement | null
+      if (quoteUtrInput && savedSessionUtr && !quoteUtrInput.value) {
+        quoteUtrInput.value = savedSessionUtr
+      }
+
+      // Input listener to auto-clear error banners when user types valid UTR
+      const modalUtrInput = document.getElementById('modalUtr') as HTMLInputElement | null
+      const modalUtrErr = document.getElementById('modalUtrError') as HTMLElement | null
+      modalUtrInput?.addEventListener('input', () => {
+        if (modalUtrInput.value.trim().length >= 6) {
+          modalUtrInput.classList.remove('has-error')
+          if (modalUtrErr) modalUtrErr.style.display = 'none'
+        }
+      })
+
+      const customUtrInput = document.getElementById('quoteUtr') as HTMLInputElement | null
+      const customUtrErr = document.getElementById('quoteUtrError') as HTMLElement | null
+      customUtrInput?.addEventListener('input', () => {
+        if (customUtrInput.value.trim().length >= 6) {
+          customUtrInput.classList.remove('has-error')
+          if (customUtrErr) customUtrErr.style.display = 'none'
+        }
+      })
+
+      // Action Button Listeners for Modal Quotation
+      this.quoteModal?.querySelector('.js-send-quote-wa')?.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.validateAndSendTierQuote('whatsapp')
+      })
+      this.quoteModal?.querySelector('.js-send-quote-mail')?.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.validateAndSendTierQuote('email')
+      })
       this.tierQuoteForm?.addEventListener('submit', (e) => {
         e.preventDefault()
-        const clientName = (document.getElementById('modalClientName') as HTMLInputElement)?.value.trim() || 'Client'
-        const timeline = (document.getElementById('modalTimeline') as HTMLInputElement)?.value.trim() || 'Flexible / ASAP'
-        const notes = (document.getElementById('modalNotes') as HTMLTextAreaElement)?.value.trim() || 'Standard package deliverables.'
-
-        const message = [
-          `*QUOTATION REQUEST — BRINTA DEB PORTFOLIO*`,
-          `━━━━━━━━━━━━━━━━━━━━━`,
-          `📦 *Service Package:* ${this.activeTierData.package}`,
-          `🎯 *Selected Tier:* ${this.activeTierData.tier}`,
-          `💰 *Estimated Rate:* ${this.activeTierData.price}`,
-          `👤 *Client Name / Brand:* ${clientName}`,
-          `⏱ *Timeline:* ${timeline}`,
-          `📝 *Project Requirements:* ${notes}`,
-          `━━━━━━━━━━━━━━━━━━━━━`,
-          `_Sent directly from Brinta Deb Portfolio_`,
-        ].join('\n')
-
-        const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-        window.open(waUrl, '_blank', 'noopener,noreferrer')
-        this.closeModal()
+        this.validateAndSendTierQuote('whatsapp')
       })
 
-      // In-page Custom Quote Form Submit -> Send structured WhatsApp quotation with estimator scope
+      // Action Button Listeners for In-Page Custom Scope Form
+      this.el?.querySelector('.js-custom-send-wa')?.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.validateAndSendCustomQuote('whatsapp')
+      })
+      this.el?.querySelector('.js-custom-send-mail')?.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.validateAndSendCustomQuote('email')
+      })
       this.customQuoteForm?.addEventListener('submit', (e) => {
         e.preventDefault()
-        const clientName = (document.getElementById('quoteClientName') as HTMLInputElement)?.value.trim() || 'Client'
-        const category = (document.getElementById('quoteCategory') as HTMLSelectElement)?.value || 'Custom Scope'
-        const budget = (document.getElementById('quoteBudget') as HTMLInputElement)?.value.trim() || 'To be discussed'
-        const requirements = (document.getElementById('quoteRequirements') as HTMLTextAreaElement)?.value.trim() || 'Custom creative project inquiry'
+        this.validateAndSendCustomQuote('whatsapp')
+      })
+    }
 
-        const selectedChips = Array.from(this.el?.querySelectorAll<HTMLLabelElement>('.js-scope-chip') || [])
-        const selectedModules = selectedChips
-          .filter((chip) => chip.querySelector<HTMLInputElement>('.scope-checkbox')?.checked)
-          .map((chip) => `• ${chip.getAttribute('data-module') || ''} (+${chip.getAttribute('data-days')}d)`)
+    closeModal() {
+      this.quoteModal?.classList.add('hidden')
+      document.body.style.overflow = ''
+      const utrErr = document.getElementById('modalUtrError')
+      if (utrErr) utrErr.style.display = 'none'
+      const modalUtr = document.getElementById('modalUtr') as HTMLInputElement | null
+      modalUtr?.classList.remove('has-error')
+    }
 
-        const modulesSection = selectedModules.length > 0
-          ? `📦 *Selected Scope Deliverables:*\n${selectedModules.join('\n')}`
+    validateAndSendTierQuote(channel: 'whatsapp' | 'email') {
+      const clientInput = document.getElementById('modalClientName') as HTMLInputElement | null
+      const phoneInput = document.getElementById('modalPhone') as HTMLInputElement | null
+      const timelineInput = document.getElementById('modalTimeline') as HTMLInputElement | null
+      const notesInput = document.getElementById('modalNotes') as HTMLTextAreaElement | null
+      const utrInput = document.getElementById('modalUtr') as HTMLInputElement | null
+      const utrErr = document.getElementById('modalUtrError') as HTMLElement | null
+
+      const clientName = clientInput?.value.trim() || ''
+      const phone = phoneInput?.value.trim() || ''
+      const timeline = timelineInput?.value.trim() || 'Flexible / ASAP'
+      const notes = notesInput?.value.trim() || 'Standard package deliverables.'
+      const utr = utrInput?.value.trim() || ''
+
+      if (!clientName) {
+        clientInput?.focus()
+        clientInput?.classList.add('has-error')
+        setTimeout(() => clientInput?.classList.remove('has-error'), 2000)
+        return
+      }
+
+      // STRICT VALIDATION: Upfront ₹100 reservation UTR is required
+      if (!utr || utr.length < 6) {
+        if (utrErr) utrErr.style.display = 'block'
+        utrInput?.focus()
+        utrInput?.classList.add('has-error')
+        try { audioEngine?.playError?.() } catch (e) {}
+        return
+      }
+
+      if (utrErr) utrErr.style.display = 'none'
+      utrInput?.classList.remove('has-error')
+
+      // Save verified UTR in session so user doesn't have to re-enter
+      sessionStorage.setItem('call_payment_utr', utr)
+      const customUtr = document.getElementById('quoteUtr') as HTMLInputElement | null
+      if (customUtr && !customUtr.value) customUtr.value = utr
+
+      try { audioEngine?.playSuccess?.() } catch (e) {}
+
+      const pkg = this.activeTierData.package || 'Custom Web & Creative Service'
+      const tier = this.activeTierData.tier || 'Selected Tier'
+      const price = this.activeTierData.price || 'Market Rate'
+
+      if (channel === 'whatsapp') {
+        const waLines = [
+          `*QUOTATION REQUEST // BRINTA DEB PORTFOLIO*`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `📦 *Package:* ${pkg}`,
+          `⭐ *Selected Tier:* ${tier}`,
+          `💰 *Estimated Rate:* ${price}`,
+          `👤 *Client / Brand:* ${clientName}`,
+          phone ? `📱 *Client WhatsApp:* ${phone}` : '',
+          `⏱️ *Target Timeline:* ${timeline}`,
+          `📝 *Requirements / Notes:* ${notes}`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `🧾 *Paid ₹100 UPI UTR / Ref:* ${utr}`,
+          `_(50% refundable if not proceeding / 100% credited against invoice)_`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Sent directly from Brinta Deb Portfolio Quotation System`,
+        ].filter(Boolean)
+
+        // Obfuscated WhatsApp destination to prevent scraping
+        const _waTarget = atob('OTE3MDA1NTgxNDUz')
+        const targetUrl = `https://wa.me/${_waTarget}?text=${encodeURIComponent(waLines.join('\n'))}`
+        window.open(targetUrl, '_blank', 'noopener,noreferrer')
+        this.closeModal()
+      } else {
+        const mailLines = [
+          `QUOTATION REQUEST — BRINTA DEB PORTFOLIO`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Service Package: ${pkg}`,
+          `Selected Tier: ${tier}`,
+          `Estimated Rate: ${price}`,
+          `Client Name / Brand: ${clientName}`,
+          phone ? `Client WhatsApp: ${phone}` : '',
+          `Target Timeline: ${timeline}`,
+          `Requirements / Notes: ${notes}`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Verified ₹100 UPI UTR / Transaction Reference: ${utr}`,
+          `(50% refundable if not proceeding / 100% credited against invoice)`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Sent directly from Brinta Deb Portfolio Quotation System`,
+        ].filter(Boolean)
+
+        const subject = encodeURIComponent(`Quotation Request [PAID UPI REF: ${utr}]: ${pkg} - ${tier} (${clientName})`)
+        const body = encodeURIComponent(mailLines.join('\n'))
+        window.location.href = `mailto:brintadeb15@gmail.com?subject=${subject}&body=${body}`
+        this.closeModal()
+      }
+    }
+
+    validateAndSendCustomQuote(channel: 'whatsapp' | 'email') {
+      const clientInput = document.getElementById('quoteClientName') as HTMLInputElement | null
+      const catSelect = document.getElementById('quoteCategory') as HTMLSelectElement | null
+      const phoneInput = document.getElementById('quotePhone') as HTMLInputElement | null
+      const budgetInput = document.getElementById('quoteBudget') as HTMLInputElement | null
+      const reqInput = document.getElementById('quoteRequirements') as HTMLTextAreaElement | null
+      const utrInput = document.getElementById('quoteUtr') as HTMLInputElement | null
+      const utrErr = document.getElementById('quoteUtrError') as HTMLElement | null
+
+      const clientName = clientInput?.value.trim() || ''
+      const category = catSelect?.value || 'Custom Scope'
+      const phone = phoneInput?.value.trim() || ''
+      const budget = budgetInput?.value.trim() || 'To be discussed'
+      const requirements = reqInput?.value.trim() || ''
+      const utr = utrInput?.value.trim() || ''
+
+      if (!clientName) {
+        clientInput?.focus()
+        clientInput?.classList.add('has-error')
+        setTimeout(() => clientInput?.classList.remove('has-error'), 2000)
+        return
+      }
+
+      if (!requirements) {
+        reqInput?.focus()
+        reqInput?.classList.add('has-error')
+        setTimeout(() => reqInput?.classList.remove('has-error'), 2000)
+        return
+      }
+
+      // STRICT VALIDATION: Upfront ₹100 reservation UTR is required
+      if (!utr || utr.length < 6) {
+        if (utrErr) utrErr.style.display = 'block'
+        utrInput?.focus()
+        utrInput?.classList.add('has-error')
+        try { audioEngine?.playError?.() } catch (e) {}
+        return
+      }
+
+      if (utrErr) utrErr.style.display = 'none'
+      utrInput?.classList.remove('has-error')
+
+      // Save verified UTR in session
+      sessionStorage.setItem('call_payment_utr', utr)
+      const modalUtr = document.getElementById('modalUtr') as HTMLInputElement | null
+      if (modalUtr && !modalUtr.value) modalUtr.value = utr
+
+      try { audioEngine?.playSuccess?.() } catch (e) {}
+
+      const selectedChips = Array.from(this.el?.querySelectorAll<HTMLLabelElement>('.js-scope-chip') || [])
+      const selectedModules = selectedChips
+        .filter((chip) => chip.querySelector<HTMLInputElement>('.scope-checkbox')?.checked)
+        .map((chip) => `• ${chip.getAttribute('data-module') || ''} (+${chip.getAttribute('data-days')}d)`)
+
+      const modulesSection = selectedModules.length > 0
+        ? `Selected Scope Deliverables:\n${selectedModules.join('\n')}`
+        : ''
+
+      if (channel === 'whatsapp') {
+        const waModulesSection = selectedModules.length > 0
+          ? `🧩 *Selected Scope Deliverables:*\n${selectedModules.join('\n')}\n`
           : ''
 
-        const message = [
-          `*CUSTOM PROJECT QUOTATION — BRINTA DEB*`,
+        const waLines = [
+          `*CUSTOM SCOPE QUOTATION // BRINTA DEB*`,
           `━━━━━━━━━━━━━━━━━━━━━`,
-          `👤 *Client Name / Brand:* ${clientName}`,
-          `🎨 *Requested Service:* ${category}`,
-          `💵 *Estimated Investment & Timeline:* ${budget}`,
-          modulesSection,
-          `📋 *Requirements & Scope:* ${requirements}`,
+          `👤 *Client / Brand:* ${clientName}`,
+          `🛠️ *Primary Service:* ${category}`,
+          phone ? `📱 *Client WhatsApp:* ${phone}` : '',
+          `💰 *Estimated Budget & Timeline:* ${budget}`,
+          waModulesSection,
+          `📝 *Project Details:* ${requirements}`,
           `━━━━━━━━━━━━━━━━━━━━━`,
-          `_Sent directly from Brinta Deb Portfolio Scope Estimator_`,
-        ].filter(Boolean).join('\n')
+          `🧾 *Paid ₹100 UPI UTR / Ref:* ${utr}`,
+          `_(50% refundable if not proceeding / 100% credited against invoice)_`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Sent directly from Brinta Deb Portfolio Scope Estimator`,
+        ].filter(Boolean)
 
-        const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-        window.open(waUrl, '_blank', 'noopener,noreferrer')
-      })
+        const _waTarget = atob('OTE3MDA1NTgxNDUz')
+        const targetUrl = `https://wa.me/${_waTarget}?text=${encodeURIComponent(waLines.join('\n'))}`
+        window.open(targetUrl, '_blank', 'noopener,noreferrer')
+      } else {
+        const mailLines = [
+          `CUSTOM PROJECT QUOTATION — BRINTA DEB`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Client Name / Brand: ${clientName}`,
+          `Requested Service: ${category}`,
+          phone ? `Client WhatsApp: ${phone}` : '',
+          `Estimated Investment & Timeline: ${budget}`,
+          modulesSection,
+          `Requirements & Scope: ${requirements}`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Verified ₹100 UPI UTR / Transaction Reference: ${utr}`,
+          `(50% refundable if not proceeding / 100% credited against invoice)`,
+          `━━━━━━━━━━━━━━━━━━━━━`,
+          `Sent directly from Brinta Deb Portfolio Scope Estimator`,
+        ].filter(Boolean)
+
+        const subject = encodeURIComponent(`Custom Scope Quotation [PAID UPI REF: ${utr}]: ${category} - ${clientName}`)
+        const body = encodeURIComponent(mailLines.join('\n'))
+        window.location.href = `mailto:brintadeb15@gmail.com?subject=${subject}&body=${body}`
+      }
     }
 
     initScopeEstimator() {
@@ -817,11 +1226,6 @@ const categories = [
 
       // Initial run to sync default checked values
       updateCalculations()
-    }
-
-    closeModal() {
-      this.quoteModal?.classList.add('hidden')
-      document.body.style.overflow = ''
     }
 
     initSmileyEngine() {
@@ -1376,11 +1780,17 @@ const categories = [
         transition: color 0.25s ease;
       }
 
-      /* Custom Quote Inline Form Cell */
+      /* Custom Quote Inline Form Cell (No Tilt for stable typing & clicking) */
       &--custom-quote {
         padding: 2.25rem 2rem;
         cursor: default;
         margin-top: -1px;
+        transform: none !important;
+        will-change: auto !important;
+
+        .tilt-sheen {
+          display: none !important;
+        }
 
         @include mq(phone) {
           padding: 1.5rem 1.25rem;
@@ -1609,38 +2019,6 @@ const categories = [
         }
       }
 
-      .form-submit-row {
-        margin-top: 1.25rem;
-      }
-
-      .s__submit-quote-btn {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.95rem 1.25rem;
-        background: color(secondary);
-        border: 1px solid color(secondary);
-        color: color(primary);
-        font: 700 0.75rem / 1 font-family(fraktion);
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.25s ease;
-
-        .btn-arrow {
-          transition: transform 0.25s ease;
-        }
-
-        &:hover {
-          background: color(primary);
-          color: color(secondary);
-
-          .btn-arrow {
-            transform: translateX(4px);
-          }
-        }
-      }
     }
 
     /* Canvas for Subtle Smileys */
@@ -1683,14 +2061,25 @@ const categories = [
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 34rem;
+      max-width: 36rem;
+      max-height: 90vh;
+      overflow-y: auto;
       background: color(primary);
       border: 1px solid color(secondary);
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
       padding: 2rem;
 
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: color(secondary);
+      }
+
       @include mq(phone) {
-        padding: 1.5rem 1.25rem;
+        padding: 1.5rem 1.15rem;
+        max-height: 92vh;
       }
     }
 
@@ -1726,7 +2115,7 @@ const categories = [
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
 
       .summary-line {
         display: flex;
@@ -1785,36 +2174,265 @@ const categories = [
           }
         }
       }
+    }
+  }
 
-      .modal-send-btn {
-        margin-top: 0.5rem;
-        width: 100%;
+  /* Shared Paygate Boxes for Custom Estimator and Modal Quotations */
+  .custom-paygate-box,
+  .modal-paygate-box {
+    background: #ffffff;
+    border: 1px solid color(secondary);
+    padding: 1.15rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+
+    .paygate-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.65rem;
+
+      .paygate-badge-left {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 0.95rem 1.25rem;
-        background: color(secondary);
-        border: 1px solid color(secondary);
-        color: color(primary);
-        font: 700 0.75rem / 1 font-family(fraktion);
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.25s ease;
+        gap: 0.4rem;
+      }
 
-        .btn-arrow {
-          transition: transform 0.25s ease;
+      .paygate-lock-icon {
+        font-size: 0.85rem;
+      }
+
+      .paygate-tag {
+        font: 700 0.625rem / 1.2 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+
+      .paygate-refund-pill {
+        background: #1b5e20;
+        color: #ffffff;
+        font: 700 0.5625rem / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.55rem;
+        border-radius: 999px;
+      }
+    }
+
+    .paygate-quote {
+      font: italic 500 0.75rem / 1.5 font-family(fraktion);
+      color: color(secondary);
+      opacity: 0.88;
+      margin: 0 0 0.85rem 0;
+      padding-left: 0.75rem;
+      border-left: 2px solid color(secondary);
+    }
+
+    .paygate-qr-preview {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      background: rgba(22, 0, 0, 0.03);
+      border: 1px dashed color(secondary);
+      padding: 0.85rem;
+
+      @include mq(phone) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .paygate-mini-qr {
+        width: 75px;
+        height: 108px;
+        object-fit: cover;
+        border: 1px solid rgba(22, 0, 0, 0.2);
+        flex-shrink: 0;
+        background: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .paygate-qr-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .paygate-upi-label {
+        font: 700 0.5625rem / 1.2 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.65;
+        color: color(secondary);
+      }
+
+      .paygate-upi-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        .paygate-upi-id {
+          font: 700 0.8125rem / 1 font-family(fraktion);
+          color: color(secondary);
+          background: #ffffff;
+          padding: 0.4rem 0.65rem;
+          border: 1px solid color(secondary);
+          user-select: all;
         }
 
-        &:hover {
-          background: color(primary);
-          color: color(secondary);
+        .paygate-copy-btn {
+          background: color(secondary);
+          color: color(primary);
+          border: 1px solid color(secondary);
+          font: 700 0.5625rem / 1 font-family(fraktion);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 0.45rem 0.75rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
 
-          .btn-arrow {
-            transform: translateX(4px);
+          &:hover {
+            background: color(primary);
+            color: color(secondary);
+          }
+
+          &.is-copied {
+            background: #1b5e20;
+            border-color: #1b5e20;
+            color: #ffffff;
           }
         }
       }
+
+      .paygate-app-link {
+        display: inline-block;
+        font: 700 0.5625rem / 1.3 font-family(fraktion);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: color(secondary);
+        text-decoration: underline;
+        margin-top: 0.2rem;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
     }
+  }
+
+  /* UTR Verification and Error Banners */
+  .form-group--utr {
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+
+      .field-hint {
+        font: 500 0.5625rem / 1 font-family(fraktion);
+        text-transform: none;
+        letter-spacing: normal;
+        opacity: 0.85;
+        color: #b71c1c;
+      }
+    }
+
+    input.has-error {
+      border-color: #c62828 !important;
+      background: #fff5f5 !important;
+    }
+
+    .modal-utr-error {
+      margin-top: 0.45rem;
+      padding: 0.6rem 0.75rem;
+      background: #ffebee;
+      border: 1px solid #ef5350;
+      color: #b71c1c;
+      font: 600 0.6875rem / 1.4 font-family(fraktion);
+      letter-spacing: 0.02em;
+    }
+  }
+
+  /* Dual Action Buttons (WhatsApp & Email) */
+  .modal-actions-row,
+  .custom-actions-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+
+    @include mq(phone) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .modal-action-btn,
+  .custom-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1rem;
+    border: 1px solid color(secondary);
+    font: 700 0.6875rem / 1 font-family(fraktion);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    .btn-icon {
+      font-size: 0.9rem;
+    }
+
+    .btn-arrow {
+      transition: transform 0.25s ease;
+    }
+
+    &:hover .btn-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    &--wa {
+      background: #25d366;
+      border-color: #128c7e;
+      color: #073822;
+      font-weight: 800;
+
+      &:hover {
+        background: #128c7e;
+        color: #ffffff;
+      }
+    }
+
+    &--mail {
+      background: color(secondary);
+      color: color(primary);
+
+      &:hover {
+        background: color(primary);
+        color: color(secondary);
+      }
+    }
+  }
+
+  .modal-fee-guarantee,
+  .custom-fee-guarantee {
+    margin-top: 0.75rem;
+    text-align: center;
+    font: 500 0.625rem / 1.4 font-family(fraktion);
+    letter-spacing: 0.04em;
+    color: color(secondary);
+    opacity: 0.75;
   }
 </style>

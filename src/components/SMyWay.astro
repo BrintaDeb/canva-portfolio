@@ -132,14 +132,12 @@
         <!-- Primary Action: WhatsApp Instant Booking -->
         <div class="action-block">
           <a
-            href="https://wa.me/917005581453"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#lab"
             class="booking-btn booking-btn--wa js-wa-booking-btn"
           >
             <div class="btn-left">
               <span class="btn-tag">[ RECOMMENDED &bull; FASTEST ]</span>
-              <span class="btn-text">CONFIRM CALL ON WHATSAPP</span>
+              <span class="btn-text">PAY TO CALL (₹100) ON WHATSAPP</span>
             </div>
             <span class="btn-icon">→</span>
           </a>
@@ -345,7 +343,7 @@
       const encodedMsg = encodeURIComponent(message)
 
       if (this.waBtn) {
-        this.waBtn.href = 'https://wa.me/917005581453?text=' + encodedMsg
+        this.waBtn.href = '#lab'
       }
 
       if (this.emailBtn) {

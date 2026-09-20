@@ -76,10 +76,10 @@ const steps = [
                 <span>(30 Minutes)</span>
               </div>
               <div class="s__step-action">
-                <button type="button" class="s__step-schedule-btn js-open-schedule" aria-label="Schedule 30-Minute Discovery Call">
-                  <span>SCHEDULE 30-MIN CALL</span>
+                <a href="#lab" class="s__step-schedule-btn" aria-label="Pay to Call on WhatsApp (₹100)">
+                  <span>PAY TO CALL (₹100)</span>
                   <span class="btn-arrow" aria-hidden="true">→</span>
-                </button>
+                </a>
               </div>
             </div>
             <span class="s__cell__mask"></span>
@@ -538,6 +538,7 @@ const steps = [
       justify-content: space-between;
       gap: 0.75rem;
       width: 100%;
+      box-sizing: border-box;
       padding: 0.65rem 0.85rem;
       background: transparent;
       border: 1px solid color(secondary);
@@ -545,6 +546,7 @@ const steps = [
       font: 700 0.6875rem / 1 font-family(fraktion);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      text-decoration: none;
       cursor: pointer;
       text-align: left;
       transition: all 0.25s ease;

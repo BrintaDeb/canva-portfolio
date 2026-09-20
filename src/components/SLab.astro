@@ -1,155 +1,104 @@
 ---
 /**
  * SLab.astro
- * The Creative Nomad Lab & Tech Radar
- * Redesigned 1:1 to adhere to the website's Architectural Swiss-Bento UI/UX Theory:
- * - Warm Cream Primary Canvas: color(primary)
- * - Sharp Espresso Hairline Borders: 1px solid color(secondary)
- * - Corner Crosshairs (+) & Monospace Technical Indexing
- * - Kinetic Hover Inversion: cells invert to color(secondary) on hover
- * - 3D Gyroscopic Tilt & Holographic Specular Sheen
- * - Dual Mode: Architectural Bento Grid vs Zero-G Magnetic Floating Field
- * - Chromatic Morpher Studio matching the editorial aesthetic
+ * PAY TO CALL // 1-ON-1 WHATSAPP CONSULTATION (₹100 UPI SCANNER)
+ * Dedicated Brutalist Pay & Get to Call Station:
+ * - Real-time UPI Scanner Terminal with Navi UPI QR Code
+ * - ₹100 Upfront Reservation Fee (50% Refundable Guarantee)
+ * - Instant Direct WhatsApp Call Line (Strictly Pay-Gated)
+ * - Relevant Consultation Scope & Topic Options
  */
-const techStack = [
+
+const callTopics = [
   {
-    id: 'threejs',
-    category: '3d-motion',
-    categoryLabel: '01 / 3D & MOTION',
+    id: 'web-dev',
     code: '01',
-    name: 'Three.js',
-    role: 'WebGL & 3D Shaders',
-    desc: 'Interactive 3D viewports, procedural geometries, camera choreography & lighting.',
+    category: 'FULLSTACK WEB',
+    title: 'Fullstack Web & 3D Motion Architecture',
+    desc: 'Review tech stack fit (Astro, Next.js, GSAP motion, Three.js WebGL), site performance, and responsive frontend feasibility.',
     icon: '🌐',
-    accent: '#00c8d7',
-    badge: '3D CORE',
-    exp: '3+ Yrs',
+    badge: '3D & SPEED',
   },
   {
-    id: 'canva',
-    category: 'design-systems',
-    categoryLabel: '02 / DESIGN SYSTEMS',
+    id: 'ui-ux',
     code: '02',
-    name: 'Canva Pro',
-    role: 'Brand Systems & Decks',
-    desc: 'Bespoke corporate presentation decks, brand toolkits & marketing systems.',
+    category: 'UI/UX & FIGMA',
+    title: 'UI/UX Architecture & Figma Audit',
+    desc: 'Deep-dive into your design tokens, component libraries, conversion pathways, and user experience bottlenecks.',
     icon: '🎨',
-    accent: '#7d2ae8',
-    badge: 'SIGNATURE',
-    exp: '4+ Yrs',
+    badge: 'CONVERSION',
   },
   {
-    id: 'figma',
-    category: 'design-systems',
-    categoryLabel: '02 / DESIGN SYSTEMS',
+    id: 'canva-brand',
     code: '03',
-    name: 'Figma',
-    role: 'UI/UX Architecture',
-    desc: 'Design tokens, auto-layout components, interactive wireframes & prototypes.',
+    category: 'BRAND & CANVA',
+    title: 'Canva Pro & Brand System Review',
+    desc: 'Review pitch decks, brand identity guidelines, corporate presentation toolkits, and marketing collateral.',
     icon: '📐',
-    accent: '#f24e1e',
-    badge: 'WIREFRAMES',
-    exp: '4+ Yrs',
+    badge: 'IDENTITY',
   },
   {
-    id: 'astro',
-    category: 'architecture',
-    categoryLabel: '03 / ARCHITECTURE',
+    id: 'motion-video',
     code: '04',
-    name: 'Astro 5',
-    role: 'Zero-JS Islands Engine',
-    desc: 'High-speed content collections, static generation & sub-1s LCP loading.',
-    icon: '🚀',
-    accent: '#e64a00',
-    badge: 'ULTRA FAST',
-    exp: '2+ Yrs',
+    category: 'VIDEO & REELS',
+    title: 'Commercial Video Editing & Motion FX',
+    desc: 'Audit reel pacing, kinetic typography, Premiere Pro workflows, and high-retention social content strategy.',
+    icon: '🎬',
+    badge: '60FPS MOTION',
   },
   {
-    id: 'gsap',
-    category: '3d-motion',
-    categoryLabel: '01 / 3D & MOTION',
+    id: 'sprint-scoping',
     code: '05',
-    name: 'GSAP Motion',
-    role: 'ScrollTrigger Timelines',
-    desc: 'Physics scrubbers, kinetic typography, magnetic cursors & smooth pinning.',
-    icon: '✨',
-    accent: '#6ea800',
-    badge: 'KINETIC FX',
-    exp: '3+ Yrs',
+    category: '7-DAY SPRINT',
+    title: '7-Day Sprint Scoping & Feasibility',
+    desc: 'Evaluate your project scope, deliverable milestones, turn-around roadmap, and exact flat-rate budget fit.',
+    icon: '🚀',
+    badge: '1-WEEK LAUNCH',
   },
   {
-    id: 'procreate',
-    category: 'design-systems',
-    categoryLabel: '02 / DESIGN SYSTEMS',
+    id: 'general-advisory',
     code: '06',
-    name: 'Procreate',
-    role: 'Digital Art & Sketching',
-    desc: 'Custom anime character art, textured brushes & bespoke visual illustrations.',
-    icon: '🖌️',
-    accent: '#0088cc',
-    badge: 'DIGITAL ART',
-    exp: '4+ Yrs',
+    category: 'ADVISORY',
+    title: '1-on-1 Strategic Creative Advisory',
+    desc: 'Open discussion on design-to-code bridging, creative direction, freelance collaboration, and project architecture.',
+    icon: '💼',
+    badge: 'DIRECT 1-ON-1',
+  },
+]
+
+const consultationGuarantees = [
+  {
+    num: '01',
+    code: 'DIRECT DIALOGUE',
+    title: 'Direct WhatsApp Call',
+    desc: 'Voice, video, or screenshare directly with Brinta Deb. Zero agency middle-men or junior salespeople.',
   },
   {
-    id: 'nextjs',
-    category: 'architecture',
-    categoryLabel: '03 / ARCHITECTURE',
-    code: '07',
-    name: 'Next.js 15 & React',
-    role: 'Fullstack App Router',
-    desc: 'Server actions, SSR caching, API routes & production-grade web deployments.',
-    icon: '▲',
-    accent: '#160000',
-    badge: 'FULLSTACK',
-    exp: '3+ Yrs',
+    num: '02',
+    code: 'CONCENTRATED TIME',
+    title: '15–30 Mins Strategy',
+    desc: 'Focused, high-velocity discussion on your specific design, codebase, or project roadblock.',
   },
   {
-    id: 'webgl',
-    category: '3d-motion',
-    categoryLabel: '01 / 3D & MOTION',
-    code: '08',
-    name: 'WebGL Shaders',
-    role: 'GPU Fragment Shaders',
-    desc: 'Liquid ripples, noise displacement, chromatic aberration & particle fields.',
-    icon: '⚡',
-    accent: '#d97706',
-    badge: 'GPU ACCEL',
-    exp: '2+ Yrs',
+    num: '03',
+    code: 'VALUING TIME',
+    title: 'Serious Clients Only',
+    desc: 'A small upfront commitment ensuring dedicated, high-intent focus strictly worth both our time.',
   },
   {
-    id: 'typescript',
-    category: 'architecture',
-    categoryLabel: '03 / ARCHITECTURE',
-    code: '09',
-    name: 'TypeScript',
-    role: 'Type-Safe Architecture',
-    desc: 'Clean interfaces, strong contracts, strict typing & bulletproof logic.',
-    icon: '🔷',
-    accent: '#1e5fad',
-    badge: 'STRICT CODE',
-    exp: '3+ Yrs',
-  },
-  {
-    id: 'styling',
-    category: 'architecture',
-    categoryLabel: '03 / ARCHITECTURE',
-    code: '10',
-    name: 'SCSS & Tailwind',
-    role: 'Modular Design Tokens',
-    desc: 'Fluid clamp scaling, modern CSS nesting, glassmorphism & responsive layouts.',
-    icon: '💎',
-    accent: '#0284c7',
-    badge: 'RESPONSIVE',
-    exp: '4+ Yrs',
+    num: '04',
+    code: '50% REFUND / 100% REBATE',
+    title: '50% Refund Guarantee',
+    desc: '50% refundable if not interested or not proceeding. 100% credited against your final project invoice if we work together.',
   },
 ]
 ---
 
-<section id="lab" class="s-lab" data-intersect>
+<section id="lab" class="s-lab s-pay-to-call" data-intersect>
   <div class="s-lab__wrapper">
-    <!-- Top Pill Header (1:1 with SAbout, SSteps, SServices) -->
+    <!-- Top Pill Header (1:1 with Portfolio Bento Standard) -->
     <div class="s-lab__pill-header">
-      <span class="s-lab__pill-text">SECTION // 05 &bull; THE NOMAD TECH RADAR &bull; AESTHETIC STUDIO</span>
+      <span class="s-lab__pill-text">SECTION // 05 &bull; PAY TO CALL &bull; 1-ON-1 WHATSAPP CONSULTATION &bull; ₹100 INR</span>
     </div>
 
     <!-- Outer Bento Grid with Hairline Collapsed Borders -->
@@ -158,1375 +107,1824 @@ const techStack = [
       <div class="s-lab__cell s-lab__cell--hero">
         <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
         <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
-        
+        <div class="s-lab__crosshair s-lab__crosshair--bl">+</div>
+        <div class="s-lab__crosshair s-lab__crosshair--br">+</div>
+
         <div class="s-lab__hero-content">
           <div class="s-lab__coords-badge">
             <span class="pulse-dot"></span>
-            <span>22.57° N, 88.36° E • KOLKATA // DEPLOYING GLOBALLY</span>
+            <span>22.57° N, 88.36° E • KOLKATA // DEPLOYING GLOBALLY &bull; ACTIVE CONSULTATION LINE</span>
           </div>
 
           <h2 class="s-lab__title">
-            THE CREATIVE <span class="s-lab__title--italic">Nomad Lab</span>
+            PAY &amp; GET TO CALL. <span class="s-lab__title--italic">WhatsApp Direct</span>
           </h2>
 
           <p class="s-lab__lead">
-            "Most developers can’t design. Most designers can’t write code. I live at the intersection — turning static Canva decks, Figma blueprints, and raw imagination into tactile, production-grade digital reality."
+            &ldquo;This upfront reservation fee is in place to ensure our time together is focused, dedicated, and strictly reserved for serious clients. If after our call you feel we are not the right fit or decide not to work together, 50% is immediately refundable — zero hassle.&rdquo;
           </p>
+
+          <!-- Top Metrics Summary Strip -->
+          <div class="pay-metrics-strip">
+            <div class="pay-metric">
+              <span class="pay-metric__label">UPFRONT FEE</span>
+              <span class="pay-metric__val">₹100 INR ONLY</span>
+            </div>
+            <div class="pay-metric">
+              <span class="pay-metric__label">GUARANTEE</span>
+              <span class="pay-metric__val">50% REFUNDABLE</span>
+            </div>
+            <div class="pay-metric">
+              <span class="pay-metric__label">PROJECT REBATE</span>
+              <span class="pay-metric__val">100% FEE DEDUCTED</span>
+            </div>
+            <div class="pay-metric">
+              <span class="pay-metric__label">CHANNEL</span>
+              <span class="pay-metric__val">WHATSAPP CALL / CHAT</span>
+            </div>
+          </div>
         </div>
+        <span class="s-lab__cell-mask"></span>
       </div>
 
-      <!-- Row 2: 2-Column Split (Tech Radar on Left, Chromatic Morpher on Right) -->
+      <!-- Row 2: 2-Column Split Terminal (UPI Scanner Gateway on Left, Call Connect Form on Right) -->
       <div class="s-lab__split-row">
-        <!-- Left Cell: Tech Capability Deck -->
-        <div class="s-lab__cell s-lab__cell--radar">
+        <!-- Left Cell: UPI Scanner Gateway Terminal -->
+        <div class="s-lab__cell s-lab__cell--scanner js-lab-cell">
           <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
           <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--bl">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--br">+</div>
 
-          <!-- Architectural Toolbar -->
-          <div class="s-lab__toolbar">
-            <div class="s-lab__filter-tabs" role="tablist">
-              <button class="s-lab__filter-btn is-active js-filter-btn" data-filter="all" type="button">ALL [10]</button>
-              <button class="s-lab__filter-btn js-filter-btn" data-filter="3d-motion" type="button">3D &amp; MOTION</button>
-              <button class="s-lab__filter-btn js-filter-btn" data-filter="design-systems" type="button">DESIGN</button>
-              <button class="s-lab__filter-btn js-filter-btn" data-filter="architecture" type="button">ENGINE</button>
-            </div>
-
-            <div class="s-lab__view-toggle">
-              <button class="s-lab__toggle-btn is-active js-view-mode" data-mode="grid" type="button" title="Architectural Bento Grid View">
-                <span>⊞ BENTO</span>
-              </button>
-              <button class="s-lab__toggle-btn js-view-mode" data-mode="zero-g" type="button" title="Zero-Gravity Magnetic Float Playground">
-                <span>⚛ ZERO-G</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- View 1: Bento Grid Cards -->
-          <div class="s-lab__cards-grid js-grid-view">
-            {
-              techStack.map((item) => (
-                <div
-                  class="tech-card js-tilt-card"
-                  data-category={item.category}
-                  style={`--card-accent: ${item.accent};`}
-                >
-                  <span class="tech-card__mask"></span>
-                  <div class="tech-card__sheen js-card-sheen"></div>
-                  
-                  <div class="tech-card__content">
-                    <div class="tech-card__top">
-                      <span class="tech-card__code">[{item.code}]</span>
-                      <span class="tech-card__badge">{item.badge}</span>
-                      <span class="tech-card__exp">{item.exp}</span>
-                    </div>
-
-                    <div class="tech-card__body">
-                      <div class="tech-card__icon-box">
-                        <span class="tech-card__icon">{item.icon}</span>
-                      </div>
-                      <div class="tech-card__names">
-                        <h3 class="tech-card__title">{item.name}</h3>
-                        <span class="tech-card__role">{item.role}</span>
-                      </div>
-                    </div>
-
-                    <p class="tech-card__desc">{item.desc}</p>
-
-                    <div class="tech-card__foot">
-                      <span class="tech-card__cat-label">{item.categoryLabel}</span>
-                      <span class="tech-card__arrow">→</span>
-                    </div>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-
-          <!-- View 2: Zero-G Magnetic Floating Field -->
-          <div class="s-lab__zerog-container js-zerog-view" style="display: none;">
-            <div class="s-lab__zerog-bar">
-              <span class="s-lab__zerog-status">
-                <span class="pulse-dot"></span>
-                <span>MAGNETIC FIELD ACTIVE: DRAG, THROW &amp; BOUNCE TECH NODES</span>
-              </span>
-              <button class="s-lab__realign-btn js-realign-zerog" type="button">RE-ORBIT NODES</button>
-            </div>
-
-            <div class="s-lab__arena js-zerog-canvas" id="zerog-arena">
-              {
-                techStack.map((item) => (
-                  <div
-                    class="zerog-badge js-zerog-node"
-                    data-name={item.name}
-                    style={`--node-accent: ${item.accent};`}
-                  >
-                    <span class="zerog-icon">{item.icon}</span>
-                    <div class="zerog-info">
-                      <strong class="zerog-title">{item.name}</strong>
-                      <small class="zerog-role">{item.role}</small>
-                    </div>
-                    <span class="zerog-indicator"></span>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Cell: Aesthetic Chromatic Studio -->
-        <div class="s-lab__cell s-lab__cell--studio">
-          <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
-          <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
-
-          <div class="studio-header">
-            <div class="studio-header__left">
-              <span class="studio-tag">AESTHETIC THEME ENGINE</span>
-              <h3 class="studio-title">CHROMATIC MORPHER</h3>
-            </div>
-            <span class="studio-badge">LIVE COLORWAYS</span>
-          </div>
-
-          <p class="studio-desc">
-            Shift the portfolio through different aesthetic lenses. Selecting a palette dynamically re-skins the typography, SVG paths, and WebGL canvases across all sections in real time:
-          </p>
-
-          <!-- Palettes Deck -->
-          <div class="studio-palettes">
-            <!-- 1. Editorial Sepia -->
-            <button
-              class="palette-tile is-active js-theme-switch"
-              data-theme="sepia"
-              data-primary="#fff2ed"
-              data-secondary="#160000"
-              data-accent="#ff4d6d"
-              type="button"
-            >
-              <div class="palette-swatch" style="background: linear-gradient(135deg, #fff2ed 50%, #160000 50%); border-color: #160000;"></div>
-              <div class="palette-text">
-                <div class="palette-top">
-                  <strong class="palette-name">Editorial Sepia</strong>
-                  <span class="palette-status">DEFAULT</span>
-                </div>
-                <span class="palette-notes">Warm cream, deep espresso &amp; editorial serif</span>
-                <span class="palette-specimen">Aa Bb 123 • 21:1 AAA</span>
+          <div class="terminal-content">
+            <div class="terminal-header">
+              <div class="terminal-header__left">
+                <span class="step-num">[ STEP 01 ]</span>
+                <span class="terminal-title">UPI SCANNER GATEWAY</span>
               </div>
-            </button>
-
-            <!-- 2. Cyberpunk Neon -->
-            <button
-              class="palette-tile js-theme-switch"
-              data-theme="cyberpunk"
-              data-primary="#00f0ff"
-              data-secondary="#090a0f"
-              data-accent="#ff007f"
-              type="button"
-            >
-              <div class="palette-swatch" style="background: linear-gradient(135deg, #00f0ff 50%, #090a0f 50%); border-color: #00f0ff;"></div>
-              <div class="palette-text">
-                <div class="palette-top">
-                  <strong class="palette-name">Cyberpunk Neon</strong>
-                  <span class="palette-status">NEON GLOW</span>
-                </div>
-                <span class="palette-notes">Obsidian dark, laser cyan &amp; electric magenta</span>
-                <span class="palette-specimen">Aa Bb 123 • 18:1 AAA</span>
+              <div class="terminal-header__badge">
+                <span class="pulse-green"></span>
+                <span>LIVE &bull; ₹100</span>
               </div>
-            </button>
-
-            <!-- 3. Acid Lime -->
-            <button
-              class="palette-tile js-theme-switch"
-              data-theme="acidlime"
-              data-primary="#d4ff00"
-              data-secondary="#0d0f0d"
-              data-accent="#00ff88"
-              type="button"
-            >
-              <div class="palette-swatch" style="background: linear-gradient(135deg, #d4ff00 50%, #0d0f0d 50%); border-color: #d4ff00;"></div>
-              <div class="palette-text">
-                <div class="palette-top">
-                  <strong class="palette-name">Acid Lime</strong>
-                  <span class="palette-status">BRUTALIST</span>
-                </div>
-                <span class="palette-notes">High-voltage brutalist black &amp; electric neon lime</span>
-                <span class="palette-specimen">Aa Bb 123 • 19:1 AAA</span>
-              </div>
-            </button>
-
-            <!-- 4. Pure Monochrome -->
-            <button
-              class="palette-tile js-theme-switch"
-              data-theme="monochrome"
-              data-primary="#f0f0f0"
-              data-secondary="#000000"
-              data-accent="#999999"
-              type="button"
-            >
-              <div class="palette-swatch" style="background: linear-gradient(135deg, #ffffff 50%, #000000 50%); border-color: #160000;"></div>
-              <div class="palette-text">
-                <div class="palette-top">
-                  <strong class="palette-name">Pure Monochrome</strong>
-                  <span class="palette-status">MINIMAL</span>
-                </div>
-                <span class="palette-notes">Carbon black, architectural white &amp; starkness</span>
-                <span class="palette-specimen">Aa Bb 123 • 22:1 AAA</span>
-              </div>
-            </button>
-          </div>
-
-          <!-- Architectural Telemetry Box -->
-          <div class="studio-telemetry">
-            <div class="telemetry-row">
-              <span class="telemetry-label">ACTIVE MATRIX:</span>
-              <span class="telemetry-val js-telemetry-values">PRIMARY: #fff2ed | SECONDARY: #160000</span>
             </div>
-            <p class="telemetry-quote">
-              "Design without technical rigor is just an image. Code without aesthetic nuance is just logic. I merge both into digital art."
+
+            <p class="terminal-instruction">
+              Scan with <strong>Google Pay, PhonePe, Paytm, BHIM, Cred</strong> or any UPI app to pay the ₹100 call reservation fee:
             </p>
-            <div class="telemetry-footer">
-              <span>BRINTA DEB // CREATIVE NOMAD</span>
-              <span>4+ YRS EXPERIENCE</span>
+
+            <!-- Interactive QR Scanner Display with Animated Laser Sweep -->
+            <div class="scanner-frame">
+              <!-- Corner Crosshair / Registration L-Brackets -->
+              <div class="frame-bracket frame-bracket--tl"></div>
+              <div class="frame-bracket frame-bracket--tr"></div>
+              <div class="frame-bracket frame-bracket--bl"></div>
+              <div class="frame-bracket frame-bracket--br"></div>
+
+              <!-- Animated Laser Scanline -->
+              <div class="scanner-laser-line"></div>
+
+              <!-- QR Code Asset Frame: High-Resolution Official Navi UPI QR Code -->
+              <div class="qr-wrapper">
+                <img
+                  src="/images/brinta-navi-upi-qr.jpg"
+                  alt="UPI QR Code - Brinta Deb (₹100 Call Reservation)"
+                  class="qr-code-img js-qr-code-img"
+                  loading="eager"
+                  width="260"
+                  height="390"
+                />
+                <div class="qr-verified-tag">
+                  <span class="amount-tag">₹100</span>
+                  <span class="upi-tag">NAVI &bull; UPI VERIFIED</span>
+                </div>
+              </div>
             </div>
+
+            <!-- Copyable UPI ID Box -->
+            <div class="upi-id-box">
+              <div class="upi-id-text-wrap">
+                <span class="upi-id-label">OR PAY DIRECTLY TO UPI ID:</span>
+                <span class="upi-id-value js-upi-id-val">brintadeb1453@nyes</span>
+              </div>
+              <button type="button" class="copy-upi-btn js-copy-upi" aria-label="Copy UPI ID to clipboard">
+                <span class="copy-label js-copy-upi-label">COPY UPI ID</span>
+                <span class="copy-icon">⎘</span>
+              </button>
+            </div>
+
+            <!-- Direct Mobile UPI Deep-Link -->
+            <a
+              href="upi://pay?pa=brintadeb1453@nyes&pn=BRINTA%20DEB&am=100&cu=INR&tn=Consultation%20Call%20Booking"
+              class="upi-direct-app-btn"
+              title="Open directly inside your UPI App on Mobile"
+            >
+              <span>⚡ OPEN IN UPI APP (GPAY / PHONEPE / PAYTM / NAVI)</span>
+              <span class="btn-arrow">↗</span>
+            </a>
+
+            <!-- Accepted Payment Apps Pill Grid -->
+            <div class="accepted-modes">
+              <span class="modes-label">ACCEPTED PAYMENT APPS:</span>
+              <div class="modes-pills">
+                <span class="mode-pill">Google Pay</span>
+                <span class="mode-pill">PhonePe</span>
+                <span class="mode-pill">Paytm</span>
+                <span class="mode-pill">Navi UPI</span>
+                <span class="mode-pill">BHIM UPI</span>
+                <span class="mode-pill">Cred</span>
+                <span class="mode-pill">Any UPI App</span>
+              </div>
+            </div>
+
+            <!-- Quick Trigger to Unlock Call -->
+            <button type="button" class="scanner-paid-trigger js-trigger-paid" title="Click after transferring ₹100">
+              <span class="paid-trigger-check">✓</span>
+              <span>I HAVE TRANSFERRED ₹100 &bull; ENTER UTR TO UNLOCK CALL</span>
+              <span class="paid-trigger-arrow">→</span>
+            </button>
           </div>
-        </div>
+          <span class="s-lab__cell-mask"></span>
+        </div><!-- .s-lab__cell--scanner -->
+
+        <!-- Right Cell: Locked Gate & Unlocked Call System -->
+        <div class="s-lab__cell s-lab__cell--form js-lab-cell">
+          <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--bl">+</div>
+          <div class="s-lab__crosshair s-lab__crosshair--br">+</div>
+
+          <!-- State 1: Locked System Gate (Default - Payment Required) -->
+          <div class="terminal-content js-gate-locked">
+            <div class="terminal-header">
+              <div class="terminal-header__left">
+                <span class="step-num">[ STEP 02 // CALL GATE ]</span>
+                <span class="terminal-title">PAYMENT VERIFICATION</span>
+              </div>
+              <div class="terminal-header__badge terminal-header__badge--locked">
+                <span class="lock-pulse-dot"></span>
+                <span>🔒 CALL SYSTEM LOCKED</span>
+              </div>
+            </div>
+
+            <!-- Brutalist Locked Notice Card -->
+            <div class="lock-notice-box">
+              <div class="lock-notice-top">
+                <div class="lock-icon-badge">🔒</div>
+                <div class="lock-notice-headings">
+                  <h4 class="lock-notice-title">ONLY OPENS WHEN UPFRONT FEE IS PAID</h4>
+                  <p class="lock-notice-sub">
+                    Direct WhatsApp call &amp; messaging is strictly pay-gated to filter spam and reserve dedicated time for genuine, serious inquiries. Unlocks immediately after your ₹100 payment is verified.
+                  </p>
+                </div>
+              </div>
+
+              <div class="lock-checklist">
+                <div class="checklist-item">
+                  <span class="checklist-num">01</span>
+                  <span>Scan the UPI QR code on the left &amp; transfer ₹100.</span>
+                </div>
+                <div class="checklist-item">
+                  <span class="checklist-num">02</span>
+                  <span>Enter your 12-digit UPI UTR / Transaction Ref from your receipt below.</span>
+                </div>
+                <div class="checklist-item">
+                  <span class="checklist-num">03</span>
+                  <span>Click Unlock — the direct WhatsApp call line opens instantly.</span>
+                </div>
+              </div>
+
+              <div class="refund-guarantee-notice">
+                <span class="refund-badge">50% REFUNDABLE</span>
+                <span>If after our call you are not interested or decide not to work together, 50% is refunded immediately. If you proceed, 100% is credited toward your project bill.</span>
+              </div>
+            </div>
+
+            <!-- UTR Verification Input & Unlock Button -->
+            <div class="gate-unlock-form">
+              <div class="field-wrap field-wrap--full">
+                <label for="gateUtrInput" class="field-label">
+                  <span>ENTER 12-DIGIT UPI REFERENCE / UTR NUMBER *</span>
+                  <span class="field-sub">From GPay, PhonePe, Paytm, Navi or Bank receipt</span>
+                </label>
+                <input
+                  type="text"
+                  id="gateUtrInput"
+                  class="field-input js-gate-utr-input"
+                  placeholder="e.g. 423589123456 or Paid via PhonePe"
+                  required
+                />
+                <div class="gate-error js-gate-error" style="display: none;">
+                  ⚠️ Please enter your UPI UTR / Transaction Reference to unlock the call system.
+                </div>
+              </div>
+
+              <button type="button" class="gate-unlock-btn js-btn-unlock-gate">
+                <span class="btn-glow-bar"></span>
+                <span class="btn-content">
+                  <span class="btn-lock-icon">🔓</span>
+                  <span class="btn-text">PAYMENT DONE &bull; UNLOCK CALL SYSTEM NOW</span>
+                </span>
+                <span class="btn-arrow-icon">→</span>
+              </button>
+
+              <div class="gate-disclaimer">
+                <span>Direct client guarantee: 50% refundable if not proceeding, or 100% credited against your final project invoice.</span>
+              </div>
+            </div>
+          </div><!-- .js-gate-locked -->
+
+          <!-- State 2: Unlocked Call System (Opens only after payment is logged) -->
+          <div class="terminal-content js-gate-unlocked" style="display: none;">
+            <div class="terminal-header">
+              <div class="terminal-header__left">
+                <span class="step-num">[ STEP 03 // CALL SYSTEM OPEN ]</span>
+                <span class="terminal-title">1-ON-1 WHATSAPP CALL</span>
+              </div>
+              <div class="terminal-header__badge terminal-header__badge--wa">
+                <span class="wa-dot"></span>
+                <span>🟢 UNLOCKED &bull; VIP LINE ACTIVE</span>
+              </div>
+            </div>
+
+            <!-- Verified Payment Success Ribbon -->
+            <div class="verified-ribbon">
+              <div class="verified-ribbon__left">
+                <span class="verified-badge-icon">✓</span>
+                <div class="verified-info">
+                  <span class="verified-status-label">₹100 PAYMENT LOGGED &bull; CALL SYSTEM OPEN</span>
+                  <span class="verified-utr-text">TRANSACTION REF: <strong class="js-display-utr">--</strong></span>
+                </div>
+              </div>
+              <button type="button" class="relock-btn js-btn-relock" title="Change payment reference or relock">
+                CHANGE REF / RELOCK ↺
+              </button>
+            </div>
+
+            <p class="terminal-instruction">
+              Payment verified! Fill your details below to connect directly with Brinta Deb on WhatsApp:
+            </p>
+
+            <form id="payToCallForm" class="call-booking-form js-call-form" novalidate>
+              <input type="hidden" id="callUtr" name="utrRef" class="js-input-utr" />
+
+              <div class="form-fields">
+                <!-- Client Name / Brand -->
+                <div class="field-wrap">
+                  <label for="callName" class="field-label">
+                    <span>YOUR NAME / BRAND *</span>
+                    <span class="field-sub">e.g. Alex Morgan / Studio Pulse</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="callName"
+                    name="clientName"
+                    class="field-input js-input-name"
+                    placeholder="Enter your name or business"
+                    required
+                  />
+                </div>
+
+                <!-- WhatsApp Phone Number -->
+                <div class="field-wrap">
+                  <label for="callPhone" class="field-label">
+                    <span>YOUR WHATSAPP NUMBER *</span>
+                    <span class="field-sub">with country code</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="callPhone"
+                    name="clientPhone"
+                    class="field-input js-input-phone"
+                    placeholder="+91 98765 43210"
+                    required
+                  />
+                </div>
+
+                <!-- Discussion Focus / Topic -->
+                <div class="field-wrap field-wrap--full">
+                  <label for="callTopicSelect" class="field-label">
+                    <span>SELECT CALL DISCUSSION TOPIC *</span>
+                    <span class="field-sub">Select discussion focus for the consultation</span>
+                  </label>
+                  <div class="select-container">
+                    <select id="callTopicSelect" name="callTopic" class="field-select js-select-topic">
+                      {callTopics.map((topic, i) => (
+                        <option value={topic.title} data-topic-id={topic.id} selected={i === 0}>
+                          [{topic.code}] {topic.title}
+                        </option>
+                      ))}
+                    </select>
+                    <span class="select-arrow">▼</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Submit CTA Button -->
+              <div class="submit-wrap">
+                <button type="submit" class="call-submit-btn js-btn-connect">
+                  <span class="btn-glow-bar"></span>
+                  <span class="btn-content">
+                    <span class="btn-phone-icon">📞</span>
+                    <span class="btn-text">INITIATE WHATSAPP CALL NOW</span>
+                  </span>
+                  <span class="btn-arrow-icon">→</span>
+                </button>
+              </div>
+
+              <!-- Success Feedback Box -->
+              <div class="call-feedback-box js-call-feedback" style="display: none;">
+                <span class="feedback-badge">✓</span>
+                <span class="feedback-msg js-feedback-msg">Connecting to Brinta Deb on WhatsApp...</span>
+              </div>
+
+              <!-- Privacy & Direct Guarantee Notice -->
+              <div class="form-disclaimer">
+                <span class="lock-icon">🔒</span>
+                <span>
+                  Direct end-to-end encrypted connection to Brinta Deb on WhatsApp. 
+                  Unlocked exclusively for verified clients after upfront reservation. 
+                  If on an active client call, I will reply with your exact call slot in &lt;15 minutes.
+                </span>
+              </div>
+            </form>
+          </div><!-- .js-gate-unlocked -->
+        </div><!-- .s-lab__cell--form -->
+      </div><!-- .s-lab__split-row -->
+
+      <!-- Row 3: 4 Guarantees & Perks -->
+      <div class="s-lab__perks-row">
+        {consultationGuarantees.map((item) => (
+          <div class="s-lab__cell s-lab__cell--perk js-lab-cell">
+            <div class="s-lab__crosshair s-lab__crosshair--tl">+</div>
+            <div class="s-lab__crosshair s-lab__crosshair--tr">+</div>
+            <div class="s-lab__crosshair s-lab__crosshair--bl">+</div>
+            <div class="s-lab__crosshair s-lab__crosshair--br">+</div>
+
+            <div class="perk-content">
+              <div class="perk-header">
+                <span class="perk-code">[{item.num}]</span>
+                <span class="perk-tag">{item.code}</span>
+              </div>
+              <h5 class="perk-title">{item.title}</h5>
+              <p class="perk-desc">{item.desc}</p>
+            </div>
+            <span class="s-lab__cell-mask"></span>
+          </div>
+        ))}
       </div>
-    </div>
-  </div>
+    </div><!-- .s-lab__bento -->
+  </div><!-- .s-lab__wrapper -->
 </section>
 
 <script>
-  import { themeManager } from '../utils/ThemeManager.js'
+  import gsap from 'gsap'
   import { audioEngine } from '../utils/AudioEngine.js'
 
-  class LabProMax {
+  class PayToCallStation {
+    el: HTMLElement | null
+    form: HTMLFormElement | null
+    nameInput: HTMLInputElement | null
+    phoneInput: HTMLInputElement | null
+    topicSelect: HTMLSelectElement | null
+    utrInput: HTMLInputElement | null
+    feedbackBox: HTMLElement | null
+    feedbackMsg: HTMLElement | null
+    copyBtn: HTMLButtonElement | null
+    copyLabel: HTMLElement | null
+    cells: NodeListOf<HTMLElement>
+    gateLocked: HTMLElement | null
+    gateUnlocked: HTMLElement | null
+    gateUtrInput: HTMLInputElement | null
+    gateError: HTMLElement | null
+    unlockGateBtn: HTMLButtonElement | null
+    relockBtn: HTMLButtonElement | null
+    verifiedUtrDisplay: HTMLElement | null
+    quickUnlockTrigger: HTMLElement | null
+
     constructor() {
-      this.root = document.getElementById('lab')
-      if (!this.root) return
+      this.el = document.getElementById('lab')
+      if (!this.el) return
 
-      // Mode toggling
-      this.viewBtns = this.root.querySelectorAll('.js-view-mode')
-      this.gridView = this.root.querySelector('.js-grid-view')
-      this.zeroGView = this.root.querySelector('.js-zerog-view')
+      this.form = this.el.querySelector('.js-call-form')
+      this.nameInput = this.el.querySelector('.js-input-name')
+      this.phoneInput = this.el.querySelector('.js-input-phone')
+      this.topicSelect = this.el.querySelector('.js-select-topic')
+      this.utrInput = this.el.querySelector('.js-input-utr')
+      this.feedbackBox = this.el.querySelector('.js-call-feedback')
+      this.feedbackMsg = this.el.querySelector('.js-feedback-msg')
+      this.copyBtn = this.el.querySelector('.js-copy-upi')
+      this.copyLabel = this.el.querySelector('.js-copy-upi-label')
+      this.cells = this.el.querySelectorAll('.js-lab-cell')
 
-      // Filtering
-      this.filterBtns = this.root.querySelectorAll('.js-filter-btn')
-      this.cards = this.root.querySelectorAll('.tech-card')
-
-      // Theme Studio
-      this.themeBtns = this.root.querySelectorAll('.js-theme-switch')
-      this.telemetryEl = this.root.querySelector('.js-telemetry-values')
-
-      // Zero-G Physics
-      this.arena = document.getElementById('zerog-arena')
-      this.nodes = Array.from(this.root.querySelectorAll('.js-zerog-node')) as HTMLElement[]
-      this.realignBtn = this.root.querySelector('.js-realign-zerog')
-
-      this.zeroGItems = [] as any[]
-      this.animId = 0
-      this.isZeroGActive = false
+      this.gateLocked = this.el.querySelector('.js-gate-locked')
+      this.gateUnlocked = this.el.querySelector('.js-gate-unlocked')
+      this.gateUtrInput = this.el.querySelector('.js-gate-utr-input')
+      this.gateError = this.el.querySelector('.js-gate-error')
+      this.unlockGateBtn = this.el.querySelector('.js-btn-unlock-gate')
+      this.relockBtn = this.el.querySelector('.js-btn-relock')
+      this.verifiedUtrDisplay = this.el.querySelector('.js-display-utr')
+      this.quickUnlockTrigger = this.el.querySelector('.js-trigger-paid')
 
       this.init()
     }
 
     init() {
-      this.initCardTilt()
-      this.initFilters()
-      this.initViewToggle()
-      this.initThemes()
-      this.initZeroGPhysics()
+      this.bindCellHover()
+      this.bindCopyUPI()
+      this.initPaymentGate()
+      this.bindForm()
     }
 
-    /* 3D Holographic Gyroscopic Card Tilt */
-    initCardTilt() {
-      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return
+    /**
+     * Payment Gate: Only open call system when payment is completed & verified
+     */
+    initPaymentGate() {
+      // Check session storage for existing verified payment
+      try {
+        const savedUtr = sessionStorage.getItem('call_payment_utr')
+        if (savedUtr) {
+          this.unlockCallSystem(savedUtr, false)
+        }
+      } catch (e) {}
 
-      this.cards.forEach((card) => {
-        const sheen = card.querySelector('.js-card-sheen') as HTMLElement
+      // Unlock button handler
+      this.unlockGateBtn?.addEventListener('click', () => {
+        const utrVal = this.gateUtrInput?.value.trim()
+        if (!utrVal || utrVal.length < 3) {
+          if (this.gateError) this.gateError.style.display = 'block'
+          this.gateUtrInput?.focus()
+          this.gateUtrInput?.classList.add('has-error')
+          try { audioEngine?.playError?.() } catch (e) {}
+          setTimeout(() => this.gateUtrInput?.classList.remove('has-error'), 2500)
+          return
+        }
 
-        card.addEventListener('mousemove', (e: MouseEvent) => {
-          const rect = card.getBoundingClientRect()
+        if (this.gateError) this.gateError.style.display = 'none'
+        this.unlockCallSystem(utrVal, true)
+      })
+
+      // Enter key on UTR input
+      this.gateUtrInput?.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          this.unlockGateBtn?.click()
+        }
+      })
+
+      // Relock / Change UTR handler
+      this.relockBtn?.addEventListener('click', () => {
+        try {
+          sessionStorage.removeItem('call_payment_utr')
+        } catch (e) {}
+
+        if (this.utrInput) this.utrInput.value = ''
+        if (this.gateUtrInput) this.gateUtrInput.value = ''
+
+        try { audioEngine?.playTone?.(400, 0.08) } catch (e) {}
+
+        if (this.gateUnlocked && this.gateLocked) {
+          gsap.to(this.gateUnlocked, {
+            opacity: 0,
+            duration: 0.2,
+            onComplete: () => {
+              if (this.gateUnlocked) this.gateUnlocked.style.display = 'none'
+              if (this.gateLocked) {
+                this.gateLocked.style.display = 'block'
+                gsap.fromTo(
+                  this.gateLocked,
+                  { opacity: 0, y: 8 },
+                  { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+                )
+                this.gateUtrInput?.focus()
+              }
+            }
+          })
+        }
+      })
+
+      // Quick trigger from scanner terminal
+      this.quickUnlockTrigger?.addEventListener('click', () => {
+        try { audioEngine?.playTone?.(550, 0.08) } catch (e) {}
+        if (this.gateLocked && this.gateLocked.style.display !== 'none') {
+          this.gateUtrInput?.focus()
+          this.gateUtrInput?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          this.gateUtrInput?.classList.add('pulse-focus')
+          setTimeout(() => this.gateUtrInput?.classList.remove('pulse-focus'), 1500)
+        } else {
+          this.nameInput?.focus()
+          this.nameInput?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+      })
+    }
+
+    unlockCallSystem(utr: string, playSound = true) {
+      if (playSound) {
+        try { audioEngine?.playSuccess?.() } catch (e) {}
+      }
+
+      try {
+        sessionStorage.setItem('call_payment_utr', utr)
+      } catch (e) {}
+
+      if (this.utrInput) this.utrInput.value = utr
+      if (this.verifiedUtrDisplay) this.verifiedUtrDisplay.textContent = utr
+
+      if (this.gateLocked && this.gateUnlocked) {
+        gsap.to(this.gateLocked, {
+          opacity: 0,
+          duration: 0.22,
+          onComplete: () => {
+            if (this.gateLocked) this.gateLocked.style.display = 'none'
+            if (this.gateUnlocked) {
+              this.gateUnlocked.style.display = 'block'
+              gsap.fromTo(
+                this.gateUnlocked,
+                { opacity: 0, y: 14 },
+                { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+              )
+              setTimeout(() => this.nameInput?.focus(), 250)
+            }
+          }
+        })
+      }
+    }
+
+    /**
+     * Subtle Cell Hover Masks
+     */
+    bindCellHover() {
+      this.cells.forEach((cell) => {
+        const mask = cell.querySelector('.s-lab__cell-mask') as HTMLElement
+        if (!mask) return
+
+        cell.addEventListener('mouseenter', (e: MouseEvent) => {
+          const rect = cell.getBoundingClientRect()
           const x = e.clientX - rect.left
           const y = e.clientY - rect.top
 
-          const centerX = rect.width / 2
-          const centerY = rect.height / 2
-
-          const rotateX = ((y - centerY) / centerY) * -8
-          const rotateY = ((x - centerX) / centerX) * 8
-
-          card.style.transform = `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`
-
-          if (sheen) {
-            sheen.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.22) 0%, transparent 65%)`
-          }
+          gsap.killTweensOf(mask)
+          gsap.fromTo(
+            mask,
+            { opacity: 0, scale: 0.85, transformOrigin: `${x}px ${y}px` },
+            { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
+          )
         })
 
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0)'
-          if (sheen) {
-            sheen.style.background = 'none'
-          }
-        })
-
-        card.addEventListener('mouseenter', () => {
-          audioEngine.playTab()
+        cell.addEventListener('mouseleave', () => {
+          gsap.to(mask, { opacity: 0, duration: 0.3, ease: 'power2.in' })
         })
       })
     }
 
-    /* Domain Filtering */
-    initFilters() {
-      this.filterBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const filter = btn.getAttribute('data-filter')
-          this.filterBtns.forEach((b) => b.classList.remove('is-active'))
-          btn.classList.add('is-active')
-          audioEngine.playSnap()
+    /**
+     * Copy UPI ID Button
+     */
+    bindCopyUPI() {
+      if (!this.copyBtn) return
 
-          this.cards.forEach((card) => {
-            const cat = card.getAttribute('data-category')
-            if (filter === 'all' || cat === filter) {
-              card.style.display = 'block'
-              card.style.opacity = '1'
-            } else {
-              card.style.display = 'none'
-              card.style.opacity = '0'
-            }
-          })
-        })
-      })
-    }
+      this.copyBtn.addEventListener('click', async () => {
+        const upiId = 'brintadeb1453@nyes'
+        audioEngine?.playTone(750, 0.08)
 
-    /* Bento Grid vs Zero-G Switcher */
-    initViewToggle() {
-      this.viewBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const mode = btn.getAttribute('data-mode')
-          this.viewBtns.forEach((b) => b.classList.remove('is-active'))
-          btn.classList.add('is-active')
-          audioEngine.playChime()
-
-          if (mode === 'zero-g') {
-            if (this.gridView) this.gridView.style.display = 'none'
-            if (this.zeroGView) this.zeroGView.style.display = 'block'
-            this.isZeroGActive = true
-            this.realignZeroG()
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(upiId)
           } else {
-            if (this.gridView) this.gridView.style.display = 'grid'
-            if (this.zeroGView) this.zeroGView.style.display = 'none'
-            this.isZeroGActive = false
+            const temp = document.createElement('textarea')
+            temp.value = upiId
+            document.body.appendChild(temp)
+            temp.select()
+            document.execCommand('copy')
+            document.body.removeChild(temp)
           }
-        })
-      })
-    }
 
-    /* Theme Studio */
-    initThemes() {
-      const activeTheme = themeManager.getTheme()
-      this.updateActiveThemeUI(activeTheme)
+          if (this.copyLabel) {
+            const orig = this.copyLabel.textContent
+            this.copyLabel.textContent = '✓ COPIED TO CLIPBOARD'
+            this.copyBtn?.classList.add('is-copied')
 
-      this.themeBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const themeId = btn.getAttribute('data-theme')
-          if (!themeId) return
-          themeManager.setTheme(themeId)
-          this.updateActiveThemeUI(themeId)
-          audioEngine.playSnap()
-        })
-      })
-
-      window.addEventListener('theme:change', ((e: CustomEvent) => {
-        if (e.detail.theme) {
-          this.updateActiveThemeUI(e.detail.theme)
-        }
-      }) as EventListener)
-    }
-
-    updateActiveThemeUI(themeId: string) {
-      this.themeBtns.forEach((btn) => {
-        const id = btn.getAttribute('data-theme')
-        if (id === themeId) {
-          btn.classList.add('is-active')
-          const p = btn.getAttribute('data-primary')
-          const s = btn.getAttribute('data-secondary')
-          if (this.telemetryEl && p && s) {
-            this.telemetryEl.textContent = `PRIMARY: ${p} | SECONDARY: ${s}`
+            setTimeout(() => {
+              if (this.copyLabel) this.copyLabel.textContent = orig
+              this.copyBtn?.classList.remove('is-copied')
+            }, 2500)
           }
-        } else {
-          btn.classList.remove('is-active')
+        } catch {
+          if (this.copyLabel) this.copyLabel.textContent = 'brintadeb1453@nyes'
         }
       })
     }
 
-    /* Zero-Gravity Floating Physics Engine */
-    initZeroGPhysics() {
-      if (!this.arena || this.nodes.length === 0) return
+    /**
+     * Form Submission: Generates Pre-filled WhatsApp Call Request
+     */
+    bindForm() {
+      if (!this.form) return
 
-      const arenaRect = this.arena.getBoundingClientRect()
-      const w = arenaRect.width || 600
-      const h = arenaRect.height || 420
+      this.form.addEventListener('submit', (e: Event) => {
+        e.preventDefault()
 
-      this.zeroGItems = this.nodes.map((el, i) => {
-        const nw = el.offsetWidth || 140
-        const nh = el.offsetHeight || 48
+        const name = this.nameInput?.value.trim() || 'Client'
+        const phone = this.phoneInput?.value.trim() || ''
+        const topic = this.topicSelect?.value || 'Consultation & Strategy Call'
+        const utr = this.utrInput?.value.trim() || 'Paid via UPI (₹100)'
 
-        const cols = 3
-        const row = Math.floor(i / cols)
-        const col = i % cols
-
-        const targetX = 30 + col * ((w - 60) / 3) + (Math.random() * 20 - 10)
-        const targetY = 30 + row * 95 + (Math.random() * 20 - 10)
-
-        const item = {
-          el,
-          x: Math.max(10, Math.min(w - nw - 10, targetX)),
-          y: Math.max(10, Math.min(h - nh - 10, targetY)),
-          originX: targetX,
-          originY: targetY,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: (Math.random() - 0.5) * 1.2,
-          w: nw,
-          h: nh,
-          floatPhase: Math.random() * Math.PI * 2,
-          isDragging: false,
-        }
-
-        this.bindZeroGDrag(item)
-        return item
-      })
-
-      this.realignBtn?.addEventListener('click', () => {
-        this.realignZeroG()
-        audioEngine.playChime()
-      })
-
-      this.runZeroGLoop()
-    }
-
-    realignZeroG() {
-      if (!this.arena) return
-      const rect = this.arena.getBoundingClientRect()
-      const w = rect.width || 600
-      const h = rect.height || 420
-
-      this.zeroGItems.forEach((item, i) => {
-        const cols = 3
-        const row = Math.floor(i / cols)
-        const col = i % cols
-        item.x = 30 + col * ((w - 60) / 3)
-        item.y = 30 + row * 95
-        item.vx = (Math.random() - 0.5) * 0.5
-        item.vy = (Math.random() - 0.5) * 0.5
-      })
-    }
-
-    bindZeroGDrag(item: any) {
-      const el = item.el
-      let offX = 0
-      let offY = 0
-
-      const onPointerDown = (e: MouseEvent | TouchEvent) => {
-        const cx = 'touches' in e ? e.touches[0].clientX : e.clientX
-        const cy = 'touches' in e ? e.touches[0].clientY : e.clientY
-        const aRect = this.arena?.getBoundingClientRect()
-        if (!aRect) return
-
-        offX = cx - aRect.left - item.x
-        offY = cy - aRect.top - item.y
-
-        item.isDragging = true
-        el.classList.add('is-dragging')
-        audioEngine.playClick()
-
-        const onPointerMove = (me: MouseEvent | TouchEvent) => {
-          if (!item.isDragging) return
-          const mcx = 'touches' in me ? me.touches[0].clientX : me.clientX
-          const mcy = 'touches' in me ? me.touches[0].clientY : me.clientY
-          const arenaRect = this.arena?.getBoundingClientRect()
-          if (!arenaRect) return
-
-          const newX = mcx - arenaRect.left - offX
-          const newY = mcy - arenaRect.top - offY
-
-          item.vx = (newX - item.x) * 0.45
-          item.vy = (newY - item.y) * 0.45
-          item.x = newX
-          item.y = newY
-        }
-
-        const onPointerUp = () => {
-          item.isDragging = false
-          el.classList.remove('is-dragging')
-          window.removeEventListener('mousemove', onPointerMove)
-          window.removeEventListener('mouseup', onPointerUp)
-          window.removeEventListener('touchmove', onPointerMove)
-          window.removeEventListener('touchend', onPointerUp)
-          audioEngine.playTab()
-        }
-
-        window.addEventListener('mousemove', onPointerMove)
-        window.addEventListener('mouseup', onPointerUp)
-        window.addEventListener('touchmove', onPointerMove)
-        window.addEventListener('touchend', onPointerUp)
-      }
-
-      el.addEventListener('mousedown', onPointerDown)
-      el.addEventListener('touchstart', onPointerDown, { passive: true })
-    }
-
-    runZeroGLoop() {
-      const tick = () => {
-        if (this.isZeroGActive && this.arena) {
-          const rect = this.arena.getBoundingClientRect()
-          const w = rect.width
-          const h = rect.height
-
-          for (let i = 0; i < this.zeroGItems.length; i++) {
-            const item = this.zeroGItems[i]
-
-            if (!item.isDragging) {
-              item.floatPhase += 0.02
-              const floatOffsetY = Math.sin(item.floatPhase) * 0.35
-
-              item.x += item.vx
-              item.y += item.vy + floatOffsetY
-              item.vx *= 0.97
-              item.vy *= 0.97
-
-              // Inter-Node Repulsion
-              for (let j = i + 1; j < this.zeroGItems.length; j++) {
-                const other = this.zeroGItems[j]
-                const dx = other.x - item.x
-                const dy = other.y - item.y
-                const dist = Math.hypot(dx, dy)
-                const minDist = 90
-                if (dist < minDist && dist > 0.1) {
-                  const force = (minDist - dist) * 0.03
-                  const fx = (dx / dist) * force
-                  const fy = (dy / dist) * force
-                  if (!item.isDragging) {
-                    item.vx -= fx
-                    item.vy -= fy
-                  }
-                  if (!other.isDragging) {
-                    other.vx += fx
-                    other.vy += fy
-                  }
-                }
-              }
-
-              // Elastic boundary walls
-              const pad = 10
-              if (item.x < pad) {
-                item.x = pad
-                item.vx = -item.vx * 0.8
-              } else if (item.x + item.w > w - pad) {
-                item.x = w - item.w - pad
-                item.vx = -item.vx * 0.8
-              }
-
-              if (item.y < pad) {
-                item.y = pad
-                item.vy = -item.vy * 0.8
-              } else if (item.y + item.h > h - pad) {
-                item.y = h - item.h - pad
-                item.vy = -item.vy * 0.8
-              }
-            }
-
-            item.el.style.transform = `translate3d(${item.x.toFixed(1)}px, ${item.y.toFixed(1)}px, 0)`
+        if (!phone) {
+          if (this.phoneInput) {
+            this.phoneInput.focus()
+            this.phoneInput.classList.add('has-error')
+            setTimeout(() => this.phoneInput?.classList.remove('has-error'), 2000)
           }
+          return
         }
 
-        this.animId = requestAnimationFrame(tick)
-      }
-      this.animId = requestAnimationFrame(tick)
+        try { audioEngine?.playSuccess?.() } catch (e) {}
+
+        const messageLines = [
+          `*PAY TO CALL // 1-ON-1 WHATSAPP CONSULTATION (₹100)*`,
+          ``,
+          `Hi Brinta! I have paid ₹100 via UPI scanner for a 1-on-1 consultation call.`,
+          ``,
+          `👤 *Name / Brand:* ${name}`,
+          `📞 *WhatsApp:* ${phone}`,
+          `🎯 *Call Topic:* ${topic}`,
+          `🧾 *UPI Ref / UTR:* ${utr}`,
+          ``,
+          `Please confirm my booking and let me know your immediate availability for the call!`,
+        ]
+
+        const encoded = encodeURIComponent(messageLines.join('\n'))
+        // Phone number is obfuscated so it is not visible in plain text anywhere in source or DOM
+        const _waTarget = atob('OTE3MDA1NTgxNDUz')
+        const targetUrl = `https://wa.me/${_waTarget}?text=${encoded}`
+
+        if (this.feedbackBox && this.feedbackMsg) {
+          this.feedbackBox.style.display = 'flex'
+          this.feedbackMsg.textContent = `✓ Payment logged for ${name}! Connecting to Brinta Deb on WhatsApp...`
+          gsap.fromTo(
+            this.feedbackBox,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+          )
+        }
+
+        setTimeout(() => {
+          window.open(targetUrl, '_blank', 'noopener,noreferrer')
+        }, 350)
+      })
     }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => new LabProMax())
+    document.addEventListener('DOMContentLoaded', () => new PayToCallStation())
   } else {
-    new LabProMax()
+    new PayToCallStation()
   }
 </script>
 
 <style lang="scss">
-  .s-lab {
+  .s-lab.s-pay-to-call {
     position: relative;
-    z-index: 3;
-    padding: 7rem 0 10rem;
-    background: color(primary); // 100% true to website UI theory (Warm Cream Canvas)
-    color: color(secondary); // 100% true to website UI theory (Architectural Espresso)
-    border-top: 1px solid color(secondary);
+    z-index: 2;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
     border-bottom: 1px solid color(secondary);
+    background-color: color(primary);
     overflow: hidden;
 
-    @include mq(tablet) {
-      padding: 4.5rem 0 8.5rem;
+    @include mq(phone) {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
     }
 
-    &__wrapper {
-      position: relative;
+    .s-lab__wrapper {
+      width: 100%;
+      max-width: 1440px;
       margin: 0 auto;
-      width: min(84rem, calc(100% - 3rem));
+      padding: 0 1.5rem;
+      box-sizing: border-box;
 
       @include mq(phone) {
-        width: calc(100% - 1.5rem);
+        padding: 0 1rem;
       }
     }
 
-    /* Top Pill Header (1:1 with SAbout & SSteps) */
-    &__pill-header {
-      display: block;
-      background: color(secondary);
-      color: color(primary);
-      text-align: center;
-      padding: 0.45rem 1rem;
+    .s-lab__pill-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .s-lab__pill-text {
+      display: inline-block;
+      padding: 0.4rem 1rem;
       border: 1px solid color(secondary);
-      border-bottom: 0;
-    }
-
-    &__pill-text {
-      font: 700 0.6875rem / 1 font-family(fraktion);
-      letter-spacing: 0.22em;
+      border-radius: 999px;
+      font: 700 11px / 1 font-family(fraktion);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: color(secondary);
+      background: rgba(0, 0, 0, 0.03);
     }
 
-    /* Bento Grid Container */
-    &__bento {
+    /* Bento Structure with Collapsed 1px Borders */
+    .s-lab__bento {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      border: 1px solid color(secondary);
+      background-color: color(secondary);
+      gap: 1px;
     }
 
-    /* Generic Architectural Cell */
-    &__cell {
+    .s-lab__split-row {
+      display: flex;
+      flex-direction: row;
+      gap: 1px;
+      width: 100%;
+
+      @include mq(tablet) {
+        flex-direction: column;
+      }
+    }
+
+    .s-lab__cell {
       position: relative;
-      background: color(primary);
-      border: 1px solid color(secondary);
-      margin-top: -1px;
+      background-color: color(primary);
+      padding: 2.5rem;
+      box-sizing: border-box;
       overflow: hidden;
 
+      @include mq(phone) {
+        padding: 1.5rem;
+      }
+
       &--hero {
-        padding: 3rem 2.5rem 2.75rem;
+        width: 100%;
+      }
 
-        @include mq(phone) {
-          padding: 2rem 1.25rem;
+      &--scanner {
+        flex: 1.05;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &--form {
+        flex: 1.25;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &--topic {
+        flex: 1;
+        cursor: pointer;
+        transition: background-color 0.25s ease, transform 0.25s ease;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        &.is-selected {
+          background-color: rgba(37, 211, 102, 0.06);
+          box-shadow: inset 0 0 0 1px #25D366;
+
+          .topic-num {
+            color: #128C7E;
+          }
+
+          .topic-badge {
+            border-color: #25D366;
+            color: #128C7E;
+            background: rgba(37, 211, 102, 0.1);
+          }
+
+          .topic-select-action {
+            background: #25D366;
+            color: #000000;
+            border-color: #25D366;
+          }
         }
       }
 
-      &--radar {
-        padding: 1.75rem;
-        flex: 1.35;
-
-        @include mq(phone) {
-          padding: 1.25rem;
-        }
-      }
-
-      &--studio {
-        padding: 1.75rem;
-        flex: 0.85;
-
-        @include mq(phone) {
-          padding: 1.25rem;
-        }
+      &--perk {
+        flex: 1;
       }
     }
 
-    /* Corner Crosshairs (+) */
-    &__crosshair {
+    .s-lab__cell-mask {
       position: absolute;
-      font-family: font-family(mono);
-      font-size: 0.85rem;
-      line-height: 1;
-      color: color(secondary);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
       pointer-events: none;
-      z-index: 5;
-
-      &--tl { top: 0.5rem; left: 0.65rem; }
-      &--tr { top: 0.5rem; right: 0.65rem; }
+      opacity: 0;
+      z-index: 1;
     }
 
-    /* Hero Section Content */
-    &__coords-badge {
+    .s-lab__crosshair {
+      position: absolute;
+      font: 400 13px / 1 font-family(fraktion);
+      color: color(secondary);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 3;
+
+      &--tl { top: 0.6rem; left: 0.75rem; }
+      &--tr { top: 0.6rem; right: 0.75rem; }
+      &--bl { bottom: 0.6rem; left: 0.75rem; }
+      &--br { bottom: 0.6rem; right: 0.75rem; }
+    }
+
+    /* Hero Cell Content */
+    .s-lab__hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .s-lab__coords-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      padding: 0.25rem 0.65rem;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
       border: 1px solid color(secondary);
-      border-radius: 20px;
-      font-family: font-family(mono);
-      font-size: 0.65rem;
+      font: 700 9px / 1 font-family(fraktion);
       letter-spacing: 0.12em;
-      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      color: color(secondary);
+      background: rgba(0, 0, 0, 0.02);
 
       .pulse-dot {
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: var(--theme-accent, #ff4d6d);
-        animation: labPulse 1.8s infinite;
-      }
-
-      @include mq(phone) {
-        font-size: 0.58rem;
-        padding: 0.2rem 0.5rem;
-        max-width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        background-color: #25D366;
+        box-shadow: 0 0 8px #25D366;
+        animation: pulse 1.5s infinite;
       }
     }
 
-    &__title {
-      font: 700 min(7.5vw, 4.25rem) / 1.05 font-family(bigger);
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .s-lab__title {
+      font: 900 clamp(2.5rem, 6vw, 4.5rem) / 0.95 font-family(editorial);
+      letter-spacing: -0.03em;
       text-transform: uppercase;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.25rem;
       color: color(secondary);
+      margin: 0 0 1rem 0;
 
       &--italic {
-        font-family: font-family(editorial);
-        font-weight: 300;
         font-style: italic;
-        text-transform: none;
+        font-weight: 400;
       }
     }
 
-    &__lead {
-      font-family: font-family(editorial);
-      font-size: 1.3rem;
-      line-height: 1.55;
-      max-width: 54rem;
+    .s-lab__lead {
+      font: 400 clamp(1rem, 2vw, 1.25rem) / 1.5 font-family(editorial);
+      font-style: italic;
       color: color(secondary);
       opacity: 0.85;
+      max-width: 900px;
+      margin: 0 0 2rem 0;
+    }
+
+    /* Metrics Summary Strip */
+    .pay-metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+      @include mq(tablet) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       @include mq(phone) {
-        font-size: 1.05rem;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
       }
     }
 
-    /* Split Row */
-    &__split-row {
+    .pay-metric {
       display: flex;
-      margin-top: -1px;
+      flex-direction: column;
+      gap: 0.35rem;
 
-      > .s-lab__cell:not(:first-child) {
-        margin-left: -1px;
+      &__label {
+        font: 700 9px / 1 font-family(fraktion);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: color(secondary);
+        opacity: 0.55;
       }
 
-      @include mq(desktop-xs) {
-        flex-direction: column;
+      &__val {
+        font: 700 12px / 1.3 font-family(fraktion);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+    }
 
-        > .s-lab__cell:not(:first-child) {
-          margin-left: 0;
-          margin-top: -1px;
+    /* Terminal Headers */
+    .terminal-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+      &__left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .step-num {
+        font: 700 11px / 1 font-family(fraktion);
+        color: #128C7E;
+      }
+
+      .terminal-title {
+        font: 700 11px / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: color(secondary);
+      }
+
+      &__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.25rem 0.65rem;
+        border: 1px solid color(secondary);
+        font: 700 9px / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: color(secondary);
+
+        .pulse-green {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #25D366;
+        }
+
+        &--wa {
+          border-color: #25D366;
+          color: #128C7E;
+          background: rgba(37, 211, 102, 0.08);
+
+          .wa-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #25D366;
+          }
+        }
+
+        &--locked {
+          border-color: #ff3366;
+          color: #ff3366;
+          background: rgba(255, 51, 102, 0.08);
+
+          .lock-pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #ff3366;
+            animation: lockPulse 1.8s infinite ease-in-out;
+          }
         }
       }
     }
 
-    /* Toolbar */
-    &__toolbar {
+    @keyframes lockPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    .terminal-instruction {
+      font: 400 12px / 1.5 font-family(fraktion);
+      color: color(secondary);
+      opacity: 0.8;
+      margin: 0 0 1.5rem 0;
+
+      strong {
+        color: color(secondary);
+        opacity: 1;
+      }
+    }
+
+    /* Scanner Frame */
+    .scanner-frame {
+      position: relative;
       display: flex;
-      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px dashed rgba(0, 0, 0, 0.25);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+
+      @include mq(phone) {
+        padding: 1.25rem;
+      }
+    }
+
+    .frame-bracket {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: color(secondary);
+      border-style: solid;
+      pointer-events: none;
+      z-index: 4;
+
+      &--tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+      &--tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+      &--bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+      &--br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+    }
+
+    .scanner-laser-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #25D366 30%, #FFFFFF 50%, #25D366 70%, transparent);
+      box-shadow: 0 0 12px #25D366, 0 0 20px rgba(37, 211, 102, 0.7);
+      pointer-events: none;
+      z-index: 5;
+      animation: sweepLaser 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    @keyframes sweepLaser {
+      0% { top: 6%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { top: 94%; opacity: 0; }
+    }
+
+    .qr-wrapper {
+      position: relative;
+      display: inline-block;
+      padding: 0.75rem;
+      background: #FFFFFF;
+      border: 1px solid color(secondary);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      .qr-code-img {
+        display: block;
+        width: 250px;
+        height: auto;
+        max-width: 100%;
+        border-radius: 4px;
+        object-fit: contain;
+
+        @include mq(phone) {
+          width: 200px;
+        }
+      }
+
+      .qr-code-svg {
+        display: block;
+        width: 220px;
+        height: 220px;
+
+        @include mq(phone) {
+          width: 180px;
+          height: 180px;
+        }
+      }
+    }
+
+    .qr-verified-tag {
+      position: absolute;
+      bottom: -10px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #111111;
+      border: 1px solid #25D366;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+      .amount-tag {
+        font: 900 12px / 1 font-family(editorial);
+        color: #25D366;
+      }
+
+      .upi-tag {
+        font: 700 8px / 1 font-family(fraktion);
+        letter-spacing: 0.1em;
+        color: #FFFFFF;
+      }
+    }
+
+    /* UPI ID Box */
+    .upi-id-box {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      margin-bottom: 1rem;
+
+      @include mq(phone) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    .upi-id-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .upi-id-label {
+      font: 700 8px / 1 font-family(fraktion);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: color(secondary);
+      opacity: 0.6;
+    }
+
+    .upi-id-value {
+      font: 700 13px / 1.2 font-family(fraktion);
+      letter-spacing: 0.05em;
+      color: color(secondary);
+      user-select: all;
+    }
+
+    .copy-upi-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.85rem;
+      background: transparent;
+      border: 1px solid color(secondary);
+      color: color(secondary);
+      font: 700 10px / 1 font-family(fraktion);
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+
+      &:hover {
+        background: color(secondary);
+        color: color(primary);
+      }
+
+      &.is-copied {
+        background: #25D366;
+        border-color: #25D366;
+        color: #000000;
+      }
+    }
+
+    /* Mobile Deep Link */
+    .upi-direct-app-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #25D366;
+      background: rgba(37, 211, 102, 0.08);
+      color: #128C7E;
+      font: 700 10px / 1 font-family(fraktion);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(37, 211, 102, 0.2);
+        transform: translateY(-1px);
+      }
+    }
+
+    /* Modes Pills */
+    .accepted-modes {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+      .modes-label {
+        display: block;
+        font: 700 8px / 1 font-family(fraktion);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: color(secondary);
+        opacity: 0.5;
+        margin-bottom: 0.5rem;
+      }
+
+      .modes-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .mode-pill {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        background: rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        font: 700 9px / 1 font-family(fraktion);
+        color: color(secondary);
+        opacity: 0.85;
+      }
+    }
+
+    /* Quick Trigger to Unlock Call */
+    .scanner-paid-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1rem;
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px dashed #25D366;
+      color: color(secondary);
+      font: 700 9.5px / 1.2 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      .paid-trigger-check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #25D366;
+        color: #000000;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .paid-trigger-arrow {
+        font-size: 13px;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover {
+        background: #25D366;
+        color: #000000;
+        border-style: solid;
+
+        .paid-trigger-arrow {
+          transform: translateX(4px);
+        }
+      }
+    }
+
+    /* Locked Gate Notice Box */
+    .lock-notice-box {
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      background: rgba(0, 0, 0, 0.03);
+      padding: 1rem 1.15rem;
+      margin-bottom: 1.15rem;
+
+      @include mq(phone) {
+        padding: 0.85rem;
+      }
+    }
+
+    .lock-notice-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .lock-icon-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: rgba(255, 51, 102, 0.1);
+      border: 1px solid #ff3366;
+      font-size: 16px;
+    }
+
+    .lock-notice-headings {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .lock-notice-title {
+        font: 800 12.5px / 1.2 font-family(fraktion);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: color(secondary);
+        margin: 0;
+      }
+
+      .lock-notice-sub {
+        font: 400 10.5px / 1.4 font-family(fraktion);
+        color: color(secondary);
+        opacity: 0.75;
+        margin: 0;
+      }
+    }
+
+    .lock-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed rgba(0, 0, 0, 0.12);
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font: 500 10.5px / 1.3 font-family(fraktion);
+      color: color(secondary);
+
+      .checklist-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font: 700 8px / 1 font-family(fraktion);
+        padding: 0.15rem 0.4rem;
+        background: color(secondary);
+        color: color(primary);
+        letter-spacing: 0.05em;
+        min-width: 18px;
+      }
+    }
+
+    .refund-guarantee-notice {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-top: 0.85rem;
+      padding: 0.55rem 0.75rem;
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      font: 500 10px / 1.4 font-family(fraktion);
+      color: color(secondary);
+
+      .refund-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2rem 0.5rem;
+        background: #25D366;
+        color: #000000;
+        font: 800 8.5px / 1 font-family(fraktion);
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+    }
+
+    /* Gate Unlock Form */
+    .gate-unlock-form {
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid color(secondary);
-      margin-bottom: 1.5rem;
+    }
+
+    .gate-error {
+      padding: 0.6rem 0.85rem;
+      background: rgba(255, 51, 102, 0.1);
+      border: 1px solid #ff3366;
+      color: #ff3366;
+      font: 700 10px / 1.35 font-family(fraktion);
+      letter-spacing: 0.02em;
+    }
+
+    .gate-unlock-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: color(secondary);
+      border: 1px solid color(secondary);
+      color: color(primary);
+      font: 800 11.5px / 1 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+      @include mq(phone) {
+        padding: 0.9rem 1rem;
+        font-size: 10px;
+      }
+
+      .btn-content {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-lock-icon {
+        font-size: 16px;
+      }
+
+      .btn-arrow-icon {
+        font-size: 16px;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover {
+        background: #25D366;
+        border-color: #25D366;
+        color: #000000;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+
+        .btn-arrow-icon {
+          transform: translateX(4px);
+        }
+      }
+
+      &:active {
+        transform: scale(0.99);
+      }
+    }
+
+    .gate-disclaimer {
+      font: 400 9.5px / 1.4 font-family(fraktion);
+      color: color(secondary);
+      opacity: 0.6;
+      text-align: center;
+    }
+
+    /* Verified Payment Ribbon (Inside Unlocked State) */
+    .verified-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.15rem;
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid #25D366;
+      margin-bottom: 1.25rem;
 
       @include mq(phone) {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.75rem;
-        padding-bottom: 1rem;
       }
-    }
 
-    &__filter-tabs {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.4rem;
+      &__left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
 
-      @include mq(phone) {
-        width: 100%;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 2px;
+      .verified-badge-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #25D366;
+        color: #000000;
+        font-weight: 900;
+        font-size: 13px;
+      }
 
-        &::-webkit-scrollbar {
-          display: none;
+      .verified-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .verified-status-label {
+        font: 700 9.5px / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        color: #128C7E;
+        text-transform: uppercase;
+      }
+
+      .verified-utr-text {
+        font: 700 11.5px / 1.2 font-family(fraktion);
+        color: color(secondary);
+        letter-spacing: 0.04em;
+
+        strong {
+          color: #25D366;
+        }
+      }
+
+      .relock-btn {
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        color: color(secondary);
+        font: 700 8.5px / 1 font-family(fraktion);
+        letter-spacing: 0.08em;
+        padding: 0.45rem 0.7rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+
+        &:hover {
+          background: color(secondary);
+          color: color(primary);
         }
       }
     }
 
-    &__filter-btn {
-      flex-shrink: 0;
-      white-space: nowrap;
-      font-family: font-family(mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      padding: 0.35rem 0.7rem;
-      background: transparent;
-      border: 1px solid color(secondary);
-      color: color(secondary);
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background: rgba(22, 0, 0, 0.08);
-      }
-
-      &.is-active {
-        background: color(secondary);
-        color: color(primary);
-        font-weight: 700;
-      }
-    }
-
-    &__view-toggle {
+    /* Call Booking Form */
+    .call-booking-form {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.2rem;
-      border: 1px solid color(secondary);
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
     }
 
-    &__toggle-btn {
-      font-family: font-family(mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      padding: 0.3rem 0.6rem;
-      border: none;
-      background: transparent;
-      color: color(secondary);
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &.is-active {
-        background: color(secondary);
-        color: color(primary);
-        font-weight: 700;
-      }
-    }
-
-    /* Cards Grid */
-    &__cards-grid {
+    .form-fields {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 1.25rem;
+
+      @include mq(phone) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .field-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+
+      &--full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .field-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font: 700 10px / 1 font-family(fraktion);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: color(secondary);
+
+      .field-sub {
+        font-weight: 400;
+        font-size: 9px;
+        opacity: 0.55;
+        text-transform: none;
+      }
+    }
+
+    .field-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.85rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      color: color(secondary);
+      font: 500 13px / 1.4 font-family(fraktion);
+      outline: none;
+      transition: all 0.2s ease;
+
+      &::placeholder {
+        color: color(secondary);
+        opacity: 0.4;
+      }
+
+      &:focus {
+        border-color: color(secondary);
+        background: rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 0 1px color(secondary);
+      }
+
+      &.has-error {
+        border-color: #ff3366;
+        background: rgba(255, 51, 102, 0.08);
+      }
+    }
+
+    .select-container {
+      position: relative;
+      width: 100%;
+
+      .field-select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.85rem 2.5rem 0.85rem 1rem;
+        background: color(primary);
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        color: color(secondary);
+        font: 500 13px / 1.4 font-family(fraktion);
+        outline: none;
+        appearance: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:focus {
+          border-color: color(secondary);
+          box-shadow: 0 0 0 1px color(secondary);
+        }
+
+        option {
+          background: color(primary);
+          color: color(secondary);
+          padding: 0.5rem;
+        }
+      }
+
+      .select-arrow {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        font-size: 10px;
+        color: color(secondary);
+        opacity: 0.6;
+        pointer-events: none;
+      }
+    }
+
+    .submit-wrap {
+      margin-top: 0.5rem;
+    }
+
+    .call-submit-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      background: #25D366;
+      border: 1px solid #1EBE5D;
+      color: #000000;
+      font: 900 13px / 1 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+      transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+
+      @include mq(phone) {
+        padding: 1.1rem 1rem;
+        font-size: 11px;
+      }
+
+      .btn-content {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-phone-icon {
+        font-size: 16px;
+      }
+
+      .btn-arrow-icon {
+        font-size: 18px;
+        transition: transform 0.3s ease;
+        position: relative;
+        z-index: 2;
+      }
+
+      &:hover {
+        background: #1EBE5D;
+        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        transform: translateY(-2px);
+
+        .btn-arrow-icon {
+          transform: translateX(4px);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .call-feedback-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid #25D366;
+      color: #128C7E;
+      font: 700 12px / 1.4 font-family(fraktion);
+      letter-spacing: 0.05em;
+
+      .feedback-badge {
+        font-size: 16px;
+      }
+    }
+
+    .form-disclaimer {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font: 400 10px / 1.5 font-family(fraktion);
+      color: color(secondary);
+      opacity: 0.6;
+
+      .lock-icon {
+        font-size: 11px;
+        opacity: 0.8;
+      }
+    }
+
+
+    /* Perks Row */
+    .s-lab__perks-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: color(secondary);
+
+      @include mq(tablet) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       @include mq(phone) {
         grid-template-columns: 1fr;
       }
     }
 
-    /* 3D Gyroscopic Architectural Tech Card */
-    .tech-card {
+    .perk-content {
       position: relative;
-      background: color(primary);
-      border: 1px solid color(secondary);
-      padding: 1.25rem;
-      cursor: pointer;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-
-      &__mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        background: color(secondary);
-        scale: 0 1;
-        transform-origin: 0 50%;
-        transition: scale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        pointer-events: none;
-      }
-
-      &__sheen {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 3;
-      }
-
-      &__content {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        transition: color 0.25s ease;
-      }
-
-      @media (hover: hover) {
-        &:hover {
-          box-shadow: 0 12px 28px rgba(22, 0, 0, 0.15);
-
-          .tech-card__mask {
-            scale: 1 1;
-          }
-
-          .tech-card__content {
-            color: color(primary);
-          }
-
-          .tech-card__top,
-          .tech-card__role,
-          .tech-card__desc,
-          .tech-card__foot {
-            color: color(primary);
-          }
-
-          .tech-card__title {
-            color: color(primary);
-          }
-
-          .tech-card__badge {
-            background: color(primary);
-            color: color(secondary);
-            border-color: color(primary);
-          }
-
-          .tech-card__arrow {
-            transform: translateX(4px);
-          }
-        }
-      }
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      &__top {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        font-family: font-family(mono);
-        font-size: 0.62rem;
-        letter-spacing: 0.1em;
-        color: color(secondary);
-        opacity: 0.75;
-      }
-
-      &__badge {
-        padding: 0.15rem 0.45rem;
-        border: 1px solid color(secondary);
-        border-radius: 2px;
-        font-weight: 700;
-        transition: all 0.25s ease;
-      }
-
-      &__body {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.85rem;
-      }
-
-      &__icon-box {
-        width: 42px;
-        height: 42px;
-        border: 1px solid color(secondary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.25rem;
-        background: rgba(22, 0, 0, 0.03);
-      }
-
-      &__names {
-        display: flex;
-        flex-direction: column;
-      }
-
-      &__title {
-        font-family: font-family(mono);
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        color: color(secondary);
-      }
-
-      &__role {
-        font-size: 0.68rem;
-        color: color(secondary);
-        opacity: 0.7;
-      }
-
-      &__desc {
-        font-size: 0.72rem;
-        line-height: 1.45;
-        color: color(secondary);
-        opacity: 0.85;
-        flex: 1;
-      }
-
-      &__foot {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        border-top: 1px solid color(secondary);
-        padding-top: 0.6rem;
-        font-family: font-family(mono);
-        font-size: 0.58rem;
-        letter-spacing: 0.1em;
-        color: color(secondary);
-        opacity: 0.7;
-      }
-
-      &__arrow {
-        transition: transform 0.2s ease;
-        font-size: 0.8rem;
-        font-weight: 700;
-      }
+      z-index: 2;
     }
 
-    /* Zero-G Arena */
-    &__zerog-container {
-      position: relative;
-    }
-
-    &__zerog-bar {
+    .perk-header {
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: 0.65rem 1rem;
-      border: 1px solid color(secondary);
-      font-family: font-family(mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 1rem;
-    }
+      margin-bottom: 0.75rem;
 
-    &__zerog-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-
-      .pulse-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--theme-accent, #ff4d6d);
-        animation: labPulse 1.8s infinite;
-      }
-    }
-
-    &__realign-btn {
-      font-family: font-family(mono);
-      font-size: 0.6rem;
-      padding: 0.25rem 0.6rem;
-      background: color(secondary);
-      color: color(primary);
-      border: 1px solid color(secondary);
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background: transparent;
-        color: color(secondary);
-      }
-    }
-
-    &__arena {
-      position: relative;
-      height: 480px;
-      width: 100%;
-      background: color(primary);
-      border: 1px solid color(secondary);
-      overflow: hidden;
-      user-select: none;
-      touch-action: none;
-
-      // Subtle architectural grid dots on cream canvas
-      background-image: radial-gradient(color(secondary) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-
-    .zerog-badge {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      padding: 0.65rem 1rem;
-      background: color(primary);
-      border: 1.5px solid color(secondary);
-      cursor: grab;
-      box-shadow: 0 8px 24px rgba(22, 0, 0, 0.12);
-      will-change: transform;
-      user-select: none;
-      transition: background 0.2s ease, color 0.2s ease;
-
-      &:hover {
-        background: color(secondary);
-        color: color(primary);
-
-        .zerog-title,
-        .zerog-role {
-          color: color(primary);
-        }
+      .perk-code {
+        font: 700 10px / 1 font-family(fraktion);
+        color: #128C7E;
       }
 
-      &.is-dragging {
-        cursor: grabbing;
-        z-index: 50;
-        transform: scale(1.08) !important;
-        background: color(secondary);
-        color: color(primary);
-        box-shadow: 0 20px 48px rgba(22, 0, 0, 0.25);
-
-        .zerog-title,
-        .zerog-role {
-          color: color(primary);
-        }
-      }
-
-      .zerog-icon {
-        font-size: 1.15rem;
-      }
-
-      .zerog-info {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .zerog-title {
-        font-family: font-family(mono);
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: color(secondary);
-      }
-
-      .zerog-role {
-        font-size: 0.56rem;
-        color: color(secondary);
-        opacity: 0.7;
-      }
-
-      .zerog-indicator {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--node-accent, color(secondary));
-      }
-    }
-
-    /* Aesthetic Studio (Right Column) */
-    .studio-header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid color(secondary);
-      padding-bottom: 1rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .studio-tag {
-      font-family: font-family(mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      color: color(secondary);
-      opacity: 0.7;
-    }
-
-    .studio-title {
-      font-family: font-family(bigger);
-      font-size: 1.6rem;
-      letter-spacing: -0.01em;
-      margin-top: 0.2rem;
-      color: color(secondary);
-    }
-
-    .studio-badge {
-      font-family: font-family(mono);
-      font-size: 0.62rem;
-      padding: 0.25rem 0.6rem;
-      background: color(secondary);
-      color: color(primary);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-      height: fit-content;
-    }
-
-    .studio-desc {
-      font-size: 0.82rem;
-      line-height: 1.5;
-      color: color(secondary);
-      opacity: 0.85;
-      margin-bottom: 1.5rem;
-    }
-
-    .studio-palettes {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .palette-tile {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1.15rem;
-      padding: 0.95rem 1.15rem;
-      background: color(primary);
-      border: 1px solid color(secondary);
-      cursor: pointer;
-      text-align: left;
-      color: color(secondary);
-      transition: all 0.25s ease;
-
-      &:hover {
-        transform: translateX(4px);
-        box-shadow: 0 8px 20px rgba(22, 0, 0, 0.08);
-      }
-
-      &.is-active {
-        background: color(secondary);
-        color: color(primary);
-        box-shadow: 0 12px 28px rgba(22, 0, 0, 0.15);
-
-        .palette-name,
-        .palette-notes,
-        .palette-specimen {
-          color: color(primary);
-        }
-
-        .palette-status {
-          background: color(primary);
-          color: color(secondary);
-        }
-      }
-
-      .palette-swatch {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        border: 2px solid color(secondary);
-        flex-shrink: 0;
-        box-shadow: 0 4px 10px rgba(22, 0, 0, 0.15);
-      }
-
-      .palette-text {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      }
-
-      .palette-top {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .palette-name {
-        font-family: font-family(mono);
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: color(secondary);
-      }
-
-      .palette-status {
-        font-family: font-family(mono);
-        font-size: 0.58rem;
-        padding: 0.15rem 0.4rem;
-        border: 1px solid color(secondary);
-        letter-spacing: 0.08em;
-      }
-
-      .palette-notes {
-        font-size: 0.68rem;
-        color: color(secondary);
-        opacity: 0.7;
-      }
-
-      .palette-specimen {
-        font-family: font-family(mono);
-        font-size: 0.58rem;
-        letter-spacing: 0.1em;
-        opacity: 0.7;
-        margin-top: 0.15rem;
-      }
-    }
-
-    /* Telemetry Box */
-    .studio-telemetry {
-      padding: 1.25rem;
-      background: rgba(22, 0, 0, 0.03);
-      border: 1px dashed color(secondary);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-
-      .telemetry-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        font-family: font-family(mono);
-        font-size: 0.62rem;
+      .perk-tag {
+        font: 700 8px / 1 font-family(fraktion);
         letter-spacing: 0.12em;
+        text-transform: uppercase;
         color: color(secondary);
-        font-weight: 700;
-        border-bottom: 1px solid color(secondary);
-        padding-bottom: 0.45rem;
-      }
-
-      .telemetry-quote {
-        font-family: font-family(editorial);
-        font-size: 0.95rem;
-        font-style: italic;
-        line-height: 1.45;
-        color: color(secondary);
-      }
-
-      .telemetry-footer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        font-family: font-family(mono);
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        color: color(secondary);
-        opacity: 0.6;
+        opacity: 0.5;
       }
     }
-  }
 
-  @keyframes labPulse {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.8;
+    .perk-title {
+      font: 900 1.15rem / 1.2 font-family(editorial);
+      color: color(secondary);
+      margin: 0 0 0.5rem 0;
     }
-    50% {
-      transform: scale(1.4);
-      opacity: 1;
+
+    .perk-desc {
+      font: 400 11px / 1.5 font-family(fraktion);
+      color: color(secondary);
+      opacity: 0.75;
+      margin: 0;
     }
   }
 </style>

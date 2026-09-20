@@ -5,9 +5,9 @@
 
 $theme-colors: (
   default: (
-    primary: #f40c3f,
+    primary: #fff2ed,
     secondary: #160000,
-    shadow: #540000,
+    shadow: #4d4040,
     white: #fff0eb,
     accent: #ff4d6d,
   ),
@@ -21,26 +21,42 @@ $theme-colors: (
   ),
 
   cyberpunk: (
-    primary: #00f0ff,
-    secondary: #090a0f,
-    shadow: #ff007f,
+    primary: #0a0c16,
+    secondary: #00f0ff,
+    shadow: #002e38,
     white: #ffffff,
     accent: #ff007f,
   ),
 
   acidlime: (
-    primary: #d4ff00,
-    secondary: #0d0f0d,
-    shadow: #445500,
+    primary: #0b0e0b,
+    secondary: #d4ff00,
+    shadow: #273600,
     white: #f5f5f5,
     accent: #00ff88,
   ),
 
-  monochrome: (
-    primary: #f0f0f0,
-    secondary: #000000,
-    shadow: #333333,
+  royalviolet: (
+    primary: #0d0818,
+    secondary: #d8b4fe,
+    shadow: #2c0e48,
     white: #ffffff,
-    accent: #999999,
+    accent: #f43f5e,
+  ),
+
+  solaramber: (
+    primary: #120a05,
+    secondary: #ffb326,
+    shadow: #361700,
+    white: #ffffff,
+    accent: #ff5500,
+  ),
+
+  monochrome: (
+    primary: #f5f5f7,
+    secondary: #0a0a0a,
+    shadow: #cccccc,
+    white: #ffffff,
+    accent: #555555,
   ),
 );

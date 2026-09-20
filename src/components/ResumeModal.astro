@@ -37,13 +37,13 @@
         </div>
 
         <div class="resume-contact-pills">
-          <a href="mailto:debbrinta01@gmail.com" class="contact-pill">
+          <a href="mailto:brintadeb15@gmail.com" class="contact-pill">
             <span class="pill-k">EMAIL</span>
-            <span class="pill-v">debbrinta01@gmail.com</span>
+            <span class="pill-v">brintadeb15@gmail.com</span>
           </a>
-          <a href="https://wa.me/917005581453" target="_blank" rel="noopener" class="contact-pill">
-            <span class="pill-k">TEL / WA</span>
-            <span class="pill-v">+91 70055 81453</span>
+          <a href="#lab" class="contact-pill js-close-resume">
+            <span class="pill-k">CALL</span>
+            <span class="pill-v">Pay to Call (₹100)</span>
           </a>
           <a href="https://instagram.com/http.shreyam.adhd" target="_blank" rel="noopener" class="contact-pill">
             <span class="pill-k">IG</span>
@@ -163,9 +163,9 @@
       <!-- Footer / Print Signature -->
       <footer class="resume-bottom">
         <span class="resume-bottom-text">VERIFIED RESUME &bull; BRINTA DEB &bull; CURRENT AS OF 2024/2025</span>
-        <button type="button" class="resume-quick-schedule js-open-schedule" aria-label="Book a 30-min call">
-          [ 🗓 SCHEDULE DISCOVERY CALL → ]
-        </button>
+        <a href="#lab" class="resume-quick-schedule js-close-resume" aria-label="Pay to Call on WhatsApp (₹100)">
+          [ 📞 PAY TO CALL (₹100) → ]
+        </a>
       </footer>
     </div>
   </div>
@@ -565,11 +565,13 @@
       }
 
       .resume-quick-schedule {
+        display: inline-block;
         background: transparent;
         border: none;
         color: color(secondary);
         font: 700 0.6875rem / 1 font-family(fraktion);
         letter-spacing: 0.08em;
+        text-decoration: none;
         cursor: pointer;
         padding: 0.3rem 0;
         transition: opacity 0.2s ease;

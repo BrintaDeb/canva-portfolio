@@ -1,10 +1,12 @@
 /**
  * ThemeManager.js
  * Manages site-wide aesthetic palettes:
- * - sepia (Editorial Sepia: Warm cream & espresso)
+ * - sepia (Editorial Sepia: Warm cream & deep espresso)
  * - cyberpunk (Cyberpunk Dark: Obsidian, neon cyan & electric magenta)
  * - acidlime (Acid Lime Brutalist: Studio dark & electric lime)
- * - monochrome (Monochrome Chrome: Pure carbon & platinum white)
+ * - royalviolet (Royal Amethyst: Velvet obsidian & electric lilac) [NEW]
+ * - solaramber (Solar Ember: Basalt carbon & solar amber gold) [NEW]
+ * - monochrome (Pure Mono: Platinum paper & pure carbon)
  */
 import Emitter from './Emitter'
 
@@ -18,31 +20,59 @@ class ThemeManager {
         tagline: 'Warm cream & deep espresso',
         primary: '#fff2ed',
         secondary: '#160000',
+        accent: '#ff4d6d',
         badge: 'Default',
+        isDark: false,
       },
       {
         id: 'cyberpunk',
         name: 'Cyberpunk Neon',
         tagline: 'Obsidian, neon cyan & magenta',
-        primary: '#00f0ff',
-        secondary: '#090a0f',
+        primary: '#0a0c16',
+        secondary: '#00f0ff',
+        accent: '#ff007f',
         badge: 'High Glow',
+        isDark: true,
       },
       {
         id: 'acidlime',
         name: 'Acid Lime',
         tagline: 'Studio dark & electric lime',
-        primary: '#d4ff00',
-        secondary: '#0d0f0d',
+        primary: '#0b0e0b',
+        secondary: '#d4ff00',
+        accent: '#00ff88',
         badge: 'Brutalist',
+        isDark: true,
+      },
+      {
+        id: 'royalviolet',
+        name: 'Royal Amethyst',
+        tagline: 'Velvet obsidian & electric lilac',
+        primary: '#0d0818',
+        secondary: '#d8b4fe',
+        accent: '#f43f5e',
+        badge: 'Luxury Dark',
+        isDark: true,
+      },
+      {
+        id: 'solaramber',
+        name: 'Solar Ember',
+        tagline: 'Basalt carbon & solar amber gold',
+        primary: '#120a05',
+        secondary: '#ffb326',
+        accent: '#ff5500',
+        badge: 'Warm Glow',
+        isDark: true,
       },
       {
         id: 'monochrome',
         name: 'Pure Mono',
-        tagline: 'Carbon black & platinum',
-        primary: '#f0f0f0',
-        secondary: '#000000',
+        tagline: 'Platinum paper & pure carbon',
+        primary: '#f5f5f7',
+        secondary: '#0a0a0a',
+        accent: '#555555',
         badge: 'Minimal',
+        isDark: false,
       },
     ]
 
@@ -59,6 +89,14 @@ class ThemeManager {
     }
   }
 
+  cycleTheme() {
+    const currentIndex = this.themes.findIndex((t) => t.id === this.currentTheme)
+    const nextIndex = (currentIndex + 1) % this.themes.length
+    const nextTheme = this.themes[nextIndex]
+    this.applyTheme(nextTheme.id, true)
+    return nextTheme
+  }
+
   applyTheme(themeId, emitEvents = true) {
     if (typeof document === 'undefined') return
     const theme = this.themes.find((t) => t.id === themeId) || this.themes[0]
@@ -67,23 +105,33 @@ class ThemeManager {
     const html = document.documentElement
     html.setAttribute('data-theme', theme.id)
 
-    // Preserve compatibility with .theme-contrasted
-    if (theme.id === 'sepia') {
-      html.classList.add('theme-contrasted')
+    // Handle light vs dark mode helper classes
+    if (theme.isDark) {
+      html.classList.add('theme-is-dark')
+      html.classList.remove('theme-is-light', 'theme-contrasted')
+    } else {
+      html.classList.add('theme-is-light', 'theme-contrasted')
+      html.classList.remove('theme-is-dark')
     }
 
     try {
       localStorage.setItem('bd_theme', theme.id)
     } catch (_) {}
 
+    // Update browser theme color meta tag
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme.primary)
+    }
+
     if (emitEvents) {
       // Re-trigger canvas redraws across Hero & Work
-      Emitter.emit('contrastchange', true)
+      Emitter.emit('contrastchange', theme.isDark ? 'dark' : 'contrasted')
       Emitter.emit('themechange', theme)
 
       window.dispatchEvent(
         new CustomEvent('theme:change', {
-          detail: { theme: theme.id, themeData: theme },
+          detail: { theme: theme.id, themeData: theme, isDark: theme.isDark },
         })
       )
     }
@@ -95,6 +143,10 @@ class ThemeManager {
 
   getTheme() {
     return this.currentTheme
+  }
+
+  getCurrentThemeData() {
+    return this.themes.find((t) => t.id === this.currentTheme) || this.themes[0]
   }
 
   getThemes() {

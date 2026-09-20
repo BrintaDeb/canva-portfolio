@@ -6,16 +6,16 @@
 
 /* CSS properties */
 :root {
-  // Default Colors
-  @each $variable, $color in map.get($theme-colors, 'default') {
+  // Default Sepia Colors
+  @each $variable, $color in map.get($theme-colors, 'contrasted') {
     --color-#{"" + $variable}: #{$color};
   }
-  --theme-glow: rgba(244, 12, 63, 0.2);
+  --theme-glow: rgba(255, 242, 237, 0.15);
   --theme-accent: #ff4d6d;
 }
 
-.theme-contrasted,
-html[data-theme='sepia'] {
+html[data-theme='sepia'],
+html:not([data-theme]) {
   @each $variable, $color in map.get($theme-colors, 'contrasted') {
     --color-#{"" + $variable}: #{$color};
   }
@@ -27,7 +27,7 @@ html[data-theme='cyberpunk'] {
   @each $variable, $color in map.get($theme-colors, 'cyberpunk') {
     --color-#{"" + $variable}: #{$color};
   }
-  --theme-glow: rgba(0, 240, 255, 0.3);
+  --theme-glow: rgba(0, 240, 255, 0.35);
   --theme-accent: #ff007f;
 }
 
@@ -35,14 +35,44 @@ html[data-theme='acidlime'] {
   @each $variable, $color in map.get($theme-colors, 'acidlime') {
     --color-#{"" + $variable}: #{$color};
   }
-  --theme-glow: rgba(212, 255, 0, 0.3);
+  --theme-glow: rgba(212, 255, 0, 0.35);
   --theme-accent: #00ff88;
+}
+
+html[data-theme='royalviolet'] {
+  @each $variable, $color in map.get($theme-colors, 'royalviolet') {
+    --color-#{"" + $variable}: #{$color};
+  }
+  --theme-glow: rgba(168, 85, 247, 0.35);
+  --theme-accent: #f43f5e;
+}
+
+html[data-theme='solaramber'] {
+  @each $variable, $color in map.get($theme-colors, 'solaramber') {
+    --color-#{"" + $variable}: #{$color};
+  }
+  --theme-glow: rgba(255, 179, 38, 0.35);
+  --theme-accent: #ff5500;
 }
 
 html[data-theme='monochrome'] {
   @each $variable, $color in map.get($theme-colors, 'monochrome') {
     --color-#{"" + $variable}: #{$color};
   }
-  --theme-glow: rgba(255, 255, 255, 0.2);
-  --theme-accent: #888888;
+  --theme-glow: rgba(0, 0, 0, 0.15);
+  --theme-accent: #555555;
+}
+
+/* Smooth Theme Transitions */
+html,
+body,
+.site-head,
+.site-foot,
+.site-wrapper,
+.sb-menu a,
+.sb-contrast,
+.sb-sound,
+.sb-availability,
+.sb-logo {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 }

@@ -25,8 +25,14 @@ export class CardTilt {
     this.elements = Array.from(document.querySelectorAll(this.selector))
 
     this.elements.forEach(el => {
-      // Don't tilt if element is a modal dialog or lightbox itself
-      if (el.closest('.modal-dialog') || el.closest('.project-lightbox')) return
+      // Don't tilt if element is a modal dialog, lightbox, or explicitly opted out of tilt
+      if (
+        el.closest('.modal-dialog') ||
+        el.closest('.project-lightbox') ||
+        el.closest('[data-no-tilt]') ||
+        el.classList.contains('no-tilt') ||
+        el.classList.contains('s__cell--custom-quote')
+      ) return
 
       this.bindCard(el)
     })

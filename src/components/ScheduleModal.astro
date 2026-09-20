@@ -249,7 +249,7 @@
   class ScheduleController {
     modal: HTMLElement | null
     form: HTMLFormElement | null
-    phoneNumber = '917005581453'
+    phoneNumber = ''
 
     tabForm: HTMLButtonElement | null
     tabCal: HTMLButtonElement | null
@@ -611,7 +611,7 @@
 
       const title = encodeURIComponent(`15-Min Strategy Call: ${name} & Brinta Deb`)
       const details = encodeURIComponent(
-        `15-Minute Strategic Discovery Call with Brinta Deb (Creative Developer & UI/UX Specialist).\n\nTopic: ${topic}\nLocation: Google Meet room\nHost: Brinta Deb (+91 7005581453 / brintadeb15@gmail.com)`
+        `15-Minute Strategic Discovery Call with Brinta Deb (Creative Developer & UI/UX Specialist).\n\nTopic: ${topic}\nLocation: Google Meet room\nHost: Brinta Deb (brintadeb15@gmail.com)`
       )
       const loc = encodeURIComponent('Google Meet')
 
@@ -645,7 +645,7 @@
         `DTSTART:${startStr}`,
         `DTEND:${endStr}`,
         `SUMMARY:15-Min Strategy Call: ${name} & Brinta Deb`,
-        `DESCRIPTION:15-Minute Strategy Call with Brinta Deb.\\nTopic: ${topic}\\nHost: Brinta Deb (+91 7005581453 / brintadeb15@gmail.com)`,
+        `DESCRIPTION:15-Minute Strategy Call with Brinta Deb.\\nTopic: ${topic}\\nHost: Brinta Deb (brintadeb15@gmail.com)`,
         'LOCATION:Google Meet',
         'STATUS:CONFIRMED',
         'END:VEVENT',

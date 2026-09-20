@@ -151,12 +151,10 @@ const spotlightItems = [
       const modalCloseObserver = new MutationObserver(() => {
         const lightbox = document.getElementById('projectLightbox')
         const isLightboxOpen = lightbox?.classList.contains('is-open')
-        const isWaOpen = document.getElementById('waChatWindow')?.classList.contains('is-open')
-        const isScheduleOpen = document.getElementById('scheduleModal')?.classList.contains('is-open')
         const isResumeOpen = document.getElementById('resumeModal')?.classList.contains('is-open')
 
         if (this.dock) {
-          if (isLightboxOpen || isWaOpen || isScheduleOpen || isResumeOpen) {
+          if (isLightboxOpen || isResumeOpen) {
             this.dock.classList.add('is-hidden')
           } else {
             this.dock.classList.remove('is-hidden')
@@ -170,8 +168,6 @@ const spotlightItems = [
       }
 
       observeModal('projectLightbox')
-      observeModal('waChatWindow')
-      observeModal('scheduleModal')
       observeModal('resumeModal')
     }
   }

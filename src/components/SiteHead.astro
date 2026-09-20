@@ -14,7 +14,7 @@ const menu = [
   },
   {
     id: 'lab',
-    text: 'Lab',
+    text: 'Pay to Call',
   },
   {
     id: 'services',
@@ -115,14 +115,19 @@ const menu = [
       </li>
     </ul><!-- .sb-socials -->
 
-    <button class="sb-contrast js-contrast" type="button" aria-label="Toggle High Contrast Theme">
+    <button
+      class="sb-contrast js-contrast"
+      type="button"
+      aria-label="Cycle Theme: Editorial Sepia"
+      title="Theme: Editorial Sepia — Click to cycle palette"
+    >
       <span
         class="sb__icon"
         style="--path: path('M10.0996 20C8.71628 20 7.41628 19.7373 6.19961 19.212C4.98294 18.6867 3.92461 17.9743 3.02461 17.075C2.12461 16.1757 1.41228 15.1173 0.887611 13.9C0.362944 12.6827 0.100277 11.3827 0.0996106 10C0.098944 8.61733 0.361611 7.31733 0.887611 6.1C1.41361 4.88267 2.12594 3.82433 3.02461 2.925C3.92328 2.02567 4.98161 1.31333 6.19961 0.788C7.41761 0.262667 8.71761 0 10.0996 0C11.4816 0 12.7816 0.262667 13.9996 0.788C15.2176 1.31333 16.2759 2.02567 17.1746 2.925C18.0733 3.82433 18.7859 4.88267 19.3126 6.1C19.8393 7.31733 20.1016 8.61733 20.0996 10C20.0976 11.3827 19.8349 12.6827 19.3116 13.9C18.7883 15.1173 18.0759 16.1757 17.1746 17.075C16.2733 17.9743 15.2149 18.687 13.9996 19.213C12.7843 19.739 11.4843 20.0013 10.0996 20ZM11.0996 17.925C13.0829 17.675 14.7456 16.804 16.0876 15.312C17.4296 13.82 18.1003 12.0493 18.0996 10C18.0989 7.95067 17.4279 6.18 16.0866 4.688C14.7453 3.196 13.0829 2.325 11.0996 2.075V17.925Z');"
       >
       </span>
 
-      <span class="u-sr-only">Change contrast</span>
+      <span class="u-sr-only">Toggle theme</span>
     </button><!-- .sb-contrast -->
 
     <button class="sb-sound js-sound" type="button" aria-label="Toggle Interactive Audio FX" title="Sound FX: MUTED">
@@ -147,9 +152,7 @@ const menu = [
         </span>
 
         <span class="sb__line">
-          <span class="sb__text">Designing globally from India →</span>
-
-          <a href="mailto:brintadeb15@gmail.com" class="sb__link">Hire me</a>
+          <span class="sb__text">Designing globally from India</span>
         </span>
       </p>
     </aside><!-- .sb-availability -->
@@ -162,12 +165,20 @@ const menu = [
       <img src="/images/qr-code.svg" alt="Contact Email QR Code" width="72" height="72" />
     </a><!-- .sb-qr-code -->
   </div><!-- .site-head__container -->
+
+  <!-- Theme Switching Toast Notification -->
+  <div class="sb-theme-toast js-theme-toast" aria-live="polite">
+    <span class="sb-theme-toast__dot js-theme-toast-dot"></span>
+    <span class="sb-theme-toast__name js-theme-toast-name">Editorial Sepia</span>
+    <span class="sb-theme-toast__badge js-theme-toast-badge">Default</span>
+  </div>
 </header>
 
 <script>
   import Emitter from '../utils/Emitter'
   import Ticker from '../utils/Ticker'
   import { audioEngine } from '../utils/AudioEngine.js'
+  import { themeManager } from '../utils/ThemeManager.js'
 
   import { gsap } from 'gsap'
 
@@ -177,6 +188,11 @@ const menu = [
     console: HTMLElement
     contrastMask: HTMLElement
     links: NodeListOf<HTMLElement>
+    toastEl: HTMLElement | null
+    toastDot: HTMLElement | null
+    toastName: HTMLElement | null
+    toastBadge: HTMLElement | null
+    toastTimer: any
 
     messages: string[]
     message: string
@@ -197,6 +213,10 @@ const menu = [
       this.console = document.querySelector('.js-console') as HTMLElement
       this.contrastMask = document.querySelector('.js-contrast-mask') as HTMLElement
       this.links = this.el?.querySelectorAll('.js-menu-link') as NodeListOf<HTMLElement>
+      this.toastEl = this.el?.querySelector('.js-theme-toast') as HTMLElement | null
+      this.toastDot = this.el?.querySelector('.js-theme-toast-dot') as HTMLElement | null
+      this.toastName = this.el?.querySelector('.js-theme-toast-name') as HTMLElement | null
+      this.toastBadge = this.el?.querySelector('.js-theme-toast-badge') as HTMLElement | null
 
       // Properties
       this.messages = [
@@ -236,6 +256,51 @@ const menu = [
       this.bindEvents()
       this.initClock()
       this.initSound()
+      this.initTheme()
+    }
+
+    /**
+     * Theme Controller
+     */
+    initTheme() {
+      const current = themeManager.getCurrentThemeData()
+      this.updateThemeUI(current, false)
+
+      window.addEventListener('theme:change', ((e: CustomEvent) => {
+        if (e.detail?.themeData) {
+          this.updateThemeUI(e.detail.themeData, false)
+        }
+      }) as EventListener)
+    }
+
+    updateThemeUI(theme: any, showToast = false) {
+      if (!theme) return
+
+      if (this.contrastButton) {
+        this.contrastButton.setAttribute(
+          'title',
+          `Theme: ${theme.name} (${theme.badge}) — Click to cycle`
+        )
+        this.contrastButton.setAttribute(
+          'aria-label',
+          `Theme: ${theme.name} (${theme.badge}). Click to cycle theme.`
+        )
+      }
+
+      if (showToast && this.toastEl) {
+        if (this.toastName) this.toastName.textContent = theme.name
+        if (this.toastBadge) this.toastBadge.textContent = theme.badge
+        if (this.toastDot) {
+          this.toastDot.style.backgroundColor = theme.secondary
+          this.toastDot.style.boxShadow = `0 0 8px ${theme.secondary}`
+        }
+
+        clearTimeout(this.toastTimer)
+        this.toastEl.classList.add('is-visible')
+        this.toastTimer = setTimeout(() => {
+          this.toastEl?.classList.remove('is-visible')
+        }, 1800)
+      }
     }
 
     /**
@@ -392,48 +457,27 @@ const menu = [
     }
 
     /**
-     * Toggle contrast
+     * Cycle Theme
      */
     toggleContrast() {
-      let fromX = '0'
-      let toX = '-100%'
+      const nextTheme = themeManager.cycleTheme()
 
-      if (document.documentElement.classList.contains('theme-contrasted')) {
-        fromX = '-100%'
-        toX = '0'
+      // Interactive audio click/snap feedback
+      audioEngine.playSnap()
+
+      // Micro-animation on icon
+      const icon = this.contrastButton?.querySelector('.sb__icon')
+      if (icon) {
+        gsap.killTweensOf(icon)
+        gsap.fromTo(
+          icon,
+          { rotate: 0, scale: 0.8 },
+          { rotate: 360, scale: 1, duration: 0.45, ease: 'back.out(2)' }
+        )
       }
 
-      gsap.fromTo(
-        this.contrastMask,
-        {
-          x: fromX,
-        },
-        {
-          x: toX,
-          duration: 1,
-          ease: 'expo.inOut',
-          onComplete: () => {
-            if (this.contrastMask) this.contrastMask.style.transform = ''
-
-            if (toX === '0') {
-              document.documentElement.classList.remove('theme-contrasted')
-            } else {
-              document.documentElement.classList.add('theme-contrasted')
-            }
-
-            Emitter.emit(
-              'contrastchange',
-              document.documentElement.classList.contains('theme-contrasted')
-                ? 'contrasted'
-                : 'default'
-            )
-          },
-        }
-      )
-
-      if (toX !== '0') {
-        document.documentElement.classList.add('theme-contrasted')
-      }
+      // Show toast and update accessibility titles
+      this.updateThemeUI(nextTheme, true)
     }
 
     /**
@@ -938,14 +982,16 @@ const menu = [
         }
       }
 
-      &:hover {
-        &:before {
-          scale: 1 1;
-        }
-
-        .sb__icon {
+      @media (hover: hover) {
+        &:hover {
           &:before {
             scale: 1 1;
+          }
+
+          .sb__icon {
+            &:before {
+              scale: 1 1;
+            }
           }
         }
       }
@@ -953,6 +999,66 @@ const menu = [
       &:before,
       .sb__icon:before {
         transition: scale 0.3s ease(in-out-expo);
+      }
+    }
+
+    .sb-theme-toast {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 1.5rem;
+      z-index: 99;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.85rem;
+
+      background: color(primary);
+      border: 1px solid color(secondary);
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+      font: 700 0.68rem / 1 font-family(fraktion);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: color(secondary);
+      white-space: nowrap;
+
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+      @include mq(phone) {
+        right: 0.5rem;
+        top: calc(100% + 6px);
+        padding: 0.35rem 0.65rem;
+        font-size: 0.62rem;
+      }
+
+      &.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      &__dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: color(secondary);
+        flex-shrink: 0;
+        transition: background-color 0.3s ease;
+      }
+
+      &__badge {
+        display: inline-block;
+        padding: 0.15rem 0.35rem;
+        font-size: 0.55rem;
+        border: 1px solid color(secondary);
+        border-radius: 2px;
+        opacity: 0.8;
       }
     }
 
