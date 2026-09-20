@@ -144,13 +144,13 @@ const menu = [
       <span class="u-sr-only">Toggle theme</span>
     </button><!-- .sb-contrast -->
 
-    <button class="sb-sound js-sound" type="button" aria-label="Toggle Interactive Audio FX" title="Sound FX: MUTED">
+    <button class="sb-sound js-sound" type="button" aria-label="Toggle Soothing Background Music &amp; Audio FX" title="Soothing Music &amp; Sound FX: MUTED">
       <span class="sb-sound__waves" aria-hidden="true">
         <span class="sound-bar sound-bar--1"></span>
         <span class="sound-bar sound-bar--2"></span>
         <span class="sound-bar sound-bar--3"></span>
       </span>
-      <span class="u-sr-only">Toggle Sound</span>
+      <span class="u-sr-only">Toggle Sound &amp; Music</span>
     </button><!-- .sb-sound -->
 
     <aside class="sb-availability">
@@ -383,20 +383,53 @@ const menu = [
       const soundBtn = this.el?.querySelector('.js-sound') as HTMLButtonElement | null
       if (!soundBtn) return
 
-      const updateUI = (enabled: boolean) => {
+      const updateUI = (enabled: boolean, showToast = false) => {
         soundBtn.classList.toggle('is-active', enabled)
-        soundBtn.setAttribute('title', enabled ? 'Sound FX: ACTIVE' : 'Sound FX: MUTED')
+        soundBtn.setAttribute(
+          'title',
+          enabled
+            ? 'Music & Sound: ACTIVE (Erik Satie — Gymnopédie No. 1)'
+            : 'Music & Sound: MUTED'
+        )
+        soundBtn.setAttribute(
+          'aria-label',
+          enabled
+            ? 'Mute soothing background music and sound effects'
+            : 'Play soothing background music and sound effects'
+        )
+
+        if (showToast && this.toastEl) {
+          if (this.toastName)
+            this.toastName.textContent = enabled
+              ? 'Erik Satie — Gymnopédie No. 1'
+              : 'Background Audio Muted'
+          if (this.toastBadge)
+            this.toastBadge.textContent = enabled ? 'Soothing Music ♫' : 'Off'
+          if (this.toastDot) {
+            this.toastDot.style.backgroundColor = enabled
+              ? '#4ade80'
+              : 'var(--color-secondary)'
+            this.toastDot.style.boxShadow = enabled
+              ? '0 0 8px #4ade80'
+              : 'none'
+          }
+          clearTimeout(this.toastTimer)
+          this.toastEl.classList.add('is-visible')
+          this.toastTimer = setTimeout(() => {
+            this.toastEl?.classList.remove('is-visible')
+          }, 2400)
+        }
       }
 
-      updateUI(audioEngine.isEnabled())
+      updateUI(audioEngine.isEnabled(), false)
 
       soundBtn.addEventListener('click', () => {
         const isNowEnabled = audioEngine.toggle()
-        updateUI(isNowEnabled)
+        updateUI(isNowEnabled, true)
       })
 
       window.addEventListener('sound:state-changed', ((e: CustomEvent) => {
-        updateUI(e.detail.enabled)
+        updateUI(e.detail.enabled, false)
       }) as EventListener)
     }
 
