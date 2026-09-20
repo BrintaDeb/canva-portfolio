@@ -163,6 +163,7 @@
           <section class="resume-section">
             <div class="section-label">[ SELECTED PORTFOLIO HIGHLIGHTS ]</div>
             <div class="project-tags">
+              <span class="p-tag"><strong>YOU &amp; ME:</strong> Cinematic wedding photography &amp; high-ticket booking flow</span>
               <span class="p-tag"><strong>Nest Services:</strong> Corporate platform with live pricing estimator</span>
               <span class="p-tag"><strong>Saffron &amp; Sage:</strong> Organic culinary editorial brand system</span>
               <span class="p-tag"><strong>Demon Slayer Studies:</strong> Custom Procreate hand-drawn anime collection</span>
@@ -202,6 +203,11 @@
           e.preventDefault()
           this.open()
         })
+      })
+
+      // Global custom event listener
+      window.addEventListener('open-resume-modal', () => {
+        this.open()
       })
 
       // Close triggers

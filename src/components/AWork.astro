@@ -119,6 +119,9 @@ const impactSnippet = impact ? impact.split('•')[0].trim() : ''
             </svg>
           </span>
         </div>
+        <div class="a__tap-indicator" aria-hidden="true">
+          <span class="a__tap-pill">TAP TO VIEW ↗</span>
+        </div>
       </div>
 
       <!-- Two-tier Structured Caption -->
@@ -469,9 +472,14 @@ const impactSnippet = impact ? impact.split('•')[0].trim() : ''
       object-fit: contain;
       border-radius: 4px;
 
+      @include mq(tablet) {
+        max-width: 68vw;
+        max-height: 48vh;
+      }
+
       @include mq(phone) {
-        max-width: 86vw;
-        max-height: 52vh;
+        max-width: 88vw;
+        max-height: 46vh;
       }
     }
 
@@ -494,6 +502,42 @@ const impactSnippet = impact ? impact.split('•')[0].trim() : ''
       @include mq(phone) {
         display: none;
       }
+    }
+
+    // Mobile-only tap indicator — replaces hover overlay
+    .a__tap-indicator {
+      display: none;
+      position: absolute;
+      bottom: 0.4rem;
+      right: 0.4rem;
+      z-index: 3;
+      pointer-events: none;
+
+      @include mq(phone) {
+        display: flex;
+      }
+    }
+
+    .a__tap-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.22rem 0.5rem;
+      font: 700 8px / 1 font-family(fraktion);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+      animation: tapPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes tapPulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
     }
 
     .a__hover-pill {
